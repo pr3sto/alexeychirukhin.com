@@ -1,0 +1,41 @@
+html {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 400;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  background-color: transparent;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+img {
+  border-style: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Nuxt pages transition */
+.page-enter-active {
+  transition: opacity 0.25s;
+}
+.page-enter {
+  opacity: 0.5;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "alexeychirukhin.com",
+  "version": "0.1.0",
+  "description": "Alexey Chirukhin personal website",
+  "author": "Alexey Chirukhin",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "devh": "nuxt --hostname 0.0.0.0",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
+    "nuxt": "^2.15.8",
+    "nuxt-client-init-module": "^0.3.0",
+    "vue-masonry-css": "^1.0.3",
+    "vuex-persistedstate": "^4.1.0"
+  }
+}

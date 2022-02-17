@@ -1,0 +1,97 @@
+<template>
+  <div class="photocard" :style="cssVars">
+    <div
+      class="photocard-photo"
+      :class="{ 'photocard-photo--round': card.round }"
+    >
+      <img class="photocard-photo-img" :src="card.photoUrl" />
+    </div>
+    <div class="photocard-signature">
+      {{ card.signature }}
+    </div>
+  </div>
+</template>
+
+<style>
+.photocard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 6% 6% 0 6%;
+  border-radius: 1px;
+  box-shadow: 2px 2px 6px -3px #000;
+  background-color: rgb(253, 253, 253);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+/* texture */
+.photocard::before {
+  pointer-events: none;
+  content: "";
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAYAAADam2dgAAAAAXNSR0IArs4c6QAAADFJREFUKFNjZGBgkGJgYHjGgBtIMULlcCkEi8MUgdSiK4TzkRUhK0TRQJJJBN1E0HcAEQkMPPAHd4YAAAAASUVORK5CYII=);
+  background-size: 0.7em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.25;
+}
+
+.photocard-photo {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 1;
+}
+
+/* gloss effect on photo */
+.photocard-photo::after {
+  pointer-events: none;
+  content: "";
+  background-image: url("/images/gloss.png");
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.photocard-photo-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-color: rgba(0, 0, 0, 0.5);
+  border-style: solid;
+  border-width: 0 0 1px 1px;
+}
+
+/* round photo */
+.photocard-photo--round::after,
+.photocard-photo--round img {
+  border-radius: 50%;
+}
+
+.photocard-signature {
+  flex-grow: 1;
+  padding: 8% 0;
+}
+</style>
+
+<script>
+export default {
+  name: "PhotoCard",
+  props: ["card", "fontSize"],
+  computed: {
+    cssVars() {
+      return {
+        "--font-size": this.fontSize + "px",
+        "--line-height": this.fontSize + "px",
+      };
+    },
+  },
+};
+</script>

@@ -1,0 +1,57 @@
+<div class="loading-indicator">
+  <div>
+    <p>please stand by</p>
+  </div>
+</div>
+
+<style>
+  .loading-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    animation: loader-fade-in 1.5s;
+  }
+
+  .loading-indicator p {
+    margin: 0 auto;
+    border-right: 0.15em solid #000;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: loader-typing 2.5s steps(15, end), loader-blink-caret 1s step-end infinite;
+  }
+
+  @keyframes loader-fade-in {
+    0%,
+    50% {
+      visibility: hidden;
+      opacity: 0;
+    }
+    100% {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  @keyframes loader-typing {
+    0%,
+    40% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes loader-blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: black;
+    }
+  }
+</style>
