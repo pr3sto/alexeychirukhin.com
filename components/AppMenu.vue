@@ -45,7 +45,7 @@
   white-space: nowrap;
 }
 .nuxt-link-exact-active {
-  font-weight: 600;
+  font-weight: bolder;
 }
 
 @media only screen and (max-width: 700px) {

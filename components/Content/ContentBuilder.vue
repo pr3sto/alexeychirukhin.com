@@ -25,8 +25,10 @@
 }
 .content-block {
   display: flex;
-  flex-grow: 1;
   padding-bottom: 1em;
+}
+.content-block:only-child {
+  flex-grow: 1;
 }
 .content-block:last-child {
   padding-bottom: 0;
