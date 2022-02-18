@@ -36,10 +36,9 @@
 }
 
 .photogrid-fullscreen {
+  touch-action: pinch-zoom;
   position: fixed;
   display: none;
-  align-items: center;
-  justify-content: center;
   top: 0;
   bottom: 0;
   left: 0;
@@ -56,8 +55,16 @@
   transition: transform 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
 }
 
-.stop-scrolling {
-    overflow-y: hidden;
+@media only screen and (max-width: 700px) {
+  .photogrid-fullscreen {
+    transition: none !important;
+  }
+  .photogrid-fullscreen-img {
+    transition: none !important;
+  }
+  .non-scrollable {
+    overflow: hidden;
+  }
 }
 </style>
 
@@ -86,13 +93,16 @@ export default {
         window.addEventListener("wheel", this.handleScroll, { passive: false });
       }
 
+      // prevent scroll when fullscreen image opened
+      document.body.classList.add("non-scrollable");
+
       // get html elements
       var fullscreenDiv = this.$refs.fullscreenDiv;
       var fullscreenImg = fullscreenDiv.children[0];
       fullscreenImg.src = this.grid.photos[index].url;
 
       // show fullscreen div
-      fullscreenDiv.style.display = "flex";
+      fullscreenDiv.style.display = "block";
 
       // get initial image rect
       var initImgRect = event.target.getBoundingClientRect();
@@ -136,12 +146,19 @@ export default {
       fullscreenImg.style.transform = "translate(0px, 0px) scale(1)";
       fullscreenDiv.style.background = "rgba(0, 0, 0, 0)";
 
-      // wait for transform animation
-      const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-      await delay(220);
+      if (!window.matchMedia("(max-width: 700px)").matches) {
+        // on a mobile device we do not show animation
+        // that is why we need to wait for animation
+        // only on devices with max-width greater 700px
+        const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+        await delay(220);
+      }
 
       // hide fullscreen div
       fullscreenDiv.style.display = "none";
+
+      // restore scroll
+      document.body.classList.remove("non-scrollable");
 
       if (window) {
         window.removeEventListener("resize", this.closeFullscreenPhoto);
