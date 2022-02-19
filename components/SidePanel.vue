@@ -1,5 +1,5 @@
 <template>
-  <div class="side-panel">
+  <div class="side-panel crosses-border">
     {{ text }}
   </div>
 </template>

@@ -32,6 +32,49 @@ img {
   box-sizing: inherit;
 }
 
+/* border */
+.crosses-border {
+  --w: 10px;
+  --p: 0.2em;
+  --c: rgba(0,0,0,0.1);
+
+  background:
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) var(--p) var(--p),
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) var(--p) var(--p),
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) calc(100% - var(--p)) calc(100% - var(--p)),
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) calc(100% - var(--p)) calc(100% - var(--p)),
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) var(--p) calc(100% - var(--p)),
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) var(--p) calc(100% - var(--p)),
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) calc(100% - var(--p)) var(--p),
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) calc(100% - var(--p)) var(--p);
+  background-size: var(--w) var(--w);
+  background-repeat: no-repeat;
+}
+
 /* Nuxt pages transition */
 .page-enter-active {
   transition: opacity 0.25s;
