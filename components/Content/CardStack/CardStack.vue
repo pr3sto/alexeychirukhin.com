@@ -211,7 +211,11 @@ export default {
       }
       return cards;
     },
-    switchCards: function () {
+    switchCards: function (event) {
+      // prevent click on href
+      if (event.target.tagName.toLowerCase() === 'a') {
+        return;
+      }
       // prevent click when text is selected
       var selection = document.getSelection();
       if (selection.type === "Range") {

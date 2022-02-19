@@ -5,7 +5,7 @@
         <img src="/images/arrow.png" />
         <div>Inser film this slide up.&#10;Do not remove this darkslide.</div>
       </div>
-      <div class="darkslidecard-content-text" v-html="card.html" />
+      <div class="darkslidecard-content-area" v-html="card.html" />
       <div class="darkslidecard-content-footer">
         <div class="darkslidecard-content-footer-left">
           <div class="darkslidecard-content-footer-left-dot" />
@@ -30,6 +30,10 @@
   font-size: var(--font-size);
   line-height: var(--line-height);
   filter: drop-shadow(2px 2px 1px #000);
+}
+
+.darkslidecard a {
+  color: #fff;
 }
 
 /* shape of darkslide */
@@ -70,10 +74,13 @@
   opacity: 0.5;
 }
 
-.darkslidecard-content-text {
+.darkslidecard-content-area {
   flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 8%;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .darkslidecard-content-header {
