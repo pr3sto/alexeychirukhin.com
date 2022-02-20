@@ -31,8 +31,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  left: 10%;
-  right: 10%;
+  left: 5%;
+  right: 5%;
   top: 10%;
   bottom: 10%;
 }
@@ -119,6 +119,12 @@
     transform: translateX(13%) translateY(-8%) rotate(8deg) scale(0.95);
   }
 }
+
+@media only screen and (max-width: 700px) {
+  .cardstack-card--out {
+    animation: none;
+  }
+}
 </style>
 
 <script>
@@ -175,15 +181,15 @@ export default {
 
   methods: {
     reCalculate: function () {
-      var elementRect = this.$el.getBoundingClientRect();
-      if (elementRect.width / elementRect.height > 0.83) {
+      var containerRect = this.$el.children[0].getBoundingClientRect();
+      if (containerRect.width / containerRect.height > 0.83) {
         this.cardstackContainerHeight = "100%";
         this.cardstackContainerWidth = "auto";
-        this.fontSize = elementRect.height / 55;
+        this.fontSize = containerRect.height / 55;
       } else {
         this.cardstackContainerHeight = "auto";
         this.cardstackContainerWidth = "100%";
-        this.fontSize = elementRect.width / 45;
+        this.fontSize = containerRect.width / 45;
       }
     },
     annotateCards: function (cards, topCardIndex, pageload) {
