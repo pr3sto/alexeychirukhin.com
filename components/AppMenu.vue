@@ -1,5 +1,5 @@
 <template>
-  <div class="app-menu crosses-border">
+  <div class="app-menu">
     <div
       class="app-menu-section"
       v-for="(items, sectionName, index) of menu"

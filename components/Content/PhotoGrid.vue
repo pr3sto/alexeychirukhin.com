@@ -1,8 +1,8 @@
 <template>
   <div class="photogrid">
-    <masonry :cols="grid.cols" :gutter="'1em'">
+    <masonry :cols="grid.cols">
       <div
-        class="photogrid-block"
+        class="photogrid-block crosses-border"
         v-for="(photo, index) of grid.photos"
         :key="index"
       >
@@ -21,14 +21,12 @@
 
 <style>
 .photogrid {
-  margin-bottom: -1em;
-}
-
-.photogrid-block {
-  padding-bottom: 1em;
+  padding: 0.5em;
+  margin: -1em;
 }
 
 .photogrid-block > img {
+  padding: 0.5em;
   display: block;
   width: 100%;
   height: 100%;
@@ -53,6 +51,49 @@
   position: fixed;
   transform-origin: center;
   transition: transform 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
+}
+
+/* border */
+.crosses-border {
+  --w: 7px;
+  --p: 0.1em;
+  --c: rgba(0,0,0,0.15);
+
+  background:
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) var(--p) var(--p),
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) var(--p) var(--p),
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) calc(100% - var(--p)) calc(100% - var(--p)),
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) calc(100% - var(--p)) calc(100% - var(--p)),
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) var(--p) calc(100% - var(--p)),
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) var(--p) calc(100% - var(--p)),
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) calc(100% - var(--p)) var(--p),
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0) calc(50%),
+      var(--c) calc(50%),
+      rgba(0, 0, 0, 0) calc(50% + 1px)) calc(100% - var(--p)) var(--p);
+  background-size: var(--w) var(--w);
+  background-repeat: no-repeat;
 }
 
 @media only screen and (max-width: 700px) {
@@ -106,6 +147,13 @@ export default {
 
       // get initial image rect
       var initImgRect = event.target.getBoundingClientRect();
+      var initImgRectPadding = parseFloat(
+        getComputedStyle(event.target).fontSize
+      );
+      initImgRect.height = initImgRect.height - initImgRectPadding;
+      initImgRect.width = initImgRect.width - initImgRectPadding;
+      initImgRect.x = initImgRect.x + initImgRectPadding/2;
+      initImgRect.y = initImgRect.y + initImgRectPadding/2;
 
       // get fullscreen rect
       var fullscreenRect = fullscreenDiv.getBoundingClientRect();
