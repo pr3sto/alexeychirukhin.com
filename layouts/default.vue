@@ -1,5 +1,5 @@
 <template>
-  <div id="default-layout">
+  <div id="default-layout" :style="cssVars">
     <side-panel id="default-layout-sidepanel" />
     <nuxt id="default-layout-page" />
     <app-menu id="default-layout-appmenu" />
@@ -10,7 +10,7 @@
 #default-layout {
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
+  min-height: var(--window-height);
   background: radial-gradient(
       circle,
       rgba(255, 255, 255, 0.5) 85%,
@@ -61,5 +61,13 @@ import SidePanel from "~/components/SidePanel.vue";
 
 export default {
   components: { AppMenu, SidePanel },
+
+  computed: {
+    cssVars() {
+      return {
+        '--window-height': `${window.innerHeight}px`,
+      }
+    },
+  },
 };
 </script>
