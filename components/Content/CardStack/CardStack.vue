@@ -22,10 +22,6 @@
   position: relative;
 }
 
-/*
- * Give horizontal and vertical 10% space
- * for translateX and translateY functions
- */
 .cardstack-content {
   position: absolute;
   display: flex;

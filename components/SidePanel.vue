@@ -6,12 +6,12 @@
 
 <style>
 .side-panel {
-  writing-mode: vertical-lr;
+  writing-mode: vertical-rl;
 }
 
 @media only screen and (max-width: 700px) {
   .side-panel {
-    writing-mode: horizontal-tb;
+    writing-mode: initial;
   }
 }
 </style>

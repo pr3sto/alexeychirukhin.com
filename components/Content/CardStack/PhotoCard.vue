@@ -64,9 +64,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-color: rgba(0, 0, 0, 0.5);
-  border-style: solid;
-  border-width: 0 0 1px 1px;
 }
 
 /* round photo */

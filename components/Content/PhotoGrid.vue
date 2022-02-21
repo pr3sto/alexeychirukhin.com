@@ -26,15 +26,14 @@
 }
 
 .photogrid-block > img {
-  padding: 0.5em;
   display: block;
+  padding: 0.5em;
   width: 100%;
   height: 100%;
   cursor: zoom-in;
 }
 
 .photogrid-fullscreen {
-  touch-action: pinch-zoom;
   position: fixed;
   display: none;
   top: 0;
@@ -45,6 +44,7 @@
   overflow: auto;
   background: rgba(0, 0, 0, 0);
   transition: background 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
+  touch-action: pinch-zoom;
 }
 
 .photogrid-fullscreen-img {
