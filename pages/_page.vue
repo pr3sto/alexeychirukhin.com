@@ -7,6 +7,13 @@ import ContentBuilder from "~/components/Content/ContentBuilder.vue";
 
 export default {
   components: { ContentBuilder },
+
+  head() {
+    return {
+      title: this.page.menuItemText,
+    };
+  },
+
   computed: {
     page() {
       return this.$store.state.data.pages.find(
@@ -14,10 +21,15 @@ export default {
       );
     },
   },
-  head() {
-    return {
-      title: this.page.menuItemText,
-    };
+
+  validate({ params, store, redirect }) {
+    var page = store.state.data.pages.find(
+      (page) => page.route === `/${params.page}`
+    );
+    if (!page) {
+      redirect("/");
+    }
+    return true;
   },
 };
 </script>
