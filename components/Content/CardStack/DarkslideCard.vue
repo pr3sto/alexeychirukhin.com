@@ -40,15 +40,14 @@
 .darkslidecard-content,
 .darkslidecard::after {
   clip-path: polygon(
+    0 0,
+    16% 0,
     16% 2%,
     100% 2%,
-    100% 43%,
     100% 98%,
     95% 100%,
     5% 100%,
-    0 98%,
-    0 0,
-    16% 0
+    0 98%
   );
 }
 

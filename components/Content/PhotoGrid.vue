@@ -49,6 +49,7 @@
 
 .photogrid-fullscreen-img {
   position: fixed;
+  cursor: zoom-out;
   transform-origin: center;
   transition: transform 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
 }
