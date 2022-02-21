@@ -11,8 +11,17 @@ export const actions = {
       }
     }
 
+    var headers = new Headers();
+    headers.append('pragma', 'no-cache');
+    headers.append('cache-control', 'no-cache');
+
+    var reqInit = {
+      method: 'GET',
+      headers: headers,
+    };
+
     var start = performance.now();
-    var data = await fetch(process.env.DATA_JSON_URL).then((res) =>
+    var data = await fetch(process.env.DATA_JSON_URL, reqInit).then((res) =>
       res.json()
     );
     var end = performance.now();
