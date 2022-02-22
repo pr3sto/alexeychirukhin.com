@@ -11,8 +11,8 @@
     </masonry>
     <transition
       name="background-transition"
-      v-on:before-enter="beforeFullscreen"
-      v-on:after-leave="afterFullscreen"
+      v-on:before-enter="beforeFullscreenOpened"
+      v-on:after-leave="afterFullscreenClosed"
     >
       <div
         class="photogrid-fullscreen"
@@ -199,24 +199,23 @@ export default {
   },
 
   beforeDestroy: function () {
-    window.removeEventListener("resize", this.closeFullscreenPhoto);
-    window.removeEventListener("wheel", this.handleScroll);
+    this.afterFullscreenClosed();
   },
 
   methods: {
-    beforeFullscreen: function (el) {
+    beforeFullscreenOpened: function (el) {
       // close on resize/scroll
       window.addEventListener("resize", this.closeFullscreenPhoto);
       window.addEventListener("wheel", this.handleScroll, { passive: false });
       // prevent scroll when fullscreen opened
       document.body.classList.add("non-scrollable");
     },
-    afterFullscreen: function (el) {
-      // restore scroll
-      document.body.classList.remove("non-scrollable");
+    afterFullscreenClosed: function (el) {
       // clear events
       window.removeEventListener("resize", this.closeFullscreenPhoto);
       window.removeEventListener("wheel", this.handleScroll);
+      // restore scroll
+      document.body.classList.remove("non-scrollable");
     },
     openFullscreenPhoto: function (event, index) {
       // calculate transform from initial img to fullscreen

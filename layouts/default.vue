@@ -74,9 +74,7 @@ export default {
       this.reCalculate();
     });
 
-    if (window) {
-      window.addEventListener("resize", this.reCalculate);
-    }
+    window.addEventListener("resize", this.reCalculate);
   },
 
   updated() {
@@ -86,15 +84,13 @@ export default {
   },
 
   beforeDestroy() {
-    if (window) {
-      window.removeEventListener("resize", this.reCalculate);
-    }
+    window.removeEventListener("resize", this.reCalculate);
   },
 
   methods: {
     reCalculate: function () {
       this.$el.style.minHeight = `${window.innerHeight}px`;
-    }
+    },
   },
 };
 </script>
