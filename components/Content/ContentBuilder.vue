@@ -27,11 +27,11 @@
   display: flex;
   padding-bottom: 1em;
 }
-.content-block:only-child {
-  flex-grow: 1;
-}
 .content-block:last-child {
   padding-bottom: 0;
+}
+.content-block:only-child {
+  flex-grow: 1;
 }
 .content-block > * {
   flex-grow: 1;
@@ -40,8 +40,8 @@
 
 <script>
 import CardStack from "~/components/Content/CardStack/CardStack.vue";
-import PhotoGrid from "~/components/Content/PhotoGrid.vue";
-import TextContent from "~/components/Content/TextContent.vue";
+import PhotoGrid from "~/components/Content/PhotoGrid/PhotoGrid.vue";
+import TextContent from "~/components/Content/Text/TextContent.vue";
 
 export default {
   name: "ContentBuilder",

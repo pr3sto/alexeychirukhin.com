@@ -38,6 +38,14 @@
   padding-bottom: 1em;
 }
 
+/* Nuxt pages transition */
+.page-enter-active {
+  transition: opacity 0.25s;
+}
+.page-enter {
+  opacity: 0.5;
+}
+
 @media only screen and (max-width: 700px) {
   #default-layout {
     flex-direction: column-reverse;
