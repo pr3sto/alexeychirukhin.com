@@ -31,7 +31,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .photogrid {
   padding: 0.5em;
   margin: -1em;

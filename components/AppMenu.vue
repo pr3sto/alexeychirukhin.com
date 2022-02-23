@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .app-menu {
   display: flex;
   flex-direction: column;

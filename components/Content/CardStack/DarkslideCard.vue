@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .darkslidecard {
   width: 100%;
   height: 100%;
@@ -30,10 +30,6 @@
   font-size: var(--font-size);
   line-height: var(--line-height);
   filter: drop-shadow(2px 2px 1px #000);
-}
-
-.darkslidecard a {
-  color: #fff;
 }
 
 /* shape of darkslide */

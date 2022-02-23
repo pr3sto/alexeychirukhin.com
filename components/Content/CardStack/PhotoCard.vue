@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .photocard {
   display: flex;
   flex-direction: column;

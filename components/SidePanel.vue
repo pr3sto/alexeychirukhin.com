@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .side-panel {
   writing-mode: vertical-rl;
 }
