@@ -1,18 +1,8 @@
 <template>
   <div class="content-container">
-    <div
-      class="content-block"
-      v-for="(item, index) of content"
-      :key="index"
-    >
-      <text-content
-        v-if="item.type === 'TextContent'"
-        :text="item.text"
-      />
-      <card-stack
-        v-else-if="item.type === 'CardStack'"
-        :cards="item.cards"
-      />
+    <div class="content-block" v-for="(item, index) of content" :key="index">
+      <text-content v-if="item.type === 'TextContent'" :text="item.text" />
+      <card-stack v-else-if="item.type === 'CardStack'" :cards="item.cards" />
       <photo-grid v-else-if="item.type === 'PhotoGrid'" :grid="item" />
     </div>
   </div>

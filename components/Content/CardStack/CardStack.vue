@@ -118,7 +118,7 @@
 
 @media only screen and (max-width: 700px) {
   .cardstack-card--out {
-    animation: none;
+    animation: none !important;
   }
 }
 </style>
@@ -130,9 +130,15 @@ import DarkslideCard from "~/components/Content/CardStack/DarkslideCard.vue";
 export default {
   name: "CardStack",
   props: ["cards"],
-  components: {
-    PhotoCard,
-    DarkslideCard,
+  components: { PhotoCard, DarkslideCard },
+
+  computed: {
+    cssVars() {
+      return {
+        "--cardstack-container-height": this.cardstackContainerHeight,
+        "--cardstack-container-width": this.cardstackContainerWidth,
+      };
+    },
   },
 
   data() {
@@ -144,23 +150,12 @@ export default {
     };
   },
 
-  computed: {
-    cssVars() {
-      return {
-        "--cardstack-container-height": this.cardstackContainerHeight,
-        "--cardstack-container-width": this.cardstackContainerWidth,
-      };
-    },
-  },
-
   mounted() {
     this.$nextTick(() => {
       this.reCalculate();
     });
 
-    if (window) {
-      window.addEventListener("resize", this.reCalculate);
-    }
+    window.addEventListener("resize", this.reCalculate);
   },
 
   updated() {
@@ -170,9 +165,7 @@ export default {
   },
 
   beforeDestroy() {
-    if (window) {
-      window.removeEventListener("resize", this.reCalculate);
-    }
+    window.removeEventListener("resize", this.reCalculate);
   },
 
   methods: {
@@ -187,6 +180,41 @@ export default {
         this.cardstackContainerWidth = "100%";
         this.fontSize = containerRect.width / 37;
       }
+    },
+    switchCards: function (event) {
+      // prevent click on href
+      if (event.target.tagName.toLowerCase() === "a") {
+        return;
+      }
+      // prevent click when text is selected
+      var selection = document.getSelection();
+      if (selection.type === "Range") {
+        return;
+      }
+
+      // don't switch one card
+      if (this.annotatedCards.length < 2) {
+        return;
+      }
+
+      var currentTopCardIndex = this.annotatedCards.findIndex((card) => {
+        return card.class == "cardstack-card--current";
+      });
+
+      var newTopCardIndex = this.mod(
+        currentTopCardIndex + 1,
+        this.cards.length
+      );
+
+      // trigger Vue reactive update
+      this.$nextTick(() => {
+        this.annotatedCards = [];
+        this.annotatedCards = this.annotateCards(
+          this.cards,
+          newTopCardIndex,
+          false
+        );
+      });
     },
     annotateCards: function (cards, topCardIndex, pageload) {
       cards.forEach((card) => {
@@ -212,39 +240,6 @@ export default {
         cards[index].class = "cardstack-card--next2";
       }
       return cards;
-    },
-    switchCards: function (event) {
-      // prevent click on href
-      if (event.target.tagName.toLowerCase() === 'a') {
-        return;
-      }
-      // prevent click when text is selected
-      var selection = document.getSelection();
-      if (selection.type === "Range") {
-        return;
-      }
-
-      // don't switch one card
-      if (this.annotatedCards.length < 2) {
-        return;
-      }
-
-      var currentTopCardIndex = this.annotatedCards.findIndex((card) => {
-        return card.class == "cardstack-card--current";
-      });
-
-      var newTopCardIndex = this.mod(
-        currentTopCardIndex + 1,
-        this.cards.length
-      );
-
-      // trigger Vue reactive update
-      this.annotatedCards = [];
-      this.annotatedCards = this.annotateCards(
-        this.cards,
-        newTopCardIndex,
-        false
-      );
     },
     mod: function (n, m) {
       return ((n % m) + m) % m;
