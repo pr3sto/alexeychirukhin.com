@@ -3,7 +3,7 @@
     <div class="darkslidecard-content">
       <div class="darkslidecard-content-header">
         <img src="/images/arrow.png" />
-        <div>Inser film this slide up.&#10;Do not remove this darkslide.</div>
+        <div>Insert film this side up.&#10;Do not remove this darkslide.</div>
       </div>
       <div class="darkslidecard-content-area" v-html="card.html" />
       <div class="darkslidecard-content-footer">
