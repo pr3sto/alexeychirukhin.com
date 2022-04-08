@@ -1,0 +1,80 @@
+{
+  "pages": [
+    {
+      "menuItemText": "Alexey Chirukhin",
+      "menuItemSection": "",
+      "sidePanelText": "What the hell am I doin' here?",
+      "route": "/",
+      "content": [
+        {
+          "type": "CardStack",
+          "cards": [
+            {
+              "type": "PhotoCard",
+              "round": true,
+              "photoUrl": "alexeychirukhin_com/pages/index/vDXwb_ibYHTPk2A.jpg"
+            },
+            {
+              "type": "DarkslideCard",
+              "html": "<div style=\"display:flex;flex-direction:column;font-size:2em;line-height:1.1em;\"><div>Contacts:</div><a href=\"https://www.instagram.com/alexeychirukhin\" target=\"_blank\" style=\"color: #fff\">instagram.com/alexeychirukhin</a><a href=\"https://github.com/pr3sto\" target=\"_blank\" style=\"color: #fff\">github.com/pr3sto</a></div>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "menuItemText": "Memories - Rzhev",
+      "menuItemSection": "projects",
+      "sidePanelText": "Ode to Childhood",
+      "route": "/memories-rzhev",
+      "content": [
+        {
+          "type": "PhotoGrid",
+          "cols": {
+            "default": 1
+          },
+          "photos": [{
+            "url": "alexeychirukhin_com/pages/memories/Xvbmh_DO59t-Lbs.jpg"
+          }]
+        },
+        {
+          "type": "PhotoGrid",
+          "cols": {
+            "default": 2
+          },
+          "photos": [{
+            "url": "alexeychirukhin_com/pages/memories/rcWHx_iwViZvI5N.jpg"
+          },
+          {
+            "url": "alexeychirukhin_com/pages/memories/pHHiT_obkRLKFYk.jpg"
+          },
+          {
+            "url": "alexeychirukhin_com/pages/memories/iIg84_W4tbH8MhG.jpg"
+          },
+          {
+            "url": "alexeychirukhin_com/pages/memories/4xhRA_LbZLyudr5.jpg"
+          },
+          {
+            "url": "alexeychirukhin_com/pages/memories/Ws1hz_BXNjEyXVC.jpg"
+          },
+          {
+            "url": "alexeychirukhin_com/pages/memories/35Dr5_ITdpMDtuB.jpg"
+          }]
+        },
+        {
+          "type": "PhotoGrid",
+          "cols": {
+            "default": 1
+          },
+          "photos": [{
+            "url": "alexeychirukhin_com/pages/memories/zatje_Fe0OEQNbW.jpg"
+          }]
+        },
+        {
+          "type": "TextContent",
+          "text": "Zine Coming Soon..."
+        }
+      ]
+    }
+  ]
+}
