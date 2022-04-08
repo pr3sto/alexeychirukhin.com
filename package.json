@@ -17,5 +17,8 @@
     "nuxt-client-init-module": "^0.3.0",
     "vue-masonry-css": "^1.0.3",
     "vuex-persistedstate": "^4.1.0"
+  },
+  "devDependencies": {
+    "@nuxt/image": "^0.6.2"
   }
 }

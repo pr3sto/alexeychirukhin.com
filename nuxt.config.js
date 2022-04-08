@@ -37,10 +37,16 @@ export default {
     'nuxt-client-init-module',
   ],
   buildModules: [
-    ['@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }]
+    ['@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }],
+    '@nuxt/image',
   ],
   plugins: [
     { src: '~/plugins/VueMasonry.client.js', mode: 'client', },
     { src: '~/plugins/persistedState.client.js' },
   ],
+  image: {
+    imagekit: {
+      baseURL: 'https://ik.imagekit.io/pr3sto'
+    },
+  },
 }

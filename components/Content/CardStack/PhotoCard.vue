@@ -4,7 +4,12 @@
       class="photocard-photo"
       :class="{ 'photocard-photo--round': card.round }"
     >
-      <img class="photocard-photo-img" :src="card.photoUrl" />
+      <nuxt-img
+        class="photocard-photo-img"
+        provider="imagekit"
+        sizes="sm:400px md:800px lg:1000px"
+        :src="card.photoUrl"
+      />
     </div>
     <div class="photocard-signature">
       {{ card.signature }}
