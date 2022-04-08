@@ -6,7 +6,13 @@
         v-for="(photo, index) of grid.photos"
         :key="index"
       >
-        <img :src="photo.url" v-on:click="openFullscreenPhoto($event, index)" />
+        <nuxt-img
+          provider="imagekit"
+          preset="progressivejpg"
+          sizes="md:800px lg:1500px"
+          :src="photo.url"
+          v-on:click="openFullscreenPhoto($event, index)"
+        />
       </div>
     </masonry>
     <transition
@@ -240,7 +246,7 @@ export default {
       this.fsImgTop = initImgRect.top;
       this.fsImgWidth = initImgRect.width;
       this.fsImgHeight = initImgRect.height;
-      this.fsImgSrc = this.grid.photos[index].url;
+      this.fsImgSrc = event.target.src;
       this.fsImgTransform = transfrom;
 
       // show fullscreen

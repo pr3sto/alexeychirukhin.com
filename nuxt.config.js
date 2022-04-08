@@ -48,5 +48,16 @@ export default {
     imagekit: {
       baseURL: 'https://ik.imagekit.io/pr3sto'
     },
+    screens: {
+      md: 700,
+    },
+    presets: {
+      progressivejpg: {
+        modifiers: {
+          f: 'jpg',
+          progressive: true,
+        },
+      }
+    },
   },
 }
