@@ -51,10 +51,14 @@
     flex-direction: column-reverse;
   }
   #default-layout-page {
-    padding: 0 1em 0 1em;
+    padding: 0 1em 1em 1em;
   }
   #default-layout-sidepanel {
-    position: static;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    color: white;
+    mix-blend-mode: exclusion;
   }
   #default-layout-appmenu {
     position: static;

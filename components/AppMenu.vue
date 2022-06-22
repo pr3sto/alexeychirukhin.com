@@ -58,6 +58,9 @@
     flex-wrap: wrap;
     padding-bottom: 0;
   }
+  .app-menu-section:not(:last-child) {
+    border-right: 0.05em solid rgba(0, 0, 0, 0.15);
+  }
   .app-menu-section-header {
     display: none;
   }
