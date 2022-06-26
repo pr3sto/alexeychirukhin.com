@@ -11,7 +11,7 @@
           preset="progressivejpg"
           sizes="md:800px lg:1500px"
           :src="photo.url"
-          v-on:click="openFullscreenPhoto($event, index)"
+          v-on:click="openFullscreenPhoto"
         />
       </div>
     </masonry>
@@ -23,13 +23,14 @@
       <div
         class="photogrid-fullscreen"
         v-show="showFullScreen"
-        v-on:click="closeFullscreenPhoto"
+        v-on:click.self="closeFullscreenPhoto"
       >
         <transition name="transform-transition" appear>
-          <img
-            class="photogrid-fullscreen-img"
+          <ZoomImg
+            class="photogrid-fullscreen-zoomimg"
             v-show="showFullScreen"
             :src="fsImgSrc"
+            :zoomScale="fsImgZoomScale"
           />
         </transition>
       </div>
@@ -48,7 +49,7 @@
   padding: 0.5em;
   width: 100%;
   height: 100%;
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 .photogrid-fullscreen {
@@ -63,15 +64,13 @@
   touch-action: pinch-zoom;
 }
 
-.photogrid-fullscreen-img {
+.photogrid-fullscreen-zoomimg {
   position: fixed;
-  cursor: zoom-out;
   left: var(--fs-img-left);
   top: var(--fs-img-top);
   width: var(--fs-img-width);
   height: var(--fs-img-height);
-  transform: var(--fs-img-transform);
-  transform-origin: center;
+  transform: translate(0px, 0px) scale(1);
 }
 
 /* transition background color */
@@ -91,7 +90,7 @@
 }
 .transform-transition-enter,
 .transform-transition-leave-to {
-  transform: translate(0px, 0px) scale(1);
+  transform: var(--fs-img-transform);
 }
 
 /* border */
@@ -176,9 +175,12 @@
 </style>
 
 <script>
+import ZoomImg from "./ZoomImg.vue";
+
 export default {
   name: "PhotoGrid",
   props: ["grid"],
+  components: { ZoomImg },
 
   computed: {
     cssVars() {
@@ -194,13 +196,14 @@ export default {
 
   data() {
     return {
+      showFullScreen: false,
       fsImgLeft: 0,
       fsImgTop: 0,
       fsImgWidth: 0,
       fsImgHeight: 0,
       fsImgTransform: "none",
       fsImgSrc: "",
-      showFullScreen: false,
+      fsImgZoomScale: 0,
     };
   },
 
@@ -223,31 +226,50 @@ export default {
       // restore scroll
       document.body.classList.remove("non-scrollable");
     },
-    openFullscreenPhoto: function (event, index) {
-      // calculate transform from initial img to fullscreen
-      var initImgRect = event.target.getBoundingClientRect();
+    openFullscreenPhoto: function (event) {
+      var imgElement = event.target;
+
+      // get initial image dimensions (without padding)
+      var initImgRect = imgElement.getBoundingClientRect();
       var initImgRectPadding = parseFloat(
-        getComputedStyle(event.target).fontSize
+        getComputedStyle(imgElement).fontSize
       );
       initImgRect.height = initImgRect.height - initImgRectPadding;
       initImgRect.width = initImgRect.width - initImgRectPadding;
       initImgRect.x = initImgRect.x + initImgRectPadding / 2;
       initImgRect.y = initImgRect.y + initImgRectPadding / 2;
 
-      var transfrom = this.calcTransform(
+      // calculate scale factor (from initial to fullscreen)
+      var fsImgScaleFactor = this.calcFsImgScaleFactor(
         initImgRect,
         document.documentElement.clientWidth,
         window.innerHeight,
         parseFloat(getComputedStyle(this.$el).fontSize)
       );
 
-      // set fullscreen image css
-      this.fsImgLeft = initImgRect.left;
-      this.fsImgTop = initImgRect.top;
-      this.fsImgWidth = initImgRect.width;
-      this.fsImgHeight = initImgRect.height;
-      this.fsImgSrc = event.target.src;
-      this.fsImgTransform = transfrom;
+      // calculate fullscreen image position
+      var fsImgRect = this.calcFsImgRect(
+        initImgRect,
+        document.documentElement.clientWidth,
+        window.innerHeight,
+        fsImgScaleFactor
+      );
+
+      // calculate transform (from fullscreen to initial)
+      var fsImgTransfrom = this.calcFsImgTransform(
+        initImgRect,
+        fsImgRect,
+        fsImgScaleFactor
+      );
+
+      // set fullscreen image css vars
+      this.fsImgLeft = fsImgRect.x;
+      this.fsImgTop = fsImgRect.y;
+      this.fsImgWidth = fsImgRect.width;
+      this.fsImgHeight = fsImgRect.height;
+      this.fsImgTransform = fsImgTransfrom;
+      this.fsImgSrc = imgElement.src;
+      this.fsImgZoomScale = imgElement.naturalWidth / fsImgRect.width;
 
       // show fullscreen
       this.showFullScreen = true;
@@ -265,34 +287,48 @@ export default {
       e.preventDefault();
       this.closeFullscreenPhoto();
     },
-    calcTransform: function (
-      initRect,
+    calcFsImgScaleFactor: function (
+      initImgRect,
       fullscreenWidth,
       fullscreenHeight,
       padding
     ) {
-      var scale = Math.min(
-        (fullscreenWidth - padding * 2) / initRect.width,
-        (fullscreenHeight - padding * 2) / initRect.height
+      return Math.min(
+        (fullscreenWidth - padding * 2) / initImgRect.width,
+        (fullscreenHeight - padding * 2) / initImgRect.height
       );
-
-      var finalX = (fullscreenWidth - scale * initRect.width) / 2;
-      var finalY = (fullscreenHeight - scale * initRect.height) / 2;
-
+    },
+    calcFsImgRect: function (
+      initImgRect,
+      fullscreenWidth,
+      fullscreenHeight,
+      fsImgScaleFactor
+    ) {
+      return {
+        x: (fullscreenWidth - fsImgScaleFactor * initImgRect.width) / 2,
+        y: (fullscreenHeight - fsImgScaleFactor * initImgRect.height) / 2,
+        width: initImgRect.width * fsImgScaleFactor,
+        height: initImgRect.height * fsImgScaleFactor,
+      };
+    },
+    calcFsImgTransform: function (initImgRect, fsImgRect, fsImgScaleFactor) {
       var x, y;
+      var scale = 1 / fsImgScaleFactor;
 
       if (scale > 1) {
         x =
-          finalX - (initRect.x - (scale * initRect.width - initRect.width) / 2);
+          initImgRect.x -
+          (fsImgRect.x - (scale * fsImgRect.width - fsImgRect.width) / 2);
         y =
-          finalY -
-          (initRect.y - (scale * initRect.height - initRect.height) / 2);
+          initImgRect.y -
+          (fsImgRect.y - (scale * fsImgRect.height - fsImgRect.height) / 2);
       } else {
         x =
-          finalX - (initRect.x + (initRect.width - scale * initRect.width) / 2);
+          initImgRect.x -
+          (fsImgRect.x + (fsImgRect.width - scale * fsImgRect.width) / 2);
         y =
-          finalY -
-          (initRect.y + (initRect.height - scale * initRect.height) / 2);
+          initImgRect.y -
+          (fsImgRect.y + (fsImgRect.height - scale * fsImgRect.height) / 2);
       }
 
       return `translate(${x}px, ${y}px) scale(${scale})`;
