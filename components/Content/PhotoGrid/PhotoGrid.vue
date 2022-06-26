@@ -29,6 +29,7 @@
           <ZoomImg
             class="photogrid-fullscreen-zoomimg"
             v-show="showFullScreen"
+            :visible="showFullScreen"
             :src="fsImgSrc"
             :zoomScale="fsImgZoomScale"
           />

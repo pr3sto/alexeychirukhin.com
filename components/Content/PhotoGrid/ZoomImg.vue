@@ -39,7 +39,15 @@
 <script>
 export default {
   name: "ZoomImg",
-  props: ["src", "zoomScale"],
+  props: ["src", "visible", "zoomScale"],
+
+  watch: {
+    visible: function (newVal, oldVal) {
+      if (newVal == false) {
+        this.zoomOut();
+      }
+    },
+  },
 
   computed: {
     cssVars() {
@@ -62,7 +70,7 @@ export default {
   },
 
   beforeDestroy: function () {
-    this.zoomOut();
+    this.removeEventListeners();
   },
 
   methods: {
@@ -106,8 +114,7 @@ export default {
     },
     zoomIn(clientX, clientY) {
       this.isZoomed = true;
-      this.$el.addEventListener("mouseleave", this.handleMouseLeave);
-      this.$el.addEventListener("mousemove", this.handleMouseMove);
+      this.addEventListeners();
 
       this.handleMouseMove({ clientX, clientY });
 
@@ -119,14 +126,21 @@ export default {
     },
     zoomOut() {
       this.isZoomed = false;
-      this.$el.addEventListener("mouseleave", this.handleMouseLeave);
-      this.$el.addEventListener("mousemove", this.handleMouseMove);
+      this.removeEventListeners();
 
       // zoom in or out in progress
       this.isZoomInProgress = true;
       setTimeout(() => {
         this.isZoomInProgress = false;
       }, 250);
+    },
+    addEventListeners() {
+      this.$el.addEventListener("mouseleave", this.handleMouseLeave);
+      this.$el.addEventListener("mousemove", this.handleMouseMove);
+    },
+    removeEventListeners() {
+      this.$el.removeEventListener("mouseleave", this.handleMouseLeave);
+      this.$el.removeEventListener("mousemove", this.handleMouseMove);
     },
     getScaledDimensions(imgRect, zoomScale) {
       return {
