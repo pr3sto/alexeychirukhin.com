@@ -1,11 +1,14 @@
 export const state = () => ({
   created: null,
+  misc: null,
   pages: [],
   menu: []
 })
 
 export const mutations = {
   setData(state, data) {
+    state.misc = data.misc;
+
     // site pages
     state.pages = data.pages;
 

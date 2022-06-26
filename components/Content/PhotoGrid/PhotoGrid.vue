@@ -11,7 +11,7 @@
           preset="progressivejpg"
           sizes="md:800px lg:1500px"
           :src="photo.url"
-          v-on:click="openFullscreenPhoto"
+          v-on:click="openFullscreenPhoto($event, photo)"
         />
       </section>
     </masonry>
@@ -203,7 +203,7 @@ export default {
       fsImgWidth: 0,
       fsImgHeight: 0,
       fsImgTransform: "none",
-      fsImgSrc: "",
+      fsImgSrc: this.$store.state.data.misc.noImageUrl,
       fsImgZoomScale: 0,
     };
   },
@@ -227,7 +227,7 @@ export default {
       // restore scroll
       document.body.classList.remove("non-scrollable");
     },
-    openFullscreenPhoto: function (event) {
+    openFullscreenPhoto: function (event, photo) {
       var imgElement = event.target;
 
       // get initial image dimensions (without padding)
@@ -269,7 +269,7 @@ export default {
       this.fsImgWidth = fsImgRect.width;
       this.fsImgHeight = fsImgRect.height;
       this.fsImgTransform = fsImgTransfrom;
-      this.fsImgSrc = imgElement.src;
+      this.fsImgSrc = photo.url;
       this.fsImgZoomScale = imgElement.naturalWidth / fsImgRect.width;
 
       // show fullscreen

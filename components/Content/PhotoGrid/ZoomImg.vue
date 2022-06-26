@@ -1,6 +1,9 @@
 <template>
   <div class="zoomimg" v-on:click="handleClick">
-    <img
+    <nuxt-img
+      provider="imagekit"
+      preset="progressivejpg"
+      sizes="md:800px lg:1500px"
       :class="{
         'zoomimg-img--original': !isZoomed,
         'zoomimg-img--zoomed': isZoomed,

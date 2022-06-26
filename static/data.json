@@ -72,5 +72,8 @@
         }
       ]
     }
-  ]
+  ],
+  "misc": {
+    "noImageUrl": "alexeychirukhin_com/misc/noimage.jpg"
+  }
 }
