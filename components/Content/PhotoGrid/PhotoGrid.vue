@@ -235,13 +235,18 @@ export default {
       this.openFullscreenPhoto(imgElement, photo);
     },
     handleFullscreenClicked: function (event) {
-      // clicked on fullscreen image
-      if (event && event.type == "click" && !event.srcElement.classList.contains("photogrid-fullscreen")) {
-        if (!window.matchMedia("(max-width: 700px)").matches) {
-          return;
-        }
+      // close fullscreen:
+      // - (desktop) when user clicks on black area
+      // - (mobile) when user clicks anywhere on screen
+      if (
+        event.srcElement.classList.contains("photogrid-fullscreen") ||
+        window.matchMedia("(max-width: 700px)").matches
+      ) {
+        this.closeFullscreenPhoto();
       }
-
+    },
+    handleScroll: function (e) {
+      e.preventDefault();
       this.closeFullscreenPhoto();
     },
     openFullscreenPhoto: function (imgElement, photo) {
@@ -290,7 +295,7 @@ export default {
       // show fullscreen
       this.showFullScreen = true;
     },
-    closeFullscreenPhoto: async function () {
+    closeFullscreenPhoto: function () {
       // prevent multiple events triggering this function
       if (!this.showFullScreen) {
         return;
@@ -298,10 +303,6 @@ export default {
 
       // hide fullscreen
       this.showFullScreen = false;
-    },
-    handleScroll: async function (e) {
-      e.preventDefault();
-      this.closeFullscreenPhoto();
     },
     calcFsImgScaleFactor: function (
       initImgRect,
