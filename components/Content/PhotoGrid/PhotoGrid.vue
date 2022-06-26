@@ -11,7 +11,7 @@
           preset="progressivejpg"
           sizes="md:800px lg:1500px"
           :src="photo.url"
-          v-on:click="openFullscreenPhoto($event, photo)"
+          v-on:click="handlePhotoImgClicked($event, photo)"
         />
       </section>
     </masonry>
@@ -23,7 +23,7 @@
       <div
         class="photogrid-fullscreen"
         v-show="showFullScreen"
-        v-on:click.self="closeFullscreenPhoto"
+        v-on:click="handleFullscreenClicked"
       >
         <transition name="transform-transition" appear>
           <ZoomImg
@@ -161,6 +161,9 @@
 }
 
 @media only screen and (max-width: 700px) {
+  .photogrid-fullscreen-zoomimg {
+    pointer-events: none;
+  }
   .background-transition-enter-active,
   .background-transition-leave-active {
     transition: none !important;
@@ -227,9 +230,21 @@ export default {
       // restore scroll
       document.body.classList.remove("non-scrollable");
     },
-    openFullscreenPhoto: function (event, photo) {
+    handlePhotoImgClicked: function (event, photo) {
       var imgElement = event.target;
+      this.openFullscreenPhoto(imgElement, photo);
+    },
+    handleFullscreenClicked: function (event) {
+      // clicked on fullscreen image
+      if (event && event.type == "click" && !event.srcElement.classList.contains("photogrid-fullscreen")) {
+        if (!window.matchMedia("(max-width: 700px)").matches) {
+          return;
+        }
+      }
 
+      this.closeFullscreenPhoto();
+    },
+    openFullscreenPhoto: function (imgElement, photo) {
       // get initial image dimensions (without padding)
       var initImgRect = imgElement.getBoundingClientRect();
       var initImgRectPadding = parseFloat(
