@@ -77,17 +77,26 @@ export default {
   },
 
   methods: {
+    addEventListeners() {
+      this.$el.addEventListener("mouseleave", this.handleMouseLeave);
+      this.$el.addEventListener("mousemove", this.handleMouseMove);
+    },
+    removeEventListeners() {
+      this.$el.removeEventListener("mouseleave", this.handleMouseLeave);
+      this.$el.removeEventListener("mousemove", this.handleMouseMove);
+    },
     handleClick(e) {
       if (this.isZoomed) {
         this.zoomOut();
       } else {
+        // image bounds
+        this.imgProps.bounds = this.$el.getBoundingClientRect();
+
         // get dimensions of zoomed image
         var scaledDimensions = this.getScaledDimensions(
-          this.$el.getBoundingClientRect(),
+          this.imgProps.bounds,
           this.zoomScale
         );
-
-        this.imgProps.bounds = this.$el.getBoundingClientRect();
 
         // calculate ratios for zoomed image
         this.imgProps.ratios = this.getRatios(
@@ -129,6 +138,8 @@ export default {
     },
     zoomOut() {
       this.isZoomed = false;
+      this.imgOffsetX = 0;
+      this.imgOffsetY = 0;
       this.removeEventListeners();
 
       // zoom in or out in progress
@@ -136,14 +147,6 @@ export default {
       setTimeout(() => {
         this.isZoomInProgress = false;
       }, 250);
-    },
-    addEventListeners() {
-      this.$el.addEventListener("mouseleave", this.handleMouseLeave);
-      this.$el.addEventListener("mousemove", this.handleMouseMove);
-    },
-    removeEventListeners() {
-      this.$el.removeEventListener("mouseleave", this.handleMouseLeave);
-      this.$el.removeEventListener("mousemove", this.handleMouseMove);
     },
     getScaledDimensions(imgRect, zoomScale) {
       return {
