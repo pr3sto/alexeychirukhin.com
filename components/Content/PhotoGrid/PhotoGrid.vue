@@ -1,7 +1,7 @@
 <template>
   <div class="photogrid" :style="cssVars">
     <masonry :cols="grid.cols">
-      <div
+      <section
         class="photogrid-block crosses-border"
         v-for="(photo, index) of grid.photos"
         :key="index"
@@ -13,7 +13,7 @@
           :src="photo.url"
           v-on:click="openFullscreenPhoto"
         />
-      </div>
+      </section>
     </masonry>
     <transition
       name="background-transition"

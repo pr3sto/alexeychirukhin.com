@@ -26,7 +26,8 @@
 .zoomimg-img--zoomed {
   position: absolute;
   cursor: zoom-out;
-  transform: translate(var(--zoomimg-img-offset-x), var(--zoomimg-img-offset-y)) scale(1);
+  transform: translate(var(--zoomimg-img-offset-x), var(--zoomimg-img-offset-y))
+    scale(1);
   transform-origin: left top;
 }
 
@@ -69,12 +70,15 @@ export default {
       if (this.isZoomed) {
         this.zoomOut();
       } else {
+        // get dimensions of zoomed image
         var scaledDimensions = this.getScaledDimensions(
           this.$el.getBoundingClientRect(),
           this.zoomScale
         );
 
         this.imgProps.bounds = this.$el.getBoundingClientRect();
+
+        // calculate ratios for zoomed image
         this.imgProps.ratios = this.getRatios(
           this.imgProps.bounds,
           scaledDimensions
@@ -83,6 +87,7 @@ export default {
         this.zoomIn(e.pageX, e.pageY);
       }
 
+      // zoom in or out in progress
       this.isZoomInProgress = true;
       setTimeout(() => {
         this.isZoomInProgress = false;

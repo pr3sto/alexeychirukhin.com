@@ -1,5 +1,5 @@
 <template>
-  <div class="photocard" :style="cssVars">
+  <figure class="photocard" :style="cssVars">
     <div
       class="photocard-photo"
       :class="{ 'photocard-photo--round': card.round }"
@@ -15,7 +15,7 @@
     <div class="photocard-signature">
       {{ card.signature }}
     </div>
-  </div>
+  </figure>
 </template>
 
 <style scoped>

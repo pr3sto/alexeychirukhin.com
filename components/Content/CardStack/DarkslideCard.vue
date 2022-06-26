@@ -1,5 +1,5 @@
 <template>
-  <div class="darkslidecard" :style="cssVars">
+  <figure class="darkslidecard" :style="cssVars">
     <div class="darkslidecard-content">
       <div class="darkslidecard-content-header">
         <img src="/images/arrow.png" />
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="darkslidecard-black-label" />
-  </div>
+  </figure>
 </template>
 
 <style scoped>

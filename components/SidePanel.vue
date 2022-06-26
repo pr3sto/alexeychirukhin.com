@@ -1,7 +1,7 @@
 <template>
-  <div class="side-panel">
-    {{ text }}
-  </div>
+  <aside class="side-panel">
+    <p>{{ text }}</p>
+  </aside>
 </template>
 
 <style scoped>

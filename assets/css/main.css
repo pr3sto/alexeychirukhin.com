@@ -20,6 +20,16 @@ body {
   box-sizing: inherit;
 }
 
+menu {
+  padding: 0;
+  margin: 0;
+}
+
+figure {
+  padding: 0;
+  margin: 0;
+}
+
 a {
   background-color: transparent;
 }
@@ -27,6 +37,11 @@ a {
 b,
 strong {
   font-weight: bolder;
+}
+
+p {
+  padding: 0;
+  margin: 0;
 }
 
 img {

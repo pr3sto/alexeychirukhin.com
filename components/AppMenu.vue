@@ -1,13 +1,13 @@
 <template>
-  <div class="app-menu">
-    <div
+  <menu class="app-menu">
+    <section
       class="app-menu-section"
       v-for="(items, sectionName, index) of menu"
       :key="index"
     >
-      <div class="app-menu-section-header" v-show="sectionName !== ''">
+      <p class="app-menu-section-header" v-show="sectionName !== ''">
         {{ sectionName }}
-      </div>
+      </p>
       <nuxt-link
         class="app-menu-section-link"
         v-for="(item, index1) of items"
@@ -16,8 +16,8 @@
       >
         {{ item.menuItemText }}
       </nuxt-link>
-    </div>
-  </div>
+    </section>
+  </menu>
 </template>
 
 <style scoped>
