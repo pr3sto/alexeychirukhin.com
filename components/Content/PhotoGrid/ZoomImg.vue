@@ -86,12 +86,6 @@ export default {
 
         this.zoomIn(e.clientX, e.clientY);
       }
-
-      // zoom in or out in progress
-      this.isZoomInProgress = true;
-      setTimeout(() => {
-        this.isZoomInProgress = false;
-      }, 250);
     },
     handleMouseLeave(e) {
       this.zoomOut();
@@ -116,11 +110,23 @@ export default {
       this.$el.addEventListener("mousemove", this.handleMouseMove);
 
       this.handleMouseMove({ clientX, clientY });
+
+      // zoom in or out in progress
+      this.isZoomInProgress = true;
+      setTimeout(() => {
+        this.isZoomInProgress = false;
+      }, 250);
     },
     zoomOut() {
       this.isZoomed = false;
       this.$el.addEventListener("mouseleave", this.handleMouseLeave);
       this.$el.addEventListener("mousemove", this.handleMouseMove);
+
+      // zoom in or out in progress
+      this.isZoomInProgress = true;
+      setTimeout(() => {
+        this.isZoomInProgress = false;
+      }, 250);
     },
     getScaledDimensions(imgRect, zoomScale) {
       return {
