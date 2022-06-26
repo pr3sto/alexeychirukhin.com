@@ -84,7 +84,7 @@ export default {
           scaledDimensions
         );
 
-        this.zoomIn(e.pageX, e.pageY);
+        this.zoomIn(e.clientX, e.clientY);
       }
 
       // zoom in or out in progress
@@ -101,8 +101,8 @@ export default {
         return;
       }
 
-      var x = e.pageX - this.imgProps.offsets.x;
-      var y = e.pageY - this.imgProps.offsets.y;
+      var x = e.clientX - this.imgProps.bounds.left;
+      var y = e.clientY - this.imgProps.bounds.top;
 
       x = Math.max(Math.min(x, this.imgProps.bounds.width), 0);
       y = Math.max(Math.min(y, this.imgProps.bounds.height), 0);
@@ -110,19 +110,12 @@ export default {
       this.imgOffsetX = x * -this.imgProps.ratios.x;
       this.imgOffsetY = y * -this.imgProps.ratios.y;
     },
-    zoomIn(pageX, pageY) {
+    zoomIn(clientX, clientY) {
       this.isZoomed = true;
       this.$el.addEventListener("mouseleave", this.handleMouseLeave);
       this.$el.addEventListener("mousemove", this.handleMouseMove);
 
-      this.imgProps.offsets = this.getOffsets(
-        window.pageXOffset,
-        window.pageYOffset,
-        -this.imgProps.bounds.left,
-        -this.imgProps.bounds.top
-      );
-
-      this.handleMouseMove({ pageX, pageY });
+      this.handleMouseMove({ clientX, clientY });
     },
     zoomOut() {
       this.isZoomed = false;
@@ -133,12 +126,6 @@ export default {
       return {
         width: imgRect.width * zoomScale,
         height: imgRect.height * zoomScale,
-      };
-    },
-    getOffsets(pageX, pageY, left, top) {
-      return {
-        x: pageX - left,
-        y: pageY - top,
       };
     },
     getRatios(bounds, dimensions) {
