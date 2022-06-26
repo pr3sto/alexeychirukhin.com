@@ -10,7 +10,7 @@ export default {
     title: 'Alexey Chirukhin',
     titleTemplate: (titleChunk) => {
       return titleChunk && titleChunk !== 'Alexey Chirukhin' ?
-        `${titleChunk} - Alexey Chirukhin` :
+        `${titleChunk} — Alexey Chirukhin` :
         'Alexey Chirukhin';
     },
     meta: [
