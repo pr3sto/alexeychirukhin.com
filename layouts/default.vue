@@ -20,14 +20,15 @@
 
 #default-layout-page {
   flex-grow: 1;
-  padding: 1em 0 1em 0;
+  padding: 1em 0 1em 1em;
 }
 
 #default-layout-sidepanel {
-  position: sticky;
-  align-self: baseline;
-  top: 0;
+  position: fixed;
   padding: 1em;
+  top: 0;
+  color: white;
+  mix-blend-mode: exclusion;
 }
 
 #default-layout-appmenu {
@@ -54,11 +55,8 @@
     padding: 0 1em 1em 1em;
   }
   #default-layout-sidepanel {
-    position: fixed;
     top: auto;
     bottom: 0;
-    color: white;
-    mix-blend-mode: exclusion;
   }
   #default-layout-appmenu {
     position: static;
