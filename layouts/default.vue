@@ -29,6 +29,7 @@
   top: 0;
   color: white;
   mix-blend-mode: exclusion;
+  z-index: 999;
 }
 
 #default-layout-appmenu {
