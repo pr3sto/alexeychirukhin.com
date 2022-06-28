@@ -8,7 +8,7 @@
           :is="card.type"
           :key="index"
           :class="card.class"
-          v-on:click.native="switchCards"
+          v-on:click.native="handleClick"
           :card="card"
           :fontSize="fontSize"
         />
@@ -124,6 +124,7 @@
 </style>
 
 <script>
+import * as cardstackConstants from "~/constants/cardstack.js";
 import PhotoCard from "~/components/Content/CardStack/PhotoCard.vue";
 import DarkslideCard from "~/components/Content/CardStack/DarkslideCard.vue";
 
@@ -169,29 +170,38 @@ export default {
   },
 
   methods: {
-    reCalculate: function () {
-      var containerRect = this.$el.children[0].getBoundingClientRect();
-      if (containerRect.width / containerRect.height > 0.83) {
-        this.cardstackContainerHeight = "100%";
-        this.cardstackContainerWidth = "auto";
-        this.fontSize = containerRect.height / 45;
-      } else {
-        this.cardstackContainerHeight = "auto";
-        this.cardstackContainerWidth = "100%";
-        this.fontSize = containerRect.width / 37;
-      }
-    },
-    switchCards: function (event) {
+    handleClick: function (event) {
       // prevent click on href
       if (event.target.tagName.toLowerCase() === "a") {
         return;
       }
+
       // prevent click when text is selected
       var selection = document.getSelection();
       if (selection.type === "Range") {
         return;
       }
 
+      this.switchCards();
+    },
+    reCalculate: function () {
+      var containerRect = this.$el.children[0].getBoundingClientRect();
+      if (
+        containerRect.width / containerRect.height >
+        cardstackConstants.POLAROID_CARD_ASPECT_RATIO
+      ) {
+        this.cardstackContainerHeight = "100%";
+        this.cardstackContainerWidth = "auto";
+        this.fontSize =
+          containerRect.height / cardstackConstants.FONT_SIZE_FACTOR1;
+      } else {
+        this.cardstackContainerHeight = "auto";
+        this.cardstackContainerWidth = "100%";
+        this.fontSize =
+          containerRect.width / cardstackConstants.FONT_SIZE_FACTOR2;
+      }
+    },
+    switchCards: function () {
       // don't switch one card
       if (this.annotatedCards.length < 2) {
         return;
