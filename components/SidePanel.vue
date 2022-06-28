@@ -21,7 +21,7 @@ export default {
   name: "SidePanel",
   computed: {
     text() {
-      var page = this.$store.getters['data/currentPage'](this.$route.path);
+      var page = this.$store.getters["data/currentPage"](this.$route.path);
       if (page.sidePanelText) {
         return page.sidePanelText;
       } else if (page.menuItemSection) {
