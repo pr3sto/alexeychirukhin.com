@@ -22,14 +22,17 @@
 
 .zoomimg-img--original {
   cursor: zoom-in;
-  transform: translate(0, 0) scale(var(--zoomimg-img-scale));
+  transform: translate(0, 0) scale(var(--zoomimg-img-original-scale));
   transform-origin: left top;
 }
 
 .zoomimg-img--zoomed {
   position: absolute;
   cursor: zoom-out;
-  transform: translate(var(--zoomimg-img-offset-x), var(--zoomimg-img-offset-y))
+  transform: translate(
+      var(--zoomimg-img-zoomed-offset-x),
+      var(--zoomimg-img-zoomed-offset-y)
+    )
     scale(1);
   transform-origin: left top;
 }
@@ -42,7 +45,7 @@
 <script>
 export default {
   name: "ZoomImg",
-  props: ["src", "visible", "zoomScale"],
+  props: ["src", "zoomScale", "visible"],
 
   watch: {
     visible: function (newVal, oldVal) {
@@ -55,9 +58,9 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--zoomimg-img-offset-x": `${this.imgOffsetX}px`,
-        "--zoomimg-img-offset-y": `${this.imgOffsetY}px`,
-        "--zoomimg-img-scale": 1 / this.zoomScale,
+        "--zoomimg-img-zoomed-offset-x": `${this.zoomedImgOffsetX}px`,
+        "--zoomimg-img-zoomed-offset-y": `${this.zoomedImgOffsetY}px`,
+        "--zoomimg-img-original-scale": 1 / this.zoomScale,
       };
     },
   },
@@ -65,10 +68,11 @@ export default {
   data() {
     return {
       isZoomed: false,
-      imgOffsetX: 0,
-      imgOffsetY: 0,
-      imgProps: {},
+      isTouch: false,
       isZoomInProgress: false,
+      zoomedImgOffsetX: 0,
+      zoomedImgOffsetY: 0,
+      zoomedImgProps: {},
     };
   },
 
@@ -80,28 +84,32 @@ export default {
     addEventListeners() {
       this.$el.addEventListener("mouseleave", this.handleMouseLeave);
       this.$el.addEventListener("mousemove", this.handleMouseMove);
+      this.$el.addEventListener("touchstart", this.handleTouchStart);
+      this.$el.addEventListener("touchend", this.handleTouchEnd);
     },
     removeEventListeners() {
       this.$el.removeEventListener("mouseleave", this.handleMouseLeave);
       this.$el.removeEventListener("mousemove", this.handleMouseMove);
+      this.$el.removeEventListener("touchstart", this.handleTouchStart);
+      this.$el.removeEventListener("touchend", this.handleTouchEnd);
     },
     handleClick(e) {
       if (this.isZoomed) {
         this.zoomOut();
       } else {
         // image bounds
-        this.imgProps.bounds = this.$el.getBoundingClientRect();
+        this.zoomedImgProps.bounds = this.$el.getBoundingClientRect();
 
         // get dimensions of zoomed image
-        var scaledDimensions = this.getScaledDimensions(
-          this.imgProps.bounds,
+        this.zoomedImgProps.scaledDimensions = this.getScaledDimensions(
+          this.zoomedImgProps.bounds,
           this.zoomScale
         );
 
         // calculate ratios for zoomed image
-        this.imgProps.ratios = this.getRatios(
-          this.imgProps.bounds,
-          scaledDimensions
+        this.zoomedImgProps.ratios = this.getRatios(
+          this.zoomedImgProps.bounds,
+          this.zoomedImgProps.scaledDimensions
         );
 
         this.zoomIn(e.clientX, e.clientY);
@@ -111,38 +119,88 @@ export default {
       this.zoomOut();
     },
     handleMouseMove(e) {
-      if (!this.isZoomed) {
+      if (this.isTouch) {
         return;
       }
 
-      var x = e.clientX - this.imgProps.bounds.left;
-      var y = e.clientY - this.imgProps.bounds.top;
+      var x = e.clientX - this.zoomedImgProps.bounds.left;
+      var y = e.clientY - this.zoomedImgProps.bounds.top;
 
-      x = Math.max(Math.min(x, this.imgProps.bounds.width), 0);
-      y = Math.max(Math.min(y, this.imgProps.bounds.height), 0);
+      x = Math.max(Math.min(x, this.zoomedImgProps.bounds.width), 0);
+      y = Math.max(Math.min(y, this.zoomedImgProps.bounds.height), 0);
 
-      this.imgOffsetX = x * -this.imgProps.ratios.x;
-      this.imgOffsetY = y * -this.imgProps.ratios.y;
+      this.zoomedImgOffsetX = x * -this.zoomedImgProps.ratios.x;
+      this.zoomedImgOffsetY = y * -this.zoomedImgProps.ratios.y;
+    },
+    handleTouchStart(e) {
+      this.isTouch = true;
+
+      this.zoomedImgProps.initialTouch = {
+        zoomedImgOffsetX: this.zoomedImgOffsetX,
+        zoomedImgOffsetY: this.zoomedImgOffsetY,
+        x: e.changedTouches[0].clientX - this.zoomedImgProps.bounds.left,
+        y: e.changedTouches[0].clientY - this.zoomedImgProps.bounds.top,
+      };
+
+      this.$el.addEventListener("touchmove", this.handleTouchMove, {
+        passive: true,
+      });
+    },
+    handleTouchEnd(e) {
+      this.$el.removeEventListener("touchmove", this.handleTouchMove);
+    },
+    handleTouchMove(e) {
+      var currentTouch = {
+        x: e.changedTouches[0].clientX - this.zoomedImgProps.bounds.left,
+        y: e.changedTouches[0].clientY - this.zoomedImgProps.bounds.top,
+      };
+
+      var x =
+        this.zoomedImgProps.initialTouch.zoomedImgOffsetX +
+        (currentTouch.x - this.zoomedImgProps.initialTouch.x);
+      var y =
+        this.zoomedImgProps.initialTouch.zoomedImgOffsetY +
+        (currentTouch.y - this.zoomedImgProps.initialTouch.y);
+
+      x = Math.max(
+        Math.min(x, 0),
+        (this.zoomedImgProps.scaledDimensions.width -
+          this.zoomedImgProps.bounds.width) *
+          -1
+      );
+      y = Math.max(
+        Math.min(y, 0),
+        (this.zoomedImgProps.scaledDimensions.height -
+          this.zoomedImgProps.bounds.height) *
+          -1
+      );
+
+      this.zoomedImgOffsetX = x;
+      this.zoomedImgOffsetY = y;
     },
     zoomIn(clientX, clientY) {
-      this.isZoomed = true;
       this.addEventListeners();
 
+      this.isZoomed = true;
+
+      // move image under cursor (or touch)
       this.handleMouseMove({ clientX, clientY });
 
-      // zoom in or out in progress
+      // set zoom in or out in progress
       this.isZoomInProgress = true;
       setTimeout(() => {
         this.isZoomInProgress = false;
       }, 250);
     },
     zoomOut() {
-      this.isZoomed = false;
-      this.imgOffsetX = 0;
-      this.imgOffsetY = 0;
       this.removeEventListeners();
 
-      // zoom in or out in progress
+      this.isZoomed = false;
+      this.isTouch = false;
+      this.zoomedImgOffsetX = 0;
+      this.zoomedImgOffsetY = 0;
+
+      // set zoom in or out in progress
       this.isZoomInProgress = true;
       setTimeout(() => {
         this.isZoomInProgress = false;
