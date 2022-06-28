@@ -17,7 +17,7 @@
 
 <style scoped>
 .zoomimg {
-  clip-path: inset(0 0 0 0);
+  overflow: hidden;
 }
 
 .zoomimg-img--original {
