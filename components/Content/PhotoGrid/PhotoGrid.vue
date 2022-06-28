@@ -59,10 +59,10 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 1000;
   overflow: auto;
   background: rgba(0, 0, 0, 0.9);
-  touch-action: pinch-zoom;
+  touch-action: none;
 }
 
 .photogrid-fullscreen-zoomimg {
@@ -216,14 +216,14 @@ export default {
   },
 
   methods: {
-    beforeFullscreenOpened: function (el) {
+    beforeFullscreenOpened: function () {
       // close on resize/scroll
       window.addEventListener("resize", this.closeFullscreenPhoto);
       window.addEventListener("wheel", this.handleScroll, { passive: false });
       // prevent scroll when fullscreen opened
       document.body.classList.add("non-scrollable");
     },
-    afterFullscreenClosed: function (el) {
+    afterFullscreenClosed: function () {
       // clear events
       window.removeEventListener("resize", this.closeFullscreenPhoto);
       window.removeEventListener("wheel", this.handleScroll);
