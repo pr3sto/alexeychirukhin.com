@@ -9,9 +9,7 @@ export default {
   components: { ContentBuilder },
   computed: {
     page() {
-      return this.$store.state.data.pages.find(
-        (page) => page.route === this.$route.path
-      );
+      return this.$store.getters['data/currentPage'](this.$route.path);
     },
   },
 };

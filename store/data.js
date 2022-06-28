@@ -5,6 +5,14 @@ export const state = () => ({
   menu: []
 })
 
+export const getters = {
+  currentPage: (state) => (route) => {
+    return state.pages.find(
+      (page) => page.route === route
+    );
+  }
+}
+
 export const mutations = {
   setData(state, data) {
     state.misc = data.misc;

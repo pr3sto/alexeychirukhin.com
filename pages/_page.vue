@@ -10,9 +10,7 @@ export default {
 
   computed: {
     page() {
-      return this.$store.state.data.pages.find(
-        (page) => page.route === this.$route.path
-      );
+      return this.$store.getters['data/currentPage'](this.$route.path);
     },
   },
 
@@ -23,9 +21,7 @@ export default {
   },
 
   validate({ params, store, redirect }) {
-    var page = store.state.data.pages.find(
-      (page) => page.route === `/${params.page}`
-    );
+    var page = store.getters['data/currentPage'](`/${params.page}`);
     if (!page) {
       redirect("/");
     }
