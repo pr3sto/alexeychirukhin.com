@@ -2,11 +2,11 @@ export const actions = {
   async nuxtClientInit({ commit }, context) {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-    // cache data in local storage for 30 minutes
+    // cache data in local storage for [LOCAL_STORE_LIFETIME_MINUTES] minutes
     if (context.store.state.data.created) {
       var millisecconds = Date.now() - context.store.state.data.created;
       var minutes = Math.floor((millisecconds/1000)/60);
-      if (minutes < 30) {
+      if (minutes < process.env.LOCAL_STORE_LIFETIME_MINUTES) {
         return;
       }
     }
@@ -26,8 +26,8 @@ export const actions = {
     );
     var end = performance.now();
 
-    // show loading page at least 3 seconds
-    var delayTime = 3000 - (end - start);
+    // show loading page at least [DATA_LOADING_ANIMATION_TIME_SECONDS] seconds
+    var delayTime = (process.env.DATA_LOADING_ANIMATION_TIME_SECONDS * 1000) - (end - start);
     if (delayTime > 0) {
       await delay(delayTime);
     }
