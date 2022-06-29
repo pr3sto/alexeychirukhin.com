@@ -20,5 +20,9 @@
   },
   "devDependencies": {
     "@nuxt/image": "^0.6.2"
-  }
+  },
+  "browserslist": [
+    "cover 99.5%",
+    "not dead"
+  ]
 }
