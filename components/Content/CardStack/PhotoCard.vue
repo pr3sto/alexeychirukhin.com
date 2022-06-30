@@ -47,8 +47,8 @@
 }
 
 .photocard-photo {
-  width: 100%;
   position: relative;
+  width: 100%;
   aspect-ratio: 1;
 }
 

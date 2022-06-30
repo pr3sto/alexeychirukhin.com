@@ -6,7 +6,7 @@
 
 <style scoped>
 .side-panel {
-  writing-mode: vertical-rl;
+  writing-mode: vertical-lr;
 }
 
 @media only screen and (max-width: 700px) {

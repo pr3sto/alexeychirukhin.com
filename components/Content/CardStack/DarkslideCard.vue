@@ -70,8 +70,8 @@
 }
 
 .darkslidecard-content-area {
-  flex-grow: 1;
   display: flex;
+  flex-grow: 1;
   align-items: center;
   justify-content: center;
   padding: 8%;

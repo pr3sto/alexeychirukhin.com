@@ -25,8 +25,8 @@
 
 #default-layout-sidepanel {
   position: fixed;
-  padding: 1em;
   top: 0;
+  padding: 1em;
   color: white;
   mix-blend-mode: exclusion;
   z-index: 999;
