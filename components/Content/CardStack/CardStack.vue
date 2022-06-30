@@ -69,6 +69,7 @@
   z-index: 1;
   animation: cardstack-card-out 0.6s cubic-bezier(0.8, 0.2, 0.1, 0.8);
   transform: translateX(13%) translateY(-8%) rotate(8deg) scale(0.95);
+  transition: none !important;
 }
 
 /* dim the card */
@@ -103,7 +104,7 @@
 @keyframes cardstack-card-out {
   0% {
     z-index: 10;
-    transform: translateX(0) translateY(0) rotate(0deg);
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
   }
   50% {
     transform: translateX(-13%) translateY(-120%) rotate(-4deg);
@@ -113,12 +114,6 @@
   }
   100% {
     transform: translateX(13%) translateY(-8%) rotate(8deg) scale(0.95);
-  }
-}
-
-@media only screen and (max-width: 700px) {
-  .cardstack-card--out {
-    animation: none !important;
   }
 }
 </style>

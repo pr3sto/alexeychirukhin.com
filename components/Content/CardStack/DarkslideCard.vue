@@ -3,7 +3,7 @@
     <div class="darkslidecard-content">
       <div class="darkslidecard-content-header">
         <img src="/images/arrow.png" />
-        <div>Insert film this side up.&#10;Do not remove this darkslide.</div>
+        <p>Insert film this side up.&#10;Do not remove this darkslide.</p>
       </div>
       <div class="darkslidecard-content-area" v-html="card.html" />
       <div class="darkslidecard-content-footer">
@@ -11,8 +11,8 @@
           <div class="darkslidecard-content-footer-left-dot" />
         </div>
         <div class="darkslidecard-content-footer-right">
-          <div>{{ currentDate }}</div>
-          <div><b>Alexey Chirukhin</b>&#10;alexeychirukhin.com</div>
+          <p>{{ currentDate }}</p>
+          <p><b>Alexey Chirukhin</b>&#10;alexeychirukhin.com</p>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
   margin-right: 0.1em;
 }
 
-.darkslidecard-content-header > div {
+.darkslidecard-content-header > p {
   display: inline-block;
   white-space: pre-line;
 }
@@ -129,7 +129,7 @@
   opacity: 0.8;
 }
 
-.darkslidecard-content-footer-right > div {
+.darkslidecard-content-footer-right > p {
   display: inline-block;
   margin-right: 1em;
   vertical-align: top;
