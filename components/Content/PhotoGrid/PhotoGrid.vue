@@ -25,7 +25,7 @@
         v-show="showFullScreen"
         v-on:click="handleFullscreenClicked"
       >
-        <transition name="transform-transition" appear>
+        <transition name="transform-transition">
           <ZoomImg
             class="photogrid-fullscreen-zoomimg"
             v-show="showFullScreen"
@@ -33,6 +33,15 @@
             :src="fsImgSrc"
             :zoomScale="fsImgZoomScale"
           />
+        </transition>
+        <transition name="opacity-transition">
+          <p
+            class="photogrid-fullscreen-close"
+            v-show="showFullScreen"
+            v-on:click="handleCloseButtonClicked"
+          >
+            close
+          </p>
         </transition>
       </div>
     </transition>
@@ -60,7 +69,6 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  overflow: auto;
   background: rgba(0, 0, 0, 0.9);
   touch-action: none;
 }
@@ -72,6 +80,17 @@
   width: var(--fs-img-width);
   height: var(--fs-img-height);
   transform: translate(0px, 0px) scale(1);
+}
+
+.photogrid-fullscreen-close {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1em;
+  color: white;
+  writing-mode: vertical-rl;
+  mix-blend-mode: exclusion;
+  cursor: pointer;
 }
 
 /* transition background color */
@@ -92,6 +111,16 @@
 .transform-transition-enter,
 .transform-transition-leave-to {
   transform: var(--fs-img-transform);
+}
+
+/* transition opacity */
+.opacity-transition-enter-active,
+.opacity-transition-leave-active {
+  transition: opacity 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
+}
+.opacity-transition-enter,
+.opacity-transition-leave-to {
+  opacity: 0;
 }
 
 /* border */
@@ -230,20 +259,23 @@ export default {
       // restore scroll
       document.body.classList.remove("non-scrollable");
     },
-    handlePhotoImgClicked: function (event, photo) {
-      var imgElement = event.target;
+    handlePhotoImgClicked: function (e, photo) {
+      var imgElement = e.target;
       this.openFullscreenPhoto(imgElement, photo);
     },
-    handleFullscreenClicked: function (event) {
+    handleFullscreenClicked: function (e) {
       // close fullscreen:
       // - (desktop) when user clicks on black area
       // - (mobile) when user clicks anywhere on screen
       if (
-        event.srcElement.classList.contains("photogrid-fullscreen") ||
+        e.srcElement.classList.contains("photogrid-fullscreen") ||
         window.matchMedia("(max-width: 700px)").matches
       ) {
         this.closeFullscreenPhoto();
       }
+    },
+    handleCloseButtonClicked: function() {
+      this.closeFullscreenPhoto();
     },
     handleScroll: function (e) {
       e.preventDefault();
