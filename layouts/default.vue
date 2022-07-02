@@ -10,12 +10,9 @@
 #default-layout {
   display: flex;
   flex-direction: row;
-  background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.5) 85%,
-      rgba(215, 215, 215, 0.5) 100%
-    ),
-    url("../assets/noise.svg");
+  background-image: url("../assets/copyofacopy.svg");
+  background-repeat: repeat;
+  background-size: 100vw;
 }
 
 #default-layout-page {
@@ -27,9 +24,10 @@
   position: fixed;
   top: 0;
   padding: 1em;
+  z-index: 999;
+  writing-mode: vertical-lr;
   color: white;
   mix-blend-mode: exclusion;
-  z-index: 999;
 }
 
 #default-layout-appmenu {
@@ -38,14 +36,6 @@
   top: 0;
   padding-top: 1em;
   padding-bottom: 1em;
-}
-
-/* Nuxt pages transition */
-.page-enter-active {
-  transition: opacity 0.25s;
-}
-.page-enter {
-  opacity: 0.5;
 }
 
 @media only screen and (max-width: 700px) {
@@ -58,6 +48,7 @@
   #default-layout-sidepanel {
     top: auto;
     bottom: 0;
+    writing-mode: initial;
   }
   #default-layout-appmenu {
     position: static;
