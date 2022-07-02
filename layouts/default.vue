@@ -24,7 +24,6 @@
   position: fixed;
   top: 0;
   padding: 1em;
-  z-index: 999;
   writing-mode: vertical-lr;
   color: white;
   mix-blend-mode: exclusion;
