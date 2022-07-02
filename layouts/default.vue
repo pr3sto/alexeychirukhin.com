@@ -13,7 +13,7 @@
   background: radial-gradient(
       circle,
       rgba(255, 255, 255, 0.5) 85%,
-      rgba(215, 215, 215, 0.7) 100%
+      rgba(215, 215, 215, 0.5) 100%
     ),
     url("../assets/noise.svg");
 }
