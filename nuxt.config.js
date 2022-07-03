@@ -1,17 +1,20 @@
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`
+  path: `.env.${process.env.NODE_ENV}`,
 })
 
 export default {
   devtools: process.env.NODE_ENV !== 'production',
   ssr: false,
   target: 'static',
+  env: {
+    defaultTitle: 'Alexey Chirukhin',
+  },
   head: {
-    title: 'Alexey Chirukhin',
+    title: process.env.defaultTitle,
     titleTemplate: (titleChunk) => {
-      return titleChunk && titleChunk !== 'Alexey Chirukhin' ?
-        `${titleChunk} — Alexey Chirukhin` :
-        'Alexey Chirukhin';
+      return titleChunk && titleChunk !== process.env.defaultTitle ?
+        `${titleChunk} — ${process.env.defaultTitle}` :
+        process.env.defaultTitle;
     },
     meta: [
       { charset: 'utf-8' },
@@ -46,7 +49,7 @@ export default {
   ],
   image: {
     imagekit: {
-      baseURL: 'https://ik.imagekit.io/pr3sto'
+      baseURL: 'https://ik.imagekit.io/pr3sto',
     },
     screens: {
       md: 700,
@@ -57,7 +60,7 @@ export default {
           f: 'jpg',
           progressive: true,
         },
-      }
+      },
     },
   },
 }

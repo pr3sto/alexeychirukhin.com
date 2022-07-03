@@ -10,11 +10,7 @@ export default {
   computed: {
     text() {
       var page = this.$store.getters["data/currentPage"](this.$route.path);
-      if (page.sidePanelText) {
-        return page.sidePanelText;
-      } else {
-        return "";
-      }
+      return page.sidePanelText ? page.sidePanelText : "";
     },
   },
 };
