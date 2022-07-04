@@ -24,6 +24,7 @@
 .content-floating-text {
   position: fixed;
   top: 0;
+  left: 0;
   padding: 1em;
   writing-mode: vertical-lr;
   color: white;
