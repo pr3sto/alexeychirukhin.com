@@ -1,10 +1,12 @@
 <template>
   <main class="content">
-    <floating-text class="content-floating-text" />
+    <aside v-show="content.floatingText" class="content-floating-text">
+      <p>{{ content.floatingText }}</p>
+    </aside>
     <div class="content-container">
       <section
         class="content-block"
-        v-for="(item, index) of content"
+        v-for="(item, index) of content.blocks"
         :key="index"
       >
         <text-content v-if="item.type === 'TextContent'" :text="item.text" />
@@ -24,6 +26,8 @@
   top: 0;
   padding: 1em;
   writing-mode: vertical-lr;
+  color: white;
+  mix-blend-mode: exclusion;
 }
 .content-container {
   display: flex;
@@ -54,7 +58,6 @@
 </style>
 
 <script>
-import FloatingText from "~/components/FloatingText";
 import CardStack from "~/components/Content/CardStack/CardStack.vue";
 import PhotoGrid from "~/components/Content/PhotoGrid/PhotoGrid.vue";
 import TextContent from "~/components/Content/Text/TextContent.vue";
@@ -62,6 +65,6 @@ import TextContent from "~/components/Content/Text/TextContent.vue";
 export default {
   name: "ContentBuilder",
   props: ["content"],
-  components: { FloatingText, CardStack, PhotoGrid, TextContent },
+  components: { CardStack, PhotoGrid, TextContent },
 };
 </script>
