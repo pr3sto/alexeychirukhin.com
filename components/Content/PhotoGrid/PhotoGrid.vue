@@ -190,19 +190,8 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .photogrid-fullscreen-zoomimg {
-    pointer-events: none;
-  }
-  .background-transition-enter-active,
-  .background-transition-leave-active {
-    transition: none !important;
-  }
-  .transform-transition-enter-active,
-  .transform-transition-leave-active {
-    transition: none !important;
-  }
-  .non-scrollable {
-    overflow: hidden;
+  .photogrid-fullscreen-close {
+    writing-mode: initial;
   }
 }
 </style>
@@ -249,15 +238,11 @@ export default {
       // close on resize/scroll
       window.addEventListener("resize", this.closeFullscreenPhoto);
       window.addEventListener("wheel", this.handleScroll, { passive: false });
-      // prevent scroll when fullscreen opened
-      document.body.classList.add("non-scrollable");
     },
     afterFullscreenClosed: function () {
       // clear events
       window.removeEventListener("resize", this.closeFullscreenPhoto);
       window.removeEventListener("wheel", this.handleScroll);
-      // restore scroll
-      document.body.classList.remove("non-scrollable");
     },
     handlePhotoImgClicked: function (e, photo) {
       var imgElement = e.target;
@@ -274,7 +259,7 @@ export default {
         this.closeFullscreenPhoto();
       }
     },
-    handleCloseButtonClicked: function() {
+    handleCloseButtonClicked: function () {
       this.closeFullscreenPhoto();
     },
     handleScroll: function (e) {
