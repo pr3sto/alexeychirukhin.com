@@ -24,7 +24,7 @@
     {
       "menuItemText": "Memories - Rzhev",
       "menuItemSection": "projects",
-      "sidePanelText": "Ode to Childhood",
+      "floatingText": "Ode to Childhood",
       "route": "/memories-rzhev",
       "content": [
         {

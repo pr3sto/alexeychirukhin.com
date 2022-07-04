@@ -1,6 +1,5 @@
 <template>
   <div id="default-layout">
-    <side-panel id="default-layout-sidepanel" />
     <nuxt id="default-layout-page" />
     <app-menu id="default-layout-appmenu" />
   </div>
@@ -14,21 +13,10 @@
   background-repeat: repeat;
   background-size: 100vw;
 }
-
 #default-layout-page {
   flex-grow: 1;
   padding: 1em 0 1em 1em;
 }
-
-#default-layout-sidepanel {
-  position: fixed;
-  top: 0;
-  padding: 1em;
-  writing-mode: vertical-lr;
-  color: white;
-  mix-blend-mode: exclusion;
-}
-
 #default-layout-appmenu {
   position: sticky;
   align-self: baseline;
@@ -44,11 +32,6 @@
   #default-layout-page {
     padding: 0 1em 1em 1em;
   }
-  #default-layout-sidepanel {
-    top: auto;
-    bottom: 0;
-    writing-mode: initial;
-  }
   #default-layout-appmenu {
     position: static;
   }
@@ -57,10 +40,9 @@
 
 <script>
 import AppMenu from "~/components/AppMenu.vue";
-import SidePanel from "~/components/SidePanel.vue";
 
 export default {
-  components: { AppMenu, SidePanel },
+  components: { AppMenu },
 
   mounted() {
     this.$nextTick(() => {
