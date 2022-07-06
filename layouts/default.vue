@@ -61,7 +61,7 @@ export default {
 
   methods: {
     reCalculate: function () {
-      this.$el.style.minHeight = `${window.innerHeight}px`;
+      this.$el.style.minHeight = `${document.documentElement.clientHeight}px`;
     },
   },
 };
