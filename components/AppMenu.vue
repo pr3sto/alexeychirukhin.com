@@ -24,6 +24,7 @@
 .app-menu {
   display: flex;
   flex-direction: column;
+  font-size: 1.2em;
 }
 .app-menu-section {
   display: flex;
