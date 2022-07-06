@@ -9,9 +9,6 @@
 #default-layout {
   display: flex;
   flex-direction: row;
-  background-image: url("../assets/copyofacopy.svg");
-  background-repeat: repeat;
-  background-size: 100vw;
 }
 #default-layout-page {
   flex-grow: 1;

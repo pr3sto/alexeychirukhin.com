@@ -9,6 +9,9 @@ html {
 
 body {
   margin: 0;
+  background-image: url("../copyofacopy.svg");
+  background-repeat: repeat;
+  background-size: 100vw;
 }
 
 *,
@@ -50,5 +53,9 @@ img {
   /* looks better on mobile */
   img {
     image-rendering: auto;
+  }
+
+  body {
+    background-size: 150vw;
   }
 }
