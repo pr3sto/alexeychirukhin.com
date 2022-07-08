@@ -54,10 +54,10 @@
         v-on:before-enter="beforeFullscreenSmallOpened"
         v-on:after-leave="afterFullscreenSmallClosed"
       >
-        <div class="photogrid-fullscreen-small" v-show="showFullScreen">
+        <div class="photogrid-small-screen-fullscreen" v-show="showFullScreen">
           <transition name="opacity-transition">
             <nuxt-img
-              class="photogrid-fullscreen-small-img"
+              class="photogrid-small-screen-fullscreen-img"
               v-show="showFullScreen"
               provider="imagekit"
               preset="progressivejpg"
@@ -67,7 +67,7 @@
           </transition>
           <transition name="opacity-transition">
             <p
-              class="photogrid-fullscreen-small-close"
+              class="photogrid-small-screen-fullscreen-close"
               v-show="showFullScreen"
               v-on:click="handleCloseButtonClicked"
             >
@@ -124,7 +124,7 @@
   cursor: pointer;
 }
 
-.photogrid-fullscreen-small {
+.photogrid-small-screen-fullscreen {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -134,7 +134,7 @@
   background: rgb(255, 255, 255);
 }
 
-.photogrid-fullscreen-small-img {
+.photogrid-small-screen-fullscreen-img {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -146,7 +146,7 @@
   padding: 1em;
 }
 
-.photogrid-fullscreen-small-close {
+.photogrid-small-screen-fullscreen-close {
   position: fixed;
   top: 0;
   left: 0;

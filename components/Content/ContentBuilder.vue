@@ -5,7 +5,7 @@
     </aside>
     <div class="content-container">
       <section
-        class="content-block"
+        class="content-container-block"
         v-for="(item, index) of content.blocks"
         :key="index"
       >
@@ -35,17 +35,17 @@
   flex-direction: column;
   flex-grow: 1;
 }
-.content-block {
+.content-container-block {
   display: flex;
   padding-bottom: 1em;
 }
-.content-block:last-child {
+.content-container-block:last-child {
   padding-bottom: 0;
 }
-.content-block:only-child {
+.content-container-block:only-child {
   flex-grow: 1;
 }
-.content-block > * {
+.content-container-block > * {
   flex-grow: 1;
 }
 

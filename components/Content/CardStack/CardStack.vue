@@ -1,7 +1,7 @@
 <template>
   <div class="cardstack" :style="cssVars">
     <div class="cardstack-content">
-      <div class="cardstack-cards-container">
+      <div class="cardstack-content-cards">
         <component
           class="cardstack-card"
           v-for="(card, index) of annotatedCards"
@@ -33,7 +33,7 @@
   bottom: 10%;
 }
 
-.cardstack-cards-container {
+.cardstack-content-cards {
   position: relative;
   height: var(--cardstack-container-height);
   width: var(--cardstack-container-width);
