@@ -1,5 +1,6 @@
 export const state = () => ({
   created: null,
+  isSmallScreen: null,
   misc: null,
   pages: [],
   menu: []
@@ -38,5 +39,8 @@ export const mutations = {
 
     // datetime for maintaining localstorage cache
     state.created = Date.now();
+  },
+  setSmallScreen(state, isSmallScreen) {
+    state.isSmallScreen = isSmallScreen;
   }
 }

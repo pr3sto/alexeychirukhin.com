@@ -62,6 +62,9 @@ export default {
   methods: {
     reCalculate: function () {
       this.$el.style.minHeight = `${document.documentElement.clientHeight}px`;
+
+      var isSmallScreen = window.matchMedia("(max-width: 700px)").matches;
+      this.$store.commit('data/setSmallScreen', isSmallScreen);
     },
   },
 };
