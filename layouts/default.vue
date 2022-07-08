@@ -61,8 +61,10 @@ export default {
 
   methods: {
     reCalculate: function () {
+      // set min height of layout to screen height
       this.$el.style.minHeight = `${document.documentElement.clientHeight}px`;
 
+      // small screen if width of screen is 700px
       var isSmallScreen = window.matchMedia("(max-width: 700px)").matches;
       this.$store.commit('data/setSmallScreen', isSmallScreen);
     },

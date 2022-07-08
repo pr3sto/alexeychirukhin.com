@@ -15,36 +15,68 @@
         />
       </section>
     </masonry>
-    <transition
-      name="background-transition"
-      v-on:before-enter="beforeFullscreenOpened"
-      v-on:after-leave="afterFullscreenClosed"
-    >
-      <div
-        class="photogrid-fullscreen"
-        v-show="showFullScreen"
-        v-on:click="handleFullscreenClicked"
+
+    <template v-if="!isSmallScreen">
+      <transition
+        name="background-transition"
+        v-on:before-enter="beforeFullscreenOpened"
+        v-on:after-leave="afterFullscreenClosed"
       >
-        <transition name="transform-transition">
-          <ZoomImg
-            class="photogrid-fullscreen-zoomimg"
-            v-show="showFullScreen"
-            :visible="showFullScreen"
-            :src="fsImgSrc"
-            :zoomScale="fsImgZoomScale"
-          />
-        </transition>
-        <transition name="opacity-transition">
-          <p
-            class="photogrid-fullscreen-close"
-            v-show="showFullScreen"
-            v-on:click="handleCloseButtonClicked"
-          >
-            close
-          </p>
-        </transition>
-      </div>
-    </transition>
+        <div
+          class="photogrid-fullscreen"
+          v-show="showFullScreen"
+          v-on:click="handleFullscreenClicked"
+        >
+          <transition name="transform-transition">
+            <ZoomImg
+              class="photogrid-fullscreen-zoomimg"
+              v-show="showFullScreen"
+              :visible="showFullScreen"
+              :src="fsImgSrc"
+              :zoomScale="fsImgZoomScale"
+            />
+          </transition>
+          <transition name="opacity-transition">
+            <p
+              class="photogrid-fullscreen-close"
+              v-show="showFullScreen"
+              v-on:click="handleCloseButtonClicked"
+            >
+              close
+            </p>
+          </transition>
+        </div>
+      </transition>
+    </template>
+
+    <template v-if="isSmallScreen">
+      <transition
+        v-on:before-enter="beforeFullscreenSmallOpened"
+        v-on:after-leave="afterFullscreenSmallClosed"
+      >
+        <div class="photogrid-fullscreen-small" v-show="showFullScreen">
+          <transition name="opacity-transition">
+            <nuxt-img
+              class="photogrid-fullscreen-small-img"
+              v-show="showFullScreen"
+              provider="imagekit"
+              preset="progressivejpg"
+              sizes="md:800px lg:1500px"
+              :src="fsImgSrc"
+            />
+          </transition>
+          <transition name="opacity-transition">
+            <p
+              class="photogrid-fullscreen-small-close"
+              v-show="showFullScreen"
+              v-on:click="handleCloseButtonClicked"
+            >
+              close
+            </p>
+          </transition>
+        </div>
+      </transition>
+    </template>
   </div>
 </template>
 
@@ -68,9 +100,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 100;
   background: rgba(0, 0, 0, 0.9);
-  touch-action: none;
 }
 
 .photogrid-fullscreen-zoomimg {
@@ -89,6 +120,38 @@
   padding: 1em;
   color: white;
   writing-mode: vertical-rl;
+  mix-blend-mode: exclusion;
+  cursor: pointer;
+}
+
+.photogrid-fullscreen-small {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgb(255, 255, 255);
+}
+
+.photogrid-fullscreen-small-img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  padding: 1em;
+}
+
+.photogrid-fullscreen-small-close {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1em;
+  color: white;
   mix-blend-mode: exclusion;
   cursor: pointer;
 }
@@ -188,12 +251,6 @@
   background-size: var(--w) var(--w);
   background-repeat: no-repeat;
 }
-
-@media only screen and (max-width: 700px) {
-  .photogrid-fullscreen-close {
-    writing-mode: initial;
-  }
-}
 </style>
 
 <script>
@@ -214,6 +271,9 @@ export default {
         "--fs-img-transform": this.fsImgTransform,
       };
     },
+    isSmallScreen() {
+      return this.$store.state.data.isSmallScreen;
+    },
   },
 
   data() {
@@ -231,31 +291,34 @@ export default {
 
   beforeDestroy: function () {
     this.afterFullscreenClosed();
+    this.afterFullscreenSmallClosed();
   },
 
   methods: {
     beforeFullscreenOpened: function () {
-      // close on resize/scroll
       window.addEventListener("resize", this.closeFullscreenPhoto);
       window.addEventListener("wheel", this.handleScroll, { passive: false });
     },
     afterFullscreenClosed: function () {
-      // clear events
       window.removeEventListener("resize", this.closeFullscreenPhoto);
       window.removeEventListener("wheel", this.handleScroll);
+    },
+    beforeFullscreenSmallOpened: function () {
+      // disable scroll on html when fullscreen opened
+      document.body.classList.add("non-scrollable");
+      document.documentElement.classList.add("non-scrollable");
+    },
+    afterFullscreenSmallClosed: function () {
+      // restore scroll on html when fullscreen closed
+      document.body.classList.remove("non-scrollable");
+      document.documentElement.classList.remove("non-scrollable");
     },
     handlePhotoImgClicked: function (e, photo) {
       var imgElement = e.target;
       this.openFullscreenPhoto(imgElement, photo);
     },
     handleFullscreenClicked: function (e) {
-      // close fullscreen:
-      // - (desktop) when user clicks on black area
-      // - (mobile) when user clicks anywhere on screen
-      if (
-        e.srcElement.classList.contains("photogrid-fullscreen") ||
-        window.matchMedia("(max-width: 700px)").matches
-      ) {
+      if (e.srcElement.classList.contains("photogrid-fullscreen")) {
         this.closeFullscreenPhoto();
       }
     },
