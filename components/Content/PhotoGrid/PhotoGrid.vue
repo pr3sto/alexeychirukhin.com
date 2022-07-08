@@ -286,6 +286,7 @@ export default {
       fsImgTransform: "none",
       fsImgSrc: this.$store.state.data.misc.noImageUrl,
       fsImgZoomScale: 0,
+      windowScrollPosition: {},
     };
   },
 
@@ -304,14 +305,21 @@ export default {
       window.removeEventListener("wheel", this.handleScroll);
     },
     beforeFullscreenSmallOpened: function () {
+      // save scroll position
+      this.windowScrollPosition = {
+        x: window.pageXOffset,
+        y: window.pageYOffset,
+      };
       // disable scroll on html when fullscreen opened
       document.body.classList.add("non-scrollable");
       document.documentElement.classList.add("non-scrollable");
     },
     afterFullscreenSmallClosed: function () {
-      // restore scroll on html when fullscreen closed
+      // enable scroll on html when fullscreen closed
       document.body.classList.remove("non-scrollable");
       document.documentElement.classList.remove("non-scrollable");
+      // restore scroll position
+      window.scrollTo(this.windowScrollPosition.x, this.windowScrollPosition.y);
     },
     handlePhotoImgClicked: function (e, photo) {
       var imgElement = e.target;
