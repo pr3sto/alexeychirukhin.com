@@ -3,8 +3,8 @@ export const actions = {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     // cache data in local storage for [LOCAL_STORE_LIFETIME_MINUTES] minutes
-    if (context.store.state.data.created) {
-      var millisecconds = Date.now() - context.store.state.data.created;
+    if (context.store.state.data.timestamp) {
+      var millisecconds = Date.now() - context.store.state.data.timestamp;
       var minutes = Math.floor((millisecconds/1000)/60);
       if (minutes < process.env.LOCAL_STORE_LIFETIME_MINUTES) {
         return;

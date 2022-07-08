@@ -1,9 +1,9 @@
 export const state = () => ({
-  created: null,
-  isSmallScreen: null,
+  timestamp: null,
   misc: null,
   pages: [],
-  menu: []
+  menu: [],
+  isSmallScreen: null,
 })
 
 export const getters = {
@@ -38,7 +38,7 @@ export const mutations = {
     }, Object.create(null));
 
     // datetime for maintaining localstorage cache
-    state.created = Date.now();
+    state.timestamp = Date.now();
   },
   setSmallScreen(state, isSmallScreen) {
     state.isSmallScreen = isSmallScreen;

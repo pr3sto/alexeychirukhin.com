@@ -5,6 +5,7 @@ html {
   text-size-adjust: 100%;
   box-sizing: border-box;
   overflow: auto;
+  background: white;
 }
 
 body {
@@ -49,12 +50,19 @@ img {
   image-rendering: -webkit-optimize-contrast;
 }
 
+/* disables scroll on element */
+.non-scrollable {
+  height: 100%;
+  overflow: hidden;
+}
+
 @media only screen and (max-width: 700px) {
   /* looks better on mobile */
   img {
     image-rendering: auto;
   }
 
+  /* adjust background for mobile */
   body {
     background-size: 150vw;
   }
