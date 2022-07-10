@@ -19,26 +19,26 @@
     <template v-if="!isSmallScreen">
       <transition
         name="background-transition"
-        v-on:before-enter="beforeFullscreenOpened"
-        v-on:after-leave="afterFullscreenClosed"
+        v-on:before-enter="beforeFullscreenLgOpened"
+        v-on:after-leave="afterFullscreenLgClosed"
       >
         <div
-          class="photogrid-fullscreen"
+          class="photogrid-fullscreen-lg"
           v-show="showFullScreen"
-          v-on:click="handleFullscreenClicked"
+          v-on:click="handleFullscreenLgClicked"
         >
-          <transition name="transform-transition">
+          <transition name="zoomimg-transform-transition">
             <ZoomImg
-              class="photogrid-fullscreen-zoomimg"
+              class="photogrid-fullscreen-lg-zoomimg"
               v-show="showFullScreen"
               :visible="showFullScreen"
-              :src="fsImgSrc"
-              :zoomScale="fsImgZoomScale"
+              :src="fullscreenImgSrc"
+              :zoomScale="zoomigProps.zoomScale"
             />
           </transition>
           <transition name="opacity-transition">
             <p
-              class="photogrid-fullscreen-close"
+              class="photogrid-fullscreen-lg-close"
               v-show="showFullScreen"
               v-on:click="handleCloseButtonClicked"
             >
@@ -51,23 +51,23 @@
 
     <template v-if="isSmallScreen">
       <transition
-        v-on:before-enter="beforeFullscreenSmallOpened"
-        v-on:after-leave="afterFullscreenSmallClosed"
+        v-on:before-enter="beforeFullscreenSmOpened"
+        v-on:after-leave="afterFullscreenSmClosed"
       >
-        <div class="photogrid-small-screen-fullscreen" v-show="showFullScreen">
+        <div class="photogrid-fullscreen-sm" v-show="showFullScreen">
           <transition name="opacity-transition">
             <nuxt-img
-              class="photogrid-small-screen-fullscreen-img"
+              class="photogrid-fullscreen-sm-img"
               v-show="showFullScreen"
               provider="imagekit"
               preset="progressivejpg"
               sizes="md:800px lg:1500px"
-              :src="fsImgSrc"
+              :src="fullscreenImgSrc"
             />
           </transition>
           <transition name="opacity-transition">
             <p
-              class="photogrid-small-screen-fullscreen-close"
+              class="photogrid-fullscreen-sm-close"
               v-show="showFullScreen"
               v-on:click="handleCloseButtonClicked"
             >
@@ -94,7 +94,7 @@
   cursor: pointer;
 }
 
-.photogrid-fullscreen {
+.photogrid-fullscreen-lg {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -104,16 +104,16 @@
   background: rgba(0, 0, 0, 0.9);
 }
 
-.photogrid-fullscreen-zoomimg {
+.photogrid-fullscreen-lg-zoomimg {
   position: fixed;
-  left: var(--fs-img-left);
-  top: var(--fs-img-top);
-  width: var(--fs-img-width);
-  height: var(--fs-img-height);
+  left: var(--fs-zoomimg-left);
+  top: var(--fs-zoomimg-top);
+  width: var(--fs-zoomimg-width);
+  height: var(--fs-zoomimg-height);
   transform: translate(0px, 0px) scale(1);
 }
 
-.photogrid-fullscreen-close {
+.photogrid-fullscreen-lg-close {
   position: fixed;
   top: 0;
   left: 0;
@@ -124,7 +124,7 @@
   cursor: pointer;
 }
 
-.photogrid-small-screen-fullscreen {
+.photogrid-fullscreen-sm {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -134,7 +134,7 @@
   background: rgb(255, 255, 255);
 }
 
-.photogrid-small-screen-fullscreen-img {
+.photogrid-fullscreen-sm-img {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -146,7 +146,7 @@
   padding: 1em;
 }
 
-.photogrid-small-screen-fullscreen-close {
+.photogrid-fullscreen-sm-close {
   position: fixed;
   top: 0;
   left: 0;
@@ -156,7 +156,7 @@
   cursor: pointer;
 }
 
-/* transition background color */
+/* background color transition */
 .background-transition-enter-active,
 .background-transition-leave-active {
   transition: background 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
@@ -166,17 +166,17 @@
   background: rgba(0, 0, 0, 0);
 }
 
-/* transition transform */
-.transform-transition-enter-active,
-.transform-transition-leave-active {
+/* zoomimg transform transition */
+.zoomimg-transform-transition-enter-active,
+.zoomimg-transform-transition-leave-active {
   transition: transform 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
 }
-.transform-transition-enter,
-.transform-transition-leave-to {
-  transform: var(--fs-img-transform);
+.zoomimg-transform-transition-enter,
+.zoomimg-transform-transition-leave-to {
+  transform: var(--fs-zoomimg-transform);
 }
 
-/* transition opacity */
+/* opacity transition */
 .opacity-transition-enter-active,
 .opacity-transition-leave-active {
   transition: opacity 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
@@ -264,11 +264,11 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--fs-img-left": `${this.fsImgLeft}px`,
-        "--fs-img-top": `${this.fsImgTop}px`,
-        "--fs-img-width": `${this.fsImgWidth}px`,
-        "--fs-img-height": `${this.fsImgHeight}px`,
-        "--fs-img-transform": this.fsImgTransform,
+        "--fs-zoomimg-left": `${this.zoomigProps.left}px`,
+        "--fs-zoomimg-top": `${this.zoomigProps.top}px`,
+        "--fs-zoomimg-width": `${this.zoomigProps.width}px`,
+        "--fs-zoomimg-height": `${this.zoomigProps.height}px`,
+        "--fs-zoomimg-transform": this.zoomigProps.transform,
       };
     },
     isSmallScreen() {
@@ -279,32 +279,34 @@ export default {
   data() {
     return {
       showFullScreen: false,
-      fsImgLeft: 0,
-      fsImgTop: 0,
-      fsImgWidth: 0,
-      fsImgHeight: 0,
-      fsImgTransform: "none",
-      fsImgSrc: this.$store.state.data.misc.noImageUrl,
-      fsImgZoomScale: 0,
       windowScrollPosition: {},
+      fullscreenImgSrc: this.$store.state.data.misc.noImageUrl,
+      zoomigProps: {
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0,
+        transform: "none",
+        zoomScale: 0,
+      },
     };
   },
 
   beforeDestroy: function () {
-    this.afterFullscreenClosed();
-    this.afterFullscreenSmallClosed();
+    this.afterFullscreenLgClosed();
+    this.afterFullscreenSmClosed();
   },
 
   methods: {
-    beforeFullscreenOpened: function () {
+    beforeFullscreenLgOpened: function () {
       window.addEventListener("resize", this.closeFullscreenPhoto);
       window.addEventListener("wheel", this.handleScroll, { passive: false });
     },
-    afterFullscreenClosed: function () {
+    afterFullscreenLgClosed: function () {
       window.removeEventListener("resize", this.closeFullscreenPhoto);
       window.removeEventListener("wheel", this.handleScroll);
     },
-    beforeFullscreenSmallOpened: function () {
+    beforeFullscreenSmOpened: function () {
       // save scroll position
       this.windowScrollPosition = {
         x: window.pageXOffset,
@@ -314,7 +316,7 @@ export default {
       document.body.classList.add("non-scrollable");
       document.documentElement.classList.add("non-scrollable");
     },
-    afterFullscreenSmallClosed: function () {
+    afterFullscreenSmClosed: function () {
       // enable scroll on html when fullscreen closed
       document.body.classList.remove("non-scrollable");
       document.documentElement.classList.remove("non-scrollable");
@@ -322,11 +324,16 @@ export default {
       window.scrollTo(this.windowScrollPosition.x, this.windowScrollPosition.y);
     },
     handlePhotoImgClicked: function (e, photo) {
-      var imgElement = e.target;
-      this.openFullscreenPhoto(imgElement, photo);
+      this.fullscreenImgSrc = photo.url;
+
+      if (this.isSmallScreen) {
+        this.showFullScreen = true;
+      } else {
+        this.openFullscreenZoomig(e.target);
+      }
     },
-    handleFullscreenClicked: function (e) {
-      if (e.srcElement.classList.contains("photogrid-fullscreen")) {
+    handleFullscreenLgClicked: function (e) {
+      if (e.srcElement.classList.contains("photogrid-fullscreen-lg")) {
         this.closeFullscreenPhoto();
       }
     },
@@ -337,7 +344,7 @@ export default {
       e.preventDefault();
       this.closeFullscreenPhoto();
     },
-    openFullscreenPhoto: function (imgElement, photo) {
+    openFullscreenZoomig: function (imgElement) {
       // get initial image dimensions (without padding)
       var initImgRect = imgElement.getBoundingClientRect();
       var initImgRectPadding = parseFloat(
@@ -371,14 +378,13 @@ export default {
         fsImgScaleFactor
       );
 
-      // set fullscreen image css vars
-      this.fsImgLeft = fsImgRect.x;
-      this.fsImgTop = fsImgRect.y;
-      this.fsImgWidth = fsImgRect.width;
-      this.fsImgHeight = fsImgRect.height;
-      this.fsImgTransform = fsImgTransfrom;
-      this.fsImgSrc = photo.url;
-      this.fsImgZoomScale = imgElement.naturalWidth / fsImgRect.width;
+      // set fullscreen zoomimg css vars
+      this.zoomigProps.left = fsImgRect.x;
+      this.zoomigProps.top = fsImgRect.y;
+      this.zoomigProps.width = fsImgRect.width;
+      this.zoomigProps.height = fsImgRect.height;
+      this.zoomigProps.transform = fsImgTransfrom;
+      this.zoomigProps.zoomScale = imgElement.naturalWidth / fsImgRect.width;
 
       // show fullscreen
       this.showFullScreen = true;
