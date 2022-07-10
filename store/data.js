@@ -1,9 +1,9 @@
 export const state = () => ({
   timestamp: null,
-  misc: null,
+  misc: {},
   pages: [],
   menu: [],
-  isSmallScreen: null,
+  isSmallScreen: false,
 })
 
 export const getters = {

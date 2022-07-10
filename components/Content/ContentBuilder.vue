@@ -1,5 +1,11 @@
 <template>
-  <main class="content">
+  <main
+    class="content"
+    :class="{
+      'content--lg': !isSmallScreen,
+      'content--sm': isSmallScreen,
+    }"
+  >
     <aside v-show="content.floatingText" class="content-floating-text">
       <p>{{ content.floatingText }}</p>
     </aside>
@@ -21,20 +27,29 @@
 .content {
   display: flex;
 }
+
 .content-floating-text {
   position: fixed;
-  top: 0;
   left: 0;
   padding: 1em;
-  writing-mode: vertical-lr;
   color: white;
   mix-blend-mode: exclusion;
 }
+.content--lg .content-floating-text {
+  top: 0;
+  writing-mode: vertical-lr;
+}
+.content--sm .content-floating-text {
+  bottom: 0;
+  writing-mode: initial;
+}
+
 .content-container {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
+
 .content-container-block {
   display: flex;
   padding-bottom: 1em;
@@ -48,14 +63,6 @@
 .content-container-block > * {
   flex-grow: 1;
 }
-
-@media only screen and (max-width: 700px) {
-  .content-floating-text {
-    top: auto;
-    bottom: 0;
-    writing-mode: initial;
-  }
-}
 </style>
 
 <script>
@@ -67,5 +74,10 @@ export default {
   name: "ContentBuilder",
   props: ["content"],
   components: { CardStack, PhotoGrid, TextContent },
+  computed: {
+    isSmallScreen() {
+      return this.$store.state.data.isSmallScreen;
+    },
+  },
 };
 </script>

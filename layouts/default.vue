@@ -1,5 +1,11 @@
 <template>
-  <div id="default-layout">
+  <div
+    id="default-layout"
+    :class="{
+      'default-layout--lg': !isSmallScreen,
+      'default-layout--sm': isSmallScreen,
+    }"
+  >
     <nuxt id="default-layout-page" />
     <app-menu id="default-layout-appmenu" />
   </div>
@@ -8,30 +14,35 @@
 <style>
 #default-layout {
   display: flex;
+}
+.default-layout--lg {
   flex-direction: row;
 }
+.default-layout--sm {
+  flex-direction: column-reverse;
+}
+
 #default-layout-page {
   flex-grow: 1;
+}
+.default-layout--lg #default-layout-page {
   padding: 1em 0 1em 1em;
 }
+.default-layout--sm #default-layout-page {
+  padding: 0 1em 1em 1em;
+}
+
 #default-layout-appmenu {
-  position: sticky;
   align-self: baseline;
   top: 0;
   padding-top: 1em;
   padding-bottom: 1em;
 }
-
-@media only screen and (max-width: 700px) {
-  #default-layout {
-    flex-direction: column-reverse;
-  }
-  #default-layout-page {
-    padding: 0 1em 1em 1em;
-  }
-  #default-layout-appmenu {
-    position: static;
-  }
+.default-layout--lg #default-layout-appmenu {
+  position: sticky;
+}
+.default-layout--sm #default-layout-appmenu {
+  position: static;
 }
 </style>
 
@@ -40,6 +51,12 @@ import AppMenu from "~/components/AppMenu.vue";
 
 export default {
   components: { AppMenu },
+
+  computed: {
+    isSmallScreen() {
+      return this.$store.state.data.isSmallScreen;
+    },
+  },
 
   mounted() {
     this.$nextTick(() => {
@@ -66,7 +83,7 @@ export default {
 
       // small screen if width of screen is 700px
       var isSmallScreen = window.matchMedia("(max-width: 700px)").matches;
-      this.$store.commit('data/setSmallScreen', isSmallScreen);
+      this.$store.commit("data/setSmallScreen", isSmallScreen);
     },
   },
 };
