@@ -37,11 +37,16 @@
 }
 .content--lg .content-floating-text {
   top: 0;
+  bottom: 0;
   writing-mode: vertical-lr;
+  text-align: center;
 }
 .content--sm .content-floating-text {
   bottom: 0;
   writing-mode: initial;
+}
+.content-floating-text > p {
+  font-size: 2em;
 }
 
 .content-container {
