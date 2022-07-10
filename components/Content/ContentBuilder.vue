@@ -31,7 +31,8 @@
 .content-floating-text {
   position: fixed;
   left: 0;
-  padding: 1em;
+  padding: 1rem;
+  font-size: 2rem;
   color: white;
   mix-blend-mode: exclusion;
 }
@@ -45,9 +46,6 @@
   bottom: 0;
   writing-mode: initial;
 }
-.content-floating-text > p {
-  font-size: 2em;
-}
 
 .content-container {
   display: flex;
@@ -57,7 +55,7 @@
 
 .content-container-block {
   display: flex;
-  padding-bottom: 1em;
+  padding-bottom: 1rem;
 }
 .content-container-block:last-child {
   padding-bottom: 0;

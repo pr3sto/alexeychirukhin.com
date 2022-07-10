@@ -26,17 +26,17 @@
   flex-grow: 1;
 }
 .default-layout--lg #default-layout-page {
-  padding: 1em 0 1em 1em;
+  padding: 1rem 0 1rem 1rem;
 }
 .default-layout--sm #default-layout-page {
-  padding: 0 1em 1em 1em;
+  padding: 0 1rem 1rem 1rem;
 }
 
 #default-layout-appmenu {
   align-self: baseline;
   top: 0;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .default-layout--lg #default-layout-appmenu {
   position: sticky;

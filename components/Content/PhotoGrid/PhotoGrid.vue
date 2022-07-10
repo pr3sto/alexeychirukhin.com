@@ -82,13 +82,13 @@
 
 <style scoped>
 .photogrid {
-  padding: 0.5em;
-  margin: -1em;
+  padding: 0.5rem;
+  margin: -1rem;
 }
 
 .photogrid-block > img {
   display: block;
-  padding: 0.5em;
+  padding: 0.5rem;
   width: 100%;
   height: 100%;
   cursor: pointer;
@@ -117,7 +117,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: 1em;
+  padding: 1rem;
   color: white;
   writing-mode: vertical-rl;
   mix-blend-mode: exclusion;
@@ -143,14 +143,14 @@
   max-width: 100%;
   max-height: 100%;
   margin: auto;
-  padding: 1em;
+  padding: 1rem;
 }
 
 .photogrid-fullscreen-sm-close {
   position: fixed;
   top: 0;
   left: 0;
-  padding: 1em;
+  padding: 1rem;
   color: white;
   mix-blend-mode: exclusion;
   cursor: pointer;
@@ -189,7 +189,7 @@
 /* border */
 .crosses-border {
   --w: 7px;
-  --p: 0.1em;
+  --p: 0.1rem;
   --c: rgba(0, 0, 0, 0.15);
 
   background: linear-gradient(
