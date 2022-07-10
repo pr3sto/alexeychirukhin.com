@@ -1,80 +1,97 @@
 <template>
   <menu class="app-menu">
-    <section
-      class="app-menu-section"
-      v-for="(items, sectionName, index) of menu"
-      :key="index"
-    >
-      <p class="app-menu-section-header" v-show="sectionName !== ''">
-        {{ sectionName }}
-      </p>
-      <nuxt-link
-        class="app-menu-section-link"
-        v-for="(item, index1) of items"
-        :key="index1"
-        :to="item.route"
-      >
-        {{ item.menuItemText }}
-      </nuxt-link>
-    </section>
+    <template v-if="!isSmallScreen">
+      <div class="app-menu-lg">
+        <section
+          @mouseover="hovered = true"
+          @mouseleave="hovered = false"
+          class="app-menu-lg-section"
+          v-for="(items, sectionName, index) of menu"
+          :key="index"
+        >
+          <p
+            class="app-menu-lg-section-header"
+            :class="{ dimmed: !hovered }"
+            v-show="sectionName !== ''"
+          >
+            {{ sectionName }}
+          </p>
+          <nuxt-link
+            class="app-menu-lg-section-link"
+            :class="{ dimmed: !hovered && !(item.route == $route.path) }"
+            v-for="(item, index1) of items"
+            :key="index1"
+            :to="item.route"
+          >
+            {{ item.menuItemText }}
+          </nuxt-link>
+        </section>
+      </div>
+    </template>
+
+    <template v-if="isSmallScreen"> </template>
   </menu>
 </template>
 
 <style scoped>
 .app-menu {
+}
+
+.app-menu-lg {
   display: flex;
   flex-direction: column;
-  font-size: 1.2em;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 2rem;
 }
-.app-menu-section {
+
+.app-menu-lg-section {
   display: flex;
   flex-direction: column;
-  padding-bottom: 0.5em;
+  padding-bottom: 1rem;
 }
-.app-menu-section-header {
-  padding-left: 1em;
-  padding-right: 1em;
+
+.app-menu-lg-section-header {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   color: rgba(0, 0, 0, 0.5);
-  font-size: 0.8em;
+  font-size: 1.5rem;
+  transition: opacity 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
 }
-.app-menu-section-link {
-  padding-left: 1em;
-  padding-right: 1em;
+
+.app-menu-lg-section-link {
+  padding-left: 1rem;
+  padding-right: 1rem;
   color: rgba(0, 0, 0, 1);
   font-size: 1em;
   text-decoration: none;
   white-space: nowrap;
-}
-.nuxt-link-exact-active {
-  font-weight: bolder;
+  transition: opacity 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
 }
 
-@media only screen and (max-width: 700px) {
-  .app-menu {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .app-menu-section {
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding-bottom: 0;
-  }
-  .app-menu-section:not(:last-child) {
-    border-right: 0.05em solid rgba(0, 0, 0, 0.15);
-  }
-  .app-menu-section-header {
-    display: none;
-  }
+.dimmed {
+  opacity: 0.2;
 }
 </style>
 
 <script>
 export default {
   name: "AppMenu",
+
   computed: {
     menu() {
       return this.$store.state.data.menu;
     },
+    isSmallScreen() {
+      return this.$store.state.data.isSmallScreen;
+    },
+  },
+
+  data() {
+    return {
+      hovered: false,
+    };
   },
 };
 </script>

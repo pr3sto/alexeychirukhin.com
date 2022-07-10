@@ -118,6 +118,7 @@
   top: 0;
   left: 0;
   padding: 1rem;
+  font-size: 2rem;
   color: white;
   writing-mode: vertical-rl;
   mix-blend-mode: exclusion;
@@ -151,6 +152,7 @@
   top: 0;
   left: 0;
   padding: 1rem;
+  font-size: 2rem;
   color: white;
   mix-blend-mode: exclusion;
   cursor: pointer;

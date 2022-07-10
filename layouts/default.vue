@@ -35,8 +35,6 @@
 #default-layout-appmenu {
   align-self: baseline;
   top: 0;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 .default-layout--lg #default-layout-appmenu {
   position: sticky;
