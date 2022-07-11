@@ -152,7 +152,7 @@
   top: 0;
   left: 0;
   padding: 1rem;
-  font-size: 2rem;
+  font-size: 1rem;
   color: white;
   mix-blend-mode: exclusion;
   cursor: pointer;
@@ -161,7 +161,7 @@
 /* background color transition */
 .background-transition-enter-active,
 .background-transition-leave-active {
-  transition: background 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
+  transition: background var(--default-transition);
 }
 .background-transition-enter,
 .background-transition-leave-to {
@@ -171,7 +171,7 @@
 /* zoomimg transform transition */
 .zoomimg-transform-transition-enter-active,
 .zoomimg-transform-transition-leave-active {
-  transition: transform 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
+  transition: transform var(--default-transition);
 }
 .zoomimg-transform-transition-enter,
 .zoomimg-transform-transition-leave-to {
@@ -181,7 +181,7 @@
 /* opacity transition */
 .opacity-transition-enter-active,
 .opacity-transition-leave-active {
-  transition: opacity 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
+  transition: opacity var(--default-transition);
 }
 .opacity-transition-enter,
 .opacity-transition-leave-to {

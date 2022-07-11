@@ -32,18 +32,19 @@
   position: fixed;
   left: 0;
   padding: 1rem;
-  font-size: 2rem;
   color: white;
   mix-blend-mode: exclusion;
 }
 .content--lg .content-floating-text {
   top: 0;
   bottom: 0;
+  font-size: 2rem;
   writing-mode: vertical-lr;
   text-align: center;
 }
 .content--sm .content-floating-text {
   bottom: 0;
+  font-size: 1rem;
   writing-mode: initial;
 }
 

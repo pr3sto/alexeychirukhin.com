@@ -1,8 +1,8 @@
 export const state = () => ({
   timestamp: null,
-  misc: {},
   pages: [],
   menu: [],
+  misc: {},
   isSmallScreen: false,
 })
 

@@ -91,8 +91,8 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--font-size": this.fontSize + "px",
-        "--line-height": this.fontSize + "px",
+        "--font-size": `${this.fontSize}px`,
+        "--line-height": `${this.fontSize}px`,
       };
     },
   },

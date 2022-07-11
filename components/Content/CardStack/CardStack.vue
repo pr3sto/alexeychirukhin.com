@@ -48,7 +48,7 @@
   cursor: pointer;
   transform: translateX(5%) rotate(4deg) scale(1);
   transform-origin: 0 0;
-  transition: transform 0.5s cubic-bezier(0.8, 0.2, 0.1, 0.8) 0.1s;
+  transition: transform 0.4s var(--default-transition-func) 0.1s;
 }
 
 .cardstack-card--current {
@@ -67,7 +67,7 @@
 
 .cardstack-card--out {
   z-index: 1;
-  animation: cardstack-card-out 0.6s cubic-bezier(0.8, 0.2, 0.1, 0.8);
+  animation: cardstack-card-out 0.5s var(--default-transition-func);
   transform: translateX(13%) translateY(-8%) rotate(8deg) scale(0.95);
   transition: none !important;
 }
@@ -83,7 +83,7 @@
   bottom: 0;
   left: 0;
   opacity: 0;
-  transition: opacity 0.5s linear;
+  transition: opacity 0.4s linear;
 }
 
 /* dim the next card */

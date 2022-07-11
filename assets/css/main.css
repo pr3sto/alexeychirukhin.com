@@ -5,14 +5,11 @@ html {
   text-size-adjust: 100%;
   box-sizing: border-box;
   overflow: auto;
-  background: white;
 }
 
 body {
   margin: 0;
-  background-image: url("../copyofacopy.svg");
-  background-repeat: repeat;
-  background-size: 100vw;
+  background: white;
 }
 
 *,
@@ -50,10 +47,23 @@ img {
   image-rendering: -webkit-optimize-contrast;
 }
 
+/* nuxt root element */
+#__nuxt {
+  background-image: url("../copyofacopy.svg");
+  background-repeat: repeat;
+  background-size: 100vw;
+}
+
 /* disables scroll on element */
 .non-scrollable {
   height: 100%;
   overflow: hidden;
+}
+
+/* common css vars */
+:root {
+  --default-transition-func: cubic-bezier(0.8, 0.2, 0.1, 0.8);
+  --default-transition: 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
 }
 
 @media only screen and (max-width: 700px) {
@@ -63,7 +73,7 @@ img {
   }
 
   /* adjust background for mobile */
-  body {
+  #__nuxt {
     background-size: 150vw;
   }
 }
