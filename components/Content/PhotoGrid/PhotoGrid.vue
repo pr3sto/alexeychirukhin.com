@@ -102,6 +102,7 @@
   right: 0;
   z-index: 100;
   background: rgba(0, 0, 0, 0.9);
+  touch-action: none;
 }
 
 .photogrid-fullscreen-lg-zoomimg {
