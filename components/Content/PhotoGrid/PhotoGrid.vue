@@ -100,7 +100,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 1;
   background: rgba(0, 0, 0, 0.9);
   touch-action: none;
 }
@@ -132,7 +132,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 1;
   background: rgb(255, 255, 255);
 }
 
