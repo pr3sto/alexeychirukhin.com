@@ -6,8 +6,14 @@
       'default-layout--sm': isSmallScreen,
     }"
   >
-    <nuxt id="default-layout-page" />
-    <app-menu id="default-layout-appmenu" />
+    <nuxt
+      id="default-layout-page"
+      :class="{
+        'default-layout-page--lg': !isSmallScreen,
+        'default-layout-page--sm': isSmallScreen,
+      }"
+    />
+    <app-menu />
   </div>
 </template>
 
@@ -25,22 +31,11 @@
 #default-layout-page {
   flex-grow: 1;
 }
-.default-layout--lg #default-layout-page {
+.default-layout-page--lg {
   padding: 1rem 0 1rem 1rem;
 }
-.default-layout--sm #default-layout-page {
+.default-layout-page--sm {
   padding: 0 1rem 1rem 1rem;
-}
-
-#default-layout-appmenu {
-  align-self: baseline;
-  top: 0;
-}
-.default-layout--lg #default-layout-appmenu {
-  position: sticky;
-}
-.default-layout--sm #default-layout-appmenu {
-  position: static;
 }
 </style>
 

@@ -1,12 +1,13 @@
 <template>
-  <main
-    class="content"
-    :class="{
-      'content--lg': !isSmallScreen,
-      'content--sm': isSmallScreen,
-    }"
-  >
-    <aside v-show="content.floatingText" class="content-floating-text">
+  <main class="content">
+    <aside
+      v-show="content.floatingText"
+      class="content-floating-text"
+      :class="{
+        'content-floating-text--lg': !isSmallScreen,
+        'content-floating-text--sm': isSmallScreen,
+      }"
+    >
       <p>{{ content.floatingText }}</p>
     </aside>
     <div class="content-container">
@@ -35,14 +36,14 @@
   color: white;
   mix-blend-mode: exclusion;
 }
-.content--lg .content-floating-text {
+.content-floating-text--lg {
   top: 0;
   bottom: 0;
   font-size: 2rem;
   writing-mode: vertical-lr;
   text-align: center;
 }
-.content--sm .content-floating-text {
+.content-floating-text--sm {
   bottom: 0;
   font-size: 1.5rem;
   writing-mode: initial;

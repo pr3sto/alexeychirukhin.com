@@ -75,6 +75,8 @@
 
 <style scoped>
 .app-menu-lg {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
