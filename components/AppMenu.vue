@@ -43,7 +43,7 @@
             v-on:click="handleAppMenuSmFullClicked"
           >
             <transition name="opacity-transition">
-              <div v-show="showFullSmMenu">
+              <div v-if="showFullSmMenu">
                 <section
                   class="app-menu-sm-full-section"
                   v-for="(sectionItems, sectionName, index) of menuSections"

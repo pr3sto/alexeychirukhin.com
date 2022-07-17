@@ -30,7 +30,7 @@
           <transition name="zoomimg-transform-transition">
             <ZoomImg
               class="photogrid-fullscreen-lg-zoomimg"
-              v-show="showFullScreen"
+              v-if="showFullScreen"
               :visible="showFullScreen"
               :src="fullscreenImgSrc"
               :zoomScale="zoomigProps.zoomScale"
@@ -39,7 +39,7 @@
           <transition name="opacity-transition">
             <p
               class="photogrid-fullscreen-lg-close"
-              v-show="showFullScreen"
+              v-if="showFullScreen"
               v-on:click="handleCloseButtonClicked"
             >
               close
@@ -58,7 +58,7 @@
           <transition name="opacity-transition">
             <nuxt-img
               class="photogrid-fullscreen-sm-img"
-              v-show="showFullScreen"
+              v-if="showFullScreen"
               provider="imagekit"
               preset="progressivejpg"
               sizes="md:800px lg:1500px"
@@ -68,7 +68,7 @@
           <transition name="opacity-transition">
             <p
               class="photogrid-fullscreen-sm-close"
-              v-show="showFullScreen"
+              v-if="showFullScreen"
               v-on:click="handleCloseButtonClicked"
             >
               close
