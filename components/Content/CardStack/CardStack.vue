@@ -20,6 +20,7 @@
 <style scoped>
 .cardstack {
   position: relative;
+  z-index: 0; /* creates stacking context for cards */
 }
 
 .cardstack-content {
