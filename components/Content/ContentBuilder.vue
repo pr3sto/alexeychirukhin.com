@@ -44,7 +44,7 @@
 }
 .content--sm .content-floating-text {
   bottom: 0;
-  font-size: 1rem;
+  font-size: 1.5rem;
   writing-mode: initial;
 }
 

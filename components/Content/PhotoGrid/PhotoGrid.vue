@@ -153,7 +153,7 @@
   top: 0;
   left: 0;
   padding: 1rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: white;
   mix-blend-mode: exclusion;
   cursor: pointer;
