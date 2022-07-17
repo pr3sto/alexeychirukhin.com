@@ -1,7 +1,7 @@
 export const state = () => ({
   timestamp: null,
   pages: [],
-  menu: [],
+  menuSections: [],
   misc: {},
   isSmallScreen: false,
 })
@@ -11,6 +11,11 @@ export const getters = {
     return state.pages.find(
       (page) => page.route === route
     );
+  },
+  currentMenuItemText: (state) => (route) => {
+    return state.pages.find(
+      (page) => page.route === route
+    ).menuItemText;
   }
 }
 
@@ -31,7 +36,7 @@ export const mutations = {
     });
 
     // group menu items by section
-    state.menu = menuItems.reduce(function (previousValue, currentValue) {
+    state.menuSections = menuItems.reduce(function (previousValue, currentValue) {
       previousValue[currentValue.menuItemSection] = previousValue[currentValue.menuItemSection] || [];
       previousValue[currentValue.menuItemSection].push(currentValue);
       return previousValue;
