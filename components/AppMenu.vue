@@ -73,7 +73,9 @@
   </menu>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use "../assets/scss/variables" as vars;
+
 .app-menu-lg {
   position: sticky;
   top: 0;
@@ -88,26 +90,26 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 1rem;
+  font-size: vars.$default-font-size-lg;
 }
 
 .app-menu-lg-section-header {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   color: rgba(0, 0, 0, 0.5);
-  font-size: 1.5rem;
+  font-size: 0.75em;
   opacity: var(--app-menu-item-opacity);
-  transition: opacity var(--default-transition);
+  transition: opacity vars.$default-transition;
 }
 
 .app-menu-lg-section-link {
   padding-left: 1rem;
   padding-right: 1rem;
   color: rgba(0, 0, 0, 1);
-  font-size: 2rem;
   text-decoration: none;
   white-space: nowrap;
   opacity: var(--app-menu-item-opacity);
-  transition: opacity var(--default-transition);
+  transition: opacity vars.$default-transition;
 }
 
 .app-menu-lg-section-link.nuxt-link-exact-active {
@@ -116,7 +118,7 @@
 
 .app-menu-sm-header {
   padding: 1rem;
-  font-size: 1.5rem;
+  font-size: vars.$default-font-size-sm;
   text-decoration: underline;
 }
 
@@ -138,20 +140,20 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 1rem;
+  font-size: vars.$default-font-size-sm;
 }
 
 .app-menu-sm-full-section-header {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   color: rgba(0, 0, 0, 0.5);
-  font-size: 1rem;
+  font-size: 0.75em;
 }
 
 .app-menu-sm-full-section-link {
   padding-left: 1rem;
   padding-right: 1rem;
   color: rgba(0, 0, 0, 1);
-  font-size: 1.5rem;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -163,7 +165,7 @@
 /* opacity transition */
 .opacity-transition-enter-active,
 .opacity-transition-leave-active {
-  transition: opacity var(--default-transition);
+  transition: opacity vars.$default-transition;
 }
 .opacity-transition-enter,
 .opacity-transition-leave-to {

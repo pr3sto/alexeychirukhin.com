@@ -19,7 +19,9 @@
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
-    "@nuxt/image": "^0.6.2"
+    "@nuxt/image": "^0.6.2",
+    "sass": "^1.53.0",
+    "sass-loader": "^10.3.1"
   },
   "browserslist": [
     "cover 99.5%",

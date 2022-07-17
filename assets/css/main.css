@@ -60,12 +60,6 @@ img {
   overflow: hidden;
 }
 
-/* common css vars */
-:root {
-  --default-transition-func: cubic-bezier(0.8, 0.2, 0.1, 0.8);
-  --default-transition: 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
-}
-
 @media only screen and (max-width: 700px) {
   /* looks better on mobile */
   img {

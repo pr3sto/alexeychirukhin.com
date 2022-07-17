@@ -80,7 +80,9 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use "../../../assets/scss/variables" as vars;
+
 .photogrid {
   padding: 0.5rem;
   margin: -1rem;
@@ -119,7 +121,7 @@
   top: 0;
   left: 0;
   padding: 1rem;
-  font-size: 2rem;
+  font-size: vars.$default-font-size-lg;
   color: white;
   writing-mode: vertical-rl;
   mix-blend-mode: exclusion;
@@ -153,7 +155,7 @@
   top: 0;
   left: 0;
   padding: 1rem;
-  font-size: 1.5rem;
+  font-size: vars.$default-font-size-sm;
   color: white;
   mix-blend-mode: exclusion;
   cursor: pointer;
@@ -162,7 +164,7 @@
 /* background color transition */
 .background-transition-enter-active,
 .background-transition-leave-active {
-  transition: background var(--default-transition);
+  transition: background vars.$default-transition;
 }
 .background-transition-enter,
 .background-transition-leave-to {
@@ -172,7 +174,7 @@
 /* zoomimg transform transition */
 .zoomimg-transform-transition-enter-active,
 .zoomimg-transform-transition-leave-active {
-  transition: transform var(--default-transition);
+  transition: transform vars.$default-transition;
 }
 .zoomimg-transform-transition-enter,
 .zoomimg-transform-transition-leave-to {
@@ -182,7 +184,7 @@
 /* opacity transition */
 .opacity-transition-enter-active,
 .opacity-transition-leave-active {
-  transition: opacity var(--default-transition);
+  transition: opacity vars.$default-transition;
 }
 .opacity-transition-enter,
 .opacity-transition-leave-to {

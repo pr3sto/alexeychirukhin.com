@@ -24,7 +24,9 @@
   </main>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use "../../assets/scss/variables" as vars;
+
 .content {
   display: flex;
 }
@@ -39,13 +41,13 @@
 .content-floating-text--lg {
   top: 0;
   bottom: 0;
-  font-size: 2rem;
+  font-size: vars.$default-font-size-lg;
   writing-mode: vertical-lr;
   text-align: center;
 }
 .content-floating-text--sm {
   bottom: 0;
-  font-size: 1.5rem;
+  font-size: vars.$default-font-size-sm;
   writing-mode: initial;
 }
 

@@ -15,7 +15,9 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use "../../../assets/scss/variables" as vars;
+
 .zoomimg {
   overflow: hidden;
 }
@@ -38,7 +40,7 @@
 }
 
 .zoomimg-img--zoom-in-progress {
-  transition: transform var(--default-transition);
+  transition: transform vars.$default-transition;
 }
 </style>
 

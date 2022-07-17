@@ -17,7 +17,9 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use "../../../assets/scss/variables" as vars;
+
 .cardstack {
   position: relative;
   z-index: 0; /* creates stacking context for cards */
@@ -49,7 +51,7 @@
   cursor: pointer;
   transform: translateX(5%) rotate(4deg) scale(1);
   transform-origin: 0 0;
-  transition: transform 0.4s var(--default-transition-func) 0.1s;
+  transition: transform 0.4s vars.$default-transition-func 0.1s;
 }
 
 .cardstack-card--current {
@@ -68,7 +70,7 @@
 
 .cardstack-card--out {
   z-index: 1;
-  animation: cardstack-card-out 0.5s var(--default-transition-func);
+  animation: cardstack-card-out 0.5s vars.$default-transition-func;
   transform: translateX(13%) translateY(-8%) rotate(8deg) scale(0.95);
   transition: none !important;
 }
