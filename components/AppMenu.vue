@@ -34,6 +34,7 @@
           {{ currentMenuItemText }}
         </p>
         <transition
+          name="opacity-transition"
           v-on:before-enter="beforeAppMenuSmFullOpened"
           v-on:after-leave="afterAppMenuSmFullClosed"
         >
@@ -42,30 +43,26 @@
             v-show="showFullSmMenu"
             v-on:click="handleAppMenuSmFullClicked"
           >
-            <transition name="opacity-transition">
-              <div v-if="showFullSmMenu">
-                <section
-                  class="app-menu-sm-full-section"
-                  v-for="(sectionItems, sectionName, index) of menuSections"
-                  :key="index"
+            <section
+              class="app-menu-sm-full-section"
+              v-for="(sectionItems, sectionName, index) of menuSections"
+              :key="index"
+            >
+              <p
+                class="app-menu-sm-full-section-header"
+                v-show="sectionName !== ''"
+              >
+                {{ sectionName }}
+              </p>
+              <div v-for="(item, index1) of sectionItems" :key="index1">
+                <nuxt-link
+                  class="app-menu-sm-full-section-link"
+                  :to="item.route"
                 >
-                  <p
-                    class="app-menu-sm-full-section-header"
-                    v-show="sectionName !== ''"
-                  >
-                    {{ sectionName }}
-                  </p>
-                  <div v-for="(item, index1) of sectionItems" :key="index1">
-                    <nuxt-link
-                      class="app-menu-sm-full-section-link"
-                      :to="item.route"
-                    >
-                      {{ item.menuItemText }}
-                    </nuxt-link>
-                  </div>
-                </section>
+                  {{ item.menuItemText }}
+                </nuxt-link>
               </div>
-            </transition>
+            </section>
           </div>
         </transition>
       </div>

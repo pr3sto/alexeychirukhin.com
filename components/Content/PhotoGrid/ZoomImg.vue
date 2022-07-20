@@ -49,6 +49,14 @@ export default {
   name: "ZoomImg",
   props: ["src", "zoomScale", "visible"],
 
+  watch: {
+    visible: function (newVal, oldVal) {
+      if (newVal == false) {
+        this.zoomOut();
+      }
+    },
+  },
+
   computed: {
     cssVars() {
       return {

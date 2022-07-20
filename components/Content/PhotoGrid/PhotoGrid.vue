@@ -30,7 +30,7 @@
           <transition name="zoomimg-transform-transition">
             <ZoomImg
               class="photogrid-fullscreen-lg-zoomimg"
-              v-if="showFullScreen"
+              v-show="showFullScreen"
               :visible="showFullScreen"
               :src="fullscreenImgSrc"
               :zoomScale="zoomigProps.zoomScale"
@@ -51,29 +51,26 @@
 
     <template v-if="isSmallScreen">
       <transition
-        v-on:before-enter="beforeFullscreenSmOpened"
-        v-on:after-leave="afterFullscreenSmClosed"
+        name="opacity-transition"
+        v-on:after-enter="afterFullscreenSmOpened"
+        v-on:before-leave="beforeFullscreenSmClosed"
       >
         <div class="photogrid-fullscreen-sm" v-show="showFullScreen">
-          <transition name="opacity-transition">
-            <nuxt-img
-              class="photogrid-fullscreen-sm-img"
-              v-if="showFullScreen"
-              provider="imagekit"
-              preset="progressivejpg"
-              sizes="md:800px lg:1500px"
-              :src="fullscreenImgSrc"
-            />
-          </transition>
-          <transition name="opacity-transition">
-            <p
-              class="photogrid-fullscreen-sm-close"
-              v-if="showFullScreen"
-              v-on:click="handleCloseButtonClicked"
-            >
-              close
-            </p>
-          </transition>
+          <nuxt-img
+            class="photogrid-fullscreen-sm-img"
+            v-if="showFullScreen"
+            provider="imagekit"
+            preset="progressivejpg"
+            sizes="md:800px lg:1500px"
+            :src="fullscreenImgSrc"
+          />
+          <p
+            class="photogrid-fullscreen-sm-close"
+            v-if="showFullScreen"
+            v-on:click="handleCloseButtonClicked"
+          >
+            close
+          </p>
         </div>
       </transition>
     </template>
@@ -299,7 +296,7 @@ export default {
 
   beforeDestroy: function () {
     this.afterFullscreenLgClosed();
-    this.afterFullscreenSmClosed();
+    this.beforeFullscreenSmClosed();
   },
 
   methods: {
@@ -311,7 +308,7 @@ export default {
       window.removeEventListener("resize", this.closeFullscreenPhoto);
       window.removeEventListener("wheel", this.handleScroll);
     },
-    beforeFullscreenSmOpened: function () {
+    afterFullscreenSmOpened: function () {
       // save scroll position
       this.windowScrollPosition = {
         x: window.pageXOffset,
@@ -321,7 +318,7 @@ export default {
       document.body.classList.add("non-scrollable");
       document.documentElement.classList.add("non-scrollable");
     },
-    afterFullscreenSmClosed: function () {
+    beforeFullscreenSmClosed: function () {
       // enable scroll on html when fullscreen closed
       document.body.classList.remove("non-scrollable");
       document.documentElement.classList.remove("non-scrollable");

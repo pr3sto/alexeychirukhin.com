@@ -37,6 +37,14 @@
 .default-layout-page--sm {
   padding: 0 1rem 1rem 1rem;
 }
+
+/* Nuxt pages transition */
+.page-enter-active {
+  transition: opacity 0.25s;
+}
+.page-enter {
+  opacity: 0.5;
+}
 </style>
 
 <script>
