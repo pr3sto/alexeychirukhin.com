@@ -50,8 +50,8 @@ export default {
   props: ["src", "zoomScale", "visible"],
 
   watch: {
-    visible: function (newVal, oldVal) {
-      if (newVal == false) {
+    visible: function (value) {
+      if (value === false) {
         this.zoomOut();
       }
     },
