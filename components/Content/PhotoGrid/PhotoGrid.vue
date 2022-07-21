@@ -16,7 +16,7 @@
       </section>
     </masonry>
 
-    <template v-if="!isSmallScreen">
+    <template v-if="!small">
       <transition
         name="background-transition"
         v-on:before-enter="beforeFullscreenLgOpened"
@@ -49,7 +49,7 @@
       </transition>
     </template>
 
-    <template v-if="isSmallScreen">
+    <template v-if="small">
       <transition
         name="opacity-transition"
         v-on:after-enter="afterFullscreenSmOpened"
@@ -260,7 +260,7 @@ import ZoomImg from "./ZoomImg.vue";
 
 export default {
   name: "PhotoGrid",
-  props: ["grid"],
+  props: ["grid", "small"],
   components: { ZoomImg },
 
   computed: {
@@ -272,9 +272,6 @@ export default {
         "--fs-zoomimg-height": `${this.zoomigProps.height}px`,
         "--fs-zoomimg-transform": this.zoomigProps.transform,
       };
-    },
-    isSmallScreen() {
-      return this.$store.state.data.isSmallScreen;
     },
   },
 
@@ -328,7 +325,7 @@ export default {
     handlePhotoImgClicked: function (e, photo) {
       this.fullscreenImgSrc = photo.url;
 
-      if (this.isSmallScreen) {
+      if (this.small) {
         this.showFullScreen = true;
       } else {
         this.openFullscreenZoomig(e.target);

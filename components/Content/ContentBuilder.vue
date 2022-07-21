@@ -4,8 +4,8 @@
       v-show="content.floatingText"
       class="content-floating-text"
       :class="{
-        'content-floating-text--lg': !isSmallScreen,
-        'content-floating-text--sm': isSmallScreen,
+        'content-floating-text--lg': !small,
+        'content-floating-text--sm': small,
       }"
     >
       <p>{{ content.floatingText }}</p>
@@ -18,7 +18,7 @@
       >
         <text-content v-if="item.type === 'TextContent'" :text="item.text" />
         <card-stack v-else-if="item.type === 'CardStack'" :cards="item.cards" />
-        <photo-grid v-else-if="item.type === 'PhotoGrid'" :grid="item" />
+        <photo-grid v-else-if="item.type === 'PhotoGrid'" :grid="item" :small="small" />
       </section>
     </div>
   </main>
@@ -79,12 +79,7 @@ import TextContent from "~/components/Content/Text/TextContent.vue";
 
 export default {
   name: "ContentBuilder",
-  props: ["content"],
+  props: ["content", "small"],
   components: { CardStack, PhotoGrid, TextContent },
-  computed: {
-    isSmallScreen() {
-      return this.$store.state.data.isSmallScreen;
-    },
-  },
 };
 </script>

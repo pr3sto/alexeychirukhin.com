@@ -3,7 +3,6 @@ export const state = () => ({
   pages: [],
   menuSections: [],
   misc: {},
-  isSmallScreen: false,
 })
 
 export const getters = {
@@ -12,11 +11,6 @@ export const getters = {
       (page) => page.route === route
     );
   },
-  currentMenuItemText: (state) => (route) => {
-    return state.pages.find(
-      (page) => page.route === route
-    ).menuItemText;
-  }
 }
 
 export const mutations = {
@@ -29,23 +23,20 @@ export const mutations = {
     // construct menu items
     var menuItems = data.pages.map((page) => {
       return {
-        menuItemText: page.menuItemText,
-        menuItemSection: page.menuItemSection,
+        header: page.header,
+        section: page.section,
         route: page.route
       };
     });
 
     // group menu items by section
     state.menuSections = menuItems.reduce(function (previousValue, currentValue) {
-      previousValue[currentValue.menuItemSection] = previousValue[currentValue.menuItemSection] || [];
-      previousValue[currentValue.menuItemSection].push(currentValue);
+      previousValue[currentValue.section] = previousValue[currentValue.section] || [];
+      previousValue[currentValue.section].push(currentValue);
       return previousValue;
     }, Object.create(null));
 
     // datetime for maintaining localstorage cache
     state.timestamp = Date.now();
   },
-  setSmallScreen(state, isSmallScreen) {
-    state.isSmallScreen = isSmallScreen;
-  }
 }

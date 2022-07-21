@@ -1,7 +1,7 @@
 {
   "pages": [{
-      "menuItemText": "Alexey Chirukhin",
-      "menuItemSection": "",
+      "header": "Alexey Chirukhin",
+      "section": "",
       "route": "/",
       "content": {
         "blocks": [{
@@ -20,8 +20,8 @@
       }
     },
     {
-      "menuItemText": "Memories - Rzhev",
-      "menuItemSection": "projects",
+      "header": "Memories - Rzhev",
+      "section": "projects",
       "route": "/memories-rzhev",
       "content": {
         "floatingText": "Ode to Childhood",

@@ -1,6 +1,6 @@
 <template>
   <menu class="app-menu" :style="cssVars">
-    <template v-if="!isSmallScreen">
+    <template v-if="!small">
       <div class="app-menu-lg">
         <div
           v-on:mouseenter="handleAppMenuLgMouseEnter"
@@ -21,17 +21,17 @@
               :key="index1"
               :to="item.route"
             >
-              {{ item.menuItemText }}
+              {{ item.header }}
             </nuxt-link>
           </section>
         </div>
       </div>
     </template>
 
-    <template v-if="isSmallScreen">
+    <template v-if="small">
       <div class="app-menu-sm">
         <p class="app-menu-sm-header" v-on:click="handleAppMenuSmHeaderClicked">
-          {{ currentMenuItemText }}
+          {{ currentHeader }}
         </p>
         <transition
           name="opacity-transition"
@@ -59,7 +59,7 @@
                   class="app-menu-sm-full-section-link"
                   :to="item.route"
                 >
-                  {{ item.menuItemText }}
+                  {{ item.header }}
                 </nuxt-link>
               </div>
             </section>
@@ -173,6 +173,7 @@
 <script>
 export default {
   name: "AppMenu",
+  props: ["small"],
 
   computed: {
     cssVars() {
@@ -183,11 +184,9 @@ export default {
     menuSections() {
       return this.$store.state.data.menuSections;
     },
-    currentMenuItemText() {
-      return this.$store.getters["data/currentMenuItemText"](this.$route.path);
-    },
-    isSmallScreen() {
-      return this.$store.state.data.isSmallScreen;
+    currentHeader() {
+      var menuItems = [].concat.apply([], Object.values(this.menuSections));
+      return menuItems.find((item) => item.route === this.$route.path).header;
     },
   },
 
