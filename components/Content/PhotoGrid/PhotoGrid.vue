@@ -45,6 +45,34 @@
               close
             </p>
           </transition>
+          <transition name="opacity-transition">
+            <div
+              class="photogrid-fullscreen-lg-colorpicker"
+              v-if="showFullScreen"
+            >
+              <div
+                class="
+                  photogrid-fullscreen-lg-colorpicker-block
+                  photogrid-fullscreen-lg-colorpicker-block--white
+                "
+                v-on:click="handleWhiteBgClicked"
+              />
+              <div
+                class="
+                  photogrid-fullscreen-lg-colorpicker-block
+                  photogrid-fullscreen-lg-colorpicker-block--black
+                "
+                v-on:click="handleBlackBgClicked"
+              />
+              <div
+                class="
+                  photogrid-fullscreen-lg-colorpicker-block
+                  photogrid-fullscreen-lg-colorpicker-block--transparent
+                "
+                v-on:click="handleTransparentBgClicked"
+              />
+            </div>
+          </transition>
         </div>
       </transition>
     </template>
@@ -100,7 +128,8 @@
   left: 0;
   right: 0;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.9);
+  background: var(--fs-bg-color);
+  transition: background vars.$default-transition;
   touch-action: none;
 }
 
@@ -123,6 +152,33 @@
   writing-mode: vertical-rl;
   mix-blend-mode: exclusion;
   cursor: pointer;
+}
+
+.photogrid-fullscreen-lg-colorpicker {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.photogrid-fullscreen-lg-colorpicker-block {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+
+  &--white {
+    background: white;
+    border: 1px solid black;
+  }
+  &--black {
+    background: black;
+    border: 1px solid white;
+  }
+  &--transparent {
+    background: url("/images/opacity.png");
+    background-size: 0.5rem;
+  }
 }
 
 .photogrid-fullscreen-sm {
@@ -266,12 +322,16 @@ export default {
   computed: {
     cssVars() {
       return {
+        "--fs-bg-color": `rgba(${this.settings.fullscreenBgColor}, ${this.settings.fullscreenBgTransparency})`,
         "--fs-zoomimg-left": `${this.zoomigProps.left}px`,
         "--fs-zoomimg-top": `${this.zoomigProps.top}px`,
         "--fs-zoomimg-width": `${this.zoomigProps.width}px`,
         "--fs-zoomimg-height": `${this.zoomigProps.height}px`,
         "--fs-zoomimg-transform": this.zoomigProps.transform,
       };
+    },
+    settings() {
+      return this.$store.state.data.settings.photogrid;
     },
   },
 
@@ -342,6 +402,25 @@ export default {
     handleScroll: function (e) {
       e.preventDefault();
       this.closeFullscreenPhoto();
+    },
+    handleWhiteBgClicked: function () {
+      this.$store.commit("data/setPhotogridSettings", {
+        ...this.settings,
+        fullscreenBgColor: "255,255,255",
+      });
+    },
+    handleBlackBgClicked: function () {
+      this.$store.commit("data/setPhotogridSettings", {
+        ...this.settings,
+        fullscreenBgColor: "0,0,0",
+      });
+    },
+    handleTransparentBgClicked: function () {
+      this.$store.commit("data/setPhotogridSettings", {
+        ...this.settings,
+        fullscreenBgTransparency:
+          this.settings.fullscreenBgTransparency == 1 ? 0.9 : 1,
+      });
     },
     openFullscreenZoomig: function (imgElement) {
       // get initial image dimensions (without padding)

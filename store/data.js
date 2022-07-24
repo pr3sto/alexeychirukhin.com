@@ -3,6 +3,9 @@ export const state = () => ({
   pages: [],
   menuSections: [],
   misc: {},
+  settings: {
+    photogrid: {},
+  },
 })
 
 export const getters = {
@@ -38,5 +41,14 @@ export const mutations = {
 
     // datetime for maintaining localstorage cache
     state.timestamp = Date.now();
+
+    // initial photogrid settings
+    state.settings.photogrid = {
+      fullscreenBgColor: "0,0,0",
+      fullscreenBgTransparency: 0.9
+    };
+  },
+  setPhotogridSettings(state, settings) {
+    state.settings.photogrid = settings;
   },
 }

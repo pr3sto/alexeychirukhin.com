@@ -168,20 +168,6 @@ export default {
   },
 
   methods: {
-    handleClick: function (event) {
-      // prevent click on href
-      if (event.target.tagName.toLowerCase() === "a") {
-        return;
-      }
-
-      // prevent click when text is selected
-      var selection = document.getSelection();
-      if (selection.type === "Range") {
-        return;
-      }
-
-      this.switchCards();
-    },
     reCalculate: function () {
       var containerRect = this.$el.children[0].getBoundingClientRect();
       if (
@@ -198,6 +184,20 @@ export default {
         this.fontSize =
           containerRect.width / cardstackConstants.FONT_SIZE_FACTOR2;
       }
+    },
+    handleClick: function (event) {
+      // prevent click on href
+      if (event.target.tagName.toLowerCase() === "a") {
+        return;
+      }
+
+      // prevent click when text is selected
+      var selection = document.getSelection();
+      if (selection.type === "Range") {
+        return;
+      }
+
+      this.switchCards();
     },
     switchCards: function () {
       // don't switch one card
