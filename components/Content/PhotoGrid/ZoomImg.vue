@@ -22,25 +22,27 @@
   overflow: hidden;
 }
 
-.zoomimg-img--original {
-  cursor: zoom-in;
-  transform: translate(0, 0) scale(var(--zoomimg-img-original-scale));
-  transform-origin: left top;
-}
+.zoomimg-img {
+  &--original {
+    cursor: zoom-in;
+    transform: translate(0, 0) scale(var(--zoomimg-img-original-scale));
+    transform-origin: left top;
+  }
 
-.zoomimg-img--zoomed {
-  position: absolute;
-  cursor: zoom-out;
-  transform: translate(
-      var(--zoomimg-img-zoomed-offset-x),
-      var(--zoomimg-img-zoomed-offset-y)
-    )
-    scale(1);
-  transform-origin: left top;
-}
+  &--zoomed {
+    position: absolute;
+    cursor: zoom-out;
+    transform: translate(
+        var(--zoomimg-img-zoomed-offset-x),
+        var(--zoomimg-img-zoomed-offset-y)
+      )
+      scale(1);
+    transform-origin: left top;
+  }
 
-.zoomimg-img--zoom-in-progress {
-  transition: transform vars.$default-transition;
+  &--zoom-in-progress {
+    transition: transform vars.$default-transition;
+  }
 }
 </style>
 

@@ -18,7 +18,11 @@
       >
         <text-content v-if="item.type === 'TextContent'" :text="item.text" />
         <card-stack v-else-if="item.type === 'CardStack'" :cards="item.cards" />
-        <photo-grid v-else-if="item.type === 'PhotoGrid'" :grid="item" :small="small" />
+        <photo-grid
+          v-else-if="item.type === 'PhotoGrid'"
+          :grid="item"
+          :small="small"
+        />
       </section>
     </div>
   </main>
@@ -37,18 +41,19 @@
   padding: 1rem;
   color: white;
   mix-blend-mode: exclusion;
-}
-.content-floating-text--lg {
-  top: 0;
-  bottom: 0;
-  font-size: vars.$default-font-size-lg;
-  writing-mode: vertical-lr;
-  text-align: center;
-}
-.content-floating-text--sm {
-  bottom: 0;
-  font-size: vars.$default-font-size-sm;
-  writing-mode: initial;
+
+  &--lg {
+    top: 0;
+    bottom: 0;
+    font-size: vars.$default-font-size-lg;
+    writing-mode: vertical-lr;
+    text-align: center;
+  }
+  &--sm {
+    bottom: 0;
+    font-size: vars.$default-font-size-sm;
+    writing-mode: initial;
+  }
 }
 
 .content-container {
@@ -60,15 +65,16 @@
 .content-container-block {
   display: flex;
   padding-bottom: 1rem;
-}
-.content-container-block:last-child {
-  padding-bottom: 0;
-}
-.content-container-block:only-child {
-  flex-grow: 1;
-}
-.content-container-block > * {
-  flex-grow: 1;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+  &:only-child {
+    flex-grow: 1;
+  }
+  & > * {
+    flex-grow: 1;
+  }
 }
 </style>
 

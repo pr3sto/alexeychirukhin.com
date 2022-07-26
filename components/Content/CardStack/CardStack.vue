@@ -52,51 +52,51 @@
   transform: translateX(5%) rotate(4deg) scale(1);
   transform-origin: 0 0;
   transition: transform 0.4s vars.$default-transition-func 0.1s;
-}
 
-.cardstack-card--current {
-  z-index: 5;
-  transform: translateX(0) translateY(0) rotate(0) scale(1);
-}
+  &--current {
+    z-index: 5;
+    transform: translateX(0) translateY(0) rotate(0) scale(1);
+  }
 
-.cardstack-card--next {
-  z-index: 4;
-  transform: translateX(5%) translateY(-4%) rotate(4deg) scale(1);
-}
+  &--next {
+    z-index: 4;
+    transform: translateX(5%) translateY(-4%) rotate(4deg) scale(1);
+  }
 
-.cardstack-card--next2 {
-  z-index: 3;
-}
+  &--next2 {
+    z-index: 3;
+  }
 
-.cardstack-card--out {
-  z-index: 1;
-  animation: cardstack-card-out 0.5s vars.$default-transition-func;
-  transform: translateX(13%) translateY(-8%) rotate(8deg) scale(0.95);
-  transition: none !important;
-}
+  &--out {
+    z-index: 1;
+    animation: cardstack-card-out 0.5s vars.$default-transition-func;
+    transform: translateX(13%) translateY(-8%) rotate(8deg) scale(0.95);
+    transition: none !important;
+  }
 
-/* dim the card */
-.cardstack-card::after {
-  pointer-events: none;
-  content: "";
-  background-color: #000;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.4s linear;
-}
+  /* dim the card */
+  &::after {
+    pointer-events: none;
+    content: "";
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s linear;
+  }
 
-/* dim the next card */
-.cardstack-card--next::after {
-  opacity: 0.05;
-}
+  /* dim the next card */
+  &--next::after {
+    opacity: 0.05;
+  }
 
-/* dim the last card */
-.cardstack-card--out::after {
-  opacity: 0.1;
+  /* dim the last card */
+  &--out::after {
+    opacity: 0.1;
+  }
 }
 
 /* skip animation on pageload */
