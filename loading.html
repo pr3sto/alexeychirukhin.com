@@ -1,6 +1,6 @@
 <div class="loading-indicator">
   <div>
-    <p>please stand by</p>
+    <p>loading</p>
   </div>
 </div>
 
@@ -10,48 +10,27 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    animation: loader-fade-in 1.5s;
   }
 
   .loading-indicator p {
-    margin: 0 auto;
-    overflow: hidden;
-    border-right: 0.15rem solid #000;
     font-size: 2rem;
-    letter-spacing: 0.15rem;
-    white-space: nowrap;
-    animation: loader-typing 2.5s steps(15, end), loader-blink-caret 1s step-end infinite;
+    animation: dimmer 2s infinite;
+    animation-delay: 2s;
+    opacity: 0;
   }
 
-  @keyframes loader-fade-in {
-    0%,
-    50% {
-      visibility: hidden;
+  @keyframes dimmer {
+    0% {
       opacity: 0;
     }
-    100% {
-      visibility: visible;
+
+    50% {
       opacity: 1;
     }
-  }
 
-  @keyframes loader-typing {
-    0%,
-    40% {
-      width: 0;
-    }
     100% {
-      width: 100%;
+      opacity: 0;
     }
   }
 
-  @keyframes loader-blink-caret {
-    from,
-    to {
-      border-color: transparent;
-    }
-    50% {
-      border-color: black;
-    }
-  }
 </style>
