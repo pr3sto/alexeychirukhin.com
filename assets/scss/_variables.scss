@@ -2,4 +2,4 @@ $default-font-size-lg: 2rem;
 $default-font-size-sm: 1.5rem;
 
 $default-transition-func: cubic-bezier(0.8, 0.2, 0.1, 0.8);
-$default-transition: 0.2s cubic-bezier(0.8, 0.2, 0.1, 0.8);
+$default-transition: 0.2s $default-transition-func;

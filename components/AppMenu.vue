@@ -182,7 +182,7 @@ export default {
       };
     },
     menuSections() {
-      return this.$store.state.data.menuSections;
+      return this.$store.getters["data/menuSections"];
     },
     currentHeader() {
       var menuItems = [].concat.apply([], Object.values(this.menuSections));

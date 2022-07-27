@@ -17,6 +17,15 @@ export const getters = {
       (page) => page.route === route
     );
   },
+  menuSections: (state) => {
+    return state.menuSections;
+  },
+  photogridSettings: (state) => {
+    return state.settings.photogrid;
+  },
+  noImageUrl: (state) => {
+    return state.misc.noImageUrl;
+  },
 }
 
 export const mutations = {

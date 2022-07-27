@@ -331,7 +331,7 @@ export default {
       };
     },
     settings() {
-      return this.$store.state.data.settings.photogrid;
+      return this.$store.getters["data/photogridSettings"];
     },
   },
 
@@ -339,14 +339,14 @@ export default {
     return {
       showFullScreen: false,
       windowScrollPosition: {},
-      fullscreenImgSrc: this.$store.state.data.misc.noImageUrl,
+      fullscreenImgSrc: this.$store.getters["data/noImageUrl"],
       zoomigProps: {
+        zoomScale: 0,
         left: 0,
         top: 0,
         width: 0,
         height: 0,
         transform: "none",
-        zoomScale: 0,
       },
     };
   },
@@ -457,12 +457,12 @@ export default {
       );
 
       // set fullscreen zoomimg css vars
+      this.zoomigProps.zoomScale = imgElement.naturalWidth / fsImgRect.width;
       this.zoomigProps.left = fsImgRect.x;
       this.zoomigProps.top = fsImgRect.y;
       this.zoomigProps.width = fsImgRect.width;
       this.zoomigProps.height = fsImgRect.height;
       this.zoomigProps.transform = fsImgTransfrom;
-      this.zoomigProps.zoomScale = imgElement.naturalWidth / fsImgRect.width;
 
       // show fullscreen
       this.showFullScreen = true;
