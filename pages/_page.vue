@@ -1,5 +1,5 @@
 <template>
-  <content-builder :content="page.content" :small="small"/>
+  <content-builder :content="page.content" :small="small" />
 </template>
 
 <script>

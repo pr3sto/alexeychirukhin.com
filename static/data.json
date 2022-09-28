@@ -1,22 +1,26 @@
 {
-  "pages": [{
+  "pages": [
+    {
       "header": "Alexey Chirukhin",
       "section": "",
       "route": "/",
       "content": {
-        "blocks": [{
-          "type": "CardStack",
-          "cards": [{
-              "type": "PhotoCard",
-              "round": true,
-              "photoUrl": "alexeychirukhin_com/pages/index/vDXwb_ibYHTPk2A.jpg"
-            },
-            {
-              "type": "DarkslideCard",
-              "html": "<div style=\"display:flex;flex-direction:column;font-size:2em;line-height:1.1em;\"><div>Contacts:</div><a href=\"https://www.instagram.com/alexeychirukhin\" target=\"_blank\" style=\"color: #fff\">instagram.com/alexeychirukhin</a><a href=\"https://github.com/pr3sto\" target=\"_blank\" style=\"color: #fff\">github.com/pr3sto</a></div>"
-            }
-          ]
-        }]
+        "blocks": [
+          {
+            "type": "CardStack",
+            "cards": [
+              {
+                "type": "PhotoCard",
+                "round": true,
+                "photoUrl": "alexeychirukhin_com/pages/index/vDXwb_ibYHTPk2A.jpg"
+              },
+              {
+                "type": "DarkslideCard",
+                "html": "<div style=\"display:flex;flex-direction:column;font-size:2em;line-height:1.1em;\"><div>Contacts:</div><a href=\"https://www.instagram.com/alexeychirukhin\" target=\"_blank\" style=\"color: #fff\">instagram.com/alexeychirukhin</a><a href=\"https://github.com/pr3sto\" target=\"_blank\" style=\"color: #fff\">github.com/pr3sto</a></div>"
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -25,21 +29,25 @@
       "route": "/memories-rzhev",
       "content": {
         "floatingText": "Ode to Childhood",
-        "blocks": [{
+        "blocks": [
+          {
             "type": "PhotoGrid",
             "cols": {
               "default": 1
             },
-            "photos": [{
-              "url": "alexeychirukhin_com/pages/memories/Xvbmh_DO59t-Lbs.jpg"
-            }]
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/pages/memories/Xvbmh_DO59t-Lbs.jpg"
+              }
+            ]
           },
           {
             "type": "PhotoGrid",
             "cols": {
               "default": 2
             },
-            "photos": [{
+            "photos": [
+              {
                 "url": "alexeychirukhin_com/pages/memories/rcWHx_iwViZvI5N.jpg"
               },
               {
@@ -64,9 +72,11 @@
             "cols": {
               "default": 1
             },
-            "photos": [{
-              "url": "alexeychirukhin_com/pages/memories/zatje_Fe0OEQNbW.jpg"
-            }]
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/pages/memories/zatje_Fe0OEQNbW.jpg"
+              }
+            ]
           }
         ]
       }
