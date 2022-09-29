@@ -2,7 +2,9 @@ export const state = () => ({
   timestamp: null,
   pages: [],
   menuSections: [],
-  misc: {},
+  misc: {
+    noImageUrl: null,
+  },
   settings: {
     photogrid: {
       fullscreenBgColor: "0,0,0",

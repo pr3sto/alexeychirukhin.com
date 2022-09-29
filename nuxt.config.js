@@ -1,55 +1,58 @@
-require('dotenv').config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
 export default {
-  devtools: process.env.NODE_ENV !== 'production',
+  devtools: process.env.NODE_ENV !== "production",
   ssr: false,
-  target: 'static',
+  target: "static",
   env: {
-    defaultTitle: 'Alexey Chirukhin',
+    defaultTitle: "Alexey Chirukhin",
   },
   head: {
     title: process.env.defaultTitle,
     titleTemplate: (titleChunk) => {
-      return titleChunk && titleChunk !== process.env.defaultTitle ?
-        `${titleChunk} — ${process.env.defaultTitle}` :
-        process.env.defaultTitle;
+      return titleChunk && titleChunk !== process.env.defaultTitle
+        ? `${titleChunk} — ${process.env.defaultTitle}`
+        : process.env.defaultTitle;
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Alexey Chirukhin personal website' },
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content: "Alexey Chirukhin personal website",
+      },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       /* Fonts */
-      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Arapey&display=swap' },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Arapey&display=swap",
+      },
     ],
     htmlAttrs: {
-      lang: 'en',
+      lang: "en",
     },
   },
-  css: [
-    '@/assets/css/main.css',
-  ],
-  loadingIndicator: '~/loading.html',
-  modules: [
-    'nuxt-client-init-module',
-  ],
+  css: ["@/assets/css/main.css"],
+  loadingIndicator: "~/loading.html",
   buildModules: [
-    ['@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }],
-    '@nuxt/image',
+    ["@nuxtjs/dotenv", { filename: `.env.${process.env.NODE_ENV}` }],
+    "@nuxt/image",
+    "nuxt-client-init-module",
   ],
   plugins: [
-    { src: '~/plugins/VueMasonry.client.js', mode: 'client', },
-    { src: '~/plugins/persistedState.client.js', mode: 'client', },
+    { src: "~/plugins/VueMasonry.client.js", mode: "client" },
+    { src: "~/plugins/persistedState.client.js", mode: "client" },
   ],
   image: {
     imagekit: {
-      baseURL: 'https://ik.imagekit.io/pr3sto',
+      baseURL: "https://ik.imagekit.io/pr3sto",
     },
     screens: {
       md: 700,
@@ -57,10 +60,10 @@ export default {
     presets: {
       progressivejpg: {
         modifiers: {
-          f: 'jpg',
+          f: "jpg",
           progressive: true,
         },
       },
     },
   },
-}
+};

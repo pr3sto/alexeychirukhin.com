@@ -2,8 +2,8 @@ export const actions = {
   async nuxtClientInit({ commit }, context) {
     // cache data in local storage for [LOCAL_STORE_LIFETIME_MINUTES] minutes
     if (context.store.state.data.timestamp) {
-      var millisecconds = Date.now() - context.store.state.data.timestamp;
-      var minutes = Math.floor(millisecconds / 1000 / 60);
+      var milliseconds = Date.now() - context.store.state.data.timestamp;
+      var minutes = Math.floor(milliseconds / 1000 / 60);
       if (minutes < process.env.LOCAL_STORE_LIFETIME_MINUTES) {
         return;
       }

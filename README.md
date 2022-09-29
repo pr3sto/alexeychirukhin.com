@@ -1,6 +1,6 @@
 # alexeychirukhin.com
 
-> alexeychirukhin.com website
+> [alexeychirukhin.com](https://alexeychirukhin.com) website
 
 ## Build Setup
 
