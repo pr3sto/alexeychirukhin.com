@@ -142,7 +142,7 @@ export default {
 
   data() {
     return {
-      annotatedCards: this.annotateCards(this.cards, 0, true),
+      annotatedCards: annotateCards(this.cards, 0, true),
       cardstackContainerHeight: "auto",
       cardstackContainerWidth: "auto",
       fontSize: 0,
@@ -168,7 +168,7 @@ export default {
   },
 
   methods: {
-    reCalculate: function () {
+    reCalculate() {
       var containerRect = this.$el.children[0].getBoundingClientRect();
       if (
         containerRect.width / containerRect.height >
@@ -185,7 +185,7 @@ export default {
           containerRect.width / cardstackConstants.FONT_SIZE_FACTOR2;
       }
     },
-    handleClick: function (event) {
+    handleClick(event) {
       // prevent click on href
       if (event.target.tagName.toLowerCase() === "a") {
         return;
@@ -199,7 +199,7 @@ export default {
 
       this.switchCards();
     },
-    switchCards: function () {
+    switchCards() {
       // don't switch one card
       if (this.annotatedCards.length < 2) {
         return;
@@ -209,49 +209,44 @@ export default {
         return card.class == "cardstack-card--current";
       });
 
-      var newTopCardIndex = this.mod(
-        currentTopCardIndex + 1,
-        this.cards.length
-      );
+      var newTopCardIndex = mod(currentTopCardIndex + 1, this.cards.length);
 
       // trigger Vue reactive update
       this.$nextTick(() => {
         this.annotatedCards = [];
-        this.annotatedCards = this.annotateCards(
-          this.cards,
-          newTopCardIndex,
-          false
-        );
+        this.annotatedCards = annotateCards(this.cards, newTopCardIndex, false);
       });
-    },
-    annotateCards: function (cards, topCardIndex, pageload) {
-      cards.forEach((card) => {
-        card.class = "";
-      });
-      if (cards.length > 0) {
-        cards[topCardIndex].class = "cardstack-card--current";
-      }
-      if (cards.length > 1) {
-        var index = this.mod(topCardIndex - 1, cards.length);
-        if (pageload) {
-          cards[index].class = "cardstack-card--out pageload";
-        } else {
-          cards[index].class = "cardstack-card--out";
-        }
-      }
-      if (cards.length > 2) {
-        var index = this.mod(topCardIndex + 1, cards.length);
-        cards[index].class = "cardstack-card--next";
-      }
-      if (cards.length > 3) {
-        var index = this.mod(topCardIndex + 2, cards.length);
-        cards[index].class = "cardstack-card--next2";
-      }
-      return cards;
-    },
-    mod: function (n, m) {
-      return ((n % m) + m) % m;
     },
   },
 };
+
+function annotateCards(cards, topCardIndex, pageload) {
+  cards.forEach((card) => {
+    card.class = "";
+  });
+  if (cards.length > 0) {
+    cards[topCardIndex].class = "cardstack-card--current";
+  }
+  if (cards.length > 1) {
+    var index = mod(topCardIndex - 1, cards.length);
+    if (pageload) {
+      cards[index].class = "cardstack-card--out pageload";
+    } else {
+      cards[index].class = "cardstack-card--out";
+    }
+  }
+  if (cards.length > 2) {
+    var index = mod(topCardIndex + 1, cards.length);
+    cards[index].class = "cardstack-card--next";
+  }
+  if (cards.length > 3) {
+    var index = mod(topCardIndex + 2, cards.length);
+    cards[index].class = "cardstack-card--next2";
+  }
+  return cards;
+}
+
+function mod(n, m) {
+  return ((n % m) + m) % m;
+}
 </script>

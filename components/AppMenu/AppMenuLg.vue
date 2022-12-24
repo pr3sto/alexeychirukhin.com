@@ -104,13 +104,13 @@ export default {
   },
 
   methods: {
-    handleAppMenuMouseEnter: function () {
+    handleAppMenuMouseEnter() {
       if (!this.touched) this.appMenuItemOpacity = 1;
     },
-    handleAppMenuMouseLeave: function () {
+    handleAppMenuMouseLeave() {
       this.appMenuItemOpacity = 0.2;
     },
-    handleAppMenuTouch: function () {
+    handleAppMenuTouch() {
       this.touched = true;
       setTimeout(() => (this.touched = false), 250);
     },

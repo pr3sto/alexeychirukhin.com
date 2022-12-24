@@ -354,21 +354,21 @@ export default {
     };
   },
 
-  beforeDestroy: function () {
+  beforeDestroy() {
     this.afterFullscreenLgClosed();
     this.beforeFullscreenSmClosed();
   },
 
   methods: {
-    beforeFullscreenLgOpened: function () {
+    beforeFullscreenLgOpened() {
       window.addEventListener("resize", this.closeFullscreenPhoto);
       window.addEventListener("wheel", this.handleScroll, { passive: false });
     },
-    afterFullscreenLgClosed: function () {
+    afterFullscreenLgClosed() {
       window.removeEventListener("resize", this.closeFullscreenPhoto);
       window.removeEventListener("wheel", this.handleScroll);
     },
-    afterFullscreenSmOpened: function () {
+    afterFullscreenSmOpened() {
       // save scroll position
       this.windowScrollPosition = {
         x: window.pageXOffset,
@@ -378,14 +378,14 @@ export default {
       document.body.classList.add("non-scrollable");
       document.documentElement.classList.add("non-scrollable");
     },
-    beforeFullscreenSmClosed: function () {
+    beforeFullscreenSmClosed() {
       // enable scroll on html when fullscreen closed
       document.body.classList.remove("non-scrollable");
       document.documentElement.classList.remove("non-scrollable");
       // restore scroll position
       window.scrollTo(this.windowScrollPosition.x, this.windowScrollPosition.y);
     },
-    handlePhotoImgClicked: function (e, photo) {
+    handlePhotoImgClicked(e, photo) {
       this.fullscreenImgSrc = photo.url;
 
       if (this.small) {
@@ -394,34 +394,34 @@ export default {
         this.openFullscreenZoomig(e.target);
       }
     },
-    handleFullscreenLgClicked: function (e) {
+    handleFullscreenLgClicked(e) {
       if (e.srcElement.classList.contains("photogrid-fullscreen-lg")) {
         this.closeFullscreenPhoto();
       }
     },
-    handleCloseButtonClicked: function () {
+    handleCloseButtonClicked() {
       this.closeFullscreenPhoto();
     },
-    handleScroll: function (e) {
+    handleScroll(e) {
       e.preventDefault();
       this.closeFullscreenPhoto();
     },
-    handleWhiteBgClicked: function () {
+    handleWhiteBgClicked() {
       this.$store.commit(
         "settings/setPhotogridFullscreenBgColor",
         "255,255,255"
       );
     },
-    handleBlackBgClicked: function () {
+    handleBlackBgClicked() {
       this.$store.commit("settings/setPhotogridFullscreenBgColor", "0,0,0");
     },
-    handleTransparentBgClicked: function () {
+    handleTransparentBgClicked() {
       this.$store.commit(
         "settings/setPhotogridFullscreenBgTransparency",
         this.settings.fullscreenBgTransparency == 1 ? 0.9 : 1
       );
     },
-    openFullscreenZoomig: function (imgElement) {
+    openFullscreenZoomig(imgElement) {
       // get initial image dimensions (without padding)
       var initImgRect = imgElement.getBoundingClientRect();
       var initImgRectPadding = parseFloat(
@@ -433,7 +433,7 @@ export default {
       initImgRect.y = initImgRect.y + initImgRectPadding / 2;
 
       // calculate scale factor (from initial to fullscreen)
-      var fsImgScaleFactor = this.calcFsImgScaleFactor(
+      var fsImgScaleFactor = calcFsImgScaleFactor(
         initImgRect,
         document.documentElement.clientWidth,
         window.innerHeight,
@@ -441,7 +441,7 @@ export default {
       );
 
       // calculate fullscreen image position
-      var fsImgRect = this.calcFsImgRect(
+      var fsImgRect = calcFsImgRect(
         initImgRect,
         document.documentElement.clientWidth,
         window.innerHeight,
@@ -449,7 +449,7 @@ export default {
       );
 
       // calculate transform (from fullscreen to initial)
-      var fsImgTransfrom = this.calcFsImgTransform(
+      var fsImgTransfrom = calcFsImgTransform(
         initImgRect,
         fsImgRect,
         fsImgScaleFactor
@@ -466,7 +466,7 @@ export default {
       // show fullscreen
       this.showFullScreen = true;
     },
-    closeFullscreenPhoto: function () {
+    closeFullscreenPhoto() {
       // prevent multiple events triggering this function
       if (!this.showFullScreen) {
         return;
@@ -475,52 +475,55 @@ export default {
       // hide fullscreen
       this.showFullScreen = false;
     },
-    calcFsImgScaleFactor: function (
-      initImgRect,
-      fullscreenWidth,
-      fullscreenHeight,
-      padding
-    ) {
-      return Math.min(
-        (fullscreenWidth - padding * 2) / initImgRect.width,
-        (fullscreenHeight - padding * 2) / initImgRect.height
-      );
-    },
-    calcFsImgRect: function (
-      initImgRect,
-      fullscreenWidth,
-      fullscreenHeight,
-      fsImgScaleFactor
-    ) {
-      return {
-        x: (fullscreenWidth - fsImgScaleFactor * initImgRect.width) / 2,
-        y: (fullscreenHeight - fsImgScaleFactor * initImgRect.height) / 2,
-        width: initImgRect.width * fsImgScaleFactor,
-        height: initImgRect.height * fsImgScaleFactor,
-      };
-    },
-    calcFsImgTransform: function (initImgRect, fsImgRect, fsImgScaleFactor) {
-      var x, y;
-      var scale = 1 / fsImgScaleFactor;
-
-      if (scale > 1) {
-        x =
-          initImgRect.x -
-          (fsImgRect.x - (scale * fsImgRect.width - fsImgRect.width) / 2);
-        y =
-          initImgRect.y -
-          (fsImgRect.y - (scale * fsImgRect.height - fsImgRect.height) / 2);
-      } else {
-        x =
-          initImgRect.x -
-          (fsImgRect.x + (fsImgRect.width - scale * fsImgRect.width) / 2);
-        y =
-          initImgRect.y -
-          (fsImgRect.y + (fsImgRect.height - scale * fsImgRect.height) / 2);
-      }
-
-      return `translate(${x}px, ${y}px) scale(${scale})`;
-    },
   },
 };
+
+function calcFsImgScaleFactor(
+  initImgRect,
+  fullscreenWidth,
+  fullscreenHeight,
+  padding
+) {
+  return Math.min(
+    (fullscreenWidth - padding * 2) / initImgRect.width,
+    (fullscreenHeight - padding * 2) / initImgRect.height
+  );
+}
+
+function calcFsImgRect(
+  initImgRect,
+  fullscreenWidth,
+  fullscreenHeight,
+  fsImgScaleFactor
+) {
+  return {
+    x: (fullscreenWidth - fsImgScaleFactor * initImgRect.width) / 2,
+    y: (fullscreenHeight - fsImgScaleFactor * initImgRect.height) / 2,
+    width: initImgRect.width * fsImgScaleFactor,
+    height: initImgRect.height * fsImgScaleFactor,
+  };
+}
+
+function calcFsImgTransform(initImgRect, fsImgRect, fsImgScaleFactor) {
+  var x, y;
+  var scale = 1 / fsImgScaleFactor;
+
+  if (scale > 1) {
+    x =
+      initImgRect.x -
+      (fsImgRect.x - (scale * fsImgRect.width - fsImgRect.width) / 2);
+    y =
+      initImgRect.y -
+      (fsImgRect.y - (scale * fsImgRect.height - fsImgRect.height) / 2);
+  } else {
+    x =
+      initImgRect.x -
+      (fsImgRect.x + (fsImgRect.width - scale * fsImgRect.width) / 2);
+    y =
+      initImgRect.y -
+      (fsImgRect.y + (fsImgRect.height - scale * fsImgRect.height) / 2);
+  }
+
+  return `translate(${x}px, ${y}px) scale(${scale})`;
+}
 </script>

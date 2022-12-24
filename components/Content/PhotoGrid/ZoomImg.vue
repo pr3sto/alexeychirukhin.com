@@ -52,7 +52,7 @@ export default {
   props: ["src", "zoomScale", "visible"],
 
   watch: {
-    visible: function (value) {
+    visible(value) {
       if (value === false) {
         this.zoomOut();
       }
@@ -80,18 +80,18 @@ export default {
     };
   },
 
-  beforeDestroy: function () {
-    this.removeEventListeners();
+  beforeDestroy() {
+    this.removeEventListenersForZoomedImg();
   },
 
   methods: {
-    addEventListeners() {
+    addEventListenersForZoomedImg() {
       this.$el.addEventListener("mouseleave", this.handleMouseLeave);
       this.$el.addEventListener("mousemove", this.handleMouseMove);
       this.$el.addEventListener("touchstart", this.handleTouchStart);
       this.$el.addEventListener("touchend", this.handleTouchEnd);
     },
-    removeEventListeners() {
+    removeEventListenersForZoomedImg() {
       this.$el.removeEventListener("mouseleave", this.handleMouseLeave);
       this.$el.removeEventListener("mousemove", this.handleMouseMove);
       this.$el.removeEventListener("touchstart", this.handleTouchStart);
@@ -105,15 +105,15 @@ export default {
         this.zoomedImgProps.bounds = this.$el.getBoundingClientRect();
 
         // get dimensions of zoomed image
-        this.zoomedImgProps.scaledDimensions = this.getScaledDimensions(
+        this.zoomedImgProps.scaledDimensions = getScaledDimensions(
           this.zoomedImgProps.bounds,
           this.zoomScale
         );
 
         // calculate ratios for zoomed image
-        this.zoomedImgProps.ratios = this.getRatios(
-          this.zoomedImgProps.bounds,
-          this.zoomedImgProps.scaledDimensions
+        this.zoomedImgProps.ratios = getRatios(
+          this.zoomedImgProps.scaledDimensions,
+          this.zoomedImgProps.bounds
         );
 
         this.zoomIn(e.clientX, e.clientY);
@@ -183,7 +183,7 @@ export default {
       this.zoomedImgOffsetY = y;
     },
     zoomIn(clientX, clientY) {
-      this.addEventListeners();
+      this.addEventListenersForZoomedImg();
 
       this.isZoomed = true;
 
@@ -197,7 +197,7 @@ export default {
       }, 250);
     },
     zoomOut() {
-      this.removeEventListeners();
+      this.removeEventListenersForZoomedImg();
 
       this.isZoomed = false;
       this.isTouch = false;
@@ -210,18 +210,20 @@ export default {
         this.isZoomInProgress = false;
       }, 250);
     },
-    getScaledDimensions(imgRect, zoomScale) {
-      return {
-        width: imgRect.width * zoomScale,
-        height: imgRect.height * zoomScale,
-      };
-    },
-    getRatios(bounds, dimensions) {
-      return {
-        x: (dimensions.width - bounds.width) / bounds.width,
-        y: (dimensions.height - bounds.height) / bounds.height,
-      };
-    },
   },
 };
+
+function getScaledDimensions(imgRect, zoomScale) {
+  return {
+    width: imgRect.width * zoomScale,
+    height: imgRect.height * zoomScale,
+  };
+}
+
+function getRatios(dimensions, bounds) {
+  return {
+    x: (dimensions.width - bounds.width) / bounds.width,
+    y: (dimensions.height - bounds.height) / bounds.height,
+  };
+}
 </script>

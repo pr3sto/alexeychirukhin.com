@@ -68,7 +68,7 @@ export default {
   },
 
   methods: {
-    reCalculate: function () {
+    reCalculate() {
       // set min height of layout to screen height
       this.$el.style.minHeight = `${document.documentElement.clientHeight}px`;
     },

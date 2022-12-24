@@ -114,18 +114,18 @@ export default {
   },
 
   methods: {
-    handleAppMenuHeaderClicked: function () {
+    handleAppMenuHeaderClicked() {
       this.showFullscreenAppMenu = true;
     },
-    handleFullscreenAppMenuClicked: function () {
+    handleFullscreenAppMenuClicked() {
       this.showFullscreenAppMenu = false;
     },
-    beforeFullscreenAppMenuOpened: function () {
+    beforeFullscreenAppMenuOpened() {
       // disable scroll on html when fullscreen opened
       document.body.classList.add("non-scrollable");
       document.documentElement.classList.add("non-scrollable");
     },
-    afterFullscreenAppMenuClosed: function () {
+    afterFullscreenAppMenuClosed() {
       // enable scroll on html when fullscreen closed
       document.body.classList.remove("non-scrollable");
       document.documentElement.classList.remove("non-scrollable");
