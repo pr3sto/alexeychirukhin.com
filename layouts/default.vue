@@ -1,41 +1,29 @@
 <template>
-  <div
-    id="default-layout"
-    :class="{
-      'default-layout--lg': !small,
-      'default-layout--sm': small,
-    }"
-  >
+  <div :id="smallScreen ? 'default-layout-sm' : 'default-layout'">
     <NuxtChild
-      id="default-layout-page"
-      :class="{
-        'default-layout-page--lg': !small,
-        'default-layout-page--sm': small,
-      }"
-      :small="small"
+      :id="smallScreen ? 'default-layout-page-sm' : 'default-layout-page'"
     />
-    <app-menu :small="small" />
+    <app-menu-sm v-if="smallScreen" />
+    <app-menu-lg v-else />
   </div>
 </template>
 
 <style>
 #default-layout {
   display: flex;
-}
-.default-layout--lg {
   flex-direction: row;
 }
-.default-layout--sm {
-  flex-direction: column-reverse;
-}
-
 #default-layout-page {
   flex-grow: 1;
-}
-.default-layout-page--lg {
   padding: 1rem 0 1rem 1rem;
 }
-.default-layout-page--sm {
+
+#default-layout-sm {
+  display: flex;
+  flex-direction: column-reverse;
+}
+#default-layout-page-sm {
+  flex-grow: 1;
   padding: 0 1rem 1rem 1rem;
 }
 
@@ -49,15 +37,16 @@
 </style>
 
 <script>
-import AppMenu from "~/components/AppMenu.vue";
+import AppMenuSm from "~/components/AppMenu/AppMenuSm.vue";
+import AppMenuLg from "~/components/AppMenu/AppMenuLg.vue";
 
 export default {
-  components: { AppMenu },
+  components: { AppMenuSm, AppMenuLg },
 
-  data() {
-    return {
-      small: false,
-    };
+  computed: {
+    smallScreen() {
+      return this.$store.state.settings.isSmallScreen;
+    },
   },
 
   mounted() {
@@ -82,9 +71,6 @@ export default {
     reCalculate: function () {
       // set min height of layout to screen height
       this.$el.style.minHeight = `${document.documentElement.clientHeight}px`;
-
-      // small screen if width of screen is 700px
-      this.small = window.matchMedia("(max-width: 700px)").matches;
     },
   },
 };

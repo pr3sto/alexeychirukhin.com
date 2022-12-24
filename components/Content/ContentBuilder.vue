@@ -3,25 +3,27 @@
     <aside
       v-show="content.floatingText"
       class="content-floating-text"
-      :class="{
-        'content-floating-text--lg': !small,
-        'content-floating-text--sm': small,
-      }"
+      :class="
+        smallScreen ? 'content-floating-text--sm' : 'content-floating-text--lg'
+      "
     >
       <p>{{ content.floatingText }}</p>
     </aside>
     <div class="content-container">
       <section
         class="content-container-block"
-        v-for="(item, index) of content.blocks"
+        v-for="(block, index) of content.blocks"
         :key="index"
       >
-        <text-content v-if="item.type === 'TextContent'" :text="item.text" />
-        <card-stack v-else-if="item.type === 'CardStack'" :cards="item.cards" />
+        <text-content v-if="block.type === 'TextContent'" :text="block.text" />
+        <card-stack
+          v-else-if="block.type === 'CardStack'"
+          :cards="block.cards"
+        />
         <photo-grid
-          v-else-if="item.type === 'PhotoGrid'"
-          :grid="item"
-          :small="small"
+          v-else-if="block.type === 'PhotoGrid'"
+          :photos="block.photos"
+          :cols="block.cols"
         />
       </section>
     </div>
@@ -29,7 +31,7 @@
 </template>
 
 <style lang="scss" scoped>
-@use "../../assets/scss/variables" as vars;
+@use "~/assets/scss/variables" as vars;
 
 .content {
   display: flex;
@@ -85,7 +87,12 @@ import TextContent from "~/components/Content/Text/TextContent.vue";
 
 export default {
   name: "ContentBuilder",
-  props: ["content", "small"],
+  props: ["content"],
   components: { CardStack, PhotoGrid, TextContent },
+  computed: {
+    smallScreen() {
+      return this.$store.state.settings.isSmallScreen;
+    },
+  },
 };
 </script>

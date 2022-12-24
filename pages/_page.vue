@@ -1,5 +1,5 @@
 <template>
-  <content-builder :content="page.content" :small="small" />
+  <content-builder :content="page.content" />
 </template>
 
 <script>
@@ -7,7 +7,6 @@ import ContentBuilder from "~/components/Content/ContentBuilder.vue";
 
 export default {
   components: { ContentBuilder },
-  props: ["small"],
 
   computed: {
     page() {

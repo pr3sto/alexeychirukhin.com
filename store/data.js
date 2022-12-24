@@ -5,26 +5,11 @@ export const state = () => ({
   misc: {
     noImageUrl: null,
   },
-  settings: {
-    photogrid: {
-      fullscreenBgColor: "0,0,0",
-      fullscreenBgTransparency: 0.9,
-    },
-  },
 });
 
 export const getters = {
   currentPage: (state) => (route) => {
     return state.pages.find((page) => page.route === route);
-  },
-  menuSections: (state) => {
-    return state.menuSections;
-  },
-  photogridSettings: (state) => {
-    return state.settings.photogrid;
-  },
-  noImageUrl: (state) => {
-    return state.misc.noImageUrl;
   },
 };
 
@@ -58,8 +43,5 @@ export const mutations = {
 
     // datetime for maintaining localstorage cache
     state.timestamp = Date.now();
-  },
-  setPhotogridSettings(state, settings) {
-    state.settings.photogrid = settings;
   },
 };

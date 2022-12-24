@@ -18,7 +18,7 @@
 </template>
 
 <style lang="scss" scoped>
-@use "../../../assets/scss/variables" as vars;
+@use "~/assets/scss/variables" as vars;
 
 .cardstack {
   position: relative;

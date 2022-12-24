@@ -1,9 +1,9 @@
 <template>
   <div class="photogrid" :style="cssVars">
-    <masonry :cols="grid.cols">
+    <masonry :cols="cols">
       <section
         class="photogrid-block crosses-border"
-        v-for="(photo, index) of grid.photos"
+        v-for="(photo, index) of photos"
         :key="index"
       >
         <nuxt-img
@@ -16,7 +16,7 @@
       </section>
     </masonry>
 
-    <template v-if="!small">
+    <template v-if="!smallScreen">
       <transition
         name="background-transition"
         v-on:before-enter="beforeFullscreenLgOpened"
@@ -77,7 +77,7 @@
       </transition>
     </template>
 
-    <template v-if="small">
+    <template v-if="smallScreen">
       <transition
         name="opacity-transition"
         v-on:after-enter="afterFullscreenSmOpened"
@@ -106,7 +106,7 @@
 </template>
 
 <style lang="scss" scoped>
-@use "../../../assets/scss/variables" as vars;
+@use "~/assets/scss/variables" as vars;
 
 .photogrid {
   padding: 0.5rem;
@@ -316,7 +316,7 @@ import ZoomImg from "./ZoomImg.vue";
 
 export default {
   name: "PhotoGrid",
-  props: ["grid", "small"],
+  props: ["photos", "cols"],
   components: { ZoomImg },
 
   computed: {
@@ -331,7 +331,10 @@ export default {
       };
     },
     settings() {
-      return this.$store.getters["data/photogridSettings"];
+      return this.$store.state.settings.photogrid;
+    },
+    smallScreen() {
+      return this.$store.state.settings.isSmallScreen;
     },
   },
 
@@ -339,7 +342,7 @@ export default {
     return {
       showFullScreen: false,
       windowScrollPosition: {},
-      fullscreenImgSrc: this.$store.getters["data/noImageUrl"],
+      fullscreenImgSrc: this.$store.state.data.misc.noImageUrl,
       zoomigProps: {
         zoomScale: 0,
         left: 0,
@@ -404,23 +407,19 @@ export default {
       this.closeFullscreenPhoto();
     },
     handleWhiteBgClicked: function () {
-      this.$store.commit("data/setPhotogridSettings", {
-        ...this.settings,
-        fullscreenBgColor: "255,255,255",
-      });
+      this.$store.commit(
+        "settings/setPhotogridFullscreenBgColor",
+        "255,255,255"
+      );
     },
     handleBlackBgClicked: function () {
-      this.$store.commit("data/setPhotogridSettings", {
-        ...this.settings,
-        fullscreenBgColor: "0,0,0",
-      });
+      this.$store.commit("settings/setPhotogridFullscreenBgColor", "0,0,0");
     },
     handleTransparentBgClicked: function () {
-      this.$store.commit("data/setPhotogridSettings", {
-        ...this.settings,
-        fullscreenBgTransparency:
-          this.settings.fullscreenBgTransparency == 1 ? 0.9 : 1,
-      });
+      this.$store.commit(
+        "settings/setPhotogridFullscreenBgTransparency",
+        this.settings.fullscreenBgTransparency == 1 ? 0.9 : 1
+      );
     },
     openFullscreenZoomig: function (imgElement) {
       // get initial image dimensions (without padding)

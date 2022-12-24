@@ -47,8 +47,9 @@ export default {
     "nuxt-client-init-module",
   ],
   plugins: [
-    { src: "~/plugins/VueMasonry.client.js", mode: "client" },
+    { src: "~/plugins/vueMasonry.client.js", mode: "client" },
     { src: "~/plugins/persistedState.client.js", mode: "client" },
+    { src: "~/plugins/windowResizeHandler.client.js", mode: "client" },
   ],
   image: {
     imagekit: {
