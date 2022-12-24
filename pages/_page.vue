@@ -21,7 +21,7 @@ export default {
   },
 
   validate({ params, store, redirect }) {
-    var page = store.getters["data/currentPage"](`/${params.page}`);
+    const page = store.getters["data/currentPage"](`/${params.page}`);
     if (!page) {
       redirect("/");
     }

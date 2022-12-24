@@ -423,8 +423,8 @@ export default {
     },
     openFullscreenZoomig(imgElement) {
       // get initial image dimensions (without padding)
-      var initImgRect = imgElement.getBoundingClientRect();
-      var initImgRectPadding = parseFloat(
+      let initImgRect = imgElement.getBoundingClientRect();
+      const initImgRectPadding = parseFloat(
         getComputedStyle(imgElement).fontSize
       );
       initImgRect.height = initImgRect.height - initImgRectPadding;
@@ -433,7 +433,7 @@ export default {
       initImgRect.y = initImgRect.y + initImgRectPadding / 2;
 
       // calculate scale factor (from initial to fullscreen)
-      var fsImgScaleFactor = calcFsImgScaleFactor(
+      const fsImgScaleFactor = calcFsImgScaleFactor(
         initImgRect,
         document.documentElement.clientWidth,
         window.innerHeight,
@@ -441,7 +441,7 @@ export default {
       );
 
       // calculate fullscreen image position
-      var fsImgRect = calcFsImgRect(
+      const fsImgRect = calcFsImgRect(
         initImgRect,
         document.documentElement.clientWidth,
         window.innerHeight,
@@ -449,7 +449,7 @@ export default {
       );
 
       // calculate transform (from fullscreen to initial)
-      var fsImgTransfrom = calcFsImgTransform(
+      const fsImgTransfrom = calcFsImgTransform(
         initImgRect,
         fsImgRect,
         fsImgScaleFactor
@@ -505,8 +505,8 @@ function calcFsImgRect(
 }
 
 function calcFsImgTransform(initImgRect, fsImgRect, fsImgScaleFactor) {
-  var x, y;
-  var scale = 1 / fsImgScaleFactor;
+  let x, y;
+  const scale = 1 / fsImgScaleFactor;
 
   if (scale > 1) {
     x =

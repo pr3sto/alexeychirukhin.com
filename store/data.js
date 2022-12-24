@@ -21,7 +21,7 @@ export const mutations = {
     state.pages = data.pages;
 
     // construct menu items
-    var menuItems = data.pages.map((page) => {
+    const menuItems = data.pages.map((page) => {
       return {
         header: page.header,
         section: page.section,

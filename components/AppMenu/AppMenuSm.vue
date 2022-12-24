@@ -102,7 +102,7 @@ export default {
       return this.$store.state.data.menuSections;
     },
     currentHeader() {
-      var menuItems = [].concat.apply([], Object.values(this.menuSections));
+      const menuItems = [].concat.apply([], Object.values(this.menuSections));
       return menuItems.find((item) => item.route === this.$route.path).header;
     },
   },

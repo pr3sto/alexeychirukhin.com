@@ -127,8 +127,8 @@ export default {
         return;
       }
 
-      var x = e.clientX - this.zoomedImgProps.bounds.left;
-      var y = e.clientY - this.zoomedImgProps.bounds.top;
+      let x = e.clientX - this.zoomedImgProps.bounds.left;
+      let y = e.clientY - this.zoomedImgProps.bounds.top;
 
       x = Math.max(Math.min(x, this.zoomedImgProps.bounds.width), 0);
       y = Math.max(Math.min(y, this.zoomedImgProps.bounds.height), 0);
@@ -154,15 +154,15 @@ export default {
       this.$el.removeEventListener("touchmove", this.handleTouchMove);
     },
     handleTouchMove(e) {
-      var currentTouch = {
+      const currentTouch = {
         x: e.changedTouches[0].clientX - this.zoomedImgProps.bounds.left,
         y: e.changedTouches[0].clientY - this.zoomedImgProps.bounds.top,
       };
 
-      var x =
+      let x =
         this.zoomedImgProps.initialTouch.zoomedImgOffsetX +
         (currentTouch.x - this.zoomedImgProps.initialTouch.x);
-      var y =
+      let y =
         this.zoomedImgProps.initialTouch.zoomedImgOffsetY +
         (currentTouch.y - this.zoomedImgProps.initialTouch.y);
 

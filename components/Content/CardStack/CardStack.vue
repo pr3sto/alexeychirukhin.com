@@ -169,7 +169,7 @@ export default {
 
   methods: {
     reCalculate() {
-      var containerRect = this.$el.children[0].getBoundingClientRect();
+      const containerRect = this.$el.children[0].getBoundingClientRect();
       if (
         containerRect.width / containerRect.height >
         cardstackConstants.POLAROID_CARD_ASPECT_RATIO
@@ -192,8 +192,7 @@ export default {
       }
 
       // prevent click when text is selected
-      var selection = document.getSelection();
-      if (selection.type === "Range") {
+      if (document.getSelection().type === "Range") {
         return;
       }
 
@@ -205,11 +204,11 @@ export default {
         return;
       }
 
-      var currentTopCardIndex = this.annotatedCards.findIndex((card) => {
+      const currentTopCardIndex = this.annotatedCards.findIndex((card) => {
         return card.class == "cardstack-card--current";
       });
 
-      var newTopCardIndex = mod(currentTopCardIndex + 1, this.cards.length);
+      const newTopCardIndex = mod(currentTopCardIndex + 1, this.cards.length);
 
       // trigger Vue reactive update
       this.$nextTick(() => {
@@ -228,7 +227,7 @@ function annotateCards(cards, topCardIndex, pageload) {
     cards[topCardIndex].class = "cardstack-card--current";
   }
   if (cards.length > 1) {
-    var index = mod(topCardIndex - 1, cards.length);
+    const index = mod(topCardIndex - 1, cards.length);
     if (pageload) {
       cards[index].class = "cardstack-card--out pageload";
     } else {
@@ -236,11 +235,11 @@ function annotateCards(cards, topCardIndex, pageload) {
     }
   }
   if (cards.length > 2) {
-    var index = mod(topCardIndex + 1, cards.length);
+    const index = mod(topCardIndex + 1, cards.length);
     cards[index].class = "cardstack-card--next";
   }
   if (cards.length > 3) {
-    var index = mod(topCardIndex + 2, cards.length);
+    const index = mod(topCardIndex + 2, cards.length);
     cards[index].class = "cardstack-card--next2";
   }
   return cards;
