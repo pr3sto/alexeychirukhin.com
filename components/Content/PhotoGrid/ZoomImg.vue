@@ -119,7 +119,7 @@ export default {
         this.zoomIn(e.clientX, e.clientY);
       }
     },
-    handleMouseLeave(e) {
+    handleMouseLeave() {
       this.zoomOut();
     },
     handleMouseMove(e) {
@@ -150,7 +150,7 @@ export default {
         passive: true,
       });
     },
-    handleTouchEnd(e) {
+    handleTouchEnd() {
       this.$el.removeEventListener("touchmove", this.handleTouchMove);
     },
     handleTouchMove(e) {

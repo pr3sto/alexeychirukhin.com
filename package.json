@@ -9,7 +9,8 @@
     "dev:host": "nuxt --hostname 0.0.0.0",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
     "@nuxtjs/dotenv": "^1.4.1",
@@ -20,6 +21,8 @@
   },
   "devDependencies": {
     "@nuxt/image": "^0.6.2",
+    "eslint": "^8.30.0",
+    "eslint-plugin-nuxt": "^4.0.0",
     "sass": "^1.53.0",
     "sass-loader": "^10.3.1"
   },
