@@ -3,7 +3,7 @@
     {
       "header": "Alexey Chirukhin",
       "section": "",
-      "route": "/",
+      "path": "",
       "content": {
         "blocks": [
           {
@@ -26,7 +26,7 @@
     {
       "header": "Memories",
       "section": "works",
-      "route": "/memories",
+      "path": "memories",
       "content": {
         "floatingText": "Ode to Childhood",
         "blocks": [

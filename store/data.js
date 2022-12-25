@@ -18,10 +18,18 @@ export const mutations = {
     state.misc = data.misc;
 
     // site pages
-    state.pages = data.pages;
+    state.pages = data.pages.map((page) => {
+      return {
+        header: page.header,
+        section: page.section,
+        path: page.path,
+        route: page.section ? `/${page.section}/${page.path}` : `/${page.path}`,
+        content: page.content,
+      };
+    });
 
     // construct menu items
-    const menuItems = data.pages.map((page) => {
+    const menuItems = state.pages.map((page) => {
       return {
         header: page.header,
         section: page.section,

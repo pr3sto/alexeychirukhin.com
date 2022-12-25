@@ -10,19 +10,20 @@ export const actions = {
     }
 
     // get JSON data
-    const data = await requestDataAsync(process.env.DATA_JSON_URL);
+    const data = await requestDataAsync(process.env.DATA_JSON_PATH);
     commit("data/setData", data);
   },
 };
 
-async function requestDataAsync(url) {
+async function requestDataAsync(path) {
   const headers = new Headers();
   headers.append("pragma", "no-cache");
   headers.append("cache-control", "no-cache");
 
-  const data = await fetch(url, { method: "GET", headers: headers }).then(
-    (res) => res.json()
-  );
+  const data = await fetch(new URL(path, window.location.origin), {
+    method: "GET",
+    headers: headers,
+  }).then((res) => res.json());
 
   return data;
 }
