@@ -56,6 +56,10 @@
     font-size: vars.$default-font-size-sm;
     writing-mode: initial;
   }
+
+  p {
+    display: inline-block;
+  }
 }
 
 .content-container {

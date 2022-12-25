@@ -69,16 +69,6 @@
 .app-menu-section-link.nuxt-link-exact-active {
   opacity: 1 !important;
 }
-
-/* opacity transition */
-.opacity-transition-enter-active,
-.opacity-transition-leave-active {
-  transition: opacity vars.$default-transition;
-}
-.opacity-transition-enter,
-.opacity-transition-leave-to {
-  opacity: 0;
-}
 </style>
 
 <script>

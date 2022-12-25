@@ -36,6 +36,7 @@
 @use "~/assets/scss/variables" as vars;
 
 .app-menu-header {
+  display: inline-block;
   padding: 1rem;
   font-size: vars.$default-font-size-sm;
   text-decoration: underline;
@@ -80,16 +81,6 @@
 
 .app-menu-full-section-link.nuxt-link-exact-active {
   font-weight: bolder;
-}
-
-/* opacity transition */
-.opacity-transition-enter-active,
-.opacity-transition-leave-active {
-  transition: opacity vars.$default-transition;
-}
-.opacity-transition-enter,
-.opacity-transition-leave-to {
-  opacity: 0;
 }
 </style>
 

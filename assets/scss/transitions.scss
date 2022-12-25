@@ -1,0 +1,10 @@
+@use "~/assets/scss/variables" as vars;
+
+.opacity-transition-enter-active,
+.opacity-transition-leave-active {
+  transition: opacity vars.$default-transition;
+}
+.opacity-transition-enter,
+.opacity-transition-leave-to {
+  opacity: 0;
+}

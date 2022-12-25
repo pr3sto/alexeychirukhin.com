@@ -1,6 +1,6 @@
 <template>
   <div :id="smallScreen ? 'default-layout-sm' : 'default-layout'">
-    <NuxtChild
+    <nuxt-child
       :id="smallScreen ? 'default-layout-page-sm' : 'default-layout-page'"
     />
     <app-menu-sm v-if="smallScreen" />

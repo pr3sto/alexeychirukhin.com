@@ -28,7 +28,7 @@
           v-on:click="handleFullscreenLgClicked"
         >
           <transition name="zoomimg-transform-transition">
-            <ZoomImg
+            <zoom-img
               class="photogrid-fullscreen-lg-zoomimg"
               v-show="showFullScreen"
               :visible="showFullScreen"
@@ -234,16 +234,6 @@
   transform: var(--fs-zoomimg-transform);
 }
 
-/* opacity transition */
-.opacity-transition-enter-active,
-.opacity-transition-leave-active {
-  transition: opacity vars.$default-transition;
-}
-.opacity-transition-enter,
-.opacity-transition-leave-to {
-  opacity: 0;
-}
-
 /* border */
 .crosses-border {
   --w: 7px;
@@ -344,7 +334,7 @@ export default {
       windowScrollPosition: {},
       fullscreenImgSrc: this.$store.state.data.misc.noImageUrl,
       zoomigProps: {
-        zoomScale: 0,
+        zoomScale: 1,
         left: 0,
         top: 0,
         width: 0,
