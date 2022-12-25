@@ -1,7 +1,9 @@
+@use "~/assets/scss/variables" as vars;
+
 html {
-  font-family: "Arapey", serif;
+  font-family: vars.$primary-font-family, serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   text-size-adjust: 100%;
   box-sizing: border-box;
   overflow: auto;
@@ -9,7 +11,7 @@ html {
 
 body {
   margin: 0;
-  background: white;
+  background: vars.$background-color;
 }
 
 *,
@@ -45,13 +47,6 @@ p {
 img {
   border-style: none;
   image-rendering: -webkit-optimize-contrast;
-}
-
-/* nuxt root element */
-#__nuxt {
-  background-image: url("../copyofacopy.svg");
-  background-repeat: repeat;
-  background-size: 100vw;
 }
 
 /* disables scroll on element */

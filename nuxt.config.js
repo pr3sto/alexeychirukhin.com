@@ -32,14 +32,14 @@ export default {
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Arapey&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Fraunces:opsz@9..144&family=Chango&display=swap",
       },
     ],
     htmlAttrs: {
       lang: "en",
     },
   },
-  css: ["@/assets/css/main.css", "@/assets/scss/transitions.scss"],
+  css: ["@/assets/scss/main.scss", "@/assets/scss/transitions.scss"],
   loadingIndicator: "~/loading.html",
   buildModules: [
     ["@nuxtjs/dotenv", { filename: `.env.${process.env.NODE_ENV}` }],

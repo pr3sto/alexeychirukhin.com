@@ -1,10 +1,6 @@
 <template>
-  <menu class="app-menu" :style="cssVars">
-    <div
-      v-on:mouseenter="handleAppMenuMouseEnter"
-      v-on:mouseleave="handleAppMenuMouseLeave"
-      v-on:touchend="handleAppMenuTouch"
-    >
+  <menu class="app-menu">
+    <div>
       <section
         class="app-menu-section"
         v-for="(sectionItems, sectionName, index) of menuSections"
@@ -47,62 +43,39 @@
 }
 
 .app-menu-section-header {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  color: rgba(0, 0, 0, 0.5);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: vars.$primary-font-color;
   font-size: 0.75em;
-  opacity: var(--app-menu-item-opacity);
-  transition: opacity vars.$default-transition;
+  opacity: 0.75;
 }
 
 .app-menu-section-link {
   padding-left: 1rem;
   padding-right: 1rem;
-  color: rgba(0, 0, 0, 1);
+  color: vars.$primary-font-color;
   text-decoration: none;
   white-space: nowrap;
-  opacity: var(--app-menu-item-opacity);
-  transition: opacity vars.$default-transition;
   cursor: pointer;
+
+  &:hover {
+    color: vars.$accent-color;
+  }
 }
 
 .app-menu-section-link.nuxt-link-exact-active {
-  opacity: 1 !important;
+  font-family: vars.$secondary-font-family;
+  font-weight: bolder;
+  text-transform: uppercase;
 }
 </style>
 
 <script>
 export default {
   name: "AppMenuLg",
-
   computed: {
-    cssVars() {
-      return {
-        "--app-menu-item-opacity": this.appMenuItemOpacity,
-      };
-    },
     menuSections() {
       return this.$store.state.data.menuSections;
-    },
-  },
-
-  data() {
-    return {
-      appMenuItemOpacity: 0.2,
-      touched: false,
-    };
-  },
-
-  methods: {
-    handleAppMenuMouseEnter() {
-      if (!this.touched) this.appMenuItemOpacity = 1;
-    },
-    handleAppMenuMouseLeave() {
-      this.appMenuItemOpacity = 0.2;
-    },
-    handleAppMenuTouch() {
-      this.touched = true;
-      setTimeout(() => (this.touched = false), 250);
     },
   },
 };

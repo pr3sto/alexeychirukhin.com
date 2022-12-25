@@ -24,9 +24,9 @@
       }
     },
     {
-      "header": "Memories - Rzhev",
-      "section": "projects",
-      "route": "/memories-rzhev",
+      "header": "Memories",
+      "section": "works",
+      "route": "/memories",
       "content": {
         "floatingText": "Ode to Childhood",
         "blocks": [

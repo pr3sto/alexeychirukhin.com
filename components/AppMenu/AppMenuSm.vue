@@ -38,8 +38,11 @@
 .app-menu-header {
   display: inline-block;
   padding: 1rem;
+  color: vars.$primary-font-color;
+  font-family: vars.$secondary-font-family;
   font-size: vars.$default-font-size-sm;
-  text-decoration: underline;
+  font-weight: bolder;
+  text-transform: uppercase;
   cursor: pointer;
 }
 
@@ -54,7 +57,7 @@
   flex-direction: column;
   justify-content: center;
   padding: 1rem;
-  background: rgb(255, 255, 255);
+  background: vars.$background-color;
 }
 
 .app-menu-full-section {
@@ -65,22 +68,25 @@
 }
 
 .app-menu-full-section-header {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  color: rgba(0, 0, 0, 0.5);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: vars.$primary-font-color;
   font-size: 0.75em;
+  opacity: 0.75;
 }
 
 .app-menu-full-section-link {
   padding-left: 1rem;
   padding-right: 1rem;
-  color: rgba(0, 0, 0, 1);
+  color: vars.$primary-font-color;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .app-menu-full-section-link.nuxt-link-exact-active {
+  font-family: vars.$secondary-font-family;
   font-weight: bolder;
+  text-transform: uppercase;
 }
 </style>
 
