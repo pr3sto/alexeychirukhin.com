@@ -81,12 +81,12 @@
   color: vars.$primary-font-color;
   text-decoration: none;
   white-space: nowrap;
-}
 
-.app-menu-full-section-link.nuxt-link-exact-active {
-  font-family: vars.$secondary-font-family;
-  font-weight: bolder;
-  text-transform: uppercase;
+  &.nuxt-link-exact-active {
+    font-family: vars.$secondary-font-family;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
 }
 </style>
 

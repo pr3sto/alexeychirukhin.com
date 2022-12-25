@@ -58,15 +58,15 @@
   white-space: nowrap;
   cursor: pointer;
 
+  &.nuxt-link-exact-active {
+    font-family: vars.$secondary-font-family;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
+
   &:hover {
     color: vars.$accent-color;
   }
-}
-
-.app-menu-section-link.nuxt-link-exact-active {
-  font-family: vars.$secondary-font-family;
-  font-weight: bolder;
-  text-transform: uppercase;
 }
 </style>
 
