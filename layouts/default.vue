@@ -57,12 +57,6 @@ export default {
     window.addEventListener("resize", this.reCalculate);
   },
 
-  updated() {
-    this.$nextTick(() => {
-      this.reCalculate();
-    });
-  },
-
   beforeDestroy() {
     window.removeEventListener("resize", this.reCalculate);
   },
