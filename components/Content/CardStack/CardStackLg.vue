@@ -127,11 +127,11 @@ export default {
         maxOffsetY * cardstackConstants.LG_CARD_CONTAINER_PADDING_PERCENT;
 
       // 2d plane for random points
-      var planeWidth = maxOffsetX - paddingX * 2;
-      var planeHeight = maxOffsetY - paddingY * 2;
+      const planeWidth = maxOffsetX - paddingX * 2;
+      const planeHeight = maxOffsetY - paddingY * 2;
 
       // get random points on 2d area
-      var randomPoints = getRandomPointsOnPlane(
+      const randomPoints = getRandomPointsOnPlane(
         planeWidth,
         planeHeight,
         cardsNumber
@@ -174,8 +174,8 @@ export default {
     },
     handleMouseMove(e) {
       // calculate move offset
-      var offsetX = this.drag.clientX - e.clientX;
-      var offsetY = this.drag.clientY - e.clientY;
+      const offsetX = this.drag.clientX - e.clientX;
+      const offsetY = this.drag.clientY - e.clientY;
 
       // save position
       this.drag.clientX = e.clientX;
@@ -193,11 +193,11 @@ export default {
 function getRandomPointsOnPlane(width, height, numberOfPoints) {
   // use poisson disk sampling algorithm
   const radius = Math.sqrt((width * height) / numberOfPoints / Math.PI);
-  var pds = new FastPoissonDiskSampling({
+  const pds = new FastPoissonDiskSampling({
     shape: [width, height],
     radius: radius,
   });
-  var points = pds.fill();
+  const points = pds.fill();
 
   // select random points from generated array
   return getRandomArray(points, numberOfPoints);
