@@ -32,7 +32,7 @@ export default {
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Fraunces:opsz@9..144&family=Chango&family=Schoolbell&family=Just+Me+Again+Down+Here&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300&family=Chango&family=Schoolbell&family=Just+Me+Again+Down+Here&display=swap",
       },
     ],
     htmlAttrs: {

@@ -33,11 +33,15 @@
   justify-content: center;
   height: 100vh;
   padding: 1rem;
+  color: vars.$background-exclde-font-color;
+  mix-blend-mode: exclusion;
+  pointer-events: none;
 }
 
 .app-menu-section {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   padding-bottom: 1rem;
   font-size: vars.$default-font-size-lg;
 }
@@ -45,18 +49,20 @@
 .app-menu-section-header {
   padding-left: 1rem;
   padding-right: 1rem;
-  color: vars.$font-color;
+  color: vars.$background-exclde-font-color;
   font-size: 0.75em;
   opacity: 0.75;
+  pointer-events: all;
 }
 
 .app-menu-section-link {
   padding-left: 1rem;
   padding-right: 1rem;
-  color: vars.$font-color;
+  color: vars.$background-exclde-font-color;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
+  pointer-events: all;
 
   &.nuxt-link-exact-active {
     font-family: vars.$secondary-font-family;
@@ -65,7 +71,7 @@
   }
 
   &:hover {
-    color: vars.$accent-color;
+    color: vars.$background-exclde-accent-color;
   }
 }
 </style>

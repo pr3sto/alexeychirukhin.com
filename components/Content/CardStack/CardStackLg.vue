@@ -32,7 +32,6 @@
   height: var(--cardstack-card-height);
   width: var(--cardstack-card-width);
   transform-origin: center;
-  z-index: 1;
   cursor: grab;
 
   &:active {
@@ -143,7 +142,7 @@ export default {
         const y = randomPoints[index][1] + paddingY;
         let rotate =
           getRandomNumber(0, cardstackConstants.LG_CARD_MAX_ANGLE_DEG) *
-          (isOdd(index) ? -1 : 1);
+          (isOdd(index) ? 1 : -1);
 
         element.style.zIndex = index + 1;
         element.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${rotate}deg)`;
