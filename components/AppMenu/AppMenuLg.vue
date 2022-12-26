@@ -32,7 +32,6 @@
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  padding: 1rem;
   color: vars.$background-exclde-font-color;
   mix-blend-mode: exclusion;
   pointer-events: none;

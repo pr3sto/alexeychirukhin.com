@@ -3,8 +3,8 @@
     <nuxt-child
       :id="smallScreen ? 'default-layout-page-sm' : 'default-layout-page'"
     />
-    <app-menu-sm v-if="smallScreen" />
-    <app-menu-lg v-else />
+    <app-menu-sm id="default-layout-menu" v-if="smallScreen" />
+    <app-menu-lg id="default-layout-menu" v-else />
   </div>
 </template>
 
@@ -25,6 +25,10 @@
 #default-layout-page-sm {
   flex-grow: 1;
   padding: 0 1rem 1rem 1rem;
+}
+
+#default-layout-menu {
+  padding: 1rem;
 }
 
 /* Nuxt pages transition */

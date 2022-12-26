@@ -37,7 +37,6 @@
 
 .app-menu-header {
   display: inline-block;
-  padding: 1rem;
   color: vars.$font-color;
   font-family: vars.$secondary-font-family;
   font-size: vars.$default-font-size-sm;
