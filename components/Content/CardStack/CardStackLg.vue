@@ -93,8 +93,10 @@ export default {
       const containerRect = this.$el.getBoundingClientRect();
 
       // calc width and height of a card based on a container bounds
-      const maxWidth = containerRect.width * 0.8;
-      const maxheigth = containerRect.height * 0.8;
+      const maxWidth =
+        containerRect.width * cardstackConstants.LG_CARD_SCALE_FACTOR;
+      const maxheigth =
+        containerRect.height * cardstackConstants.LG_CARD_SCALE_FACTOR;
       if (
         maxWidth / maxheigth >
         cardstackConstants.POLAROID_CARD_ASPECT_RATIO
@@ -119,21 +121,29 @@ export default {
       const maxOffsetY = containerRect.height - this.cardstackCardHeight;
 
       // padding, because we don't want to move cards close to edges
-      const paddingX = maxOffsetX * 0.1;
-      const paddingY = maxOffsetY * 0.1;
+      const paddingX =
+        maxOffsetX * cardstackConstants.LG_CARD_CONTAINER_PADDING_PERCENT;
+      const paddingY =
+        maxOffsetY * cardstackConstants.LG_CARD_CONTAINER_PADDING_PERCENT;
 
       // 2d plane for random points
       var planeWidth = maxOffsetX - paddingX * 2;
       var planeHeight = maxOffsetY - paddingY * 2;
 
       // get random points on 2d area
-      var randomPoints = getRandomPointsOnPlane(planeWidth, planeHeight, cardsNumber);
+      var randomPoints = getRandomPointsOnPlane(
+        planeWidth,
+        planeHeight,
+        cardsNumber
+      );
 
       // transform each card
       this.$refs["cards"].forEach((element, index) => {
         const x = randomPoints[index][0] + paddingX;
         const y = randomPoints[index][1] + paddingY;
-        let rotate = getRandomNumber(0, 10) * (isOdd(index) ? -1 : 1);
+        let rotate =
+          getRandomNumber(0, cardstackConstants.LG_CARD_MAX_ANGLE_DEG) *
+          (isOdd(index) ? -1 : 1);
 
         element.style.zIndex = index + 1;
         element.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${rotate}deg)`;

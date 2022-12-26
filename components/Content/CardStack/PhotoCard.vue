@@ -28,7 +28,7 @@
   height: 100%;
   padding: 6% 6% 0 6%;
   border-radius: 0px;
-  box-shadow: 1px 1px 6px -4px #000;
+  box-shadow: 1px 1px 7px -4px #000;
   background-color: #f9f9f9;
   font-size: var(--font-size);
   line-height: var(--line-height);
