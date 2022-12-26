@@ -45,7 +45,7 @@
 .app-menu-section-header {
   padding-left: 1rem;
   padding-right: 1rem;
-  color: vars.$primary-font-color;
+  color: vars.$font-color;
   font-size: 0.75em;
   opacity: 0.75;
 }
@@ -53,7 +53,7 @@
 .app-menu-section-link {
   padding-left: 1rem;
   padding-right: 1rem;
-  color: vars.$primary-font-color;
+  color: vars.$font-color;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;

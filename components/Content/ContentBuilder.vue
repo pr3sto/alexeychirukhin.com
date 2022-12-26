@@ -16,8 +16,12 @@
         :key="index"
       >
         <text-content v-if="block.type === 'TextContent'" :text="block.text" />
-        <card-stack
-          v-else-if="block.type === 'CardStack'"
+        <card-stack-sm
+          v-else-if="block.type === 'CardStack' && smallScreen"
+          :cards="block.cards"
+        />
+        <card-stack-lg
+          v-else-if="block.type === 'CardStack' && !smallScreen"
           :cards="block.cards"
         />
         <photo-grid
@@ -41,7 +45,7 @@
   position: fixed;
   left: 0;
   padding: 1rem;
-  color: white;
+  color: vars.$background-color;
   mix-blend-mode: exclusion;
 
   &--lg {
@@ -85,14 +89,15 @@
 </style>
 
 <script>
-import CardStack from "~/components/Content/CardStack/CardStack.vue";
+import CardStackLg from "~/components/Content/CardStack/CardStackLg.vue";
+import CardStackSm from "~/components/Content/CardStack/CardStackSm.vue";
 import PhotoGrid from "~/components/Content/PhotoGrid/PhotoGrid.vue";
 import TextContent from "~/components/Content/Text/TextContent.vue";
 
 export default {
   name: "ContentBuilder",
   props: ["content"],
-  components: { CardStack, PhotoGrid, TextContent },
+  components: { CardStackLg, CardStackSm, PhotoGrid, TextContent },
   computed: {
     smallScreen() {
       return this.$store.state.settings.isSmallScreen;

@@ -5,12 +5,12 @@
         <component
           class="cardstack-card"
           v-for="(card, index) of annotatedCards"
-          :is="card.type"
           :key="index"
           :class="card.class"
-          v-on:click.native="handleClick"
+          :is="card.type"
           :card="card"
           :fontSize="fontSize"
+          v-on:click.native="handleClick"
         />
       </div>
     </div>
@@ -127,7 +127,7 @@ import PhotoCard from "~/components/Content/CardStack/PhotoCard.vue";
 import DarkslideCard from "~/components/Content/CardStack/DarkslideCard.vue";
 
 export default {
-  name: "CardStack",
+  name: "CardStackSm",
   props: ["cards"],
   components: { PhotoCard, DarkslideCard },
 
@@ -144,23 +144,19 @@ export default {
     return {
       annotatedCards: annotateCards(this.cards, 0, true),
       cardstackContainerHeight: "auto",
-      cardstackContainerWidth: "auto",
+      cardstackContainerWidth: "100%",
       fontSize: 0,
     };
   },
 
   mounted() {
-    this.$nextTick(() => {
-      this.reCalculate();
+    setTimeout(() => {
+      this.$nextTick(() => {
+        this.reCalculate();
+      });
     });
 
     window.addEventListener("resize", this.reCalculate);
-  },
-
-  updated() {
-    this.$nextTick(() => {
-      this.reCalculate();
-    });
   },
 
   beforeDestroy() {

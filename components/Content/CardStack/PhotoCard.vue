@@ -12,57 +12,65 @@
         :src="card.photoUrl"
       />
     </div>
-    <div class="photocard-signature">
-      {{ card.signature }}
+    <div class="photocard-signature" v-if="card.signature">
+      <span>{{ card.signature }}</span>
     </div>
   </figure>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use "~/assets/scss/variables" as vars;
+
 .photocard {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
   padding: 6% 6% 0 6%;
-  border-radius: 1px;
-  box-shadow: 2px 2px 6px -3px #000;
-  background-color: rgb(253, 253, 253);
+  border-radius: 0px;
+  box-shadow: 1px 1px 6px -4px #000;
+  background-color: #f9f9f9;
   font-size: var(--font-size);
   line-height: var(--line-height);
-}
 
-/* texture */
-.photocard::before {
-  pointer-events: none;
-  content: "";
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAYAAADam2dgAAAAAXNSR0IArs4c6QAAADFJREFUKFNjZGBgkGJgYHjGgBtIMULlcCkEi8MUgdSiK4TzkRUhK0TRQJJJBN1E0HcAEQkMPPAHd4YAAAAASUVORK5CYII=);
-  background-size: 0.7em;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  opacity: 0.35;
+  /* texture */
+  &::before {
+    pointer-events: none;
+    content: "";
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAYAAADam2dgAAAAAXNSR0IArs4c6QAAADFJREFUKFNjZGBgkGJgYHjGgBtIMULlcCkEi8MUgdSiK4TzkRUhK0TRQJJJBN1E0HcAEQkMPPAHd4YAAAAASUVORK5CYII=);
+    background-size: 0.7em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.3;
+  }
 }
 
 .photocard-photo {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-}
 
-/* gloss effect on photo */
-.photocard-photo::after {
-  pointer-events: none;
-  content: "";
-  background-image: url("/images/gloss.png");
-  background-size: cover;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  /* gloss effect */
+  &::after {
+    pointer-events: none;
+    content: "";
+    background-image: url("/images/gloss.png");
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  /* round photo */
+  &--round::after,
+  &--round img {
+    border-radius: 50%;
+  }
 }
 
 .photocard-photo-img {
@@ -72,15 +80,20 @@
   object-fit: cover;
 }
 
-/* round photo */
-.photocard-photo--round::after,
-.photocard-photo--round img {
-  border-radius: 50%;
-}
-
 .photocard-signature {
   flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 8% 0;
+  font-size: 3em;
+  opacity: 0.9;
+  font-family: vars.$handwriting-font-family;
+  font-weight: bolder;
+
+  &span {
+    display: inline-block;
+  }
 }
 </style>
 

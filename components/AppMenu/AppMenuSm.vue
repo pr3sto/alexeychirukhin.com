@@ -38,7 +38,7 @@
 .app-menu-header {
   display: inline-block;
   padding: 1rem;
-  color: vars.$primary-font-color;
+  color: vars.$font-color;
   font-family: vars.$secondary-font-family;
   font-size: vars.$default-font-size-sm;
   font-weight: bolder;
@@ -70,7 +70,7 @@
 .app-menu-full-section-header {
   padding-left: 1rem;
   padding-right: 1rem;
-  color: vars.$primary-font-color;
+  color: vars.$font-color;
   font-size: 0.75em;
   opacity: 0.75;
 }
@@ -78,7 +78,7 @@
 .app-menu-full-section-link {
   padding-left: 1rem;
   padding-right: 1rem;
-  color: vars.$primary-font-color;
+  color: vars.$font-color;
   text-decoration: none;
   white-space: nowrap;
 

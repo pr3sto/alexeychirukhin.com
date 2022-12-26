@@ -1,0 +1,208 @@
+<template>
+  <div class="cardstack" :style="cssVars">
+    <div class="cardstack-plane">
+      <div
+        class="cardstack-card"
+        v-for="(card, index) of cards.slice().reverse()"
+        :key="index"
+        ref="cards"
+        v-on:mousedown="handleCardMouseDown"
+      >
+        <component :is="card.type" :card="card" :fontSize="fontSize" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+@use "~/assets/scss/variables" as vars;
+
+.cardstack-plane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 0; /* creates stacking context for cards */
+}
+
+.cardstack-card {
+  position: absolute;
+  height: var(--cardstack-card-height);
+  width: var(--cardstack-card-width);
+  transform-origin: center;
+  z-index: 1;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+</style>
+
+<script>
+import * as cardstackConstants from "~/constants/cardstack.js";
+import PhotoCard from "~/components/Content/CardStack/PhotoCard.vue";
+import DarkslideCard from "~/components/Content/CardStack/DarkslideCard.vue";
+
+import FastPoissonDiskSampling from "fast-2d-poisson-disk-sampling";
+
+export default {
+  name: "CardStackLg",
+  props: ["cards"],
+  components: { PhotoCard, DarkslideCard },
+
+  computed: {
+    cssVars() {
+      return {
+        "--cardstack-card-height": `${this.cardstackCardHeight}px`,
+        "--cardstack-card-width": `${this.cardstackCardWidth}px`,
+      };
+    },
+  },
+
+  data() {
+    return {
+      cardstackCardHeight: 0,
+      cardstackCardWidth: 0,
+      fontSize: 0,
+      drag: {
+        target: undefined,
+        clientX: 0,
+        clientY: 0,
+      },
+    };
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      this.reCalculate();
+      this.shuffleCards();
+    });
+
+    window.addEventListener("resize", this.reCalculate);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.reCalculate);
+  },
+
+  methods: {
+    reCalculate() {
+      const containerRect = this.$el.getBoundingClientRect();
+
+      // calc width and height of a card based on a container bounds
+      const maxWidth = containerRect.width * 0.8;
+      const maxheigth = containerRect.height * 0.8;
+      if (
+        maxWidth / maxheigth >
+        cardstackConstants.POLAROID_CARD_ASPECT_RATIO
+      ) {
+        this.cardstackCardHeight = maxheigth;
+        this.cardstackCardWidth =
+          maxheigth * cardstackConstants.POLAROID_CARD_ASPECT_RATIO;
+        this.fontSize = maxheigth / cardstackConstants.FONT_SIZE_FACTOR1;
+      } else {
+        this.cardstackCardHeight =
+          maxWidth / cardstackConstants.POLAROID_CARD_ASPECT_RATIO;
+        this.cardstackCardWidth = maxWidth;
+        this.fontSize = maxWidth / cardstackConstants.FONT_SIZE_FACTOR2;
+      }
+    },
+    shuffleCards() {
+      const containerRect = this.$el.getBoundingClientRect();
+      const cardsNumber = this.$refs["cards"].length;
+
+      // max offset for card
+      const maxOffsetX = containerRect.width - this.cardstackCardWidth;
+      const maxOffsetY = containerRect.height - this.cardstackCardHeight;
+
+      // padding, because we don't want to move cards close to edges
+      const paddingX = maxOffsetX * 0.1;
+      const paddingY = maxOffsetY * 0.1;
+
+      // 2d plane for random points
+      var planeWidth = maxOffsetX - paddingX * 2;
+      var planeHeight = maxOffsetY - paddingY * 2;
+
+      // get random points on 2d area
+      var randomPoints = getRandomPointsOnPlane(planeWidth, planeHeight, cardsNumber);
+
+      // transform each card
+      this.$refs["cards"].forEach((element, index) => {
+        const x = randomPoints[index][0] + paddingX;
+        const y = randomPoints[index][1] + paddingY;
+        let rotate = getRandomNumber(0, 10) * (isOdd(index) ? -1 : 1);
+
+        element.style.zIndex = index + 1;
+        element.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${rotate}deg)`;
+      });
+    },
+    handleCardMouseDown(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      this.drag.clientX = e.clientX;
+      this.drag.clientY = e.clientY;
+      this.drag.target = e.currentTarget;
+
+      // move current card on top
+      this.$refs["cards"]
+        .filter((el) => el.style.zIndex > this.drag.target.style.zIndex)
+        .forEach((element) => {
+          element.style.zIndex--;
+        });
+      this.drag.target.style.zIndex = this.$refs["cards"].length;
+
+      document.addEventListener("mouseup", this.handleMouseUp);
+      document.addEventListener("mousemove", this.handleMouseMove);
+    },
+    handleMouseUp() {
+      document.removeEventListener("mouseup", this.handleMouseUp);
+      document.removeEventListener("mousemove", this.handleMouseMove);
+    },
+    handleMouseMove(e) {
+      // calculate move offset
+      var offsetX = this.drag.clientX - e.clientX;
+      var offsetY = this.drag.clientY - e.clientY;
+
+      // save position
+      this.drag.clientX = e.clientX;
+      this.drag.clientY = e.clientY;
+
+      // set element's new position
+      this.drag.target.style.left = `${
+        this.drag.target.offsetLeft - offsetX
+      }px`;
+      this.drag.target.style.top = `${this.drag.target.offsetTop - offsetY}px`;
+    },
+  },
+};
+
+function getRandomPointsOnPlane(width, height, numberOfPoints) {
+  // use poisson disk sampling algorithm
+  const radius = Math.sqrt((width * height) / numberOfPoints / Math.PI);
+  var pds = new FastPoissonDiskSampling({
+    shape: [width, height],
+    radius: radius,
+  });
+  var points = pds.fill();
+
+  // select random points from generated array
+  return getRandomArray(points, numberOfPoints);
+}
+
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function getRandomArray(array, numberOfItems) {
+  const shuffled = array.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, numberOfItems);
+}
+
+function isOdd(number) {
+  return number % 2;
+}
+</script>
