@@ -99,8 +99,7 @@ export default {
       return this.$store.state.data.menuSections;
     },
     currentHeader() {
-      const menuItems = [].concat.apply([], Object.values(this.menuSections));
-      return menuItems.find((item) => item.route === this.$route.path).header;
+      return this.$store.getters["data/currentMenuHeader"](this.$route.path);
     },
   },
 

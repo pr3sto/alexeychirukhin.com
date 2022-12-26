@@ -11,6 +11,10 @@ export const getters = {
   currentPage: (state) => (route) => {
     return state.pages.find((page) => page.route === route);
   },
+  currentMenuHeader: (state) => (route) => {
+    const menuItems = [].concat.apply([], Object.values(state.menuSections));
+    return menuItems.find((item) => item.route === route).header;
+  },
 };
 
 export const mutations = {
