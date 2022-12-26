@@ -7,6 +7,7 @@
         :key="index"
         ref="cards"
         v-on:mousedown="handleCardMouseDown"
+        v-on:touchstart="handleCardTouchStart"
       >
         <component :is="card.type" :card="card" :fontSize="fontSize" />
       </div>
@@ -148,6 +149,15 @@ export default {
         element.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${rotate}deg)`;
       });
     },
+    rearrangeCards() {
+      // move current card on top
+      this.$refs["cards"]
+        .filter((el) => el.style.zIndex > this.drag.target.style.zIndex)
+        .forEach((element) => {
+          element.style.zIndex--;
+        });
+      this.drag.target.style.zIndex = this.$refs["cards"].length;
+    },
     handleCardMouseDown(e) {
       e.stopPropagation();
       e.preventDefault();
@@ -156,13 +166,7 @@ export default {
       this.drag.clientY = e.clientY;
       this.drag.target = e.currentTarget;
 
-      // move current card on top
-      this.$refs["cards"]
-        .filter((el) => el.style.zIndex > this.drag.target.style.zIndex)
-        .forEach((element) => {
-          element.style.zIndex--;
-        });
-      this.drag.target.style.zIndex = this.$refs["cards"].length;
+      this.rearrangeCards();
 
       document.addEventListener("mouseup", this.handleMouseUp);
       document.addEventListener("mousemove", this.handleMouseMove);
@@ -172,13 +176,35 @@ export default {
       document.removeEventListener("mousemove", this.handleMouseMove);
     },
     handleMouseMove(e) {
+      this.moveCardTo(e.clientX, e.clientY);
+    },
+    handleCardTouchStart(e) {
+      this.drag.clientX = e.changedTouches[0].clientX;
+      this.drag.clientY = e.changedTouches[0].clientY;
+      this.drag.target = e.currentTarget;
+
+      this.rearrangeCards();
+
+      document.addEventListener("touchend", this.handleTouchEnd);
+      document.addEventListener("touchmove", this.handleTouchMove, {
+        passive: true,
+      });
+    },
+    handleTouchEnd() {
+      document.removeEventListener("touchend", this.handleTouchEnd);
+      document.removeEventListener("touchmove", this.handleTouchMove);
+    },
+    handleTouchMove(e) {
+      this.moveCardTo(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+    },
+    moveCardTo(clientX, clientY) {
       // calculate move offset
-      const offsetX = this.drag.clientX - e.clientX;
-      const offsetY = this.drag.clientY - e.clientY;
+      const offsetX = this.drag.clientX - clientX;
+      const offsetY = this.drag.clientY - clientY;
 
       // save position
-      this.drag.clientX = e.clientX;
-      this.drag.clientY = e.clientY;
+      this.drag.clientX = clientX;
+      this.drag.clientY = clientY;
 
       // set element's new position
       this.drag.target.style.left = `${
