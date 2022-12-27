@@ -1,11 +1,13 @@
-export const state = () => ({
+const defaultState = {
   timestamp: null,
   pages: [],
   menuSections: [],
   misc: {
     noImageUrl: null,
   },
-});
+};
+
+export const state = () => defaultState;
 
 export const getters = {
   currentPage: (state) => (route) => {
@@ -19,6 +21,8 @@ export const getters = {
 
 export const mutations = {
   setData(state, data) {
+    state = defaultState;
+
     state.misc = data.misc;
 
     // site pages
