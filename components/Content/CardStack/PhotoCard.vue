@@ -88,7 +88,7 @@
   padding: 8% 0;
   font-size: 3em;
   opacity: 0.9;
-  font-family: vars.$handwriting-font-family1;
+  font-family: vars.$handwriting1-font-family;
   font-weight: bolder;
 
   &span {

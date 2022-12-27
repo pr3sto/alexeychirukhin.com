@@ -1,78 +1,36 @@
 <template>
   <main class="content">
-    <aside
-      v-show="content.floatingText"
-      class="content-floating-text"
-      :class="
-        smallScreen ? 'content-floating-text--sm' : 'content-floating-text--lg'
-      "
+    <section
+      class="content-block"
+      v-for="(block, index) of content.blocks"
+      :key="index"
     >
-      <p>{{ content.floatingText }}</p>
-    </aside>
-    <div class="content-container">
-      <section
-        class="content-container-block"
-        v-for="(block, index) of content.blocks"
-        :key="index"
-      >
-        <text-content v-if="block.type === 'TextContent'" :text="block.text" />
-        <card-stack-sm
-          v-else-if="block.type === 'CardStack' && smallScreen"
-          :cards="block.cards"
-        />
-        <card-stack-lg
-          v-else-if="block.type === 'CardStack' && !smallScreen"
-          :cards="block.cards"
-        />
-        <photo-grid
-          v-else-if="block.type === 'PhotoGrid'"
-          :photos="block.photos"
-          :cols="block.cols"
-        />
-      </section>
-    </div>
+      <text-content v-if="block.type === 'TextContent'" :text="block.text" />
+      <card-stack-sm
+        v-else-if="block.type === 'CardStack' && smallScreen"
+        :cards="block.cards"
+      />
+      <card-stack-lg
+        v-else-if="block.type === 'CardStack' && !smallScreen"
+        :cards="block.cards"
+      />
+      <photo-grid
+        v-else-if="block.type === 'PhotoGrid'"
+        :photos="block.photos"
+        :cols="block.cols"
+      />
+    </section>
   </main>
 </template>
 
 <style lang="scss" scoped>
-@use "~/assets/scss/variables" as vars;
-
 .content {
-  display: flex;
-}
-
-.content-floating-text {
-  position: fixed;
-  left: 0;
-  padding: 1rem;
-  color: vars.$background-color;
-  mix-blend-mode: exclusion;
-
-  &--lg {
-    top: 0;
-    bottom: 0;
-    font-size: vars.$default-font-size-lg;
-    writing-mode: vertical-lr;
-    text-align: center;
-  }
-  &--sm {
-    bottom: 0;
-    font-size: vars.$default-font-size-sm;
-    writing-mode: initial;
-  }
-
-  p {
-    display: inline-block;
-  }
-}
-
-.content-container {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.content-container-block {
+.content-block {
   display: flex;
   padding-bottom: 1rem;
 

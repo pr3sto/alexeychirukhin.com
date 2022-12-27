@@ -28,7 +28,6 @@
       "section": "works",
       "path": "memories",
       "content": {
-        "floatingText": "Ode to Childhood",
         "blocks": [
           {
             "type": "PhotoGrid",

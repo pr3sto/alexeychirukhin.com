@@ -1,7 +1,7 @@
 $primary-font-family: "Fraunces";
 $secondary-font-family: "Chango";
-$handwriting-font-family1: "Schoolbell";
-$handwriting-font-family2: "Just Me Again Down Here";
+$handwriting1-font-family: "Schoolbell";
+$handwriting2-font-family: "Just Me Again Down Here";
 
 $default-font-size-lg: 2.2rem;
 $default-font-size-sm: 1.5rem;
@@ -13,5 +13,5 @@ $background-color: #fefefe;
 $font-color: #1f1f1f;
 $accent-color: #f52d09;
 
-$background-exclde-font-color: #dfdfdf;
-$background-exclde-accent-color: #09d1f5;
+$background-exclde-font-color: #dfdfdf; // $background-color - $font-color
+$background-exclde-accent-color: #09d1f5; // $background-color - $accent-color
