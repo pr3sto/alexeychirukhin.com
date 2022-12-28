@@ -9,7 +9,7 @@
         'content-component--padding-bottom': component.padding.bottom,
         'content-component--padding-left': component.padding.left,
         'content-component--padding-right': component.padding.right,
-        }"
+      }"
     >
       <text-content
         v-if="component.content.type === 'TextContent'"

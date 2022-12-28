@@ -204,12 +204,19 @@ export default {
         return card.class == "cardstack-card--current";
       });
 
-      const newTopCardIndex = mod(currentTopCardIndex + 1, this.content.cards.length);
+      const newTopCardIndex = mod(
+        currentTopCardIndex + 1,
+        this.content.cards.length
+      );
 
       // trigger Vue reactive update
       this.$nextTick(() => {
         this.annotatedCards = [];
-        this.annotatedCards = annotateCards(this.content.cards, newTopCardIndex, false);
+        this.annotatedCards = annotateCards(
+          this.content.cards,
+          newTopCardIndex,
+          false
+        );
       });
     },
   },

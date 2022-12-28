@@ -140,7 +140,7 @@ export default {
       // transform each card
       this.$refs["cards"].forEach((element, index) => {
         const x = randomPoints[index][0] + paddingX + containerRect.x;
-        const y = randomPoints[index][1] + paddingY+ containerRect.y;
+        const y = randomPoints[index][1] + paddingY + containerRect.y;
         let rotate =
           getRandomNumber(0, cardstackConstants.LG_CARD_MAX_ANGLE_DEG) *
           (isOdd(index) ? 1 : -1);
