@@ -128,7 +128,7 @@ import DarkslideCard from "~/components/Content/CardStack/DarkslideCard.vue";
 
 export default {
   name: "CardStackSm",
-  props: ["cards"],
+  props: ["content"],
   components: { PhotoCard, DarkslideCard },
 
   computed: {
@@ -142,7 +142,7 @@ export default {
 
   data() {
     return {
-      annotatedCards: annotateCards(this.cards, 0, true),
+      annotatedCards: annotateCards(this.content.cards, 0, true),
       cardstackContainerHeight: "auto",
       cardstackContainerWidth: "100%",
       fontSize: 0,
@@ -204,12 +204,12 @@ export default {
         return card.class == "cardstack-card--current";
       });
 
-      const newTopCardIndex = mod(currentTopCardIndex + 1, this.cards.length);
+      const newTopCardIndex = mod(currentTopCardIndex + 1, this.content.cards.length);
 
       // trigger Vue reactive update
       this.$nextTick(() => {
         this.annotatedCards = [];
-        this.annotatedCards = annotateCards(this.cards, newTopCardIndex, false);
+        this.annotatedCards = annotateCards(this.content.cards, newTopCardIndex, false);
       });
     },
   },

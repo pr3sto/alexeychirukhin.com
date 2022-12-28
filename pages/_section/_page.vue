@@ -1,5 +1,5 @@
 <template>
-  <content-builder :content="page.content" />
+  <content-builder :components="page.components" />
 </template>
 
 <script>
@@ -21,7 +21,9 @@ export default {
   },
 
   validate({ params, store, redirect }) {
-    const page = store.getters["data/currentPage"](`/${params.section}/${params.page}`);
+    const page = store.getters["data/currentPage"](
+      `/${params.section}/${params.page}`
+    );
     if (!page) {
       redirect("/");
     }

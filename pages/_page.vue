@@ -1,5 +1,5 @@
 <template>
-  <content-builder :content="page.content" />
+  <content-builder :components="page.components" />
 </template>
 
 <script>

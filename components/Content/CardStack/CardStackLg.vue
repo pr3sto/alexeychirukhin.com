@@ -3,7 +3,7 @@
     <div class="cardstack-plane">
       <div
         class="cardstack-card"
-        v-for="(card, index) of cards.slice().reverse()"
+        v-for="(card, index) of content.cards.slice().reverse()"
         :key="index"
         ref="cards"
         v-on:mousedown="handleCardMouseDown"
@@ -50,7 +50,7 @@ import FastPoissonDiskSampling from "fast-2d-poisson-disk-sampling";
 
 export default {
   name: "CardStackLg",
-  props: ["cards"],
+  props: ["content"],
   components: { PhotoCard, DarkslideCard },
 
   computed: {
@@ -139,8 +139,8 @@ export default {
 
       // transform each card
       this.$refs["cards"].forEach((element, index) => {
-        const x = randomPoints[index][0] + paddingX;
-        const y = randomPoints[index][1] + paddingY;
+        const x = randomPoints[index][0] + paddingX + containerRect.x;
+        const y = randomPoints[index][1] + paddingY+ containerRect.y;
         let rotate =
           getRandomNumber(0, cardstackConstants.LG_CARD_MAX_ANGLE_DEG) *
           (isOdd(index) ? 1 : -1);

@@ -4,9 +4,9 @@
       "header": "Alexey Chirukhin",
       "section": "",
       "path": "",
-      "content": {
-        "blocks": [
-          {
+      "components": [
+        {
+          "content": {
             "type": "CardStack",
             "cards": [
               {
@@ -19,32 +19,48 @@
                 "html": "<div style=\"display:flex;flex-direction:column;font-size:2em;line-height:1.1em;\"><div>Contacts:</div><a href=\"https://www.instagram.com/alexeychirukhin\" target=\"_blank\" style=\"color: #fff\">instagram.com/alexeychirukhin</a><a href=\"https://github.com/pr3sto\" target=\"_blank\" style=\"color: #fff\">github.com/pr3sto</a></div>"
               }
             ]
+          },
+          "padding": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
           }
-        ]
-      }
+        }
+      ]
     },
     {
       "header": "Memories",
       "section": "works",
       "path": "memories",
-      "content": {
-        "blocks": [
-          {
+      "components": [
+        {
+          "content": {
             "type": "PhotoGrid",
             "cols": {
               "default": 1
             },
+            "padding": false,
             "photos": [
               {
                 "url": "alexeychirukhin_com/pages/memories/Xvbmh_DO59t-Lbs.jpg"
               }
             ]
           },
-          {
+          "padding": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "content": {
             "type": "PhotoGrid",
             "cols": {
               "default": 2
             },
+            "padding": true,
             "photos": [
               {
                 "url": "alexeychirukhin_com/pages/memories/rcWHx_iwViZvI5N.jpg"
@@ -66,19 +82,34 @@
               }
             ]
           },
-          {
+          "padding": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
+          }
+        },
+        {
+          "content": {
             "type": "PhotoGrid",
             "cols": {
               "default": 1
             },
+            "padding": false,
             "photos": [
               {
                 "url": "alexeychirukhin_com/pages/memories/zatje_Fe0OEQNbW.jpg"
               }
             ]
+          },
+          "padding": {
+            "top": false,
+            "bottom": true,
+            "left": true,
+            "right": true
           }
-        ]
-      }
+        }
+      ]
     }
   ],
   "misc": {

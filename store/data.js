@@ -21,7 +21,7 @@ export const getters = {
 
 export const mutations = {
   setData(state, data) {
-    state = defaultState;
+    Object.assign(state, defaultState);
 
     state.misc = data.misc;
 
@@ -32,7 +32,7 @@ export const mutations = {
         section: page.section,
         path: page.path,
         route: page.section ? `/${page.section}/${page.path}` : `/${page.path}`,
-        content: page.content,
+        components: page.components,
       };
     });
 

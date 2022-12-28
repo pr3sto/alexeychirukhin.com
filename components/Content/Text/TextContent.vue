@@ -1,6 +1,6 @@
 <template>
   <div class="textcontent">
-    <p>{{ text }}</p>
+    <p>{{ content.text }}</p>
   </div>
 </template>
 
@@ -13,6 +13,6 @@
 <script>
 export default {
   name: "TextContent",
-  props: ["text"],
+  props: ["content"],
 };
 </script>

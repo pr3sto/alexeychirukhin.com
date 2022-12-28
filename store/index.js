@@ -54,27 +54,38 @@ const dataPageSchema = {
     header: { type: "string" },
     section: { type: "string" },
     path: { type: "string" },
-    content: {
-      type: "object",
-      properties: {
-        blocks: {
-          type: "array",
-          items: {
+    components: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          content: {
+            type: "object",
             oneOf: [
-              { $ref: "/definitions/data/page/content/cardstack" },
-              { $ref: "/definitions/data/page/content/photogrid" },
+              { $ref: "/definitions/data/page/component/cardstack" },
+              { $ref: "/definitions/data/page/component/photogrid" },
             ],
           },
+          padding: {
+            type: "object",
+            properties: {
+              top: { type: "boolean" },
+              bottom: { type: "boolean" },
+              left: { type: "boolean" },
+              right: { type: "boolean" },
+            },
+            required: ["top", "bottom", "left", "right"],
+          },
         },
+        required: ["content", "padding"],
       },
-      required: ["blocks"],
     },
   },
-  required: ["header", "content"],
+  required: ["header", "components"],
 };
 
-const cardstackContentSchema = {
-  id: "/definitions/data/page/content/cardstack",
+const cardstackComponentSchema = {
+  id: "/definitions/data/page/component/cardstack",
   type: "object",
   properties: {
     type: { type: "string", enum: ["CardStack"] },
@@ -106,8 +117,8 @@ const cardstackContentSchema = {
   required: ["type", "cards"],
 };
 
-const photogridContentSchema = {
-  id: "/definitions/data/page/content/photogrid",
+const photogridComponentSchema = {
+  id: "/definitions/data/page/component/photogrid",
   type: "object",
   properties: {
     type: { type: "string", enum: ["PhotoGrid"] },
@@ -128,12 +139,13 @@ const photogridContentSchema = {
         required: ["url"],
       },
     },
+    padding: { type: "boolean" },
   },
   required: ["type", "photos"],
 };
 
-const textContentSchema = {
-  id: "/definitions/data/page/content/text",
+const textComponentSchema = {
+  id: "/definitions/data/page/component/text",
   type: "object",
 };
 
@@ -151,16 +163,25 @@ function isValid(data) {
   const validator = new Validator();
 
   validator.addSchema(
-    cardstackContentSchema,
-    "/definitions/data/page/content/cardstack"
+    cardstackComponentSchema,
+    "/definitions/data/page/component/cardstack"
   );
   validator.addSchema(
-    photogridContentSchema,
-    "/definitions/data/page/content/photogrid"
+    photogridComponentSchema,
+    "/definitions/data/page/component/photogrid"
   );
-  validator.addSchema(textContentSchema, "/definitions/data/page/content/text");
+  validator.addSchema(
+    textComponentSchema,
+    "/definitions/data/page/component/text"
+  );
   validator.addSchema(dataPageSchema, "/definitions/data/page");
   validator.addSchema(dataMiscSchema, "/definitions/data/misc");
 
-  return validator.validate(data, dataSchema).valid;
+  const validateResult = validator.validate(data, dataSchema);
+
+  if (process.env.NODE_ENV !== "production") {
+    console.log(validateResult);
+  }
+
+  return validateResult.valid;
 }

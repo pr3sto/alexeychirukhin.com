@@ -1,9 +1,14 @@
 <template>
-  <div class="photogrid" :style="cssVars">
-    <masonry :cols="cols">
+  <div
+    class="photogrid"
+    :class="{ 'photogrid--padding': content.padding }"
+    :style="cssVars"
+  >
+    <masonry :cols="content.cols">
       <section
-        class="photogrid-block crosses-border"
-        v-for="(photo, index) of photos"
+        class="photogrid-block"
+        v-for="(photo, index) of content.photos"
+        :class="{ 'photogrid-block--padding': content.padding }"
         :key="index"
       >
         <nuxt-img
@@ -51,24 +56,15 @@
               v-if="showFullScreen"
             >
               <div
-                class="
-                  photogrid-fullscreen-lg-colorpicker-block
-                  photogrid-fullscreen-lg-colorpicker-block--white
-                "
+                class="photogrid-fullscreen-lg-colorpicker-block photogrid-fullscreen-lg-colorpicker-block--white"
                 v-on:click="handleWhiteBgClicked"
               />
               <div
-                class="
-                  photogrid-fullscreen-lg-colorpicker-block
-                  photogrid-fullscreen-lg-colorpicker-block--black
-                "
+                class="photogrid-fullscreen-lg-colorpicker-block photogrid-fullscreen-lg-colorpicker-block--black"
                 v-on:click="handleBlackBgClicked"
               />
               <div
-                class="
-                  photogrid-fullscreen-lg-colorpicker-block
-                  photogrid-fullscreen-lg-colorpicker-block--transparent
-                "
+                class="photogrid-fullscreen-lg-colorpicker-block photogrid-fullscreen-lg-colorpicker-block--transparent"
                 v-on:click="handleTransparentBgClicked"
               />
             </div>
@@ -109,16 +105,23 @@
 @use "~/assets/scss/variables" as vars;
 
 .photogrid {
-  padding: 0.5rem;
-  margin: -1rem;
+  &--padding {
+    margin: -1rem;
+    padding: 0.5rem;
+  }
 }
 
-.photogrid-block > img {
-  display: block;
-  padding: 0.5rem;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
+.photogrid-block {
+  &--padding {
+    padding: 0.5rem;
+  }
+
+  & > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
 }
 
 .photogrid-fullscreen-lg {
@@ -233,72 +236,6 @@
 .zoomimg-transform-transition-leave-to {
   transform: var(--fs-zoomimg-transform);
 }
-
-/* border */
-.crosses-border {
-  --w: 7px;
-  --p: 0.1rem;
-  --c: rgba(0, 0, 0, 0.15);
-
-  background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) calc(50%),
-        var(--c) calc(50%),
-        rgba(0, 0, 0, 0) calc(50% + 1px)
-      )
-      var(--p) var(--p),
-    linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0) calc(50%),
-        var(--c) calc(50%),
-        rgba(0, 0, 0, 0) calc(50% + 1px)
-      )
-      var(--p) var(--p),
-    linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) calc(50%),
-        var(--c) calc(50%),
-        rgba(0, 0, 0, 0) calc(50% + 1px)
-      )
-      calc(100% - var(--p)) calc(100% - var(--p)),
-    linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0) calc(50%),
-        var(--c) calc(50%),
-        rgba(0, 0, 0, 0) calc(50% + 1px)
-      )
-      calc(100% - var(--p)) calc(100% - var(--p)),
-    linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) calc(50%),
-        var(--c) calc(50%),
-        rgba(0, 0, 0, 0) calc(50% + 1px)
-      )
-      var(--p) calc(100% - var(--p)),
-    linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0) calc(50%),
-        var(--c) calc(50%),
-        rgba(0, 0, 0, 0) calc(50% + 1px)
-      )
-      var(--p) calc(100% - var(--p)),
-    linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) calc(50%),
-        var(--c) calc(50%),
-        rgba(0, 0, 0, 0) calc(50% + 1px)
-      )
-      calc(100% - var(--p)) var(--p),
-    linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0) calc(50%),
-        var(--c) calc(50%),
-        rgba(0, 0, 0, 0) calc(50% + 1px)
-      )
-      calc(100% - var(--p)) var(--p);
-  background-size: var(--w) var(--w);
-  background-repeat: no-repeat;
-}
 </style>
 
 <script>
@@ -306,7 +243,7 @@ import ZoomImg from "./ZoomImg.vue";
 
 export default {
   name: "PhotoGrid",
-  props: ["photos", "cols"],
+  props: ["content"],
   components: { ZoomImg },
 
   computed: {
@@ -414,13 +351,6 @@ export default {
     openFullscreenZoomig(imgElement) {
       // get initial image dimensions (without padding)
       let initImgRect = imgElement.getBoundingClientRect();
-      const initImgRectPadding = parseFloat(
-        getComputedStyle(imgElement).fontSize
-      );
-      initImgRect.height = initImgRect.height - initImgRectPadding;
-      initImgRect.width = initImgRect.width - initImgRectPadding;
-      initImgRect.x = initImgRect.x + initImgRectPadding / 2;
-      initImgRect.y = initImgRect.y + initImgRectPadding / 2;
 
       // calculate scale factor (from initial to fullscreen)
       const fsImgScaleFactor = calcFsImgScaleFactor(

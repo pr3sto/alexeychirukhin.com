@@ -15,7 +15,6 @@
 }
 #default-layout-page {
   flex-grow: 1;
-  padding: 1rem 0 1rem 1rem;
 }
 
 #default-layout-sm {
@@ -24,7 +23,6 @@
 }
 #default-layout-page-sm {
   flex-grow: 1;
-  padding: 0 1rem 1rem 1rem;
 }
 
 #default-layout-menu {

@@ -1,23 +1,31 @@
 <template>
   <main class="content">
     <section
-      class="content-block"
-      v-for="(block, index) of content.blocks"
+      class="content-component"
+      v-for="(component, index) of components"
       :key="index"
+      :class="{
+        'content-component--padding-top': component.padding.top,
+        'content-component--padding-bottom': component.padding.bottom,
+        'content-component--padding-left': component.padding.left,
+        'content-component--padding-right': component.padding.right,
+        }"
     >
-      <text-content v-if="block.type === 'TextContent'" :text="block.text" />
+      <text-content
+        v-if="component.content.type === 'TextContent'"
+        :content="component.content"
+      />
       <card-stack-sm
-        v-else-if="block.type === 'CardStack' && smallScreen"
-        :cards="block.cards"
+        v-else-if="component.content.type === 'CardStack' && smallScreen"
+        :content="component.content"
       />
       <card-stack-lg
-        v-else-if="block.type === 'CardStack' && !smallScreen"
-        :cards="block.cards"
+        v-else-if="component.content.type === 'CardStack' && !smallScreen"
+        :content="component.content"
       />
       <photo-grid
-        v-else-if="block.type === 'PhotoGrid'"
-        :photos="block.photos"
-        :cols="block.cols"
+        v-else-if="component.content.type === 'PhotoGrid'"
+        :content="component.content"
       />
     </section>
   </main>
@@ -30,16 +38,26 @@
   flex-grow: 1;
 }
 
-.content-block {
+.content-component {
   display: flex;
-  padding-bottom: 1rem;
 
-  &:last-child {
-    padding-bottom: 0;
+  &--padding-top {
+    padding-top: 1rem;
   }
+  &--padding-bottom {
+    padding-bottom: 1rem;
+  }
+  &--padding-left {
+    padding-left: 1rem;
+  }
+  &--padding-right {
+    padding-right: 1rem;
+  }
+
   &:only-child {
     flex-grow: 1;
   }
+
   & > * {
     flex-grow: 1;
   }
@@ -54,7 +72,7 @@ import TextContent from "~/components/Content/Text/TextContent.vue";
 
 export default {
   name: "ContentBuilder",
-  props: ["content"],
+  props: ["components"],
   components: { CardStackLg, CardStackSm, PhotoGrid, TextContent },
   computed: {
     smallScreen() {
