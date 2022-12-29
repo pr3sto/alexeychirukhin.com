@@ -179,9 +179,9 @@ export default {
       this.moveCardTo(e.clientX, e.clientY);
     },
     handleCardTouchStart(e) {
+      this.drag.target = e.currentTarget;
       this.drag.clientX = e.changedTouches[0].clientX;
       this.drag.clientY = e.changedTouches[0].clientY;
-      this.drag.target = e.currentTarget;
 
       this.rearrangeCards();
 
@@ -232,14 +232,14 @@ function getRandomPointsOnPlane(width, height, numberOfPoints) {
   const points = pds.fill();
 
   // select random points from generated array
-  return getRandomArray(points, numberOfPoints);
+  return sliceRandom(points, numberOfPoints);
 }
 
 function getRandomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function getRandomArray(array, numberOfItems) {
+function sliceRandom(array, numberOfItems) {
   const shuffled = array.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, numberOfItems);
 }

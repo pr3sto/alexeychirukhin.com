@@ -1,5 +1,8 @@
 <template>
-  <div :id="smallScreen ? 'default-layout-sm' : 'default-layout'">
+  <div
+    :id="smallScreen ? 'default-layout-sm' : 'default-layout'"
+    :style="cssVars"
+  >
     <nuxt-child
       :id="smallScreen ? 'default-layout-page-sm' : 'default-layout-page'"
     />
@@ -12,6 +15,7 @@
 #default-layout {
   display: flex;
   flex-direction: row;
+  min-height: var(--min-height);
 }
 #default-layout-page {
   flex-grow: 1;
@@ -20,6 +24,7 @@
 #default-layout-sm {
   display: flex;
   flex-direction: column-reverse;
+  min-height: var(--min-height);
 }
 #default-layout-page-sm {
   flex-grow: 1;
@@ -49,6 +54,17 @@ export default {
     smallScreen() {
       return this.$store.state.settings.isSmallScreen;
     },
+    cssVars() {
+      return {
+        "--min-height": `${this.minHeight}px`,
+      };
+    },
+  },
+
+  data() {
+    return {
+      minHeight: 0,
+    };
   },
 
   mounted() {
@@ -66,7 +82,7 @@ export default {
   methods: {
     reCalculate() {
       // set min height of layout to screen height
-      this.$el.style.minHeight = `${document.documentElement.clientHeight}px`;
+      this.minHeight = document.documentElement.clientHeight;
     },
   },
 };

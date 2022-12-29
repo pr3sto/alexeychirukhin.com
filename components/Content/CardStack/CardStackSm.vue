@@ -10,7 +10,7 @@
           :is="card.type"
           :card="card"
           :fontSize="fontSize"
-          v-on:click.native="handleClick"
+          v-on:click.native="handleCardClick"
         />
       </div>
     </div>
@@ -181,9 +181,9 @@ export default {
           containerRect.width / cardstackConstants.FONT_SIZE_FACTOR2;
       }
     },
-    handleClick(event) {
+    handleCardClick(e) {
       // prevent click on href
-      if (event.target.tagName.toLowerCase() === "a") {
+      if (e.target.tagName.toLowerCase() === "a") {
         return;
       }
 
