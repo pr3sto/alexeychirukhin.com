@@ -19,5 +19,11 @@ $background-color: $white-color;
 $font-color: $black-color;
 $accent-color: #f52d09;
 
+// variables for blend mode
 $background-exclde-font-color: #dfdfdf; // $background-color - $font-color
 $background-exclde-accent-color: #09d1f5; // $background-color - $accent-color
+
+:export {
+  whiteColor: $white-color;
+  blackColor: $black-color;
+}
