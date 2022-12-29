@@ -1,8 +1,8 @@
 const defaultState = {
   isSmallScreen: false,
   photogrid: {
-    fullscreenBgColor: "0,0,0",
-    fullscreenBgTransparency: 0.9,
+    fullscreenBgColor: "1f1f1f",
+    fullscreenBgTransparency: "e6",
   },
 };
 

@@ -42,14 +42,14 @@
   flex-direction: column;
   align-items: flex-start;
   padding-bottom: 1rem;
-  font-size: vars.$default-font-size-lg;
+  font-size: vars.$primary-font-size-lg;
 }
 
 .app-menu-section-header {
   padding-left: 1rem;
   padding-right: 1rem;
   color: vars.$background-exclde-font-color;
-  font-size: 0.75em;
+  font-size: vars.$secondary-font-size-lg;
   opacity: 0.75;
   pointer-events: all;
 }

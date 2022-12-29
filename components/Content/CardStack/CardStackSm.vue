@@ -160,7 +160,7 @@ export default {
   },
 
   beforeDestroy() {
-    window.removeEventListener("resize", this.reCalculate);
+    this.cleanupEventListeners();
   },
 
   methods: {
@@ -218,6 +218,9 @@ export default {
           false
         );
       });
+    },
+    cleanupEventListeners() {
+      window.removeEventListener("resize", this.reCalculate);
     },
   },
 };

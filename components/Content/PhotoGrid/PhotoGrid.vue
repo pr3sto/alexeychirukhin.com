@@ -7,8 +7,8 @@
     <masonry :cols="content.cols">
       <section
         class="photogrid-block"
-        v-for="(photo, index) of content.photos"
         :class="{ 'photogrid-block--padding': content.padding }"
+        v-for="(photo, index) of content.photos"
         :key="index"
       >
         <nuxt-img
@@ -37,7 +37,7 @@
               class="photogrid-fullscreen-lg-zoomimg"
               v-show="showFullScreen"
               :visible="showFullScreen"
-              :src="fullscreenImgSrc"
+              :src="fullscreenImg.src"
               :zoomScale="zoomigProps.zoomScale"
             />
           </transition>
@@ -55,15 +55,15 @@
               class="photogrid-fullscreen-lg-colorpicker"
               v-if="showFullScreen"
             >
-              <div
+              <figure
                 class="photogrid-fullscreen-lg-colorpicker-block photogrid-fullscreen-lg-colorpicker-block--white"
                 v-on:click="handleWhiteBgClicked"
               />
-              <div
+              <figure
                 class="photogrid-fullscreen-lg-colorpicker-block photogrid-fullscreen-lg-colorpicker-block--black"
                 v-on:click="handleBlackBgClicked"
               />
-              <div
+              <figure
                 class="photogrid-fullscreen-lg-colorpicker-block photogrid-fullscreen-lg-colorpicker-block--transparent"
                 v-on:click="handleTransparentBgClicked"
               />
@@ -86,7 +86,7 @@
             provider="imagekit"
             preset="progressivejpg"
             sizes="md:800px lg:1500px"
-            :src="fullscreenImgSrc"
+            :src="fullscreenImg.src"
           />
           <p
             class="photogrid-fullscreen-sm-close"
@@ -124,6 +124,10 @@
   }
 }
 
+.photogrid-block-img--active {
+  opacity: 0;
+}
+
 .photogrid-fullscreen-lg {
   position: fixed;
   top: 0;
@@ -133,7 +137,6 @@
   z-index: 1;
   background: var(--fs-bg-color);
   transition: background vars.$default-transition;
-  touch-action: none;
 }
 
 .photogrid-fullscreen-lg-zoomimg {
@@ -150,10 +153,10 @@
   top: 0;
   left: 0;
   padding: 1rem;
-  font-size: vars.$default-font-size-lg;
-  color: white;
-  writing-mode: vertical-rl;
+  font-size: vars.$secondary-font-size-lg;
+  color: vars.$background-exclde-font-color;
   mix-blend-mode: exclusion;
+  writing-mode: vertical-rl;
   cursor: pointer;
 }
 
@@ -165,18 +168,19 @@
   display: flex;
   flex-direction: column;
 }
+
 .photogrid-fullscreen-lg-colorpicker-block {
   width: 1rem;
   height: 1rem;
   cursor: pointer;
 
   &--white {
-    background: white;
-    border: 1px solid black;
+    background: vars.$white-color;
+    border: 1px solid vars.$black-color;
   }
   &--black {
-    background: black;
-    border: 1px solid white;
+    background: vars.$black-color;
+    border: 1px solid vars.$white-color;
   }
   &--transparent {
     background: url("/images/opacity.png");
@@ -191,7 +195,7 @@
   left: 0;
   right: 0;
   z-index: 1;
-  background: rgb(255, 255, 255);
+  background: vars.$background-color;
 }
 
 .photogrid-fullscreen-sm-img {
@@ -211,8 +215,8 @@
   top: 0;
   left: 0;
   padding: 1rem;
-  font-size: vars.$default-font-size-sm;
-  color: white;
+  font-size: vars.$secondary-font-size-sm;
+  color: vars.$background-exclde-font-color;
   mix-blend-mode: exclusion;
   cursor: pointer;
 }
@@ -249,7 +253,7 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--fs-bg-color": `rgba(${this.settings.fullscreenBgColor}, ${this.settings.fullscreenBgTransparency})`,
+        "--fs-bg-color": `#${this.settings.fullscreenBgColor}${this.settings.fullscreenBgTransparency}`,
         "--fs-zoomimg-left": `${this.zoomigProps.left}px`,
         "--fs-zoomimg-top": `${this.zoomigProps.top}px`,
         "--fs-zoomimg-width": `${this.zoomigProps.width}px`,
@@ -269,7 +273,10 @@ export default {
     return {
       showFullScreen: false,
       windowScrollPosition: {},
-      fullscreenImgSrc: this.$store.state.data.misc.noImageUrl,
+      fullscreenImg: {
+        gridElement: null,
+        src: this.$store.state.data.misc.noImageUrl,
+      },
       zoomigProps: {
         zoomScale: 1,
         left: 0,
@@ -282,8 +289,16 @@ export default {
   },
 
   beforeDestroy() {
-    this.afterFullscreenLgClosed();
-    this.beforeFullscreenSmClosed();
+    // cleanup
+    if (document.body.classList.contains("non-scrollable")) {
+      document.body.classList.remove("non-scrollable");
+      console.log("1");
+    }
+    if (document.documentElement.classList.contains("non-scrollable")) {
+      document.documentElement.classList.remove("non-scrollable");
+      console.log("2");
+    }
+    this.cleanupEventListeners();
   },
 
   methods: {
@@ -292,6 +307,9 @@ export default {
       window.addEventListener("wheel", this.handleScroll, { passive: false });
     },
     afterFullscreenLgClosed() {
+      this.fullscreenImg.gridElement.classList.remove(
+        "photogrid-block-img--active"
+      );
       window.removeEventListener("resize", this.closeFullscreenPhoto);
       window.removeEventListener("wheel", this.handleScroll);
     },
@@ -313,12 +331,13 @@ export default {
       window.scrollTo(this.windowScrollPosition.x, this.windowScrollPosition.y);
     },
     handlePhotoImgClicked(e, photo) {
-      this.fullscreenImgSrc = photo.url;
+      this.fullscreenImg.gridElement = e.target;
+      this.fullscreenImg.src = photo.url;
 
-      if (this.small) {
+      if (this.smallScreen) {
         this.showFullScreen = true;
       } else {
-        this.openFullscreenZoomig(e.target);
+        this.openFullscreenZoomig();
       }
     },
     handleFullscreenLgClicked(e) {
@@ -334,23 +353,20 @@ export default {
       this.closeFullscreenPhoto();
     },
     handleWhiteBgClicked() {
-      this.$store.commit(
-        "settings/setPhotogridFullscreenBgColor",
-        "255,255,255"
-      );
+      this.$store.commit("settings/setPhotogridFullscreenBgColor", "fefefe");
     },
     handleBlackBgClicked() {
-      this.$store.commit("settings/setPhotogridFullscreenBgColor", "0,0,0");
+      this.$store.commit("settings/setPhotogridFullscreenBgColor", "1f1f1f");
     },
     handleTransparentBgClicked() {
       this.$store.commit(
         "settings/setPhotogridFullscreenBgTransparency",
-        this.settings.fullscreenBgTransparency == 1 ? 0.9 : 1
+        this.settings.fullscreenBgTransparency === "ff" ? "e6" : "ff"
       );
     },
-    openFullscreenZoomig(imgElement) {
-      // get initial image dimensions (without padding)
-      let initImgRect = imgElement.getBoundingClientRect();
+    openFullscreenZoomig() {
+      // get initial image dimensions
+      let initImgRect = this.fullscreenImg.gridElement.getBoundingClientRect();
 
       // calculate scale factor (from initial to fullscreen)
       const fsImgScaleFactor = calcFsImgScaleFactor(
@@ -376,24 +392,32 @@ export default {
       );
 
       // set fullscreen zoomimg css vars
-      this.zoomigProps.zoomScale = imgElement.naturalWidth / fsImgRect.width;
+      this.zoomigProps.zoomScale =
+        this.fullscreenImg.gridElement.naturalWidth / fsImgRect.width;
       this.zoomigProps.left = fsImgRect.x;
       this.zoomigProps.top = fsImgRect.y;
       this.zoomigProps.width = fsImgRect.width;
       this.zoomigProps.height = fsImgRect.height;
       this.zoomigProps.transform = fsImgTransfrom;
 
+      // set active img class
+      this.fullscreenImg.gridElement.classList.add(
+        "photogrid-block-img--active"
+      );
+
       // show fullscreen
       this.showFullScreen = true;
     },
     closeFullscreenPhoto() {
-      // prevent multiple events triggering this function
       if (!this.showFullScreen) {
         return;
       }
 
-      // hide fullscreen
       this.showFullScreen = false;
+    },
+    cleanupEventListeners() {
+      window.removeEventListener("resize", this.closeFullscreenPhoto);
+      window.removeEventListener("wheel", this.handleScroll);
     },
   },
 };

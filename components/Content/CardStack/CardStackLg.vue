@@ -85,7 +85,7 @@ export default {
   },
 
   beforeDestroy() {
-    window.removeEventListener("resize", this.reCalculate);
+    this.cleanupEventListeners();
   },
 
   methods: {
@@ -211,6 +211,13 @@ export default {
         this.drag.target.offsetLeft - offsetX
       }px`;
       this.drag.target.style.top = `${this.drag.target.offsetTop - offsetY}px`;
+    },
+    cleanupEventListeners() {
+      window.removeEventListener("resize", this.reCalculate);
+      document.removeEventListener("mouseup", this.handleMouseUp);
+      document.removeEventListener("mousemove", this.handleMouseMove);
+      document.removeEventListener("touchend", this.handleTouchEnd);
+      document.removeEventListener("touchmove", this.handleTouchMove);
     },
   },
 };
