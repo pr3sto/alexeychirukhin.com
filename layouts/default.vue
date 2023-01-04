@@ -76,13 +76,16 @@ export default {
   },
 
   beforeDestroy() {
-    window.removeEventListener("resize", this.reCalculate);
+    this.cleanupEventListeners();
   },
 
   methods: {
     reCalculate() {
       // set min height of layout to screen height
       this.minHeight = document.documentElement.clientHeight;
+    },
+    cleanupEventListeners() {
+      window.removeEventListener("resize", this.reCalculate);
     },
   },
 };

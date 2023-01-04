@@ -72,7 +72,6 @@ export default {
   data() {
     return {
       isZoomed: false,
-      isTouch: false,
       isZoomInProgress: false,
       zoomedImgOffsetX: 0,
       zoomedImgOffsetY: 0,
@@ -81,7 +80,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.removeEventListenersForZoomedImg();
+    this.cleanupEventListeners();
   },
 
   methods: {
@@ -123,10 +122,6 @@ export default {
       this.zoomOut();
     },
     handleMouseMove(e) {
-      if (this.isTouch) {
-        return;
-      }
-
       let x = e.clientX - this.zoomedImgProps.bounds.left;
       let y = e.clientY - this.zoomedImgProps.bounds.top;
 
@@ -137,8 +132,6 @@ export default {
       this.zoomedImgOffsetY = y * -this.zoomedImgProps.ratios.y;
     },
     handleTouchStart(e) {
-      this.isTouch = true;
-
       this.zoomedImgProps.initialTouch = {
         zoomedImgOffsetX: this.zoomedImgOffsetX,
         zoomedImgOffsetY: this.zoomedImgOffsetY,
@@ -200,7 +193,6 @@ export default {
       this.removeEventListenersForZoomedImg();
 
       this.isZoomed = false;
-      this.isTouch = false;
       this.zoomedImgOffsetX = 0;
       this.zoomedImgOffsetY = 0;
 
@@ -209,6 +201,9 @@ export default {
       setTimeout(() => {
         this.isZoomInProgress = false;
       }, 250);
+    },
+    cleanupEventListeners() {
+      this.removeEventListenersForZoomedImg();
     },
   },
 };

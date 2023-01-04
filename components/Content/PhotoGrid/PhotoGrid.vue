@@ -133,6 +133,7 @@
   z-index: 1;
   background: var(--fs-bg-color);
   transition: background vars.$default-transition;
+  touch-action: none;
 }
 
 .photogrid-fullscreen-lg-zoomimg {
@@ -286,15 +287,7 @@ export default {
   },
 
   beforeDestroy() {
-    // cleanup
-    if (document.body.classList.contains("non-scrollable")) {
-      document.body.classList.remove("non-scrollable");
-      console.log("1");
-    }
-    if (document.documentElement.classList.contains("non-scrollable")) {
-      document.documentElement.classList.remove("non-scrollable");
-      console.log("2");
-    }
+    this.$enablePageScroll();
     this.cleanupEventListeners();
   },
 
@@ -316,14 +309,12 @@ export default {
         x: window.pageXOffset,
         y: window.pageYOffset,
       };
-      // disable scroll on html when fullscreen opened
-      document.body.classList.add("non-scrollable");
-      document.documentElement.classList.add("non-scrollable");
+
+      this.$disablePageScroll();
     },
     beforeFullscreenSmClosed() {
-      // enable scroll on html when fullscreen closed
-      document.body.classList.remove("non-scrollable");
-      document.documentElement.classList.remove("non-scrollable");
+      this.$enablePageScroll();
+
       // restore scroll position
       window.scrollTo(this.windowScrollPosition.x, this.windowScrollPosition.y);
     },
