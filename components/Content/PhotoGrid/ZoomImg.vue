@@ -49,15 +49,7 @@
 <script>
 export default {
   name: "ZoomImg",
-  props: ["src", "zoomScale", "visible"],
-
-  watch: {
-    visible(value) {
-      if (value === false) {
-        this.zoomOut();
-      }
-    },
-  },
+  props: ["src", "zoomScale"],
 
   computed: {
     cssVars() {
@@ -190,6 +182,10 @@ export default {
       }, 250);
     },
     zoomOut() {
+      if (!this.isZoomed) {
+        return;
+      }
+
       this.removeEventListenersForZoomedImg();
 
       this.isZoomed = false;

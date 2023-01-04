@@ -35,8 +35,8 @@
           <transition name="zoomimg-transform-transition">
             <zoom-img
               class="photogrid-fullscreen-lg-zoomimg"
+              ref="zoomimg"
               v-show="showFullScreen"
-              :visible="showFullScreen"
               :src="fullscreenImg.src"
               :zoomScale="zoomigProps.zoomScale"
             />
@@ -405,6 +405,9 @@ export default {
       this.showFullScreen = true;
     },
     closeFullscreen() {
+      if (this.$refs["zoomimg"]) {
+        this.$refs["zoomimg"].zoomOut();
+      }
       this.showFullScreen = false;
     },
     cleanupEventListeners() {
