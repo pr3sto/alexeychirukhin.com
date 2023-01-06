@@ -18,6 +18,16 @@
           :src="photo.url"
           v-on:click="handlePhotoImgClicked($event, photo)"
         />
+        <span
+          v-if="photo.caption"
+          class="photogrid-block-caption"
+          :class="
+            smallScreen
+              ? 'photogrid-block-caption--sm'
+              : 'photogrid-block-caption--lg'
+          "
+          >{{ photo.caption }}</span
+        >
       </section>
     </masonry>
 
@@ -112,6 +122,9 @@
 }
 
 .photogrid-block {
+  display: flex;
+  flex-direction: column;
+
   &--padding {
     padding: 0.5rem;
   }
@@ -121,6 +134,19 @@
     width: 100%;
     height: 100%;
     cursor: pointer;
+  }
+}
+
+.photogrid-block-caption {
+  white-space: pre;
+  line-height: 0.9em;
+
+  &--lg {
+    font-size: vars.$photogrid-caption-font-size-lg;
+  }
+
+  &--sm {
+    font-size: vars.$photogrid-caption-font-size-sm;
   }
 }
 
@@ -150,7 +176,7 @@
   top: 0;
   left: 0;
   padding: 1rem;
-  font-size: vars.$secondary-font-size-lg;
+  font-size: vars.$photogrid-close-font-size-lg;
   color: white;
   mix-blend-mode: exclusion;
   writing-mode: vertical-rl;
@@ -212,7 +238,7 @@
   top: 0;
   left: 0;
   padding: 1rem;
-  font-size: vars.$secondary-font-size-sm;
+  font-size: vars.$photogrid-close-font-size-sm;
   color: vars.$background-exclde-font-color;
   mix-blend-mode: exclusion;
   cursor: pointer;

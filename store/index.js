@@ -135,6 +135,7 @@ const photogridComponentSchema = {
         type: "object",
         properties: {
           url: { type: "string" },
+          caption: { type: "string" },
         },
         required: ["url"],
       },
