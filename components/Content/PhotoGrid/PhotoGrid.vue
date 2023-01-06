@@ -6,8 +6,8 @@
   >
     <masonry :cols="content.cols">
       <section
-        class="photogrid-block"
-        :class="{ 'photogrid-block--padding': content.padding }"
+        class="photogrid-photo"
+        :class="{ 'photogrid-photo--padding': content.padding }"
         v-for="(photo, index) of content.photos"
         :key="index"
       >
@@ -20,11 +20,11 @@
         />
         <span
           v-if="photo.caption"
-          class="photogrid-block-caption"
+          class="photogrid-photo-caption"
           :class="
             smallScreen
-              ? 'photogrid-block-caption--sm'
-              : 'photogrid-block-caption--lg'
+              ? 'photogrid-photo-caption--sm'
+              : 'photogrid-photo-caption--lg'
           "
           >{{ photo.caption }}</span
         >
@@ -121,7 +121,7 @@
   }
 }
 
-.photogrid-block {
+.photogrid-photo {
   display: flex;
   flex-direction: column;
 
@@ -137,7 +137,7 @@
   }
 }
 
-.photogrid-block-caption {
+.photogrid-photo-caption {
   white-space: pre;
   line-height: 0.9em;
 

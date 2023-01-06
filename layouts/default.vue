@@ -6,8 +6,8 @@
     <nuxt-child
       :id="smallScreen ? 'default-layout-page-sm' : 'default-layout-page'"
     />
-    <app-menu-sm id="default-layout-menu" v-if="smallScreen" />
-    <app-menu-lg id="default-layout-menu" v-else />
+    <app-menu-sm v-if="smallScreen" id="default-layout-menu" />
+    <app-menu-lg v-else id="default-layout-menu" />
   </div>
 </template>
 

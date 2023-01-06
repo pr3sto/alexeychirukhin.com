@@ -1,8 +1,10 @@
+// font-family
 $primary-font-family: "Fraunces";
 $secondary-font-family: "Chango";
 $handwriting1-font-family: "Schoolbell";
 $handwriting2-font-family: "Just Me Again Down Here";
 
+// font-size
 $appmenu-font-size-lg: 2.2rem;
 $appmenu-font-size-sm: 1.5rem;
 $appmenu-section-header-font-size-lg: 1.7rem;
@@ -14,12 +16,14 @@ $photogrid-close-font-size-sm: 1.2rem;
 $photogrid-caption-font-size-lg: 1rem;
 $photogrid-caption-font-size-sm: 1rem;
 
+// transitions
 $default-transition-func: cubic-bezier(0.8, 0.2, 0.1, 0.8);
 $default-transition: 0.2s $default-transition-func;
 
 $white-color: #fefefe;
 $black-color: #1f1f1f;
 
+// colors
 $background-color: $white-color;
 $font-color: $black-color;
 $accent-color: #f52d09;

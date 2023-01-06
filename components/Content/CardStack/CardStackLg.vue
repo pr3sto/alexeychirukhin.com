@@ -97,17 +97,14 @@ export default {
         containerRect.width * cardstackConstants.LG_CARD_SCALE_FACTOR;
       const maxheigth =
         containerRect.height * cardstackConstants.LG_CARD_SCALE_FACTOR;
-      if (
-        maxWidth / maxheigth >
-        cardstackConstants.POLAROID_CARD_ASPECT_RATIO
-      ) {
+      if (maxWidth / maxheigth > cardstackConstants.CARD_ASPECT_RATIO) {
         this.cardstackCardHeight = maxheigth;
         this.cardstackCardWidth =
-          maxheigth * cardstackConstants.POLAROID_CARD_ASPECT_RATIO;
+          maxheigth * cardstackConstants.CARD_ASPECT_RATIO;
         this.fontSize = maxheigth / cardstackConstants.FONT_SIZE_FACTOR1;
       } else {
         this.cardstackCardHeight =
-          maxWidth / cardstackConstants.POLAROID_CARD_ASPECT_RATIO;
+          maxWidth / cardstackConstants.CARD_ASPECT_RATIO;
         this.cardstackCardWidth = maxWidth;
         this.fontSize = maxWidth / cardstackConstants.FONT_SIZE_FACTOR2;
       }

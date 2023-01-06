@@ -168,7 +168,7 @@ export default {
       const containerRect = this.$el.children[0].getBoundingClientRect();
       if (
         containerRect.width / containerRect.height >
-        cardstackConstants.POLAROID_CARD_ASPECT_RATIO
+        cardstackConstants.CARD_ASPECT_RATIO
       ) {
         this.cardstackContainerHeight = "100%";
         this.cardstackContainerWidth = "auto";
