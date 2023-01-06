@@ -3,11 +3,16 @@ $secondary-font-family: "Chango";
 $handwriting1-font-family: "Schoolbell";
 $handwriting2-font-family: "Just Me Again Down Here";
 
-$primary-font-size-lg: 2.2rem;
-$secondary-font-size-lg: 1.7rem;
+$appmenu-font-size-lg: 2.2rem;
+$appmenu-font-size-sm: 1.5rem;
+$appmenu-section-header-font-size-lg: 1.7rem;
+$appmenu-section-header-font-size-sm: 1.2rem;
 
-$primary-font-size-sm: 1.5rem;
-$secondary-font-size-sm: 1.2rem;
+$photogrid-close-font-size-lg: 1.5rem;
+$photogrid-close-font-size-sm: 1.2rem;
+
+$photogrid-text-font-size-lg: 1rem;
+$photogrid-text-font-size-sm: 1rem;
 
 $default-transition-func: cubic-bezier(0.8, 0.2, 0.1, 0.8);
 $default-transition: 0.2s $default-transition-func;

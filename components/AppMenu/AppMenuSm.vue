@@ -39,7 +39,7 @@
   display: inline-block;
   color: vars.$font-color;
   font-family: vars.$secondary-font-family;
-  font-size: vars.$primary-font-size-sm;
+  font-size: vars.$appmenu-font-size-sm;
   font-weight: bolder;
   text-transform: uppercase;
   cursor: pointer;
@@ -63,14 +63,14 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 1rem;
-  font-size: vars.$primary-font-size-sm;
+  font-size: vars.$appmenu-font-size-sm;
 }
 
 .app-menu-full-section-header {
   padding-left: 1rem;
   padding-right: 1rem;
   color: vars.$font-color;
-  font-size: vars.$secondary-font-size-sm;
+  font-size: vars.$appmenu-section-header-font-size-sm;
   opacity: 0.75;
 }
 
