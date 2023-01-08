@@ -52,6 +52,10 @@ img {
   overflow: hidden;
 }
 
+::selection {
+  background-color: vars.$accent-color;
+}
+
 @media only screen and (max-width: 700px) {
   /* looks better on mobile */
   img {
