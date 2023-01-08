@@ -8,12 +8,12 @@
       v-for="(block, index1) of content.blocks"
       :key="index1"
       :class="`textblocks-block--align-${block.align}`"
-      :style="block.linesStyle"
     >
       <component
         v-for="(line, index2) of block.lines"
         :key="index2"
         :is="line.trim() === '' ? 'br' : 'p'"
+        :style="block.linesStyle"
       >
         {{ line }}
       </component>
@@ -40,6 +40,7 @@
 .textblocks-block {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 
   &--align-left {
     align-self: flex-start;

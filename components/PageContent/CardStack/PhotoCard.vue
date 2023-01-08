@@ -12,8 +12,8 @@
         :src="card.photoUrl"
       />
     </div>
-    <div class="photocard-signature" v-if="card.signature">
-      <span>{{ card.signature }}</span>
+    <div class="photocard-caption" v-if="card.caption">
+      <span>{{ card.caption }}</span>
     </div>
   </figure>
 </template>
@@ -80,7 +80,7 @@
   object-fit: cover;
 }
 
-.photocard-signature {
+.photocard-caption {
   flex-grow: 1;
   display: flex;
   align-items: center;

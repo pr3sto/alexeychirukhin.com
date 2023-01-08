@@ -8,8 +8,8 @@
       <section
         class="photogrid-photo"
         :class="{ 'photogrid-photo--padding': content.padding }"
-        v-for="(photo, index) of content.photos"
-        :key="index"
+        v-for="(photo, index1) of content.photos"
+        :key="index1"
       >
         <nuxt-img
           provider="imagekit"
@@ -18,16 +18,18 @@
           :src="photo.url"
           v-on:click="handlePhotoImgClicked($event, photo)"
         />
-        <span
-          v-if="photo.caption"
+        <div
           class="photogrid-photo-caption"
           :class="
             smallScreen
               ? 'photogrid-photo-caption--sm'
               : 'photogrid-photo-caption--lg'
           "
-          >{{ photo.caption }}</span
         >
+          <span v-for="(line, index2) in photo.caption" :key="index2">{{
+            line
+          }}</span>
+        </div>
       </section>
     </masonry>
 
@@ -118,16 +120,19 @@
   &--padding {
     margin: -1rem;
     padding: 0.5rem;
+
+    .photogrid-photo {
+      padding: 0.5rem;
+    }
+
+    .photogrid-photo-caption {
+      padding: 1.5rem;
+    }
   }
 }
 
 .photogrid-photo {
-  display: flex;
-  flex-direction: column;
-
-  &--padding {
-    padding: 0.5rem;
-  }
+  position: relative;
 
   & > img {
     display: block;
@@ -138,8 +143,13 @@
 }
 
 .photogrid-photo-caption {
-  white-space: pre;
-  line-height: 0.9em;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
 
   &--lg {
     font-size: vars.$photogrid-caption-font-size-lg;
@@ -147,6 +157,11 @@
 
   &--sm {
     font-size: vars.$photogrid-caption-font-size-sm;
+  }
+
+  & > span {
+    background-color: vars.$accent-color;
+    line-height: 0.9em;
   }
 }
 

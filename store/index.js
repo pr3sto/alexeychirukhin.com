@@ -100,6 +100,7 @@ const cardstackComponentSchema = {
               type: { type: "string", enum: ["PhotoCard"] },
               round: { type: "boolean" },
               photoUrl: { type: "string" },
+              caption: { type: "string" },
             },
             required: ["type", "round", "photoUrl"],
           },
@@ -136,7 +137,7 @@ const photogridComponentSchema = {
         type: "object",
         properties: {
           url: { type: "string" },
-          caption: { type: "string" },
+          caption: { type: "array", items: { type: "string" } },
         },
         required: ["url"],
       },
