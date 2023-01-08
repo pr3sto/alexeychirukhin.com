@@ -63,6 +63,7 @@ export default {
 
   data() {
     return {
+      isTouch: false,
       isZoomed: false,
       isZoomInProgress: false,
       zoomedImgOffsetX: 0,
@@ -114,6 +115,12 @@ export default {
       this.zoomOut();
     },
     handleMouseMove(e) {
+      if (this.isTouch) {
+        // mousemove event is triggered by touch events
+        // so in touch mode we don't want to handle this event
+        return;
+      }
+
       let x = e.clientX - this.zoomedImgProps.bounds.left;
       let y = e.clientY - this.zoomedImgProps.bounds.top;
 
@@ -124,6 +131,8 @@ export default {
       this.zoomedImgOffsetY = y * -this.zoomedImgProps.ratios.y;
     },
     handleTouchStart(e) {
+      this.isTouch = true;
+
       this.zoomedImgProps.initialTouch = {
         zoomedImgOffsetX: this.zoomedImgOffsetX,
         zoomedImgOffsetY: this.zoomedImgOffsetY,
@@ -189,6 +198,7 @@ export default {
       this.removeEventListenersForZoomedImg();
 
       this.isZoomed = false;
+      this.isTouch = false;
       this.zoomedImgOffsetX = 0;
       this.zoomedImgOffsetY = 0;
 
