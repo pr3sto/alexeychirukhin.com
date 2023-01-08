@@ -32,6 +32,8 @@
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/scss/variables" as vars;
+
 .page-content {
   display: flex;
   flex-direction: column;
@@ -42,16 +44,16 @@
   display: flex;
 
   &--padding-top {
-    padding-top: 1rem;
+    padding-top: vars.$default-padding;
   }
   &--padding-bottom {
-    padding-bottom: 1rem;
+    padding-bottom: vars.$default-padding;
   }
   &--padding-left {
-    padding-left: 1rem;
+    padding-left: vars.$default-padding;
   }
   &--padding-right {
-    padding-right: 1rem;
+    padding-right: vars.$default-padding;
   }
 
   &:only-child {

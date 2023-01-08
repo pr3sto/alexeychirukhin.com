@@ -118,15 +118,15 @@
 
 .photogrid {
   &--padding {
-    margin: -1rem;
-    padding: 0.5rem;
+    margin: -(vars.$default-padding);
+    padding: calc(vars.$default-padding / 2);
 
     .photogrid-photo {
-      padding: 0.5rem;
+      padding: calc(vars.$default-padding / 2);
     }
 
     .photogrid-photo-caption {
-      padding: 1.5rem;
+      padding: calc(vars.$default-padding + vars.$default-padding / 2);
     }
   }
 }
@@ -149,7 +149,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1rem;
+  padding: vars.$default-padding;
 
   &--lg {
     font-size: vars.$photogrid-caption-font-size-lg;
@@ -190,7 +190,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: 1rem;
+  padding: vars.$default-padding;
   font-size: vars.$photogrid-close-font-size-lg;
   color: white;
   mix-blend-mode: exclusion;
@@ -202,14 +202,14 @@
   position: fixed;
   top: 0;
   right: 0;
-  padding: 1rem;
+  padding: vars.$default-padding;
   display: flex;
   flex-direction: column;
 }
 
 .photogrid-fullscreen-lg-colorpicker-block {
-  width: 1rem;
-  height: 1rem;
+  width: vars.$default-padding;
+  height: vars.$default-padding;
   cursor: pointer;
 
   &--white {
@@ -222,7 +222,7 @@
   }
   &--transparent {
     background: url("/images/opacity.png");
-    background-size: 0.5rem;
+    background-size: 8px;
   }
 }
 
@@ -245,14 +245,14 @@
   max-width: 100%;
   max-height: 100%;
   margin: auto;
-  padding: 1rem;
+  padding: vars.$default-padding;
 }
 
 .photogrid-fullscreen-sm-close {
   position: fixed;
   top: 0;
   left: 0;
-  padding: 1rem;
+  padding: vars.$default-padding;
   font-size: vars.$photogrid-close-font-size-sm;
   color: vars.$background-exclde-font-color;
   mix-blend-mode: exclusion;

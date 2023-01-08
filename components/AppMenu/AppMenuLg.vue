@@ -41,13 +41,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-bottom: 1rem;
+  padding-bottom: vars.$default-padding;
   font-size: vars.$appmenu-font-size-lg;
 }
 
 .app-menu-section-header {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: vars.$default-padding;
+  padding-right: vars.$default-padding;
   color: vars.$background-exclde-font-color;
   font-size: vars.$appmenu-section-header-font-size-lg;
   opacity: 0.75;
@@ -55,8 +55,8 @@
 }
 
 .app-menu-section-link {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: vars.$default-padding;
+  padding-right: vars.$default-padding;
   color: vars.$background-exclde-font-color;
   text-decoration: none;
   white-space: nowrap;

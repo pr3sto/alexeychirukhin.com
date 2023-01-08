@@ -11,7 +11,9 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
+@use "~/assets/scss/variables" as vars;
+
 #default-layout-lg {
   display: flex;
   flex-direction: row;
@@ -31,7 +33,7 @@
 }
 
 #default-layout-menu {
-  padding: 1rem;
+  padding: vars.$default-padding;
 }
 
 /* Nuxt pages transition */

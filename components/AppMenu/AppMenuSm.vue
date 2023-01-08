@@ -55,28 +55,28 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem;
+  padding: vars.$default-padding;
   background: vars.$background-color;
 }
 
 .app-menu-full-section {
   display: flex;
   flex-direction: column;
-  padding-bottom: 1rem;
+  padding-bottom: vars.$default-padding;
   font-size: vars.$appmenu-font-size-sm;
 }
 
 .app-menu-full-section-header {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: vars.$default-padding;
+  padding-right: vars.$default-padding;
   color: vars.$font-color;
   font-size: vars.$appmenu-section-header-font-size-sm;
   opacity: 0.75;
 }
 
 .app-menu-full-section-link {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: vars.$default-padding;
+  padding-right: vars.$default-padding;
   color: vars.$font-color;
   text-decoration: none;
   white-space: nowrap;
