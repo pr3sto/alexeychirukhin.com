@@ -43,8 +43,8 @@
 
 <script>
 import * as cardstackConstants from "~/constants/cardstack.js";
-import PhotoCard from "~/components/Content/CardStack/PhotoCard.vue";
-import DarkslideCard from "~/components/Content/CardStack/DarkslideCard.vue";
+import PhotoCard from "./PhotoCard.vue";
+import DarkslideCard from "./DarkslideCard.vue";
 
 import FastPoissonDiskSampling from "fast-2d-poisson-disk-sampling";
 

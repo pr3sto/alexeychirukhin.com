@@ -1,18 +1,18 @@
 <template>
-  <main class="content">
+  <main class="page-content">
     <section
-      class="content-component"
+      class="page-content-component"
       v-for="(component, index) of components"
       :key="index"
       :class="{
-        'content-component--padding-top': component.padding.top,
-        'content-component--padding-bottom': component.padding.bottom,
-        'content-component--padding-left': component.padding.left,
-        'content-component--padding-right': component.padding.right,
+        'page-content-component--padding-top': component.padding.top,
+        'page-content-component--padding-bottom': component.padding.bottom,
+        'page-content-component--padding-left': component.padding.left,
+        'page-content-component--padding-right': component.padding.right,
       }"
     >
-      <text-content
-        v-if="component.content.type === 'TextContent'"
+      <text-blocks
+        v-if="component.content.type === 'TextBlocks'"
         :content="component.content"
       />
       <card-stack-sm
@@ -32,13 +32,13 @@
 </template>
 
 <style lang="scss" scoped>
-.content {
+.page-content {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.content-component {
+.page-content-component {
   display: flex;
 
   &--padding-top {
@@ -65,15 +65,15 @@
 </style>
 
 <script>
-import CardStackLg from "~/components/Content/CardStack/CardStackLg.vue";
-import CardStackSm from "~/components/Content/CardStack/CardStackSm.vue";
-import PhotoGrid from "~/components/Content/PhotoGrid/PhotoGrid.vue";
-import TextContent from "~/components/Content/Text/TextContent.vue";
+import CardStackLg from "./CardStack/CardStackLg.vue";
+import CardStackSm from "./CardStack/CardStackSm.vue";
+import PhotoGrid from "./PhotoGrid/PhotoGrid.vue";
+import TextBlocks from "./TextBlocks/TextBlocks.vue";
 
 export default {
-  name: "ContentBuilder",
+  name: "PageContentBuilder",
   props: ["components"],
-  components: { CardStackLg, CardStackSm, PhotoGrid, TextContent },
+  components: { CardStackLg, CardStackSm, PhotoGrid, TextBlocks },
   computed: {
     smallScreen() {
       return this.$store.state.settings.isSmallScreen;

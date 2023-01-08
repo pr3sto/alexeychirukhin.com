@@ -1,12 +1,12 @@
 <template>
-  <content-builder :components="page.components" />
+  <page-content-builder :components="page.components" />
 </template>
 
 <script>
-import ContentBuilder from "~/components/Content/ContentBuilder.vue";
+import PageContentBuilder from "~/components/PageContent/PageContentBuilder.vue";
 
 export default {
-  components: { ContentBuilder },
+  components: { PageContentBuilder },
   computed: {
     page() {
       return this.$store.getters["data/currentPage"](this.$route.path);

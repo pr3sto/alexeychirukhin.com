@@ -1,10 +1,10 @@
 <template>
   <div
-    :id="smallScreen ? 'default-layout-sm' : 'default-layout'"
+    :id="smallScreen ? 'default-layout-sm' : 'default-layout-lg'"
     :style="cssVars"
   >
     <nuxt-child
-      :id="smallScreen ? 'default-layout-page-sm' : 'default-layout-page'"
+      :id="smallScreen ? 'default-layout-page-sm' : 'default-layout-page-lg'"
     />
     <app-menu-sm v-if="smallScreen" id="default-layout-menu" />
     <app-menu-lg v-else id="default-layout-menu" />
@@ -12,12 +12,12 @@
 </template>
 
 <style>
-#default-layout {
+#default-layout-lg {
   display: flex;
   flex-direction: row;
   min-height: var(--min-height);
 }
-#default-layout-page {
+#default-layout-page-lg {
   flex-grow: 1;
 }
 
