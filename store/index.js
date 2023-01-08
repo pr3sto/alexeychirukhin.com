@@ -64,6 +64,7 @@ const dataPageSchema = {
             oneOf: [
               { $ref: "/definitions/data/page/component/cardstack" },
               { $ref: "/definitions/data/page/component/photogrid" },
+              { $ref: "/definitions/data/page/component/textblocks" },
             ],
           },
           padding: {
@@ -145,9 +146,28 @@ const photogridComponentSchema = {
   required: ["type", "photos"],
 };
 
-const textComponentSchema = {
-  id: "/definitions/data/page/component/text",
+const textblocksComponentSchema = {
+  id: "/definitions/data/page/component/textblocks",
   type: "object",
+  properties: {
+    type: { type: "string", enum: ["TextBlocks"] },
+    blocks: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          align: { type: "string", enum: ["left", "right", "center"] },
+          linesStyle: { type: "string" },
+          lines: {
+            type: "array",
+            items: { type: "string" },
+          },
+        },
+        required: ["align", "linesStyle", "lines"],
+      },
+    },
+  },
+  required: ["type", "blocks"],
 };
 
 const dataMiscSchema = {
@@ -172,8 +192,8 @@ function isValid(data) {
     "/definitions/data/page/component/photogrid"
   );
   validator.addSchema(
-    textComponentSchema,
-    "/definitions/data/page/component/text"
+    textblocksComponentSchema,
+    "/definitions/data/page/component/textblocks"
   );
   validator.addSchema(dataPageSchema, "/definitions/data/page");
   validator.addSchema(dataMiscSchema, "/definitions/data/misc");

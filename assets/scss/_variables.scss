@@ -10,25 +10,28 @@ $appmenu-font-size-sm: 1.5rem;
 $appmenu-section-header-font-size-lg: 1.7rem;
 $appmenu-section-header-font-size-sm: 1.2rem;
 
-$photogrid-close-font-size-lg: 1.5rem;
+$photogrid-close-font-size-lg: 1.7rem;
 $photogrid-close-font-size-sm: 1.2rem;
 
 $photogrid-caption-font-size-lg: 1rem;
 $photogrid-caption-font-size-sm: 1rem;
 
+$textblocks-font-size-lg: 1rem;
+$textblocks-font-size-sm: 1rem;
+
 // transitions
 $default-transition-func: cubic-bezier(0.8, 0.2, 0.1, 0.8);
 $default-transition: 0.2s $default-transition-func;
 
+// colors
 $white-color: #fefefe;
 $black-color: #1f1f1f;
 
-// colors
 $background-color: $white-color;
 $font-color: $black-color;
 $accent-color: #f52d09;
 
-// variables for blend mode
+// colors for blend mode
 $background-exclde-font-color: #dfdfdf; // $background-color - $font-color
 $background-exclde-accent-color: #09d1f5; // $background-color - $accent-color
 
