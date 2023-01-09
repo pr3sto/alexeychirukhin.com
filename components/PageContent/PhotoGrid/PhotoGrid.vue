@@ -339,7 +339,7 @@ export default {
     },
     afterFullscreenLgClosed() {
       // show image on grid
-      this.fullscreenImg.targetElement.style.visibility = "visible";
+      this.fullscreenImg.targetElement.parentNode.style.visibility = "visible";
 
       window.removeEventListener("resize", this.closeFullscreen);
       window.removeEventListener("wheel", this.handleScroll);
@@ -440,7 +440,7 @@ export default {
       this.zoomigProps.transform = fsImgTransfrom;
 
       // hide original image on grid
-      this.fullscreenImg.targetElement.style.visibility = "hidden";
+      this.fullscreenImg.targetElement.parentNode.style.visibility = "hidden";
 
       // show fullscreen
       this.showFullScreen = true;
