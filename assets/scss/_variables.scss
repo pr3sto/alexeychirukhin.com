@@ -1,23 +1,18 @@
-// font-family
+// max width for mobile version of the site
+$media-mobile-max-width: 700px;
+
+// fonts
 $primary-font-family: "Fraunces";
 $secondary-font-family: "Chango";
 $handwriting1-font-family: "Schoolbell";
 $handwriting2-font-family: "Just Me Again Down Here";
 
-// font-size
-$appmenu-font-size-lg: 2.2rem;
-$appmenu-font-size-sm: 1.5rem;
-$appmenu-section-header-font-size-lg: 1.7rem;
-$appmenu-section-header-font-size-sm: 1.2rem;
+// font sizes
+$appmenu-font-size: 2.1rem;
+$appmenu-section-header-font-size: 1.5rem;
 
-$photogrid-close-font-size-lg: 1.7rem;
-$photogrid-close-font-size-sm: 1.2rem;
-
-$photogrid-caption-font-size-lg: 1.7rem;
-$photogrid-caption-font-size-sm: 1.2rem;
-
-$textblocks-font-size-lg: 1rem;
-$textblocks-font-size-sm: 1rem;
+$photogrid-close-font-size: 1.5rem;
+$photogrid-caption-font-size: 1.5rem;
 
 // padding
 $default-padding: 1rem;
@@ -39,6 +34,7 @@ $background-exclde-font-color: #dfdfdf; // $background-color - $font-color
 $background-exclde-accent-color: #09d1f5; // $background-color - $accent-color
 
 :export {
+  mediaMobileMaxWidth: $media-mobile-max-width;
   whiteColor: $white-color;
   blackColor: $black-color;
 }

@@ -152,11 +152,11 @@
   padding: vars.$default-padding;
 
   &--lg {
-    font-size: vars.$photogrid-caption-font-size-lg;
+    font-size: vars.$photogrid-caption-font-size;
   }
 
   &--sm {
-    font-size: vars.$photogrid-caption-font-size-sm;
+    font-size: vars.$photogrid-caption-font-size;
   }
 
   & > span {
@@ -191,7 +191,7 @@
   top: 0;
   left: 0;
   padding: vars.$default-padding;
-  font-size: vars.$photogrid-close-font-size-lg;
+  font-size: vars.$photogrid-close-font-size;
   color: white;
   mix-blend-mode: exclusion;
   writing-mode: vertical-rl;
@@ -253,7 +253,7 @@
   top: 0;
   left: 0;
   padding: vars.$default-padding;
-  font-size: vars.$photogrid-close-font-size-sm;
+  font-size: vars.$photogrid-close-font-size;
   color: vars.$background-exclde-font-color;
   mix-blend-mode: exclusion;
   cursor: pointer;

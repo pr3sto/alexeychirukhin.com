@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="textblocks"
-    :class="smallScreen ? 'textblocks--sm' : 'textblocks--lg'"
-  >
+  <div class="textblocks">
     <div
       class="textblocks-block"
       v-for="(block, index1) of content.blocks"
@@ -27,14 +24,6 @@
 .textblocks {
   display: flex;
   flex-direction: column;
-
-  &--lg {
-    font-size: vars.$textblocks-font-size-lg;
-  }
-
-  &--sm {
-    font-size: vars.$textblocks-font-size-sm;
-  }
 }
 
 .textblocks-block {

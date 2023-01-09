@@ -39,7 +39,7 @@
   display: inline-block;
   color: vars.$font-color;
   font-family: vars.$secondary-font-family;
-  font-size: vars.$appmenu-font-size-sm;
+  font-size: vars.$appmenu-font-size;
   font-weight: bolder;
   text-transform: uppercase;
   cursor: pointer;
@@ -63,14 +63,14 @@
   display: flex;
   flex-direction: column;
   padding-bottom: vars.$default-padding;
-  font-size: vars.$appmenu-font-size-sm;
+  font-size: vars.$appmenu-font-size;
 }
 
 .app-menu-full-section-header {
   padding-left: vars.$default-padding;
   padding-right: vars.$default-padding;
   color: vars.$font-color;
-  font-size: vars.$appmenu-section-header-font-size-sm;
+  font-size: vars.$appmenu-section-header-font-size;
   opacity: 0.75;
 }
 
@@ -79,7 +79,8 @@
   padding-right: vars.$default-padding;
   color: vars.$font-color;
   text-decoration: none;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  box-decoration-break: clone;
 
   &.nuxt-link-exact-active {
     font-family: vars.$secondary-font-family;

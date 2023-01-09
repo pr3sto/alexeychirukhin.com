@@ -57,7 +57,12 @@ img {
   background-color: vars.$accent-color;
 }
 
-@media only screen and (max-width: 700px) {
+/* mobile version */
+@media only screen and (max-width: vars.$media-mobile-max-width) {
+  html {
+    font-size: 14px;
+  }
+
   /* looks better on mobile */
   img {
     image-rendering: auto;
