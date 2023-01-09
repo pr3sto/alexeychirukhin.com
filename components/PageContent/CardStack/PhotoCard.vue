@@ -7,7 +7,6 @@
       <nuxt-img
         class="photocard-photo-img"
         provider="imagekit"
-        sizes="md:800px lg:1500px"
         preset="progressivejpg"
         :src="card.photoUrl"
       />
