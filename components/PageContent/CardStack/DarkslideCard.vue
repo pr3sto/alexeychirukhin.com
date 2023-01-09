@@ -58,16 +58,16 @@
 
   /* texture */
   &::before {
-    pointer-events: none;
     content: "";
-    background-image: url("/images/paper.png");
-    background-size: cover;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    background-image: url("/images/paper.png");
+    background-size: cover;
     opacity: 0.4;
+    pointer-events: none;
   }
 }
 
@@ -140,11 +140,11 @@
 
 .darkslidecard-black-label {
   position: absolute;
-  z-index: -1;
   top: -4%;
   left: 0;
   width: 11%;
   height: 5%;
+  z-index: -1;
   background-color: #0a0a0a;
 }
 </style>

@@ -35,16 +35,16 @@
 
   /* texture */
   &::before {
-    pointer-events: none;
     content: "";
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAYAAADam2dgAAAAAXNSR0IArs4c6QAAADFJREFUKFNjZGBgkGJgYHjGgBtIMULlcCkEi8MUgdSiK4TzkRUhK0TRQJJJBN1E0HcAEQkMPPAHd4YAAAAASUVORK5CYII=);
-    background-size: 0.7em;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAYAAADam2dgAAAAAXNSR0IArs4c6QAAADFJREFUKFNjZGBgkGJgYHjGgBtIMULlcCkEi8MUgdSiK4TzkRUhK0TRQJJJBN1E0HcAEQkMPPAHd4YAAAAASUVORK5CYII=);
+    background-size: 0.7em;
     opacity: 0.3;
+    pointer-events: none;
   }
 }
 
@@ -55,15 +55,15 @@
 
   /* gloss effect */
   &::after {
-    pointer-events: none;
     content: "";
-    background-image: url("/images/gloss.png");
-    background-size: cover;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    background-image: url("/images/gloss.png");
+    background-size: cover;
+    pointer-events: none;
   }
 
   /* round photo */
@@ -81,8 +81,8 @@
 }
 
 .photocard-caption {
-  flex-grow: 1;
   display: flex;
+  flex-grow: 1;
   align-items: center;
   justify-content: center;
   padding: 8% 0;

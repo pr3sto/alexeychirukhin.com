@@ -44,8 +44,8 @@
 
 br {
   display: block;
-  content: "";
   margin-top: 1em;
+  content: "";
 }
 </style>
 

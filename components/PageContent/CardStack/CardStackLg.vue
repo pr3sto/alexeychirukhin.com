@@ -24,8 +24,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  overflow: hidden;
   z-index: 0; /* creates stacking context for cards */
+  overflow: hidden;
 }
 
 .cardstack-card {
