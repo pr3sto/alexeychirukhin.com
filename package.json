@@ -1,12 +1,13 @@
 {
   "name": "alexeychirukhin.com",
-  "version": "0.4.0",
+  "version": "1.0.1",
   "description": "Alexey Chirukhin personal website",
   "author": "Alexey Chirukhin",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "dev:host": "nuxt --hostname 0.0.0.0",
+    "beta": "set NODE_ENV=beta&& nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",

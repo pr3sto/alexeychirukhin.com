@@ -90,4 +90,5 @@ sw.*
 *.swp
 
 # only for local dev
-static/data.local.json
+static/data.development.json
+static/data.beta.json
