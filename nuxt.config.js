@@ -39,7 +39,7 @@ export default {
       lang: "en",
     },
   },
-  css: ["@/assets/scss/main.scss", "@/assets/scss/transitions.scss"],
+  css: ["~/assets/scss/main.scss", "~/assets/scss/transitions.scss"],
   loadingIndicator: "~/loading.html",
   buildModules: [
     ["@nuxtjs/dotenv", { filename: `.env.${process.env.NODE_ENV}` }],

@@ -14,6 +14,7 @@
         <nuxt-img
           provider="imagekit"
           preset="progressivejpg"
+          loading="lazy"
           sizes="md:800px lg:1500px"
           :src="photo.url"
           v-on:click="handlePhotoImgClicked($event, photo)"
