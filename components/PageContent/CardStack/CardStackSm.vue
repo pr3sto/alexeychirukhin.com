@@ -122,7 +122,7 @@
 </style>
 
 <script>
-import * as cardstackConstants from "~/constants/cardstack.js";
+import cardstack from "~/constants/cardstack.js";
 import PhotoCard from "./PhotoCard.vue";
 import DarkslideCard from "./DarkslideCard.vue";
 
@@ -168,17 +168,17 @@ export default {
       const containerRect = this.$el.children[0].getBoundingClientRect();
       if (
         containerRect.width / containerRect.height >
-        cardstackConstants.CARD_ASPECT_RATIO
+        cardstack.CARD_ASPECT_RATIO
       ) {
         this.cardstackContainerHeight = "100%";
         this.cardstackContainerWidth = "auto";
         this.fontSize =
-          containerRect.height / cardstackConstants.FONT_SIZE_FACTOR1;
+          containerRect.height / cardstack.FONT_SIZE_FACTOR1;
       } else {
         this.cardstackContainerHeight = "auto";
         this.cardstackContainerWidth = "100%";
         this.fontSize =
-          containerRect.width / cardstackConstants.FONT_SIZE_FACTOR2;
+          containerRect.width / cardstack.FONT_SIZE_FACTOR2;
       }
     },
     handleCardClick(e) {

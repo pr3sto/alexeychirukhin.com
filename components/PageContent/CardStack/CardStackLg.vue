@@ -42,7 +42,7 @@
 </style>
 
 <script>
-import * as cardstackConstants from "~/constants/cardstack.js";
+import cardstack from "~/constants/cardstack.js";
 import PhotoCard from "./PhotoCard.vue";
 import DarkslideCard from "./DarkslideCard.vue";
 
@@ -94,19 +94,19 @@ export default {
 
       // calc width and height of a card based on a container bounds
       const maxWidth =
-        containerRect.width * cardstackConstants.LG_CARD_SCALE_FACTOR;
+        containerRect.width * cardstack.LG_CARD_SCALE_FACTOR;
       const maxheigth =
-        containerRect.height * cardstackConstants.LG_CARD_SCALE_FACTOR;
-      if (maxWidth / maxheigth > cardstackConstants.CARD_ASPECT_RATIO) {
+        containerRect.height * cardstack.LG_CARD_SCALE_FACTOR;
+      if (maxWidth / maxheigth > cardstack.CARD_ASPECT_RATIO) {
         this.cardstackCardHeight = maxheigth;
         this.cardstackCardWidth =
-          maxheigth * cardstackConstants.CARD_ASPECT_RATIO;
-        this.fontSize = maxheigth / cardstackConstants.FONT_SIZE_FACTOR1;
+          maxheigth * cardstack.CARD_ASPECT_RATIO;
+        this.fontSize = maxheigth / cardstack.FONT_SIZE_FACTOR1;
       } else {
         this.cardstackCardHeight =
-          maxWidth / cardstackConstants.CARD_ASPECT_RATIO;
+          maxWidth / cardstack.CARD_ASPECT_RATIO;
         this.cardstackCardWidth = maxWidth;
-        this.fontSize = maxWidth / cardstackConstants.FONT_SIZE_FACTOR2;
+        this.fontSize = maxWidth / cardstack.FONT_SIZE_FACTOR2;
       }
     },
     shuffleCards() {
@@ -119,9 +119,9 @@ export default {
 
       // padding, because we don't want to move cards close to edges
       const paddingX =
-        maxOffsetX * cardstackConstants.LG_CARD_CONTAINER_PADDING_PERCENT;
+        maxOffsetX * cardstack.LG_CARD_CONTAINER_PADDING_PERCENT;
       const paddingY =
-        maxOffsetY * cardstackConstants.LG_CARD_CONTAINER_PADDING_PERCENT;
+        maxOffsetY * cardstack.LG_CARD_CONTAINER_PADDING_PERCENT;
 
       // 2d plane for random points
       const planeWidth = maxOffsetX - paddingX * 2;
@@ -139,7 +139,7 @@ export default {
         const x = randomPoints[index][0] + paddingX + containerRect.x;
         const y = randomPoints[index][1] + paddingY + containerRect.y;
         let rotate =
-          getRandomNumber(0, cardstackConstants.LG_CARD_MAX_ANGLE_DEG) *
+          getRandomNumber(0, cardstack.LG_CARD_MAX_ANGLE_DEG) *
           (isOdd(index) ? 1 : -1);
 
         element.style.zIndex = index + 1;
