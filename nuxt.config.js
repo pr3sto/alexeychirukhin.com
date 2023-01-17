@@ -2,15 +2,12 @@ export default {
   devtools: process.env.NODE_ENV !== "production",
   ssr: false,
   target: "static",
-  env: {
-    defaultTitle: "Alexey Chirukhin",
-  },
   head: {
-    title: process.env.defaultTitle,
+    title: "Alexey Chirukhin",
     titleTemplate: (titleChunk) => {
-      return titleChunk && titleChunk !== process.env.defaultTitle
-        ? `${titleChunk} — ${process.env.defaultTitle}`
-        : process.env.defaultTitle;
+      return titleChunk && titleChunk !== "Alexey Chirukhin"
+        ? `${titleChunk} — Alexey Chirukhin`
+        : "Alexey Chirukhin";
     },
     meta: [
       { charset: "utf-8" },
@@ -48,6 +45,15 @@ export default {
     { src: "~/plugins/windowResizeHandler.client.js", mode: "client" },
     { src: "~/plugins/pageScroll.client.js", mode: "client" },
   ],
+  build: {
+    terser: {
+      terserOptions: {
+        compress: {
+          drop_console: true
+        }
+      }
+    }
+  },
   image: {
     imagekit: {
       baseURL: "https://ik.imagekit.io/pr3sto",

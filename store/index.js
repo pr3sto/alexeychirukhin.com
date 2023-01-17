@@ -15,8 +15,8 @@ export const actions = {
     // validate data
     if (isValid(data)) {
       commit("data/setData", data);
-    } else if (process.env.NODE_ENV === "development") {
-      alert("JSON DATA VALIDATION ERROR");
+    } else {
+      console.log("JSON DATA VALIDATION ERROR");
     }
   },
 };
@@ -201,9 +201,7 @@ function isValid(data) {
 
   const validateResult = validator.validate(data, dataSchema);
 
-  if (process.env.NODE_ENV === "development") {
-    console.log(validateResult);
-  }
+  console.log(validateResult);
 
   return validateResult.valid;
 }
