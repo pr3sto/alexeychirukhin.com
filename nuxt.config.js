@@ -1,7 +1,3 @@
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
-
 export default {
   devtools: process.env.NODE_ENV !== "production",
   ssr: false,
@@ -42,7 +38,7 @@ export default {
   css: ["~/assets/scss/main.scss", "~/assets/scss/transitions.scss"],
   loadingIndicator: "~/loading.html",
   buildModules: [
-    ["@nuxtjs/dotenv", { filename: `.env.${process.env.NODE_ENV}` }],
+    "@nuxtjs/dotenv",
     "@nuxt/image",
     "nuxt-client-init-module",
   ],
