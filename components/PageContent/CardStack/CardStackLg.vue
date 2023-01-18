@@ -8,6 +8,7 @@
         ref="cards"
         v-on:mousedown="handleCardMouseDown"
         v-on:touchstart="handleCardTouchStart"
+        v-on:click="handleCardClick"
       >
         <component :is="card.type" :card="card" :fontSize="fontSize" />
       </div>
@@ -67,6 +68,7 @@ export default {
       cardstackCardHeight: 0,
       cardstackCardWidth: 0,
       fontSize: 0,
+      cardWasDragged: false,
       drag: {
         target: undefined,
         clientX: 0,
@@ -93,18 +95,14 @@ export default {
       const containerRect = this.$el.getBoundingClientRect();
 
       // calc width and height of a card based on a container bounds
-      const maxWidth =
-        containerRect.width * cardstack.LG_CARD_SCALE_FACTOR;
-      const maxheigth =
-        containerRect.height * cardstack.LG_CARD_SCALE_FACTOR;
+      const maxWidth = containerRect.width * cardstack.LG_CARD_SCALE_FACTOR;
+      const maxheigth = containerRect.height * cardstack.LG_CARD_SCALE_FACTOR;
       if (maxWidth / maxheigth > cardstack.CARD_ASPECT_RATIO) {
         this.cardstackCardHeight = maxheigth;
-        this.cardstackCardWidth =
-          maxheigth * cardstack.CARD_ASPECT_RATIO;
+        this.cardstackCardWidth = maxheigth * cardstack.CARD_ASPECT_RATIO;
         this.fontSize = maxheigth / cardstack.FONT_SIZE_FACTOR1;
       } else {
-        this.cardstackCardHeight =
-          maxWidth / cardstack.CARD_ASPECT_RATIO;
+        this.cardstackCardHeight = maxWidth / cardstack.CARD_ASPECT_RATIO;
         this.cardstackCardWidth = maxWidth;
         this.fontSize = maxWidth / cardstack.FONT_SIZE_FACTOR2;
       }
@@ -118,10 +116,8 @@ export default {
       const maxOffsetY = containerRect.height - this.cardstackCardHeight;
 
       // padding, because we don't want to move cards close to edges
-      const paddingX =
-        maxOffsetX * cardstack.LG_CARD_CONTAINER_PADDING_PERCENT;
-      const paddingY =
-        maxOffsetY * cardstack.LG_CARD_CONTAINER_PADDING_PERCENT;
+      const paddingX = maxOffsetX * cardstack.LG_CARD_CONTAINER_PADDING_PERCENT;
+      const paddingY = maxOffsetY * cardstack.LG_CARD_CONTAINER_PADDING_PERCENT;
 
       // 2d plane for random points
       const planeWidth = maxOffsetX - paddingX * 2;
@@ -159,6 +155,8 @@ export default {
       e.stopPropagation();
       e.preventDefault();
 
+      this.cardWasDragged = false;
+
       this.drag.clientX = e.clientX;
       this.drag.clientY = e.clientY;
       this.drag.target = e.currentTarget;
@@ -173,7 +171,15 @@ export default {
       document.removeEventListener("mousemove", this.handleMouseMove);
     },
     handleMouseMove(e) {
+      this.cardWasDragged = true;
       this.moveCardTo(e.clientX, e.clientY);
+    },
+    handleCardClick(e) {
+      // prevent click on links if card was dragged
+      if (this.cardWasDragged) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
     },
     handleCardTouchStart(e) {
       this.drag.target = e.currentTarget;
