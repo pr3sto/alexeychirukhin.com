@@ -172,13 +172,11 @@ export default {
       ) {
         this.cardstackContainerHeight = "100%";
         this.cardstackContainerWidth = "auto";
-        this.fontSize =
-          containerRect.height / cardstack.FONT_SIZE_FACTOR1;
+        this.fontSize = containerRect.height / cardstack.FONT_SIZE_FACTOR1;
       } else {
         this.cardstackContainerHeight = "auto";
         this.cardstackContainerWidth = "100%";
-        this.fontSize =
-          containerRect.width / cardstack.FONT_SIZE_FACTOR2;
+        this.fontSize = containerRect.width / cardstack.FONT_SIZE_FACTOR2;
       }
     },
     handleCardClick(e) {
