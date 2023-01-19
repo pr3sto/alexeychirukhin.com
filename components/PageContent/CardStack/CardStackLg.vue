@@ -95,8 +95,8 @@ export default {
       const containerRect = this.$el.getBoundingClientRect();
 
       // calc width and height of a card based on a container bounds
-      const maxWidth = containerRect.width * cardstack.LG_CARD_SCALE_FACTOR;
-      const maxheigth = containerRect.height * cardstack.LG_CARD_SCALE_FACTOR;
+      const maxWidth = containerRect.width * cardstack.largeScreen.CARD_SCALE;
+      const maxheigth = containerRect.height * cardstack.largeScreen.CARD_SCALE;
       if (maxWidth / maxheigth > cardstack.CARD_ASPECT_RATIO) {
         this.cardstackCardHeight = maxheigth;
         this.cardstackCardWidth = maxheigth * cardstack.CARD_ASPECT_RATIO;
@@ -116,8 +116,10 @@ export default {
       const maxOffsetY = containerRect.height - this.cardstackCardHeight;
 
       // padding, because we don't want to move cards close to edges
-      const paddingX = maxOffsetX * cardstack.LG_CARD_CONTAINER_PADDING_PERCENT;
-      const paddingY = maxOffsetY * cardstack.LG_CARD_CONTAINER_PADDING_PERCENT;
+      const paddingX =
+        maxOffsetX * cardstack.largeScreen.CARD_CONTAINER_PADDING_PERCENT;
+      const paddingY =
+        maxOffsetY * cardstack.largeScreen.CARD_CONTAINER_PADDING_PERCENT;
 
       // 2d plane for random points
       const planeWidth = maxOffsetX - paddingX * 2;
@@ -135,7 +137,7 @@ export default {
         const x = randomPoints[index][0] + paddingX + containerRect.x;
         const y = randomPoints[index][1] + paddingY + containerRect.y;
         let rotate =
-          getRandomNumber(0, cardstack.LG_CARD_MAX_ANGLE_DEG) *
+          getRandomNumber(0, cardstack.largeScreen.CARD_MAX_ROTATE_ANGLE_DEG) *
           (isOdd(index) ? 1 : -1);
 
         element.style.zIndex = index + 1;
