@@ -2,6 +2,10 @@ export default {
   devtools: process.env.NODE_ENV !== "production",
   ssr: false,
   target: "static",
+  env: {
+    DATA_JSON_PATH: process.env.DATA_JSON_PATH,
+    LOCAL_STORE_LIFETIME_MINUTES: process.env.LOCAL_STORE_LIFETIME_MINUTES,
+  },
   head: {
     title: "Alexey Chirukhin",
     titleTemplate: (titleChunk) => {
@@ -35,7 +39,6 @@ export default {
   css: ["~/assets/scss/main.scss", "~/assets/scss/transitions.scss"],
   loadingIndicator: "~/loading.html",
   buildModules: [
-    "@nuxtjs/dotenv",
     "@nuxt/image",
     "nuxt-client-init-module",
   ],
