@@ -9,7 +9,7 @@ export default {
   components: { PageContentBuilder },
   computed: {
     page() {
-      return this.$store.getters["data/currentPage"](this.$route.path);
+      return this.$api.page.get(this.$route.path);
     },
   },
 };

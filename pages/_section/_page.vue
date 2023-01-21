@@ -10,7 +10,7 @@ export default {
 
   computed: {
     page() {
-      return this.$store.getters["data/currentPage"](this.$route.path);
+      return this.$api.page.get(this.$route.path);
     },
   },
 
@@ -20,10 +20,8 @@ export default {
     };
   },
 
-  validate({ params, store, redirect }) {
-    const page = store.getters["data/currentPage"](
-      `/${params.section}/${params.page}`
-    );
+  validate({ params, redirect }) {
+    const page = this.$api.page.get(`/${params.section}/${params.page}`);
     if (!page) {
       redirect("/");
     }

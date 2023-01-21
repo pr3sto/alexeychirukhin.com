@@ -38,24 +38,22 @@ export default {
   },
   css: ["~/assets/scss/main.scss", "~/assets/scss/transitions.scss"],
   loadingIndicator: "~/loading.html",
-  buildModules: [
-    "@nuxt/image",
-    "nuxt-client-init-module",
-  ],
+  buildModules: ["@nuxt/image", "nuxt-client-init-module"],
   plugins: [
     { src: "~/plugins/vueMasonry.client.js", mode: "client" },
     { src: "~/plugins/persistedState.client.js", mode: "client" },
     { src: "~/plugins/windowResizeHandler.client.js", mode: "client" },
     { src: "~/plugins/pageUtility.client.js", mode: "client" },
+    { src: "~/plugins/api.client.js", mode: "client" },
   ],
   build: {
     terser: {
       terserOptions: {
         compress: {
-          drop_console: true
-        }
-      }
-    }
+          drop_console: true,
+        },
+      },
+    },
   },
   image: {
     imagekit: {

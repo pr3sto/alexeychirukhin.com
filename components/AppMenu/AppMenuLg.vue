@@ -3,7 +3,7 @@
     <div>
       <section
         class="app-menu-section"
-        v-for="(sectionItems, sectionName, index) of menuSections"
+        v-for="(sectionItems, sectionName, index) of menu.sections"
         :key="index"
       >
         <p class="app-menu-section-header" v-show="sectionName !== ''">
@@ -79,8 +79,8 @@
 export default {
   name: "AppMenuLg",
   computed: {
-    menuSections() {
-      return this.$store.state.data.menuSections;
+    menu() {
+      return this.$api.menu.get();
     },
   },
 };

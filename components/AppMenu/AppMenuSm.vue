@@ -1,7 +1,7 @@
 <template>
   <menu class="app-menu">
     <p class="app-menu-header" v-on:click="handleAppMenuHeaderClicked">
-      {{ currentHeader }}
+      {{ activeMenuHeader }}
     </p>
     <transition
       name="opacity-transition"
@@ -15,7 +15,7 @@
       >
         <section
           class="app-menu-full-section"
-          v-for="(sectionItems, sectionName, index) of menuSections"
+          v-for="(sectionItems, sectionName, index) of menu.sections"
           :key="index"
         >
           <p class="app-menu-full-section-header" v-show="sectionName !== ''">
@@ -95,11 +95,12 @@ export default {
   name: "AppMenuSm",
 
   computed: {
-    menuSections() {
-      return this.$store.state.data.menuSections;
+    menu() {
+      return this.$api.menu.get();
     },
-    currentHeader() {
-      return this.$store.getters["data/currentMenuHeader"](this.$route.path);
+    activeMenuHeader() {
+      const menuItems = [].concat.apply([], Object.values(this.menu.sections));
+      return menuItems.find((item) => item.route === this.$route.path).header;
     },
   },
 

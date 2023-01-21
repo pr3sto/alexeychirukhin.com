@@ -315,7 +315,7 @@ export default {
       windowScrollPosition: {},
       fullscreenImg: {
         targetElement: null,
-        src: this.$store.state.data.misc.noImageUrl,
+        src: this.$api.page.noImageUrl(),
       },
       zoomigProps: {
         zoomScale: 1,

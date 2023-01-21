@@ -1,23 +1,15 @@
 const defaultState = {
   timestamp: null,
   pages: [],
-  menuSections: [],
+  menu: {
+    sections: [],
+  },
   misc: {
     noImageUrl: null,
   },
 };
 
 export const state = () => defaultState;
-
-export const getters = {
-  currentPage: (state) => (route) => {
-    return state.pages.find((page) => page.route === route);
-  },
-  currentMenuHeader: (state) => (route) => {
-    const menuItems = [].concat.apply([], Object.values(state.menuSections));
-    return menuItems.find((item) => item.route === route).header;
-  },
-};
 
 export const mutations = {
   setData(state, data) {
@@ -46,7 +38,7 @@ export const mutations = {
     });
 
     // group menu items by section
-    state.menuSections = menuItems.reduce(function (
+    state.menu.sections = menuItems.reduce(function (
       previousValue,
       currentValue
     ) {
