@@ -329,7 +329,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.$enablePageScroll();
+    this.$pageUtility.enablePageScroll();
     this.cleanupEventListeners();
   },
 
@@ -352,10 +352,10 @@ export default {
         y: window.pageYOffset,
       };
 
-      this.$disablePageScroll();
+      this.$pageUtility.disablePageScroll();
     },
     beforeFullscreenSmClosed() {
-      this.$enablePageScroll();
+      this.$pageUtility.enablePageScroll();
 
       // restore scroll position
       window.scrollTo(this.windowScrollPosition.x, this.windowScrollPosition.y);

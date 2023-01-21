@@ -117,10 +117,10 @@ export default {
       this.showFullscreenAppMenu = false;
     },
     afterFullscreenAppMenuOpened() {
-      this.$disablePageScroll();
+      this.$pageUtility.disablePageScroll();
     },
     beforeFullscreenAppMenuClosed() {
-      this.$enablePageScroll();
+      this.$pageUtility.enablePageScroll();
     },
   },
 };

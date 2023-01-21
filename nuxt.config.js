@@ -46,7 +46,7 @@ export default {
     { src: "~/plugins/vueMasonry.client.js", mode: "client" },
     { src: "~/plugins/persistedState.client.js", mode: "client" },
     { src: "~/plugins/windowResizeHandler.client.js", mode: "client" },
-    { src: "~/plugins/pageScroll.client.js", mode: "client" },
+    { src: "~/plugins/pageUtility.client.js", mode: "client" },
   ],
   build: {
     terser: {
