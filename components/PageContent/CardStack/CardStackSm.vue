@@ -142,6 +142,7 @@ export default {
 
   data() {
     return {
+      elementResizeObserver: null,
       annotatedCards: annotateCards(this.content.cards, 0, true),
       cardstackContainerHeight: "auto",
       cardstackContainerWidth: "100%",
@@ -150,17 +151,16 @@ export default {
   },
 
   mounted() {
-    setTimeout(() => {
-      this.$nextTick(() => {
-        this.reCalculate();
-      });
+    this.$nextTick(() => {
+      this.reCalculate();
     });
 
-    window.addEventListener("resize", this.reCalculate);
+    this.elementResizeObserver = new ResizeObserver(this.reCalculate);
+    this.elementResizeObserver.observe(this.$el);
   },
 
   beforeDestroy() {
-    this.cleanupEventListeners();
+    this.elementResizeObserver.disconnect();
   },
 
   methods: {
@@ -216,9 +216,6 @@ export default {
           false
         );
       });
-    },
-    cleanupEventListeners() {
-      window.removeEventListener("resize", this.reCalculate);
     },
   },
 };

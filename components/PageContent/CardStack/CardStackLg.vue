@@ -65,6 +65,7 @@ export default {
 
   data() {
     return {
+      elementResizeObserver: null,
       cardstackCardHeight: 0,
       cardstackCardWidth: 0,
       fontSize: 0,
@@ -83,10 +84,12 @@ export default {
       this.shuffleCards();
     });
 
-    window.addEventListener("resize", this.reCalculate);
+    this.elementResizeObserver = new ResizeObserver(this.reCalculate);
+    this.elementResizeObserver.observe(this.$el);
   },
 
   beforeDestroy() {
+    this.elementResizeObserver.disconnect();
     this.cleanupEventListeners();
   },
 
@@ -218,7 +221,6 @@ export default {
       this.drag.target.style.top = `${this.drag.target.offsetTop - offsetY}px`;
     },
     cleanupEventListeners() {
-      window.removeEventListener("resize", this.reCalculate);
       document.removeEventListener("mouseup", this.handleMouseUp);
       document.removeEventListener("mousemove", this.handleMouseMove);
       document.removeEventListener("touchend", this.handleTouchEnd);
