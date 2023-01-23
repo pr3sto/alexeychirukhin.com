@@ -16,22 +16,6 @@
           "displayName": "The memory"
         }
       ]
-    },
-    {
-      "path": "asda",
-      "displayName": "asda",
-      "pages": [
-        {
-          "id": 2,
-          "path": "asd1",
-          "displayName": "The asd1"
-        },
-        {
-          "id": 3,
-          "path": "asd2",
-          "displayName": "The asd2"
-        }
-      ]
     }
   ]
 }
