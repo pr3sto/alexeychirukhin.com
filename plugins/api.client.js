@@ -1,11 +1,11 @@
-import Page from "~/api/page";
-import Menu from "~/api/menu";
+import Menu from "~/api/menu.js";
+import Page from "~/api/page.js";
 
-export default (context, inject) => {
-  const factories = {
-    page: Page(context),
-    menu: Menu(context),
+export default (_, inject) => {
+  const api = {
+    menu: Menu,
+    page: Page,
   };
 
-  inject("api", factories);
+  inject("api", api);
 };

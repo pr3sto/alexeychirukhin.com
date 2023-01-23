@@ -1,0 +1,28 @@
+{
+  "id": 0,
+  "header": "Alexey Chirukhin",
+  "components": [
+    {
+      "content": {
+        "type": "CardStack",
+        "cards": [
+          {
+            "type": "PhotoCard",
+            "round": true,
+            "photoUrl": "alexeychirukhin_com/v1/pages/index/vDXwb_ibYHTPk2A.jpg"
+          },
+          {
+            "type": "DarkslideCard",
+            "html": "<div style=\"display:flex;flex-direction:column;font-size:2em;line-height:1.1em;\"><div>Links:</div><a href=\"https://www.instagram.com/alexeychirukhin\" target=\"_blank\" style=\"color: #fff\">instagram.com/alexeychirukhin</a><a href=\"https://github.com/pr3sto\" target=\"_blank\" style=\"color: #fff\">github.com/pr3sto</a></div>"
+          }
+        ]
+      },
+      "padding": {
+        "top": true,
+        "bottom": true,
+        "left": true,
+        "right": true
+      }
+    }
+  ]
+}

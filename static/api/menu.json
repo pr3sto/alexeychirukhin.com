@@ -1,0 +1,37 @@
+{
+  "index": {
+    "page": {
+      "id": 0,
+      "displayName": "Alexey Chirukhin"
+    }
+  },
+  "sections": [
+    {
+      "path": "works",
+      "displayName": "works",
+      "pages": [
+        {
+          "id": 1,
+          "path": "the-memory",
+          "displayName": "The memory"
+        }
+      ]
+    },
+    {
+      "path": "asda",
+      "displayName": "asda",
+      "pages": [
+        {
+          "id": 2,
+          "path": "asd1",
+          "displayName": "The asd1"
+        },
+        {
+          "id": 3,
+          "path": "asd2",
+          "displayName": "The asd2"
+        }
+      ]
+    }
+  ]
+}

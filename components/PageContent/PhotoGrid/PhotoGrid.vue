@@ -283,6 +283,7 @@
 
 <script>
 import * as scssVars from "~/assets/scss/_variables.scss";
+import app from "~/constants/app.js";
 import ZoomImg from "./ZoomImg.vue";
 
 export default {
@@ -315,7 +316,7 @@ export default {
       windowScrollPosition: {},
       fullscreenImg: {
         targetElement: null,
-        src: this.$api.page.noImageUrl(),
+        src: app.NO_IMAGE_URL,
       },
       zoomigProps: {
         zoomScale: 1,

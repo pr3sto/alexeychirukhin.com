@@ -3,8 +3,8 @@ export default {
   ssr: false,
   target: "static",
   env: {
-    DATA_JSON_PATH: process.env.DATA_JSON_PATH,
-    LOCAL_STORE_LIFETIME_MINUTES: process.env.LOCAL_STORE_LIFETIME_MINUTES,
+    MENU_API_URL: process.env.MENU_API_URL,
+    PAGE_API_URL: process.env.PAGE_API_URL,
   },
   head: {
     title: "Alexey Chirukhin",
@@ -45,6 +45,7 @@ export default {
     { src: "~/plugins/windowResizeHandler.client.js", mode: "client" },
     { src: "~/plugins/pageUtility.client.js", mode: "client" },
     { src: "~/plugins/api.client.js", mode: "client" },
+    { src: "~/plugins/services.client.js", mode: "client" },
   ],
   build: {
     terser: {
@@ -54,6 +55,9 @@ export default {
         },
       },
     },
+  },
+  router: {
+    middleware: ["routeValidator"],
   },
   image: {
     imagekit: {

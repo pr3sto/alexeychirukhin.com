@@ -1,21 +1,26 @@
 <template>
   <menu class="app-menu">
     <div>
+      <section class="app-menu-section">
+        <nuxt-link class="app-menu-section-link" :to="'/'">
+          {{ menu.index.page.displayName }}
+        </nuxt-link>
+      </section>
       <section
         class="app-menu-section"
-        v-for="(sectionItems, sectionName, index) of menu.sections"
+        v-for="(section, index) of menu.sections"
         :key="index"
       >
-        <p class="app-menu-section-header" v-show="sectionName !== ''">
-          {{ sectionName }}
+        <p class="app-menu-section-header" v-show="section.name !== ''">
+          {{ section.displayName }}
         </p>
         <nuxt-link
           class="app-menu-section-link"
-          v-for="(item, index1) of sectionItems"
+          v-for="(page, index1) of section.pages"
           :key="index1"
-          :to="item.route"
+          :to="page.route"
         >
-          {{ item.header }}
+          {{ page.displayName }}
         </nuxt-link>
       </section>
     </div>
@@ -80,7 +85,7 @@ export default {
   name: "AppMenuLg",
   computed: {
     menu() {
-      return this.$api.menu.get();
+      return this.$services.menu.get();
     },
   },
 };

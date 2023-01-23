@@ -1,5 +1,5 @@
 <template>
-  <page-content-builder :components="page.components" />
+  <page-content-builder :components="page && page.components" />
 </template>
 
 <script>
@@ -8,24 +8,15 @@ import PageContentBuilder from "~/components/PageContent/PageContentBuilder.vue"
 export default {
   components: { PageContentBuilder },
 
-  computed: {
-    page() {
-      return this.$api.page.get(this.$route.path);
-    },
-  },
-
   head() {
     return {
-      title: this.page.header,
+      title: this.page && this.page.header,
     };
   },
 
-  validate({ params, redirect }) {
-    const page = this.$api.page.get(`/${params.section}/${params.page}`);
-    if (!page) {
-      redirect("/");
-    }
-    return true;
+  async asyncData({ route, $services }) {
+    const page = await $services.page.getAsync(route.path);
+    return { page };
   },
 };
 </script>

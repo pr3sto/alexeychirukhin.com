@@ -13,17 +13,25 @@
         v-show="showFullscreenAppMenu"
         v-on:click="handleFullscreenAppMenuClicked"
       >
+        <section class="app-menu-full-section">
+          <nuxt-link class="app-menu-full-section-link" :to="'/'">
+            {{ menu.index.page.displayName }}
+          </nuxt-link>
+        </section>
         <section
           class="app-menu-full-section"
-          v-for="(sectionItems, sectionName, index) of menu.sections"
+          v-for="(section, index) of menu.sections"
           :key="index"
         >
-          <p class="app-menu-full-section-header" v-show="sectionName !== ''">
-            {{ sectionName }}
+          <p
+            class="app-menu-full-section-header"
+            v-show="section.displayName !== ''"
+          >
+            {{ section.displayName }}
           </p>
-          <div v-for="(item, index1) of sectionItems" :key="index1">
-            <nuxt-link class="app-menu-full-section-link" :to="item.route">
-              {{ item.header }}
+          <div v-for="(page, index1) of section.pages" :key="index1">
+            <nuxt-link class="app-menu-full-section-link" :to="page.route">
+              {{ page.displayName }}
             </nuxt-link>
           </div>
         </section>
@@ -96,11 +104,10 @@ export default {
 
   computed: {
     menu() {
-      return this.$api.menu.get();
+      return this.$services.menu.get();
     },
     activeMenuHeader() {
-      const menuItems = [].concat.apply([], Object.values(this.menu.sections));
-      return menuItems.find((item) => item.route === this.$route.path).header;
+      return this.$services.menu.getPageByRoute(this.$route.path).displayName;
     },
   },
 
