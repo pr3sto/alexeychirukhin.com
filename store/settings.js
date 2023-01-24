@@ -20,4 +20,23 @@ export const mutations = {
   setPhotogridFullscreenBgTransparency(state, value) {
     state.photogrid.fullscreenBgTransparent = value;
   },
+  fixState(state) {
+    if (state.isSmallScreen !== true && state.isSmallScreen !== false) {
+      state.isSmallScreen = defaultState.isSmallScreen;
+    }
+    if (
+      state.photogrid.fullscreenBgColor !== scssVars.whiteColor &&
+      state.photogrid.fullscreenBgColor !== scssVars.blackColor
+    ) {
+      state.photogrid.fullscreenBgColor =
+        defaultState.photogrid.fullscreenBgColor;
+    }
+    if (
+      state.photogrid.fullscreenBgTransparent !== true &&
+      state.photogrid.fullscreenBgTransparent !== false
+    ) {
+      state.photogrid.fullscreenBgTransparent =
+        defaultState.photogrid.fullscreenBgTransparent;
+    }
+  },
 };

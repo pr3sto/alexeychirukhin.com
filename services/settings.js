@@ -1,6 +1,9 @@
 import * as scssVars from "~/assets/scss/_variables.scss";
 
 export default (store) => ({
+  fixState() {
+    store.commit("settings/fixState");
+  },
   isSmallScreen() {
     return store.state.settings.isSmallScreen;
   },
