@@ -1,12 +1,24 @@
+let pagesCache = {};
+
 export default (api, menuService) => ({
   async getAsync(route) {
-    const page = menuService.getPageByRoute(route);
-    const pageData = await api.page.getAsync(page.id);
+    const menuPage = menuService.getPageByRoute(route);
+
+    // get from local cache
+    if (pagesCache[menuPage.id]) {
+      return pagesCache[menuPage.id];
+    }
+
+    // request from api
+    const pageData = await api.page.getAsync(menuPage.id);
 
     if (!pageData || !isDataValid(pageData)) {
       console.log("PAGE DATA INVALID");
       return null;
     }
+
+    // save to local cache
+    pagesCache[menuPage.id] = pageData;
 
     return pageData;
   },

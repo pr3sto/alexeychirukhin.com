@@ -1,10 +1,11 @@
 export default (api, store) => ({
   async loadToStoreAsync() {
+    store.commit("menu/deleteData");
+
     const data = await api.menu.getAsync();
 
     if (!data || !isValid(data)) {
       console.log("MENU DATA INVALID");
-      store.commit("menu/deleteData");
       return;
     }
 
