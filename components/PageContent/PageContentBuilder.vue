@@ -78,7 +78,7 @@ export default {
   components: { CardStackLg, CardStackSm, PhotoGrid, TextBlocks },
   computed: {
     smallScreen() {
-      return this.$store.state.settings.isSmallScreen;
+      return this.$services.settings.isSmallScreen();
     },
   },
 };

@@ -1,8 +1,10 @@
+import * as scssVars from "~/assets/scss/_variables.scss";
+
 const defaultState = {
   isSmallScreen: false,
   photogrid: {
-    fullscreenBgColor: "1f1f1f",
-    fullscreenBgTransparency: "e6",
+    fullscreenBgColor: scssVars.whiteColor,
+    fullscreenBgTransparent: true,
   },
 };
 
@@ -16,6 +18,6 @@ export const mutations = {
     state.photogrid.fullscreenBgColor = value;
   },
   setPhotogridFullscreenBgTransparency(state, value) {
-    state.photogrid.fullscreenBgTransparency = value;
+    state.photogrid.fullscreenBgTransparent = value;
   },
 };

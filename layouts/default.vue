@@ -54,7 +54,7 @@ export default {
 
   computed: {
     smallScreen() {
-      return this.$store.state.settings.isSmallScreen;
+      return this.$services.settings.isSmallScreen();
     },
     cssVars() {
       return {

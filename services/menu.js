@@ -1,10 +1,10 @@
-export default (api, vuexStore) => ({
+export default (api, store) => ({
   async loadToStoreAsync() {
     const data = await api.menu.getAsync();
 
     if (!data || !isValid(data)) {
       console.log("MENU DATA INVALID");
-      vuexStore.commit("menu/deleteData");
+      store.commit("menu/deleteData");
       return;
     }
 
@@ -17,14 +17,14 @@ export default (api, vuexStore) => ({
       });
     });
 
-    vuexStore.commit("menu/setData", data);
+    store.commit("menu/setData", data);
   },
   get() {
-    return vuexStore.state.menu;
+    return store.state.menu;
   },
   getAllPages() {
-    const indexPage = vuexStore.state.menu.index.page;
-    return vuexStore.state.menu.sections.reduce(
+    const indexPage = store.state.menu.index.page;
+    return store.state.menu.sections.reduce(
       (acc, section) => {
         return acc.concat(section.pages);
       },

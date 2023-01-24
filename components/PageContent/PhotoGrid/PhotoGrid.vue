@@ -294,7 +294,9 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--fs-bg-color": `#${this.settings.fullscreenBgColor}${this.settings.fullscreenBgTransparency}`,
+        "--fs-bg-color": `${this.settings.fullscreenBgColor}${
+          this.settings.fullscreenBgTransparent ? "e6" : "ff"
+        }`,
         "--fs-zoomimg-left": `${this.zoomigProps.left}px`,
         "--fs-zoomimg-top": `${this.zoomigProps.top}px`,
         "--fs-zoomimg-width": `${this.zoomigProps.width}px`,
@@ -303,10 +305,10 @@ export default {
       };
     },
     settings() {
-      return this.$store.state.settings.photogrid;
+      return this.$services.settings.photogrid.get();
     },
     smallScreen() {
-      return this.$store.state.settings.isSmallScreen;
+      return this.$services.settings.isSmallScreen();
     },
   },
 
@@ -384,22 +386,13 @@ export default {
       this.closeFullscreen();
     },
     handleWhiteBgClicked() {
-      this.$store.commit(
-        "settings/setPhotogridFullscreenBgColor",
-        scssVars.whiteColor.replace("#", "")
-      );
+      this.$services.settings.photogrid.setWhiteFullscreenBgColor();
     },
     handleBlackBgClicked() {
-      this.$store.commit(
-        "settings/setPhotogridFullscreenBgColor",
-        scssVars.blackColor.replace("#", "")
-      );
+      this.$services.settings.photogrid.setBlackFullscreenBgColor();
     },
     handleTransparentBgClicked() {
-      this.$store.commit(
-        "settings/setPhotogridFullscreenBgTransparency",
-        this.settings.fullscreenBgTransparency === "ff" ? "e6" : "ff"
-      );
+      this.$services.settings.photogrid.switchFullscreenBgTransparency();
     },
     openFullscreenSm() {
       this.showFullScreen = true;
