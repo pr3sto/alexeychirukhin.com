@@ -121,7 +121,6 @@
         "right": true
       }
     },
-
     {
       "content": {
         "type": "PhotoGrid",
@@ -142,7 +141,6 @@
         "right": true
       }
     },
-
     {
       "content": {
         "type": "TextBlocks",
@@ -387,7 +385,6 @@
         "right": true
       }
     },
-
     {
       "content": {
         "type": "PhotoGrid",
@@ -408,7 +405,6 @@
         "right": true
       }
     },
-
     {
       "content": {
         "type": "TextBlocks",
