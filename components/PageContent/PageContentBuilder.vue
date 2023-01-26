@@ -11,20 +11,24 @@
         'page-content-component--padding-right': component.padding.right,
       }"
     >
-      <text-blocks
-        v-if="component.content.type === 'TextBlocks'"
+      <card-stack-lg
+        v-if="component.content.type === 'CardStack' && !smallScreen"
         :content="component.content"
       />
       <card-stack-sm
         v-else-if="component.content.type === 'CardStack' && smallScreen"
         :content="component.content"
       />
-      <card-stack-lg
-        v-else-if="component.content.type === 'CardStack' && !smallScreen"
+      <photo
+        v-else-if="component.content.type === 'Photo'"
         :content="component.content"
       />
       <photo-grid
         v-else-if="component.content.type === 'PhotoGrid'"
+        :content="component.content"
+      />
+      <text-blocks
+        v-else-if="component.content.type === 'TextBlocks'"
         :content="component.content"
       />
     </section>
@@ -69,13 +73,14 @@
 <script>
 import CardStackLg from "./CardStack/CardStackLg.vue";
 import CardStackSm from "./CardStack/CardStackSm.vue";
-import PhotoGrid from "./PhotoGrid/PhotoGrid.vue";
+import Photo from "./Photo/Photo.vue";
+import PhotoGrid from "./Photo/PhotoGrid.vue";
 import TextBlocks from "./TextBlocks/TextBlocks.vue";
 
 export default {
   name: "PageContentBuilder",
   props: ["components"],
-  components: { CardStackLg, CardStackSm, PhotoGrid, TextBlocks },
+  components: { CardStackLg, CardStackSm, Photo, PhotoGrid, TextBlocks },
   computed: {
     smallScreen() {
       return this.$services.settings.isSmallScreen();

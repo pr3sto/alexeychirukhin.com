@@ -8,7 +8,7 @@
         preset="progressivejpg"
         loading="lazy"
         sizes="md:800px lg:1500px"
-        :src="photo.url"
+        :src="content.url"
         v-on:click="handlePhotoImgClicked()"
       />
       <div
@@ -19,7 +19,7 @@
             : 'photo-container-caption--lg'
         "
       >
-        <span v-for="(line, index) in photo.caption" :key="index">{{
+        <span v-for="(line, index) in content.caption" :key="index">{{
           line
         }}</span>
       </div>
@@ -41,7 +41,7 @@
               ref="zoomimg"
               class="fullscreen-lg-zoomimg"
               v-show="showFullScreen"
-              :src="photo.url"
+              :src="content.url"
               :zoomScale="zoomigProps.zoomScale"
             />
           </transition>
@@ -87,7 +87,7 @@
             provider="imagekit"
             preset="progressivejpg"
             sizes="md:800px lg:1500px"
-            :src="photo.url"
+            :src="content.url"
           />
           <p
             class="fullscreen-sm-close"
@@ -259,7 +259,7 @@ import ZoomImg from "./ZoomImg.vue";
 
 export default {
   name: "Photo",
-  props: ["photo"],
+  props: ["content"],
   components: { ZoomImg },
 
   computed: {

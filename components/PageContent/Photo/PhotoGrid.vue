@@ -6,7 +6,7 @@
         :class="{ 'photogrid-photo--padding': content.padding }"
         v-for="(photo, index) of content.photos"
         :key="index"
-        :photo="photo"
+        :content="photo"
       ></photo>
     </masonry>
   </div>

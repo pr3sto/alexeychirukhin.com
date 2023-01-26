@@ -39,6 +39,7 @@ const pageSchema = {
             type: "object",
             oneOf: [
               { $ref: "/definitions/data/page/component/cardstack" },
+              { $ref: "/definitions/data/page/component/photo" },
               { $ref: "/definitions/data/page/component/photogrid" },
               { $ref: "/definitions/data/page/component/textblocks" },
             ],
@@ -93,6 +94,17 @@ const cardstackComponentSchema = {
     },
   },
   required: ["type", "cards"],
+};
+
+const photoComponentSchema = {
+  id: "/definitions/data/page/component/photo",
+  type: "object",
+  properties: {
+    type: { type: "string", enum: ["Photo"] },
+    url: { type: "string" },
+    caption: { type: "array", items: { type: "string" } },
+  },
+  required: ["type", "url"],
 };
 
 const photogridComponentSchema = {
@@ -154,6 +166,10 @@ function isDataValid(data) {
   validator.addSchema(
     cardstackComponentSchema,
     "/definitions/data/page/component/cardstack"
+  );
+  validator.addSchema(
+    photoComponentSchema,
+    "/definitions/data/page/component/photo"
   );
   validator.addSchema(
     photogridComponentSchema,
