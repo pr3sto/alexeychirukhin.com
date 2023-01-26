@@ -10,26 +10,20 @@ export default (store) => ({
   setIsSmallScreen(isSmallScreen) {
     return store.commit("settings/setIsSmallScreen", isSmallScreen);
   },
-  photogrid: {
+  photo: {
     get() {
-      return store.state.settings.photogrid;
+      return store.state.settings.photo;
     },
     setWhiteFullscreenBgColor() {
-      store.commit(
-        "settings/setPhotogridFullscreenBgColor",
-        scssVars.whiteColor
-      );
+      store.commit("settings/setPhotoFullscreenBgColor", scssVars.whiteColor);
     },
     setBlackFullscreenBgColor() {
-      store.commit(
-        "settings/setPhotogridFullscreenBgColor",
-        scssVars.blackColor
-      );
+      store.commit("settings/setPhotoFullscreenBgColor", scssVars.blackColor);
     },
     switchFullscreenBgTransparency() {
       store.commit(
-        "settings/setPhotogridFullscreenBgTransparency",
-        !store.state.settings.photogrid.fullscreenBgTransparent
+        "settings/setPhotoFullscreenBgTransparency",
+        !store.state.settings.photo.fullscreenBgTransparent
       );
     },
   },

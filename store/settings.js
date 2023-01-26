@@ -2,7 +2,7 @@ import * as scssVars from "~/assets/scss/_variables.scss";
 
 const defaultState = {
   isSmallScreen: false,
-  photogrid: {
+  photo: {
     fullscreenBgColor: scssVars.whiteColor,
     fullscreenBgTransparent: true,
   },
@@ -14,29 +14,28 @@ export const mutations = {
   setIsSmallScreen(state, value) {
     state.isSmallScreen = value;
   },
-  setPhotogridFullscreenBgColor(state, value) {
-    state.photogrid.fullscreenBgColor = value;
+  setPhotoFullscreenBgColor(state, value) {
+    state.photo.fullscreenBgColor = value;
   },
-  setPhotogridFullscreenBgTransparency(state, value) {
-    state.photogrid.fullscreenBgTransparent = value;
+  setPhotoFullscreenBgTransparency(state, value) {
+    state.photo.fullscreenBgTransparent = value;
   },
   fixState(state) {
     if (state.isSmallScreen !== true && state.isSmallScreen !== false) {
       state.isSmallScreen = defaultState.isSmallScreen;
     }
     if (
-      state.photogrid.fullscreenBgColor !== scssVars.whiteColor &&
-      state.photogrid.fullscreenBgColor !== scssVars.blackColor
+      state.photo.fullscreenBgColor !== scssVars.whiteColor &&
+      state.photo.fullscreenBgColor !== scssVars.blackColor
     ) {
-      state.photogrid.fullscreenBgColor =
-        defaultState.photogrid.fullscreenBgColor;
+      state.photo.fullscreenBgColor = defaultState.photo.fullscreenBgColor;
     }
     if (
-      state.photogrid.fullscreenBgTransparent !== true &&
-      state.photogrid.fullscreenBgTransparent !== false
+      state.photo.fullscreenBgTransparent !== true &&
+      state.photo.fullscreenBgTransparent !== false
     ) {
-      state.photogrid.fullscreenBgTransparent =
-        defaultState.photogrid.fullscreenBgTransparent;
+      state.photo.fullscreenBgTransparent =
+        defaultState.photo.fullscreenBgTransparent;
     }
   },
 };
