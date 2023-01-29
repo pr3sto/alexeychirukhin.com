@@ -2,7 +2,7 @@ let pagesCache = {};
 
 export default (api, menuService) => ({
   async getAsync(route) {
-    const menuPage = menuService.getPageByRoute(route);
+    const menuPage = menuService.getMenuPageByRoute(route);
 
     // get from local cache
     if (pagesCache[menuPage.id]) {

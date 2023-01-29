@@ -1,6 +1,6 @@
 export const actions = {
   async nuxtClientInit(_, { $services }) {
-    // load menu on app init
+    // load menu
     await $services.menu.loadToStoreAsync();
 
     // settings are stored in persisted storage

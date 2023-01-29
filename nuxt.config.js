@@ -46,15 +46,6 @@ export default {
     { src: "~/plugins/pageUtility.client.js", mode: "client" },
     { src: "~/plugins/vueMasonry.client.js", mode: "client" },
   ],
-  build: {
-    terser: {
-      terserOptions: {
-        compress: {
-          drop_console: true,
-        },
-      },
-    },
-  },
   router: {
     middleware: ["routeValidator"],
   },
@@ -70,6 +61,15 @@ export default {
         modifiers: {
           f: "jpg",
           progressive: true,
+        },
+      },
+    },
+  },
+  build: {
+    terser: {
+      terserOptions: {
+        compress: {
+          drop_console: true,
         },
       },
     },

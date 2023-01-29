@@ -107,7 +107,8 @@ export default {
       return this.$services.menu.get();
     },
     activeMenuHeader() {
-      return this.$services.menu.getPageByRoute(this.$route.path).displayName;
+      return this.$services.menu.getMenuPageByRoute(this.$route.path)
+        .displayName;
     },
   },
 

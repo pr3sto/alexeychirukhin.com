@@ -21,9 +21,6 @@ export const mutations = {
     state.photo.fullscreenBgTransparent = value;
   },
   fixState(state) {
-    if (state.isSmallScreen !== true && state.isSmallScreen !== false) {
-      state.isSmallScreen = defaultState.isSmallScreen;
-    }
     if (
       state.photo.fullscreenBgColor !== scssVars.whiteColor &&
       state.photo.fullscreenBgColor !== scssVars.blackColor

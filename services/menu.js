@@ -13,8 +13,7 @@ export default (api, store) => ({
     data.index.page.route = "/";
     data.sections.forEach((section) => {
       section.pages.forEach((page) => {
-        const sectionPath = section.path !== "" ? `/${section.path}` : "";
-        page.route = `${sectionPath}/${page.path}`;
+        page.route = `/${section.path}/${page.path}`;
       });
     });
 
@@ -23,7 +22,7 @@ export default (api, store) => ({
   get() {
     return store.state.menu;
   },
-  getAllPages() {
+  getAllMenuPages() {
     const indexPage = store.state.menu.index.page;
     return store.state.menu.sections.reduce(
       (acc, section) => {
@@ -32,11 +31,11 @@ export default (api, store) => ({
       [indexPage]
     );
   },
-  getPageByRoute(route) {
-    return this.getAllPages().find((page) => page.route === route);
+  getMenuPageByRoute(route) {
+    return this.getAllMenuPages().find((page) => page.route === route);
   },
-  isValidPageRoute(route) {
-    return this.getAllPages().some((page) => page.route === route);
+  hasRoute(route) {
+    return this.getAllMenuPages().some((page) => page.route === route);
   },
 });
 
