@@ -30,6 +30,12 @@ const pageSchema = {
   properties: {
     id: { type: "number" },
     header: { type: "string" },
+    settings: {
+      type: "object",
+      properties: {
+        fitScreen: { type: "boolean" },
+      },
+    },
     components: {
       type: "array",
       items: {
@@ -44,18 +50,25 @@ const pageSchema = {
               { $ref: "/definitions/data/page/component/textblocks" },
             ],
           },
-          padding: {
+          style: {
             type: "object",
             properties: {
-              top: { type: "boolean" },
-              bottom: { type: "boolean" },
-              left: { type: "boolean" },
-              right: { type: "boolean" },
+              growToFitScreen: { type: "boolean" },
+              padding: {
+                type: "object",
+                properties: {
+                  top: { type: "boolean" },
+                  bottom: { type: "boolean" },
+                  left: { type: "boolean" },
+                  right: { type: "boolean" },
+                },
+                required: ["top", "bottom", "left", "right"],
+              },
+              required: ["padding"],
             },
-            required: ["top", "bottom", "left", "right"],
           },
         },
-        required: ["content", "padding"],
+        required: ["content", "style"],
       },
     },
   },

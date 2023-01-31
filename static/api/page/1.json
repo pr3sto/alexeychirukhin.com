@@ -22,11 +22,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": true,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -42,11 +44,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": true,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -60,11 +64,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -78,11 +84,13 @@
           }
         ]
       },
-      "padding": {
-        "top": false,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": false,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -114,11 +122,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -134,11 +144,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": true,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -152,11 +164,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -170,11 +184,13 @@
           }
         ]
       },
-      "padding": {
-        "top": false,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": false,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -199,11 +215,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -219,11 +237,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": true,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -237,11 +257,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -255,11 +277,13 @@
           }
         ]
       },
-      "padding": {
-        "top": false,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": false,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -275,11 +299,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -322,11 +348,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -342,11 +370,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": true,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -360,11 +390,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -378,11 +410,13 @@
           }
         ]
       },
-      "padding": {
-        "top": false,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": false,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -398,11 +432,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": true,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -416,11 +452,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -434,11 +472,13 @@
           }
         ]
       },
-      "padding": {
-        "top": false,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": false,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -457,11 +497,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -477,11 +519,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": false,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": false,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -497,11 +541,13 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": true,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
       }
     },
     {
@@ -526,11 +572,13 @@
           }
         ]
       },
-      "padding": {
-        "top": false,
-        "bottom": true,
-        "left": true,
-        "right": true
+      "style": {
+        "padding": {
+          "top": false,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
       }
     }
   ]

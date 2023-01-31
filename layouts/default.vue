@@ -17,7 +17,7 @@
   min-height: 100vh;
 }
 #default-layout-page-lg {
-  flex-grow: 1;
+  flex: 1;
 }
 
 #default-layout-sm {
@@ -26,7 +26,7 @@
   min-height: 100vh;
 }
 #default-layout-page-sm {
-  flex-grow: 1;
+  flex: 1;
 }
 
 #default-layout-menu {

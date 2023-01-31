@@ -1,5 +1,8 @@
 <template>
-  <page-content-builder :components="page && page.components" />
+  <page-content-builder
+    :components="page && page.components"
+    :settings="page && page.settings"
+  />
 </template>
 
 <script>

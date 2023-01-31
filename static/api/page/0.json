@@ -1,6 +1,9 @@
 {
   "id": 0,
   "header": "Alexey Chirukhin",
+  "settings": {
+    "fitScreen": true
+  },
   "components": [
     {
       "content": {
@@ -17,11 +20,14 @@
           }
         ]
       },
-      "padding": {
-        "top": true,
-        "bottom": true,
-        "left": true,
-        "right": true
+      "style": {
+        "growToFitScreen": true,
+        "padding": {
+          "top": true,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
       }
     }
   ]

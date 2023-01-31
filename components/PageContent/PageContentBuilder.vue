@@ -1,14 +1,19 @@
 <template>
-  <main class="page-content">
+  <main
+    class="page-content"
+    :class="{ 'page-content--fit-screen': settings && settings.fitScreen }"
+  >
     <section
       class="page-content-component"
       v-for="(component, index) of components"
       :key="index"
       :class="{
-        'page-content-component--padding-top': component.padding.top,
-        'page-content-component--padding-bottom': component.padding.bottom,
-        'page-content-component--padding-left': component.padding.left,
-        'page-content-component--padding-right': component.padding.right,
+        'page-content-component--padding-top': component.style.padding.top,
+        'page-content-component--padding-bottom':
+          component.style.padding.bottom,
+        'page-content-component--padding-left': component.style.padding.left,
+        'page-content-component--padding-right': component.style.padding.right,
+        'page-content-component--grow': component.style.growToFitScreen,
       }"
     >
       <card-stack-lg
@@ -41,7 +46,10 @@
 .page-content {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+
+  &--fit-screen {
+    height: 100vh;
+  }
 }
 
 .page-content-component {
@@ -59,13 +67,13 @@
   &--padding-right {
     padding-right: vars.$default-padding;
   }
-
-  &:only-child {
-    flex-grow: 1;
+  &--grow {
+    overflow: hidden;
+    flex: 1;
   }
 
   & > * {
-    flex-grow: 1;
+    flex: 1;
   }
 }
 </style>
@@ -79,7 +87,7 @@ import TextBlocks from "./TextBlocks/TextBlocks.vue";
 
 export default {
   name: "PageContentBuilder",
-  props: ["components"],
+  props: ["components", "settings"],
   components: { CardStackLg, CardStackSm, Photo, PhotoGrid, TextBlocks },
   computed: {
     smallScreen() {

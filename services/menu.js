@@ -45,17 +45,7 @@ const menuSchema = {
   properties: {
     index: {
       type: "object",
-      properties: {
-        page: {
-          type: "object",
-          properties: {
-            id: { type: "number" },
-            displayName: { type: "string" },
-          },
-          required: ["id", "displayName"],
-        },
-      },
-      required: ["page"],
+      $ref: "/definitions/menu/index",
     },
     sections: {
       type: "array",
@@ -63,6 +53,22 @@ const menuSchema = {
     },
   },
   required: ["index", "sections"],
+};
+
+const menuIndexSchema = {
+  id: "/definitions/menu/index",
+  type: "object",
+  properties: {
+    page: {
+      type: "object",
+      properties: {
+        id: { type: "number" },
+        displayName: { type: "string" },
+      },
+      required: ["id", "displayName"],
+    },
+  },
+  required: ["page"],
 };
 
 const menuSectionSchema = {
@@ -91,6 +97,7 @@ function isValid(data) {
   const Validator = require("jsonschema").Validator;
   const validator = new Validator();
 
+  validator.addSchema(menuIndexSchema, "/definitions/menu/index");
   validator.addSchema(menuSectionSchema, "/definitions/menu/section");
 
   const validateResult = validator.validate(data, menuSchema);
