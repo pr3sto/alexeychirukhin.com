@@ -107,12 +107,18 @@
 
 .photo {
   position: relative;
+  display: flex;
+}
+
+.photo-container {
+  flex: 1;
 }
 
 .photo-container-img {
   display: block;
   max-width: 100%;
   max-height: 100%;
+  object-fit: contain;
   cursor: pointer;
 }
 
