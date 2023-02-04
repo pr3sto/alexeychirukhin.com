@@ -1,15 +1,17 @@
 <template>
-  <div class="photogrid" :class="{ 'photogrid--padding': content.padding }">
-    <masonry :cols="content.cols">
-      <photo
-        class="photogrid-photo"
-        :class="{ 'photogrid-photo--padding': content.padding }"
-        v-for="(photo, index) of content.photos"
-        :key="index"
-        :content="photo"
-      ></photo>
-    </masonry>
-  </div>
+  <masonry
+    class="photogrid"
+    :class="{ 'photogrid--padding': content.padding }"
+    :cols="content.cols"
+  >
+    <photo
+      class="photogrid-photo"
+      :class="{ 'photogrid-photo--padding': content.padding }"
+      v-for="(photo, index) of content.photos"
+      :key="index"
+      :content="photo"
+    ></photo>
+  </masonry>
 </template>
 
 <style lang="scss" scoped>

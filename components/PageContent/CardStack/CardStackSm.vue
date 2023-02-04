@@ -194,7 +194,7 @@ export default {
     },
     switchCards() {
       // don't switch one card
-      if (this.annotatedCards.length < 2) {
+      if (this.annotatedCards.length <= 1) {
         return;
       }
 

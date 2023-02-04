@@ -14,7 +14,10 @@
         v-on:click="handleFullscreenAppMenuClicked"
       >
         <section class="app-menu-full-section">
-          <nuxt-link class="app-menu-full-section-link" :to="'/'">
+          <nuxt-link
+            class="app-menu-full-section-link"
+            :to="menu.index.page.route"
+          >
             {{ menu.index.page.displayName }}
           </nuxt-link>
         </section>
@@ -23,10 +26,7 @@
           v-for="(section, index) of menu.sections"
           :key="index"
         >
-          <p
-            class="app-menu-full-section-header"
-            v-show="section.displayName !== ''"
-          >
+          <p class="app-menu-full-section-header">
             {{ section.displayName }}
           </p>
           <div v-for="(page, index1) of section.pages" :key="index1">

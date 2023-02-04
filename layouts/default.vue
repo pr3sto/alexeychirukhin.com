@@ -1,8 +1,9 @@
 <template>
-  <div :id="smallScreen ? 'default-layout-sm' : 'default-layout-lg'">
-    <nuxt-child
-      :id="smallScreen ? 'default-layout-page-sm' : 'default-layout-page-lg'"
-    />
+  <div
+    id="default-layout"
+    :class="smallScreen ? 'default-layout--sm' : 'default-layout--lg'"
+  >
+    <nuxt-child id="default-layout-page" />
     <app-menu-sm v-if="smallScreen" id="default-layout-menu" />
     <app-menu-lg v-else id="default-layout-menu" />
   </div>
@@ -11,21 +12,18 @@
 <style lang="scss">
 @use "~/assets/scss/variables" as vars;
 
-#default-layout-lg {
+#default-layout {
   display: flex;
-  flex-direction: row;
   min-height: 100vh;
 }
-#default-layout-page-lg {
-  flex: 1;
+.default-layout--lg {
+  flex-direction: row;
+}
+.default-layout--sm {
+  flex-direction: column-reverse;
 }
 
-#default-layout-sm {
-  display: flex;
-  flex-direction: column-reverse;
-  min-height: 100vh;
-}
-#default-layout-page-sm {
+#default-layout-page {
   flex: 1;
 }
 

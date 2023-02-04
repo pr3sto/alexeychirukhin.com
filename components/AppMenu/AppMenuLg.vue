@@ -1,29 +1,27 @@
 <template>
   <menu class="app-menu">
-    <div>
-      <section class="app-menu-section">
-        <nuxt-link class="app-menu-section-link" :to="'/'">
-          {{ menu.index.page.displayName }}
-        </nuxt-link>
-      </section>
-      <section
-        class="app-menu-section"
-        v-for="(section, index) of menu.sections"
-        :key="index"
+    <section class="app-menu-section">
+      <nuxt-link class="app-menu-section-link" :to="menu.index.page.route">
+        {{ menu.index.page.displayName }}
+      </nuxt-link>
+    </section>
+    <section
+      class="app-menu-section"
+      v-for="(section, index) of menu.sections"
+      :key="index"
+    >
+      <p class="app-menu-section-header">
+        {{ section.displayName }}
+      </p>
+      <nuxt-link
+        class="app-menu-section-link"
+        v-for="(page, index1) of section.pages"
+        :key="index1"
+        :to="page.route"
       >
-        <p class="app-menu-section-header" v-show="section.name !== ''">
-          {{ section.displayName }}
-        </p>
-        <nuxt-link
-          class="app-menu-section-link"
-          v-for="(page, index1) of section.pages"
-          :key="index1"
-          :to="page.route"
-        >
-          {{ page.displayName }}
-        </nuxt-link>
-      </section>
-    </div>
+        {{ page.displayName }}
+      </nuxt-link>
+    </section>
   </menu>
 </template>
 
