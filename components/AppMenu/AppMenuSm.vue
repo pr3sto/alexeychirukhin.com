@@ -46,6 +46,7 @@
 .app-menu {
   font-family: vars.$menu-font-family;
   color: var(--styles-font-color);
+  z-index: 0; /* creates stacking context */
 }
 
 .app-menu-header {

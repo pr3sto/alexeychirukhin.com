@@ -17,11 +17,13 @@
   position: relative;
   min-height: 100vh;
   background: var(--styles-background-color);
+  z-index: 0; /* creates stacking context */
 
   /* texture */
   &::after {
     content: "";
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
     height: 100%;
