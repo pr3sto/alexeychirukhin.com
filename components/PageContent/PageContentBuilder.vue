@@ -1,8 +1,5 @@
 <template>
-  <main
-    class="page-content"
-    :class="{ 'page-content--fit-screen': settings && settings.fitScreen }"
-  >
+  <main class="page-content" :class="{ 'page-content--fit-screen': fitScreen }">
     <section
       class="page-content-component"
       v-for="(component, index) of components"
@@ -87,7 +84,7 @@ import TextBlocks from "./TextBlocks/TextBlocks.vue";
 
 export default {
   name: "PageContentBuilder",
-  props: ["components", "settings"],
+  props: ["components", "fitScreen"],
   components: { CardStackLg, CardStackSm, Photo, PhotoGrid, TextBlocks },
   computed: {
     smallScreen() {

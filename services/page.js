@@ -1,26 +1,25 @@
 let pagesCache = {};
 
-export default (api, menuService) => ({
-  async getAsync(route) {
+export default (api, menuService, stylesService) => ({
+  async loadAsync(route) {
     const menuPage = menuService.getMenuPageByRoute(route);
 
-    // get from local cache
-    if (pagesCache[menuPage.id]) {
-      return pagesCache[menuPage.id];
+    // load page from api
+    if (!pagesCache[menuPage.id]) {
+      const pageData = await api.page.getAsync(menuPage.id);
+
+      if (!pageData || !isDataValid(pageData)) {
+        console.log("PAGE DATA INVALID");
+        return null;
+      }
+
+      pagesCache[menuPage.id] = pageData;
     }
 
-    // request from api
-    const pageData = await api.page.getAsync(menuPage.id);
+    // apply page styles
+    stylesService.loadPageStyles(pagesCache[menuPage.id].settings);
 
-    if (!pageData || !isDataValid(pageData)) {
-      console.log("PAGE DATA INVALID");
-      return null;
-    }
-
-    // save to local cache
-    pagesCache[menuPage.id] = pageData;
-
-    return pageData;
+    return pagesCache[menuPage.id];
   },
 });
 
@@ -33,8 +32,12 @@ const pageSchema = {
     settings: {
       type: "object",
       properties: {
+        backgroundColor: { type: "string" },
+        fontColor: { type: "string" },
+        fontShadowColor: { type: "string" },
         fitScreen: { type: "boolean" },
       },
+      required: ["backgroundColor", "fontColor", "fontShadowColor"],
     },
     components: {
       type: "array",
@@ -72,7 +75,7 @@ const pageSchema = {
       },
     },
   },
-  required: ["id", "header", "components"],
+  required: ["id", "header", "settings", "components"],
 };
 
 const cardstackComponentSchema = {

@@ -43,11 +43,15 @@
 <style lang="scss" scoped>
 @use "~/assets/scss/variables" as vars;
 
+.app-menu {
+  font-family: vars.$menu-font-family;
+  color: var(--styles-font-color);
+}
+
 .app-menu-header {
   display: inline-block;
-  color: vars.$font-color;
-  font-family: vars.$secondary-font-family;
   font-size: vars.$appmenu-font-size;
+  text-shadow: var(--styles-font-shadow);
   font-weight: bolder;
   text-transform: uppercase;
   cursor: pointer;
@@ -64,7 +68,7 @@
   flex-direction: column;
   justify-content: center;
   padding: vars.$default-padding;
-  background: vars.$background-color;
+  background: var(--styles-background-color);
 }
 
 .app-menu-full-section {
@@ -77,23 +81,22 @@
 .app-menu-full-section-header {
   padding-left: vars.$default-padding;
   padding-right: vars.$default-padding;
-  color: vars.$font-color;
   font-size: vars.$appmenu-section-header-font-size;
-  opacity: 0.75;
+  font-style: italic;
 }
 
 .app-menu-full-section-link {
   padding-left: vars.$default-padding;
   padding-right: vars.$default-padding;
-  color: vars.$font-color;
+  color: var(--styles-font-color);
   text-decoration: none;
   overflow-wrap: break-word;
   box-decoration-break: clone;
 
   &.nuxt-link-exact-active {
-    font-family: vars.$secondary-font-family;
     font-weight: bolder;
     text-transform: uppercase;
+    text-shadow: var(--styles-font-shadow);
   }
 }
 </style>

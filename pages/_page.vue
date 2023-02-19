@@ -1,7 +1,7 @@
 <template>
   <page-content-builder
     :components="page && page.components"
-    :settings="page && page.settings"
+    :fitScreen="page && page.settings.fitScreen"
   />
 </template>
 
@@ -18,7 +18,7 @@ export default {
   },
 
   async asyncData({ route, $services }) {
-    const page = await $services.page.getAsync(route.path);
+    const page = await $services.page.loadAsync(route.path);
     return { page };
   },
 };

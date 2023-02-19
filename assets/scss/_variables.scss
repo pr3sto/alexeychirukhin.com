@@ -3,7 +3,7 @@ $media-mobile-max-width: 700px;
 
 // fonts
 $primary-font-family: "Fraunces";
-$secondary-font-family: "Chango";
+$menu-font-family: "Chango";
 $handwriting1-font-family: "Schoolbell";
 $handwriting2-font-family: "Just Me Again Down Here";
 
@@ -23,14 +23,6 @@ $default-transition: 0.2s $default-transition-func;
 // colors
 $white-color: #fefefe;
 $black-color: #1f1f1f;
-
-$background-color: $white-color;
-$font-color: $black-color;
-$accent-color: #f52d09;
-
-// colors for blend mode
-$background-exclde-font-color: #dfdfdf; // $background-color - $font-color
-$background-exclde-accent-color: #09d1f5; // $background-color - $accent-color
 
 :export {
   mediaMobileMaxWidth: $media-mobile-max-width;

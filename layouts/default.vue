@@ -14,11 +14,29 @@
 
 #default-layout {
   display: flex;
+  position: relative;
   min-height: 100vh;
+  background: var(--styles-background-color);
+
+  /* texture */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: url(~/assets/noise.svg);
+    filter: contrast(100%) brightness(200%) opacity(20%);
+    mix-blend-mode: plus-lighter;
+    pointer-events: none;
+  }
 }
+
 .default-layout--lg {
   flex-direction: row;
 }
+
 .default-layout--sm {
   flex-direction: column-reverse;
 }

@@ -10,7 +10,6 @@ html {
 
 body {
   margin: 0;
-  background: vars.$background-color;
 }
 
 *,
@@ -43,10 +42,6 @@ img {
 .non-scrollable {
   height: 100%;
   overflow: hidden;
-}
-
-::selection {
-  background-color: vars.$accent-color;
 }
 
 /* mobile version */

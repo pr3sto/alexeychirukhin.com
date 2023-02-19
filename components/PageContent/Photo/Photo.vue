@@ -112,6 +112,9 @@
 
 .photo-container {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .photo-container-img {
@@ -140,7 +143,6 @@
   }
 
   & > span {
-    background-color: vars.$accent-color;
     line-height: 0.9em;
   }
 }
@@ -213,7 +215,6 @@
   left: 0;
   right: 0;
   z-index: 1;
-  background: vars.$background-color;
 }
 
 .fullscreen-sm-img {
@@ -234,7 +235,6 @@
   left: 0;
   padding: vars.$default-padding;
   font-size: vars.$photo-close-font-size;
-  color: vars.$background-exclde-font-color;
   mix-blend-mode: exclusion;
   cursor: pointer;
 }

@@ -1,6 +1,6 @@
 export default (api, store) => ({
   async loadToStoreAsync() {
-    store.commit("menu/deleteData");
+    store.commit("menu/resetData");
 
     const data = await api.menu.getAsync();
 
