@@ -2,6 +2,9 @@
   "id": 0,
   "header": "Alexey Chirukhin",
   "settings": {
+    "backgroundColor": "#dacda3",
+    "fontColor": "#cc3d43",
+    "fontShadowColor": "#cc3d43",
     "fitScreen": true
   },
   "components": [

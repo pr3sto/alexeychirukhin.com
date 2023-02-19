@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-bottom: vars.$default-padding;
+  padding-bottom: calc(vars.$default-padding * 2);
   font-size: vars.$appmenu-font-size;
 }
 
@@ -53,6 +53,7 @@
   padding-right: vars.$default-padding;
   font-size: vars.$appmenu-section-header-font-size;
   font-style: italic;
+  opacity: 0.8;
   pointer-events: all;
 }
 
@@ -68,7 +69,11 @@
   &.nuxt-link-exact-active {
     font-weight: bolder;
     text-transform: uppercase;
-    text-shadow: var(--styles-font-shadow);
+    text-shadow: var(--styles-font-shadow-long);
+  }
+
+  &:hover:not(.nuxt-link-exact-active) {
+    text-shadow: var(--styles-font-shadow-short);
   }
 }
 </style>

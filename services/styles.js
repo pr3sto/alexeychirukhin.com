@@ -13,18 +13,17 @@ function createCSS(pageSettings) {
     :root {
       --styles-background-color: ${pageSettings.backgroundColor};
       --styles-font-color: ${pageSettings.fontColor};
-      --styles-font-shadow: ${createTextShadow(pageSettings.fontShadowColor)};
+      --styles-font-shadow-long: ${createTextShadow(pageSettings.fontShadowColor, 10)};
+      --styles-font-shadow-short: ${createTextShadow(pageSettings.fontShadowColor, 3)};
     }
   `;
 }
 
-function createTextShadow(hexColor) {
-  let css = `0px 0px 0 ${hexColor},`;
-  let lastColor = hexColor;
-
-  for (let i = 1; i <= 10; i++) {
-    lastColor = offsetColor(lastColor, 7);
-    css = css + `${i}px ${i}px 1px ${lastColor},`;
+function createTextShadow(hexColor, steps) {
+  let css = "";
+  for (let i = 0; i <= steps; i++) {
+    hexColor = offsetColor(hexColor, 7);
+    css = css + `${i}px ${i}px 1px ${hexColor},`;
   }
 
   return css.slice(0, -1);

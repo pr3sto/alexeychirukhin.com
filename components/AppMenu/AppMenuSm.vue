@@ -51,7 +51,7 @@
 .app-menu-header {
   display: inline-block;
   font-size: vars.$appmenu-font-size;
-  text-shadow: var(--styles-font-shadow);
+  text-shadow: var(--styles-font-shadow-long);
   font-weight: bolder;
   text-transform: uppercase;
   cursor: pointer;
@@ -74,7 +74,7 @@
 .app-menu-full-section {
   display: flex;
   flex-direction: column;
-  padding-bottom: vars.$default-padding;
+  padding-bottom: calc(vars.$default-padding * 2);
   font-size: vars.$appmenu-font-size;
 }
 
@@ -83,6 +83,7 @@
   padding-right: vars.$default-padding;
   font-size: vars.$appmenu-section-header-font-size;
   font-style: italic;
+  opacity: 0.8;
 }
 
 .app-menu-full-section-link {
@@ -96,7 +97,7 @@
   &.nuxt-link-exact-active {
     font-weight: bolder;
     text-transform: uppercase;
-    text-shadow: var(--styles-font-shadow);
+    text-shadow: var(--styles-font-shadow-short);
   }
 }
 </style>
