@@ -9,9 +9,9 @@
 @use "~/assets/scss/variables" as vars;
 
 #default-layout {
-  min-height: 100vh;
   display: flex;
   z-index: 0; /* creates stacking context */
+  min-height: 100vh;
 }
 
 #default-layout-page {
@@ -21,13 +21,13 @@
 .grain {
   content: "";
   position: fixed;
-  z-index: 2;
+  z-index: 1;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background: url(~/assets/noise.svg);
-  filter: contrast(100%) brightness(200%) opacity(20%);
+  filter: brightness(200%) opacity(20%);
   mix-blend-mode: plus-lighter;
   pointer-events: none;
 }

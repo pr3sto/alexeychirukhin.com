@@ -1,7 +1,7 @@
 <template>
   <menu class="app-menu">
     <p class="app-menu-header">
-      {{ currentHeader }}
+      {{ menu.currentHeader }}
     </p>
     <section class="app-menu-section" v-if="menu.index">
       <nuxt-link class="app-menu-section-link" :to="menu.index.page.route">
@@ -98,9 +98,6 @@ export default {
   computed: {
     menu() {
       return this.$services.menu.getByRoute(this.$route.path);
-    },
-    currentHeader() {
-      return this.menu.currentHeader;
     },
   },
 };

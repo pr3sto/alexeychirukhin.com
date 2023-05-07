@@ -1,7 +1,7 @@
 <template>
   <menu class="app-menu">
     <p class="app-menu-header" v-on:click="handleAppMenuHeaderClicked">
-      {{ currentHeader }}
+      {{ menu.currentHeader }}
     </p>
     <transition
       name="opacity-transition"
@@ -81,7 +81,6 @@
 .app-menu-full-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   padding-left: vars.$default-padding;
   padding-right: vars.$default-padding;
   padding-bottom: vars.$default-padding;
@@ -107,9 +106,6 @@ export default {
   computed: {
     menu() {
       return this.$services.menu.getByRoute(this.$route.path);
-    },
-    currentHeader() {
-      return this.menu.currentHeader;
     },
   },
 
