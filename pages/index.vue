@@ -1,18 +1,16 @@
 <template>
-  <page-content-builder
-    :components="page && page.components"
-    :fitScreen="page && page.settings.fitScreen"
-  />
+  <page :data="pageData" />
 </template>
 
 <script>
-import PageContentBuilder from "~/components/PageContent/PageContentBuilder.vue";
+import Page from "~/components/Page.vue";
 
 export default {
-  components: { PageContentBuilder },
+  components: { Page },
+
   async asyncData({ route, $services }) {
-    const page = await $services.page.loadAsync(route.path);
-    return { page };
+    const pageData = await $services.page.loadAsync(route.path);
+    return { pageData };
   },
 };
 </script>

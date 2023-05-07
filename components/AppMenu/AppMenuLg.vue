@@ -1,6 +1,9 @@
 <template>
   <menu class="app-menu">
-    <section class="app-menu-section">
+    <p class="app-menu-header">
+      {{ currentHeader }}
+    </p>
+    <section class="app-menu-section" v-if="menu.index">
       <nuxt-link class="app-menu-section-link" :to="menu.index.page.route">
         {{ menu.index.page.displayName }}
       </nuxt-link>
@@ -33,47 +36,58 @@
   top: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   height: 100vh;
-  font-family: vars.$menu-font-family;
-  color: var(--styles-font-color);
+  font-family: vars.$primary-font-family;
+  border-left: 2px solid;
+  border-image: linear-gradient(
+      to top,
+      var(--styles-font-color) 50%,
+      75%,
+      transparent 90%
+    )
+    1;
   pointer-events: none;
+}
+
+.app-menu-header {
+  position: absolute;
+  top: calc(vars.$default-padding * 2);
+  right: calc(vars.$default-padding * 2);
+  font-family: vars.$menu-header-font-family;
+  font-size: vars.$appmenu-active-header-font-size;
+  font-weight: bolder;
+  white-space: nowrap;
+  text-shadow: var(--styles-font-shadow);
+  transform: scale(1, 1.2) rotate3d(0, 1, 1, -2deg);
+  pointer-events: all;
 }
 
 .app-menu-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  padding-left: calc(vars.$default-padding * 2);
+  padding-right: calc(vars.$default-padding * 2);
   padding-bottom: calc(vars.$default-padding * 2);
   font-size: vars.$appmenu-font-size;
+  line-height: calc(vars.$appmenu-font-size * 1.1);
+  border-top: 2px solid var(--styles-font-color);
 }
 
 .app-menu-section-header {
-  padding-left: vars.$default-padding;
-  padding-right: vars.$default-padding;
   font-size: vars.$appmenu-section-header-font-size;
-  font-style: italic;
-  opacity: 0.8;
   pointer-events: all;
 }
 
 .app-menu-section-link {
-  padding-left: vars.$default-padding;
-  padding-right: vars.$default-padding;
   color: var(--styles-font-color);
   text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
   pointer-events: all;
+  cursor: pointer;
+  opacity: 0.8;
 
-  &.nuxt-link-exact-active {
-    font-weight: bolder;
-    text-transform: uppercase;
-    text-shadow: var(--styles-font-shadow-long);
-  }
-
-  &:hover:not(.nuxt-link-exact-active) {
-    text-shadow: var(--styles-font-shadow-short);
+  &:hover {
+    opacity: 1;
   }
 }
 </style>
@@ -83,7 +97,10 @@ export default {
   name: "AppMenuLg",
   computed: {
     menu() {
-      return this.$services.menu.get();
+      return this.$services.menu.getByRoute(this.$route.path);
+    },
+    currentHeader() {
+      return this.menu.currentHeader;
     },
   },
 };

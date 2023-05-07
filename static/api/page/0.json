@@ -2,9 +2,8 @@
   "id": 0,
   "header": "Alexey Chirukhin",
   "settings": {
-    "backgroundColor": "#dacda3",
-    "fontColor": "#cc3d43",
-    "fontShadowColor": "#cc3d43",
+    "backgroundColor": "#dcd9c6",
+    "fontColor": "#ec5938",
     "fitScreen": true
   },
   "components": [

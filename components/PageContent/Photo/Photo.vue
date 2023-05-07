@@ -174,8 +174,6 @@
   left: 0;
   padding: vars.$default-padding;
   font-size: vars.$photo-close-font-size;
-  color: white;
-  mix-blend-mode: exclusion;
   writing-mode: vertical-rl;
   cursor: pointer;
 }
@@ -215,6 +213,7 @@
   left: 0;
   right: 0;
   z-index: 1;
+  background: var(--styles-background-color);
 }
 
 .fullscreen-sm-img {
@@ -235,7 +234,6 @@
   left: 0;
   padding: vars.$default-padding;
   font-size: vars.$photo-close-font-size;
-  mix-blend-mode: exclusion;
   cursor: pointer;
 }
 
@@ -272,7 +270,7 @@ export default {
     cssVars() {
       return {
         "--fs-bg-color": `${this.settings.fullscreenBgColor}${
-          this.settings.fullscreenBgTransparent ? "e6" : "ff"
+          this.settings.fullscreenBgTransparent ? "c8" : "ff"
         }`,
         "--fs-zoomimg-left": `${this.zoomigProps.left}px`,
         "--fs-zoomimg-top": `${this.zoomigProps.top}px`,
@@ -282,7 +280,7 @@ export default {
       };
     },
     settings() {
-      return this.$services.settings.photo.get();
+      return this.$services.settings.photoGrid.get();
     },
     smallScreen() {
       return this.$services.settings.isSmallScreen();
@@ -356,13 +354,13 @@ export default {
       this.closeFullscreen();
     },
     handleWhiteBgClicked() {
-      this.$services.settings.photo.setWhiteFullscreenBgColor();
+      this.$services.settings.photoGrid.setWhiteFullscreenBgColor();
     },
     handleBlackBgClicked() {
-      this.$services.settings.photo.setBlackFullscreenBgColor();
+      this.$services.settings.photoGrid.setBlackFullscreenBgColor();
     },
     handleTransparentBgClicked() {
-      this.$services.settings.photo.switchFullscreenBgTransparency();
+      this.$services.settings.photoGrid.switchFullscreenBgTransparency();
     },
     openFullscreenSm() {
       this.showFullScreen = true;

@@ -89,6 +89,7 @@
   opacity: 0.9;
   font-family: vars.$handwriting1-font-family;
   font-weight: bolder;
+  color: vars.$black-color;
 
   &span {
     display: inline-block;

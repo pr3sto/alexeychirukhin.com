@@ -1,7 +1,33 @@
 {
   "id": 1,
   "header": "The memory",
+  "settings": {
+    "backgroundColor": "#3d4949",
+    "fontColor": "#e6b998"
+  },
   "components": [
+    {
+      "content": {
+        "type": "PhotoGrid",
+        "cols": {
+          "default": 1
+        },
+        "padding": false,
+        "photos": [
+          {
+            "url": "alexeychirukhin_com/v1/pages/memories/vYbxd4R.jpg"
+          }
+        ]
+      },
+      "style": {
+        "padding": {
+          "top": true,
+          "bottom": true,
+          "left": true,
+          "right": true
+        }
+      }
+    },
     {
       "content": {
         "type": "TextBlocks",
@@ -17,30 +43,8 @@
           },
           {
             "align": "right",
-            "linesStyle": "font-size:1.2em;line-height:1em;font-weight:bolder;background-color:#f52d09;",
+            "linesStyle": "font-size:1.2em;line-height:1em;font-weight:bolder;",
             "lines": ["- Aveline Vallen"]
-          }
-        ]
-      },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": true,
-          "left": true,
-          "right": true
-        }
-      }
-    },
-    {
-      "content": {
-        "type": "PhotoGrid",
-        "cols": {
-          "default": 1
-        },
-        "padding": false,
-        "photos": [
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/vYbxd4R.jpg"
           }
         ]
       },

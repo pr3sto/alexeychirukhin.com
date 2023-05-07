@@ -1,11 +1,7 @@
 <template>
-  <div
-    id="default-layout"
-    :class="smallScreen ? 'default-layout--sm' : 'default-layout--lg'"
-  >
-    <nuxt-child id="default-layout-page" />
-    <app-menu-sm v-if="smallScreen" id="default-layout-menu" />
-    <app-menu-lg v-else id="default-layout-menu" />
+  <div id="default-layout">
+    <figure class="grain" />
+    <Nuxt id="default-layout-page" />
   </div>
 </template>
 
@@ -13,42 +9,27 @@
 @use "~/assets/scss/variables" as vars;
 
 #default-layout {
-  display: flex;
-  position: relative;
   min-height: 100vh;
-  background: var(--styles-background-color);
+  display: flex;
   z-index: 0; /* creates stacking context */
-
-  /* texture */
-  &::after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: url(~/assets/noise.svg);
-    filter: contrast(100%) brightness(200%) opacity(20%);
-    mix-blend-mode: plus-lighter;
-    pointer-events: none;
-  }
-}
-
-.default-layout--lg {
-  flex-direction: row;
-}
-
-.default-layout--sm {
-  flex-direction: column-reverse;
 }
 
 #default-layout-page {
   flex: 1;
 }
 
-#default-layout-menu {
-  padding: vars.$default-padding;
+.grain {
+  content: "";
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: url(~/assets/noise.svg);
+  filter: contrast(100%) brightness(200%) opacity(20%);
+  mix-blend-mode: plus-lighter;
+  pointer-events: none;
 }
 
 /* Nuxt pages transition */
@@ -61,16 +42,5 @@
 </style>
 
 <script>
-import AppMenuSm from "~/components/AppMenu/AppMenuSm.vue";
-import AppMenuLg from "~/components/AppMenu/AppMenuLg.vue";
-
-export default {
-  components: { AppMenuSm, AppMenuLg },
-
-  computed: {
-    smallScreen() {
-      return this.$services.settings.isSmallScreen();
-    },
-  },
-};
+export default {};
 </script>

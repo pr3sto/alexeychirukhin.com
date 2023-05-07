@@ -1,7 +1,7 @@
 <template>
   <menu class="app-menu">
     <p class="app-menu-header" v-on:click="handleAppMenuHeaderClicked">
-      {{ activeMenuHeader }}
+      {{ currentHeader }}
     </p>
     <transition
       name="opacity-transition"
@@ -13,7 +13,7 @@
         v-show="showFullscreenAppMenu"
         v-on:click="handleFullscreenAppMenuClicked"
       >
-        <section class="app-menu-full-section">
+        <section class="app-menu-full-section" v-if="menu.index">
           <nuxt-link
             class="app-menu-full-section-link"
             :to="menu.index.page.route"
@@ -29,11 +29,14 @@
           <p class="app-menu-full-section-header">
             {{ section.displayName }}
           </p>
-          <div v-for="(page, index1) of section.pages" :key="index1">
-            <nuxt-link class="app-menu-full-section-link" :to="page.route">
-              {{ page.displayName }}
-            </nuxt-link>
-          </div>
+          <nuxt-link
+            class="app-menu-full-section-link"
+            v-for="(page, index1) of section.pages"
+            :key="index1"
+            :to="page.route"
+          >
+            {{ page.displayName }}
+          </nuxt-link>
         </section>
       </div>
     </transition>
@@ -44,18 +47,21 @@
 @use "~/assets/scss/variables" as vars;
 
 .app-menu {
-  font-family: vars.$menu-font-family;
-  color: var(--styles-font-color);
+  font-family: vars.$primary-font-family;
   z-index: 0; /* creates stacking context */
 }
 
 .app-menu-header {
   display: inline-block;
-  font-size: vars.$appmenu-font-size;
-  text-shadow: var(--styles-font-shadow-long);
+  padding-left: vars.$default-padding;
+  padding-right: vars.$default-padding;
+  padding-top: vars.$default-padding;
+  padding-bottom: calc(vars.$default-padding * 2);
+  font-family: vars.$menu-header-font-family;
+  font-size: vars.$appmenu-active-header-font-size;
   font-weight: bolder;
-  text-transform: uppercase;
-  cursor: pointer;
+  text-shadow: var(--styles-font-shadow);
+  transform: scale(1, 1.2) rotate3d(0, 1, 1, -1deg);
 }
 
 .app-menu-full {
@@ -75,31 +81,22 @@
 .app-menu-full-section {
   display: flex;
   flex-direction: column;
-  padding-bottom: calc(vars.$default-padding * 2);
+  align-items: flex-start;
+  padding-left: vars.$default-padding;
+  padding-right: vars.$default-padding;
+  padding-bottom: vars.$default-padding;
   font-size: vars.$appmenu-font-size;
 }
 
 .app-menu-full-section-header {
-  padding-left: vars.$default-padding;
-  padding-right: vars.$default-padding;
+  padding-bottom: calc(vars.$default-padding / 2);
   font-size: vars.$appmenu-section-header-font-size;
-  font-style: italic;
   opacity: 0.8;
 }
 
 .app-menu-full-section-link {
-  padding-left: vars.$default-padding;
-  padding-right: vars.$default-padding;
   color: var(--styles-font-color);
   text-decoration: none;
-  overflow-wrap: break-word;
-  box-decoration-break: clone;
-
-  &.nuxt-link-exact-active {
-    font-weight: bolder;
-    text-transform: uppercase;
-    text-shadow: var(--styles-font-shadow-short);
-  }
 }
 </style>
 
@@ -109,11 +106,10 @@ export default {
 
   computed: {
     menu() {
-      return this.$services.menu.get();
+      return this.$services.menu.getByRoute(this.$route.path);
     },
-    activeMenuHeader() {
-      return this.$services.menu.getMenuPageByRoute(this.$route.path)
-        .displayName;
+    currentHeader() {
+      return this.menu.currentHeader;
     },
   },
 
@@ -121,6 +117,10 @@ export default {
     return {
       showFullscreenAppMenu: false,
     };
+  },
+
+  beforeDestroy() {
+    this.$pageUtility.enablePageScroll();
   },
 
   methods: {

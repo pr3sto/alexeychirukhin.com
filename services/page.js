@@ -17,7 +17,7 @@ export default (api, menuService, stylesService) => ({
     }
 
     // apply page styles
-    stylesService.loadPageStyles(pagesCache[menuPage.id].settings);
+    stylesService.applyPageStyles(pagesCache[menuPage.id].settings);
 
     return pagesCache[menuPage.id];
   },
@@ -34,10 +34,9 @@ const pageSchema = {
       properties: {
         backgroundColor: { type: "string" },
         fontColor: { type: "string" },
-        fontShadowColor: { type: "string" },
         fitScreen: { type: "boolean" },
       },
-      required: ["backgroundColor", "fontColor", "fontShadowColor"],
+      required: ["backgroundColor", "fontColor"],
     },
     components: {
       type: "array",

@@ -6,7 +6,7 @@ export default ({ $services }, inject) => {
     detectScreenSize($services.settings);
   };
 
-  const utility = {
+  const utilities = {
     disablePageScroll: () => {
       document.body.classList.add("non-scrollable");
       document.documentElement.classList.add("non-scrollable");
@@ -17,7 +17,7 @@ export default ({ $services }, inject) => {
     },
   };
 
-  inject("pageUtility", utility);
+  inject("pageUtility", utilities);
 };
 
 function detectScreenSize(settingsService) {

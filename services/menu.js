@@ -19,8 +19,28 @@ export default (api, store) => ({
 
     store.commit("menu/setData", data);
   },
-  get() {
-    return store.state.menu;
+  getByRoute(route) {
+    // create deep copy
+    let menu = JSON.parse(JSON.stringify(store.state.menu));
+
+    menu.currentHeader = this.getMenuPageByRoute(route).displayName;
+
+    if (menu.index.page.route === route) {
+      // delete current index section
+      delete menu.index;
+    } else {
+      // delet current page
+      menu.sections.forEach((section) => {
+        section.pages = section.pages.filter((page) => page.route !== route);
+      });
+
+      // delete empty sections
+      menu.sections = menu.sections.filter(
+        (section) => section.pages && section.pages.length > 0
+      );
+    }
+
+    return menu;
   },
   getAllMenuPages() {
     const indexPage = store.state.menu.index.page;

@@ -1,5 +1,5 @@
 export default () => ({
-  loadPageStyles(pageSettings) {
+  applyPageStyles(pageSettings) {
     const sheet = new CSSStyleSheet();
     const styles = createCSS(pageSettings);
 
@@ -13,8 +13,7 @@ function createCSS(pageSettings) {
     :root {
       --styles-background-color: ${pageSettings.backgroundColor};
       --styles-font-color: ${pageSettings.fontColor};
-      --styles-font-shadow-long: ${createTextShadow(pageSettings.fontShadowColor, 10)};
-      --styles-font-shadow-short: ${createTextShadow(pageSettings.fontShadowColor, 3)};
+      --styles-font-shadow: ${createTextShadow(pageSettings.fontColor, 10)};
     }
   `;
 }
@@ -22,7 +21,7 @@ function createCSS(pageSettings) {
 function createTextShadow(hexColor, steps) {
   let css = "";
   for (let i = 0; i <= steps; i++) {
-    hexColor = offsetColor(hexColor, 7);
+    hexColor = offsetColor(hexColor, 8);
     css = css + `${i}px ${i}px 1px ${hexColor},`;
   }
 
@@ -41,11 +40,11 @@ function offsetColor(hexColor, offset) {
 }
 
 function convertHexToRGB(hexColor) {
-  let bigint = parseInt(hexColor.replace("#", ""), 16);
+  const bigint = parseInt(hexColor.replace("#", ""), 16);
 
-  let r = (bigint >> 16) & 255;
-  let g = (bigint >> 8) & 255;
-  let b = bigint & 255;
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
 
   return { r, g, b };
 }
