@@ -10,7 +10,6 @@
 
 #default-layout {
   display: flex;
-  min-height: 100vh;
 }
 
 #default-layout-page {

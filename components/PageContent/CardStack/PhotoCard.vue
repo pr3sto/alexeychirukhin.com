@@ -42,7 +42,7 @@
     left: 0;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAYAAADam2dgAAAAAXNSR0IArs4c6QAAADFJREFUKFNjZGBgkGJgYHjGgBtIMULlcCkEi8MUgdSiK4TzkRUhK0TRQJJJBN1E0HcAEQkMPPAHd4YAAAAASUVORK5CYII=);
     background-size: 0.7em;
-    opacity: 0.3;
+    opacity: 1;
     pointer-events: none;
   }
 }
@@ -90,10 +90,6 @@
   font-family: vars.$handwriting1-font-family;
   font-weight: bolder;
   color: vars.$black-color;
-
-  &span {
-    display: inline-block;
-  }
 }
 </style>
 

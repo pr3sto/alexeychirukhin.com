@@ -66,8 +66,8 @@ const pageSchema = {
                 },
                 required: ["top", "bottom", "left", "right"],
               },
-              required: ["padding"],
             },
+            required: ["padding"],
           },
         },
         required: ["content", "style"],
@@ -90,11 +90,11 @@ const cardstackComponentSchema = {
             type: "object",
             properties: {
               type: { type: "string", enum: ["PhotoCard"] },
-              round: { type: "boolean" },
               photoUrl: { type: "string" },
+              round: { type: "boolean" },
               caption: { type: "string" },
             },
-            required: ["type", "round", "photoUrl"],
+            required: ["type", "photoUrl"],
           },
           {
             type: "object",
@@ -107,8 +107,10 @@ const cardstackComponentSchema = {
         ],
       },
     },
+    cardScale: { type: "number" },
+    blurEdges: { type: "boolean" },
   },
-  required: ["type", "cards"],
+  required: ["type", "cards", "cardScale"],
 };
 
 const photoComponentSchema = {

@@ -1,6 +1,10 @@
 <template>
-  <div class="cardstack" :style="cssVars">
-    <div class="cardstack-plane">
+  <div
+    class="cardstack"
+    :style="cssVars"
+    :class="{ 'cardstack--blur-edges': content.blurEdges }"
+  >
+    <div class="cardstack-cards">
       <div
         class="cardstack-card"
         v-for="(card, index) of content.cards.slice().reverse()"
@@ -19,7 +23,24 @@
 <style lang="scss" scoped>
 @use "~/assets/scss/variables" as vars;
 
-.cardstack-plane {
+.cardstack {
+  position: relative;
+  height: 100vh;
+
+  &--blur-edges::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: inset 0 30px 10px -20px var(--styles-background-color),
+      inset 0 -30px 10px -20px var(--styles-background-color);
+    pointer-events: none;
+  }
+}
+
+.cardstack-cards {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -80,37 +101,40 @@ export default {
 
   mounted() {
     this.$nextTick(() => {
-      this.reCalculate();
-      this.shuffleCards();
+      this.recalculateCardDimensions();
+      this.distributeCards();
     });
 
-    this.elementResizeObserver = new ResizeObserver(this.reCalculate);
+    this.elementResizeObserver = new ResizeObserver(
+      this.recalculateCardDimensions
+    );
     this.elementResizeObserver.observe(this.$el);
   },
 
   beforeDestroy() {
     this.elementResizeObserver.disconnect();
+    this.elementResizeObserver = null;
     this.cleanupEventListeners();
   },
 
   methods: {
-    reCalculate() {
+    recalculateCardDimensions() {
       const containerRect = this.$el.getBoundingClientRect();
 
       // calc width and height of a card based on a container bounds
-      const maxWidth = containerRect.width * cardstack.largeScreen.CARD_SCALE;
-      const maxheigth = containerRect.height * cardstack.largeScreen.CARD_SCALE;
-      if (maxWidth / maxheigth > cardstack.CARD_ASPECT_RATIO) {
-        this.cardstackCardHeight = maxheigth;
-        this.cardstackCardWidth = maxheigth * cardstack.CARD_ASPECT_RATIO;
-        this.fontSize = maxheigth / cardstack.FONT_SIZE_FACTOR1;
+      const maxCardWidth = containerRect.width * this.content.cardScale * 0.9;
+      const maxCardHeigth = containerRect.height * this.content.cardScale * 0.9;
+      if (maxCardWidth / maxCardHeigth > cardstack.CARD_ASPECT_RATIO) {
+        this.cardstackCardHeight = maxCardHeigth;
+        this.cardstackCardWidth = maxCardHeigth * cardstack.CARD_ASPECT_RATIO;
+        this.fontSize = maxCardHeigth / cardstack.FONT_SIZE_FACTOR1;
       } else {
-        this.cardstackCardHeight = maxWidth / cardstack.CARD_ASPECT_RATIO;
-        this.cardstackCardWidth = maxWidth;
-        this.fontSize = maxWidth / cardstack.FONT_SIZE_FACTOR2;
+        this.cardstackCardHeight = maxCardWidth / cardstack.CARD_ASPECT_RATIO;
+        this.cardstackCardWidth = maxCardWidth;
+        this.fontSize = maxCardWidth / cardstack.FONT_SIZE_FACTOR2;
       }
     },
-    shuffleCards() {
+    distributeCards() {
       const containerRect = this.$el.getBoundingClientRect();
       const cardsNumber = this.$refs["cards"].length;
 
@@ -137,14 +161,20 @@ export default {
 
       // transform each card
       this.$refs["cards"].forEach((element, index) => {
-        const x = randomPoints[index][0] + paddingX + containerRect.x;
-        const y = randomPoints[index][1] + paddingY + containerRect.y;
+        const x = randomPoints[index][0] + paddingX;
+        const y = randomPoints[index][1] + paddingY;
+
+        // z-index
+        element.style.zIndex = index + 1;
+
+        // transform rotate
         let rotate =
           getRandomNumber(0, cardstack.largeScreen.CARD_MAX_ROTATE_ANGLE_DEG) *
           (isOdd(index) ? 1 : -1);
+        element.style.transform = `rotate(${rotate}deg)`;
 
-        element.style.zIndex = index + 1;
-        element.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${rotate}deg)`;
+        // left and top
+        this.moveCardElement(element, x, y);
       });
     },
     rearrangeCards() {
@@ -214,11 +244,17 @@ export default {
       this.drag.clientX = clientX;
       this.drag.clientY = clientY;
 
-      // set element's new position
-      this.drag.target.style.left = `${
-        this.drag.target.offsetLeft - offsetX
-      }px`;
-      this.drag.target.style.top = `${this.drag.target.offsetTop - offsetY}px`;
+      // calc element's new position
+      const x = this.drag.target.offsetLeft - offsetX;
+      const y = this.drag.target.offsetTop - offsetY;
+
+      // set new position
+      this.moveCardElement(this.drag.target, x, y);
+    },
+    moveCardElement(element, x, y) {
+      const containerRect = this.$el.getBoundingClientRect();
+      element.style.left = `${(x / containerRect.width) * 100}%`;
+      element.style.top = `${(y / containerRect.height) * 100}%`;
     },
     cleanupEventListeners() {
       document.removeEventListener("mouseup", this.handleMouseUp);
