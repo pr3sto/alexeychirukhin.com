@@ -160,7 +160,7 @@ export default {
       return (
         ("0" + (new Date().getMonth() + 1)).slice(-2) + // month
         "/" +
-        new Date().getFullYear().toString().substr(-2) // year
+        new Date().getFullYear().toString().slice(-2) // year
       );
     },
     cssVars() {

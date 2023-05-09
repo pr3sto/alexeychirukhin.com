@@ -1,7 +1,7 @@
 <template>
   <div id="default-layout">
-    <figure class="grain" />
     <Nuxt id="default-layout-page" />
+    <div class="grain" />
   </div>
 </template>
 
@@ -10,7 +10,6 @@
 
 #default-layout {
   display: flex;
-  z-index: 0; /* creates stacking context */
   min-height: 100vh;
 }
 
@@ -21,7 +20,6 @@
 .grain {
   content: "";
   position: fixed;
-  z-index: 1;
   top: 0;
   bottom: 0;
   left: 0;
