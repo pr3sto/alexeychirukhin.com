@@ -14,7 +14,7 @@
       <div
         class="photo-container-caption"
         :class="
-          smallScreen
+          isMobileVersion
             ? 'photo-container-caption--sm'
             : 'photo-container-caption--lg'
         "
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <template v-if="!smallScreen">
+    <template v-if="!isMobileVersion">
       <transition
         name="background-transition"
         v-on:before-enter="beforeFullscreenLgOpened"
@@ -74,7 +74,7 @@
       </transition>
     </template>
 
-    <template v-if="smallScreen">
+    <template v-if="isMobileVersion">
       <transition
         name="opacity-transition"
         v-on:after-enter="afterFullscreenSmOpened"
@@ -282,8 +282,8 @@ export default {
     settings() {
       return this.$services.settings.photoGrid.get();
     },
-    smallScreen() {
-      return this.$services.settings.isSmallScreen();
+    isMobileVersion() {
+      return this.$services.settings.useMobileVersion();
     },
   },
 
@@ -335,7 +335,7 @@ export default {
       window.scrollTo(this.windowScrollPosition.x, this.windowScrollPosition.y);
     },
     handlePhotoImgClicked() {
-      if (this.smallScreen) {
+      if (this.isMobileVersion) {
         this.openFullscreenSm();
       } else {
         this.openFullscreenLg();

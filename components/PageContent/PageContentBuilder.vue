@@ -14,11 +14,11 @@
       }"
     >
       <card-stack-lg
-        v-if="component.content.type === 'CardStack' && !smallScreen"
+        v-if="component.content.type === 'CardStack' && !isMobileVersion"
         :content="component.content"
       />
       <card-stack-sm
-        v-else-if="component.content.type === 'CardStack' && smallScreen"
+        v-else-if="component.content.type === 'CardStack' && isMobileVersion"
         :content="component.content"
       />
       <photo
@@ -87,8 +87,8 @@ export default {
   props: ["components", "fitScreen"],
   components: { CardStackLg, CardStackSm, Photo, PhotoGrid, TextBlocks },
   computed: {
-    smallScreen() {
-      return this.$services.settings.isSmallScreen();
+    isMobileVersion() {
+      return this.$services.settings.useMobileVersion();
     },
   },
 };

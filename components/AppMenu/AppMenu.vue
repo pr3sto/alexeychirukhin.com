@@ -1,5 +1,5 @@
 <template>
-  <app-menu-sm v-if="smallScreen" />
+  <app-menu-sm v-if="isMobileVersion" />
   <app-menu-lg v-else />
 </template>
 
@@ -11,8 +11,8 @@ export default {
   components: { AppMenuSm, AppMenuLg },
 
   computed: {
-    smallScreen() {
-      return this.$services.settings.isSmallScreen();
+    isMobileVersion() {
+      return this.$services.settings.useMobileVersion();
     },
   },
 };

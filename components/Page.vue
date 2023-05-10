@@ -1,5 +1,5 @@
 <template>
-  <div class="page" :class="smallScreen ? 'page--sm' : 'page--lg'">
+  <div class="page" :class="isMobileVersion ? 'page--sm' : 'page--lg'">
     <page-content-builder
       class="page-content"
       :components="data && data.components"
@@ -39,8 +39,8 @@ export default {
   props: ["data"],
 
   computed: {
-    smallScreen() {
-      return this.$services.settings.isSmallScreen();
+    isMobileVersion() {
+      return this.$services.settings.useMobileVersion();
     },
   },
 };

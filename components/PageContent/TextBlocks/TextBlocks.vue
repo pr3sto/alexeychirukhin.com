@@ -55,8 +55,8 @@ export default {
   props: ["content"],
 
   computed: {
-    smallScreen() {
-      return this.$services.settings.isSmallScreen();
+    isMobileVersion() {
+      return this.$services.settings.useMobileVersion();
     },
   },
 };

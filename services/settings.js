@@ -4,11 +4,11 @@ export default (store) => ({
   fixState() {
     store.commit("settings/fixState");
   },
-  isSmallScreen() {
-    return store.state.settings.isSmallScreen;
+  useMobileVersion() {
+    return store.state.settings.useMobileVersion;
   },
-  setIsSmallScreen(isSmallScreen) {
-    return store.commit("settings/setIsSmallScreen", isSmallScreen);
+  setUseMobileVersion(useMobileVersion) {
+    return store.commit("settings/setUseMobileVersion", useMobileVersion);
   },
   photoGrid: {
     get() {

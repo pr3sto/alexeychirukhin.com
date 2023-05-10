@@ -21,13 +21,13 @@ export default ({ $services }, inject) => {
 };
 
 function detectScreenSize(settingsService) {
-  const storedValue = settingsService.isSmallScreen();
+  const storedValue = settingsService.useMobileVersion();
 
-  const isSmallScreen = window.matchMedia(
+  const useMobileVersion = window.matchMedia(
     `(max-width: ${scssVars.mediaMobileMaxWidth})`
   ).matches;
 
-  if (storedValue !== isSmallScreen) {
-    settingsService.setIsSmallScreen(isSmallScreen);
+  if (storedValue !== useMobileVersion) {
+    settingsService.setUseMobileVersion(useMobileVersion);
   }
 }
