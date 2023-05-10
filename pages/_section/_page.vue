@@ -8,9 +8,10 @@ import Page from "~/components/Page.vue";
 export default {
   components: { Page },
 
-  head() {
+  head({ $route, $services }) {
+    const menuPage = $services.menu.getMenuPageByRoute($route.path);
     return {
-      title: this.pageData && this.pageData.header,
+      title: menuPage && menuPage.displayName,
     };
   },
 

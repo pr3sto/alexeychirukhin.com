@@ -28,7 +28,6 @@ const pageSchema = {
   type: "object",
   properties: {
     id: { type: "number" },
-    header: { type: "string" },
     settings: {
       type: "object",
       properties: {
@@ -74,7 +73,7 @@ const pageSchema = {
       },
     },
   },
-  required: ["id", "header", "settings", "components"],
+  required: ["id", "settings", "components"],
 };
 
 const cardstackComponentSchema = {
