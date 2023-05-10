@@ -33,7 +33,7 @@ const pageSchema = {
       properties: {
         backgroundColor: { type: "string" },
         fontColor: { type: "string" },
-        fitScreen: { type: "boolean" },
+        expandToWindowHeight: { type: "boolean" },
       },
       required: ["backgroundColor", "fontColor"],
     },
@@ -54,7 +54,7 @@ const pageSchema = {
           style: {
             type: "object",
             properties: {
-              growToFitScreen: { type: "boolean" },
+              fillAvaliableSpace: { type: "boolean" },
               padding: {
                 type: "object",
                 properties: {

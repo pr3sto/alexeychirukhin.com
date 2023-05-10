@@ -3,7 +3,7 @@
     <page-content-builder
       class="page-content"
       :components="data && data.components"
-      :fitScreen="data && data.settings.fitScreen"
+      :expandToWindowHeight="data && data.settings.expandToWindowHeight"
     />
     <app-menu />
   </div>

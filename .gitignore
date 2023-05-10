@@ -92,3 +92,6 @@ sw.*
 # only for local dev
 static/data.development.json
 static/data.beta.json
+
+# todo files
+*.todo

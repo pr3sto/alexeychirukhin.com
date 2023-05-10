@@ -1,5 +1,8 @@
 <template>
-  <main class="page-content" :class="{ 'page-content--fit-screen': fitScreen }">
+  <main
+    class="page-content"
+    :class="{ 'page-content--100vh': expandToWindowHeight }"
+  >
     <section
       class="page-content-component"
       v-for="(component, index) of components"
@@ -10,7 +13,8 @@
           component.style.padding.bottom,
         'page-content-component--padding-left': component.style.padding.left,
         'page-content-component--padding-right': component.style.padding.right,
-        'page-content-component--grow': component.style.growToFitScreen,
+        'page-content-component--fill-avaliable-space':
+          component.style.fillAvaliableSpace,
       }"
     >
       <card-stack-lg
@@ -44,7 +48,7 @@
   display: flex;
   flex-direction: column;
 
-  &--fit-screen {
+  &--100vh {
     height: 100vh;
   }
 }
@@ -64,7 +68,7 @@
   &--padding-right {
     padding-right: vars.$default-padding;
   }
-  &--grow {
+  &--fill-avaliable-space {
     overflow: hidden;
     flex: 1;
   }
@@ -84,7 +88,7 @@ import TextBlocks from "./TextBlocks/TextBlocks.vue";
 
 export default {
   name: "PageContentBuilder",
-  props: ["components", "fitScreen"],
+  props: ["components", "expandToWindowHeight"],
   components: { CardStackLg, CardStackSm, Photo, PhotoGrid, TextBlocks },
   computed: {
     isMobileVersion() {
