@@ -107,7 +107,7 @@ const cardstackComponentSchema = {
       },
     },
     cardScale: { type: "number" },
-    blurEdges: { type: "boolean" },
+    showBorder: { type: "boolean" },
   },
   required: ["type", "cards", "cardScale"],
 };

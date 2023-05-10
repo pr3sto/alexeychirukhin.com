@@ -2,9 +2,12 @@
   <div
     class="cardstack"
     :style="cssVars"
-    :class="{ 'cardstack--blur-edges': content.blurEdges }"
+    :class="{ 'cardstack--with-border': content.showBorder }"
   >
-    <div class="cardstack-cards">
+    <div
+      class="cardstack-cards"
+      :class="{ 'cardstack-cards--with-border': content.showBorder }"
+    >
       <div
         class="cardstack-card"
         v-for="(card, index) of content.cards.slice().reverse()"
@@ -27,7 +30,7 @@
   position: relative;
   height: 100vh;
 
-  &--blur-edges::after {
+  &--with-border::after {
     content: "";
     position: absolute;
     top: 0;
@@ -48,6 +51,11 @@
   right: 0;
   z-index: 0; /* creates stacking context for cards */
   overflow: hidden;
+
+  &--with-border {
+    border-top: 2px solid var(--styles-background-color);
+    border-bottom: 2px solid var(--styles-background-color);
+  }
 }
 
 .cardstack-card {
@@ -56,6 +64,7 @@
   width: var(--cardstack-card-width);
   transform-origin: center;
   cursor: grab;
+  touch-action: none;
 
   &:active {
     cursor: grabbing;
@@ -91,10 +100,12 @@ export default {
       cardstackCardWidth: 0,
       fontSize: 0,
       cardWasDragged: false,
-      drag: {
-        target: undefined,
-        clientX: 0,
-        clientY: 0,
+      draggableCard: {
+        element: undefined,
+        initialCardY: 0,
+        initialPositionX: 0,
+        initialMouseX: 0,
+        initialMouseY: 0,
       },
     };
   },
@@ -144,9 +155,9 @@ export default {
 
       // padding, because we don't want to move cards close to edges
       const paddingX =
-        maxOffsetX * cardstack.largeScreen.CARD_CONTAINER_PADDING_PERCENT;
+        maxOffsetX * cardstack.desktop.CARD_CONTAINER_PADDING_PERCENT;
       const paddingY =
-        maxOffsetY * cardstack.largeScreen.CARD_CONTAINER_PADDING_PERCENT;
+        maxOffsetY * cardstack.desktop.CARD_CONTAINER_PADDING_PERCENT;
 
       // 2d plane for random points
       const planeWidth = maxOffsetX - paddingX * 2;
@@ -169,7 +180,7 @@ export default {
 
         // transform rotate
         let rotate =
-          getRandomNumber(0, cardstack.largeScreen.CARD_MAX_ROTATE_ANGLE_DEG) *
+          getRandomNumber(0, cardstack.desktop.CARD_MAX_ROTATE_ANGLE_DEG) *
           (isOdd(index) ? 1 : -1);
         element.style.transform = `rotate(${rotate}deg)`;
 
@@ -177,14 +188,47 @@ export default {
         this.moveCardElement(element, x, y);
       });
     },
-    rearrangeCards() {
+    bringCardOnTop(cardElement) {
       // move current card on top
       this.$refs["cards"]
-        .filter((el) => el.style.zIndex > this.drag.target.style.zIndex)
+        .filter((el) => el.style.zIndex > cardElement.style.zIndex)
         .forEach((element) => {
           element.style.zIndex--;
         });
-      this.drag.target.style.zIndex = this.$refs["cards"].length;
+      cardElement.style.zIndex = this.$refs["cards"].length;
+    },
+    moveCardTo(clientX, clientY) {
+      const containerRect = this.$el.getBoundingClientRect();
+
+      // calculate move offset
+      const offsetX = clientX - this.draggableCard.initialMouseX;
+      const offsetY = clientY - this.draggableCard.initialMouseY;
+
+      const position = percentToPx(
+        {
+          x: this.draggableCard.initialPositionX,
+          y: this.draggableCard.initialCardY,
+        },
+        containerRect.width,
+        containerRect.height
+      );
+
+      // set new position
+      this.moveCardElement(
+        this.draggableCard.element,
+        position.x + offsetX,
+        position.y + offsetY
+      );
+    },
+    moveCardElement(element, x, y) {
+      const containerRect = this.$el.getBoundingClientRect();
+      const position = pxToPercent(
+        { x, y },
+        containerRect.width,
+        containerRect.height
+      );
+      element.style.left = `${position.x}%`;
+      element.style.top = `${position.y}%`;
     },
     handleCardMouseDown(e) {
       e.stopPropagation();
@@ -192,11 +236,17 @@ export default {
 
       this.cardWasDragged = false;
 
-      this.drag.clientX = e.clientX;
-      this.drag.clientY = e.clientY;
-      this.drag.target = e.currentTarget;
+      this.draggableCard.element = e.currentTarget;
+      this.draggableCard.initialMouseX = e.clientX;
+      this.draggableCard.initialMouseY = e.clientY;
+      this.draggableCard.initialCardY = e.currentTarget.style.top
+        ? parseFloat(e.currentTarget.style.top.slice(0, -1))
+        : 0;
+      this.draggableCard.initialPositionX = e.currentTarget.style.left
+        ? parseFloat(e.currentTarget.style.left.slice(0, -1))
+        : 0;
 
-      this.rearrangeCards();
+      this.bringCardOnTop(e.currentTarget);
 
       document.addEventListener("mouseup", this.handleMouseUp);
       document.addEventListener("mousemove", this.handleMouseMove);
@@ -217,11 +267,17 @@ export default {
       }
     },
     handleCardTouchStart(e) {
-      this.drag.target = e.currentTarget;
-      this.drag.clientX = e.changedTouches[0].clientX;
-      this.drag.clientY = e.changedTouches[0].clientY;
+      this.draggableCard.element = e.currentTarget;
+      this.draggableCard.initialMouseX = e.changedTouches[0].clientX;
+      this.draggableCard.initialMouseY = e.changedTouches[0].clientY;
+      this.draggableCard.initialCardY = e.currentTarget.style.top
+        ? parseFloat(e.currentTarget.style.top.slice(0, -1))
+        : 0;
+      this.draggableCard.initialPositionX = e.currentTarget.style.left
+        ? parseFloat(e.currentTarget.style.left.slice(0, -1))
+        : 0;
 
-      this.rearrangeCards();
+      this.bringCardOnTop(e.currentTarget);
 
       document.addEventListener("touchend", this.handleTouchEnd);
       document.addEventListener("touchmove", this.handleTouchMove, {
@@ -234,27 +290,6 @@ export default {
     },
     handleTouchMove(e) {
       this.moveCardTo(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-    },
-    moveCardTo(clientX, clientY) {
-      // calculate move offset
-      const offsetX = this.drag.clientX - clientX;
-      const offsetY = this.drag.clientY - clientY;
-
-      // save position
-      this.drag.clientX = clientX;
-      this.drag.clientY = clientY;
-
-      // calc element's new position
-      const x = this.drag.target.offsetLeft - offsetX;
-      const y = this.drag.target.offsetTop - offsetY;
-
-      // set new position
-      this.moveCardElement(this.drag.target, x, y);
-    },
-    moveCardElement(element, x, y) {
-      const containerRect = this.$el.getBoundingClientRect();
-      element.style.left = `${(x / containerRect.width) * 100}%`;
-      element.style.top = `${(y / containerRect.height) * 100}%`;
     },
     cleanupEventListeners() {
       document.removeEventListener("mouseup", this.handleMouseUp);
@@ -289,5 +324,19 @@ function sliceRandom(array, numberOfItems) {
 
 function isOdd(number) {
   return number % 2;
+}
+
+function pxToPercent(pos, width, height) {
+  return {
+    x: (pos.x / width) * 100,
+    y: (pos.y / height) * 100,
+  };
+}
+
+function percentToPx(pos, width, height) {
+  return {
+    x: (pos.x / 100) * width,
+    y: (pos.y / 100) * height,
+  };
 }
 </script>
