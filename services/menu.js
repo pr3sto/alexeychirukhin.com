@@ -82,7 +82,7 @@ const menuIndexSchema = {
     page: {
       type: "object",
       properties: {
-        id: { type: "number" },
+        id: { type: "number", minimum: 0 },
         displayName: { type: "string" },
       },
       required: ["id", "displayName"],
@@ -102,7 +102,7 @@ const menuSectionSchema = {
       items: {
         type: "object",
         properties: {
-          id: { type: "number" },
+          id: { type: "number", minimum: 0 },
           path: { type: "string" },
           displayName: { type: "string" },
         },

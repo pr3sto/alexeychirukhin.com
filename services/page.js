@@ -27,7 +27,7 @@ const pageSchema = {
   id: "/page",
   type: "object",
   properties: {
-    id: { type: "number" },
+    id: { type: "number", minimum: 0 },
     settings: {
       type: "object",
       properties: {
@@ -106,7 +106,7 @@ const cardstackComponentSchema = {
         ],
       },
     },
-    cardScale: { type: "number" },
+    cardScale: { type: "number", minimum: 0, maximum: 0.99 },
     showBorder: { type: "boolean" },
   },
   required: ["type", "cards", "cardScale"],
@@ -131,7 +131,7 @@ const photogridComponentSchema = {
     cols: {
       type: "object",
       properties: {
-        default: { type: "number" },
+        default: { type: "number", minimum: 1 },
       },
       required: ["default"],
     },

@@ -133,8 +133,8 @@ export default {
       const containerRect = this.$el.getBoundingClientRect();
 
       // calc width and height of a card based on a container bounds
-      const maxCardWidth = containerRect.width * this.content.cardScale * 0.9;
-      const maxCardHeigth = containerRect.height * this.content.cardScale * 0.9;
+      const maxCardWidth = containerRect.width * this.content.cardScale;
+      const maxCardHeigth = containerRect.height * this.content.cardScale;
       if (maxCardWidth / maxCardHeigth > cardstack.CARD_ASPECT_RATIO) {
         this.cardstackCardHeight = maxCardHeigth;
         this.cardstackCardWidth = maxCardHeigth * cardstack.CARD_ASPECT_RATIO;
