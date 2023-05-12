@@ -33,6 +33,7 @@ const pageSchema = {
       properties: {
         backgroundColor: { type: "string" },
         fontColor: { type: "string" },
+        fitScreen: { type: "boolean" },
       },
       required: ["backgroundColor", "fontColor"],
     },

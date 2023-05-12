@@ -2,6 +2,7 @@ import * as scssVars from "~/assets/scss/_variables.scss";
 
 const defaultState = {
   useMobileVersion: false,
+  viewportHeight: 0,
   photoGrid: {
     fullscreenBgColor: scssVars.whiteColor,
     fullscreenBgTransparent: true,
@@ -13,6 +14,9 @@ export const state = () => defaultState;
 export const mutations = {
   setUseMobileVersion(state, value) {
     state.useMobileVersion = value;
+  },
+  setViewportHeight(state, value) {
+    state.viewportHeight = value;
   },
   setPhotoFullscreenBgColor(state, value) {
     state.photoGrid.fullscreenBgColor = value;

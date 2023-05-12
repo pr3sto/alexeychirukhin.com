@@ -21,13 +21,15 @@ export default ({ $services }, inject) => {
 };
 
 function detectScreenSize(settingsService) {
-  const storedValue = settingsService.useMobileVersion();
-
   const useMobileVersion = window.matchMedia(
     `(max-width: ${scssVars.mediaMobileMaxWidth})`
   ).matches;
+  const viewportHeight = document.documentElement.clientHeight;
 
-  if (storedValue !== useMobileVersion) {
+  if (settingsService.useMobileVersion() !== useMobileVersion) {
     settingsService.setUseMobileVersion(useMobileVersion);
+  }
+  if (settingsService.viewportHeight() !== viewportHeight) {
+    settingsService.setViewportHeight(viewportHeight);
   }
 }
