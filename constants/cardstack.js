@@ -7,7 +7,4 @@ export default {
     CARD_MAX_ROTATE_ANGLE_DEG: 7,
     CARD_CONTAINER_PADDING_PERCENT: 0.2,
   },
-  mobile: {
-    CARD_SCALE: 0.85,
-  },
 };

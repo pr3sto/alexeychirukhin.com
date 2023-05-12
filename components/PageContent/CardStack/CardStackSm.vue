@@ -1,19 +1,15 @@
 <template>
   <div class="cardstack" :style="cssVars">
-    <div class="cardstack-content">
-      <div class="cardstack-content-cards">
-        <component
-          class="cardstack-card"
-          v-for="(card, index) of annotatedCards"
-          :key="index"
-          :class="card.class"
-          :is="card.type"
-          :card="card"
-          :fontSize="fontSize"
-          v-on:click.native="handleCardClick"
-        />
-      </div>
-    </div>
+    <component
+      class="cardstack-card"
+      v-for="(card, index) of annotatedCards"
+      :key="index"
+      :class="card.class"
+      :is="card.type"
+      :card="card"
+      :fontSize="fontSize"
+      v-on:click.native="handleCardClick"
+    />
   </div>
 </template>
 
@@ -21,36 +17,23 @@
 @use "~/assets/scss/variables" as vars;
 
 .cardstack {
-  position: relative;
-  z-index: 0; /* creates stacking context for cards */
-}
-
-.cardstack-content {
-  position: absolute;
-  left: 5%;
-  right: 5%;
-  top: 10%;
-  bottom: 10%;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.cardstack-content-cards {
-  position: relative;
-  height: var(--cardstack-container-height);
-  width: var(--cardstack-container-width);
-  aspect-ratio: 0.82;
+  min-height: var(--cardstack-height);
+  z-index: 0; /* creates stacking context for cards */
+  overflow: hidden;
 }
 
 .cardstack-card {
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
+  height: var(--cardstack-card-height);
+  width: var(--cardstack-card-width);
   cursor: pointer;
-  transform: translateX(5%) rotate(4deg) scale(1);
+
+  z-index: 2;
   transform-origin: 0 0;
+  transform: translateX(5%) rotate(4deg) scale(1);
   transition: transform 0.4s vars.$default-transition-func 0.1s;
 
   &--current {
@@ -134,8 +117,9 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--cardstack-container-height": this.cardstackContainerHeight,
-        "--cardstack-container-width": this.cardstackContainerWidth,
+        "--cardstack-height": `${this.cardstackHeight}px`,
+        "--cardstack-card-height": `${this.cardstackCardHeight}px`,
+        "--cardstack-card-width": `${this.cardstackCardWidth}px`,
       };
     },
   },
@@ -144,53 +128,43 @@ export default {
     return {
       elementResizeObserver: null,
       annotatedCards: annotateCards(this.content.cards, 0, true),
-      cardstackContainerHeight: "auto",
-      cardstackContainerWidth: "100%",
+      cardstackHeight: 0,
+      cardstackCardHeight: 0,
+      cardstackCardWidth: 0,
       fontSize: 0,
     };
   },
 
   mounted() {
     this.$nextTick(() => {
-      this.reCalculate();
+      this.recalculateCardDimensions();
     });
 
-    this.elementResizeObserver = new ResizeObserver(this.reCalculate);
+    this.elementResizeObserver = new ResizeObserver(
+      this.recalculateCardDimensions
+    );
     this.elementResizeObserver.observe(this.$el);
   },
 
   beforeDestroy() {
     this.elementResizeObserver.disconnect();
+    this.elementResizeObserver = null;
   },
 
   methods: {
-    reCalculate() {
-      const containerRect = this.$el.children[0].getBoundingClientRect();
-      if (
-        containerRect.width / containerRect.height >
-        cardstack.CARD_ASPECT_RATIO
-      ) {
-        this.cardstackContainerHeight = "100%";
-        this.cardstackContainerWidth = "auto";
-        this.fontSize = containerRect.height / cardstack.FONT_SIZE_FACTOR1;
-      } else {
-        this.cardstackContainerHeight = "auto";
-        this.cardstackContainerWidth = "100%";
-        this.fontSize = containerRect.width / cardstack.FONT_SIZE_FACTOR2;
-      }
-    },
-    handleCardClick(e) {
-      // prevent click on href
-      if (e.target.tagName.toLowerCase() === "a") {
-        return;
-      }
+    recalculateCardDimensions() {
+      const containerRect = this.$el.getBoundingClientRect();
 
-      // prevent click when text is selected
-      if (document.getSelection().type === "Range") {
-        return;
-      }
+      // multiply by 0.95 to fit angled cards
+      const cardScale = this.content.cardScale * 0.95;
 
-      this.switchCards();
+      const cardWidth = containerRect.width * cardScale;
+      const cardHeight = cardWidth / cardstack.CARD_ASPECT_RATIO;
+
+      this.cardstackHeight = cardHeight / cardScale;
+      this.cardstackCardWidth = cardWidth;
+      this.cardstackCardHeight = cardHeight;
+      this.fontSize = cardWidth / cardstack.FONT_SIZE_FACTOR2;
     },
     switchCards() {
       // don't switch one card
@@ -216,6 +190,19 @@ export default {
           false
         );
       });
+    },
+    handleCardClick(e) {
+      // prevent click on href
+      if (e.target.tagName.toLowerCase() === "a") {
+        return;
+      }
+
+      // prevent click when text is selected
+      if (document.getSelection().type === "Range") {
+        return;
+      }
+
+      this.switchCards();
     },
   },
 };
