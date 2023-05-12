@@ -33,7 +33,6 @@ const pageSchema = {
       properties: {
         backgroundColor: { type: "string" },
         fontColor: { type: "string" },
-        expandToWindowHeight: { type: "boolean" },
       },
       required: ["backgroundColor", "fontColor"],
     },

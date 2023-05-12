@@ -1,5 +1,5 @@
 <template>
-  <div id="default-layout">
+  <div id="default-layout" :style="cssVars">
     <Nuxt id="default-layout-page" />
     <div class="grain" />
   </div>
@@ -10,6 +10,7 @@
 
 #default-layout {
   display: flex;
+  min-height: var(--min-height);
 }
 
 #default-layout-page {
@@ -39,5 +40,41 @@
 </style>
 
 <script>
-export default {};
+export default {
+  computed: {
+    cssVars() {
+      return {
+        "--min-height": `${this.minHeight}px`,
+      };
+    },
+  },
+
+  data() {
+    return {
+      minHeight: 0,
+    };
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      this.reCalculate();
+    });
+
+    window.addEventListener("resize", this.reCalculate);
+  },
+
+  beforeDestroy() {
+    this.cleanupEventListeners();
+  },
+
+  methods: {
+    reCalculate() {
+      // set min height of layout to screen height
+      this.minHeight = document.documentElement.clientHeight;
+    },
+    cleanupEventListeners() {
+      window.removeEventListener("resize", this.reCalculate);
+    },
+  },
+};
 </script>

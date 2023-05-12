@@ -1,8 +1,5 @@
 <template>
-  <main
-    class="page-content"
-    :class="{ 'page-content--100vh': expandToWindowHeight }"
-  >
+  <main class="page-content">
     <section
       class="page-content-component"
       v-for="(component, index) of components"
@@ -47,10 +44,6 @@
 .page-content {
   display: flex;
   flex-direction: column;
-
-  &--100vh {
-    height: 100vh;
-  }
 }
 
 .page-content-component {
@@ -88,7 +81,7 @@ import TextBlocks from "./TextBlocks/TextBlocks.vue";
 
 export default {
   name: "PageContentBuilder",
-  props: ["components", "expandToWindowHeight"],
+  props: ["components"],
   components: { CardStackLg, CardStackSm, Photo, PhotoGrid, TextBlocks },
   computed: {
     isMobileVersion() {
