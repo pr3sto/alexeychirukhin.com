@@ -1,19 +1,19 @@
 export default () => ({
-  applyPageStyles(pageSettings) {
+  applyPageStyles(pageStyle) {
     const sheet = new CSSStyleSheet();
-    const styles = createCSS(pageSettings);
+    const styles = createCSS(pageStyle);
 
     sheet.replaceSync(styles);
     document.adoptedStyleSheets = [sheet];
   },
 });
 
-function createCSS(pageSettings) {
+function createCSS(pageStyle) {
   return `
     :root {
-      --styles-background-color: ${pageSettings.backgroundColor};
-      --styles-font-color: ${pageSettings.fontColor};
-      --styles-font-shadow: ${createTextShadow(pageSettings.fontColor, 10)};
+      --styles-background-color: ${pageStyle.backgroundColor};
+      --styles-font-color: ${pageStyle.fontColor};
+      --styles-font-shadow: ${createTextShadow(pageStyle.fontColor, 10)};
     }
   `;
 }

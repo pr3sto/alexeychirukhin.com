@@ -86,10 +86,6 @@
 <script>
 export default {
   name: "AppMenuLg",
-  computed: {
-    menu() {
-      return this.$services.menu.getByRoute(this.$route.path);
-    },
-  },
+  props: ["menu"],
 };
 </script>

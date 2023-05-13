@@ -53,11 +53,5 @@ br {
 export default {
   name: "TextBlocks",
   props: ["content"],
-
-  computed: {
-    isMobileVersion() {
-      return this.$services.settings.getUseMobileVersion();
-    },
-  },
 };
 </script>

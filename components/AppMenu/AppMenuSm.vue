@@ -101,12 +101,7 @@
 <script>
 export default {
   name: "AppMenuSm",
-
-  computed: {
-    menu() {
-      return this.$services.menu.getByRoute(this.$route.path);
-    },
-  },
+  props: ["menu"],
 
   data() {
     return {

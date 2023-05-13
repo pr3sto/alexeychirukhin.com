@@ -2,9 +2,9 @@
   <div
     class="page"
     :class="{
-      'page--sm': isMobileVersion,
-      'page--lg': !isMobileVersion,
-      'page--fit-screen': data && data.settings.fitScreen,
+      'page--sm': useMobileVersion,
+      'page--lg': !useMobileVersion,
+      'page--fit-screen': data && data.style.fitScreen,
     }"
     :style="cssVars"
   >
@@ -12,7 +12,7 @@
       class="page-content"
       :components="data && data.components"
     />
-    <app-menu />
+    <app-menu :menu="menu" />
   </div>
 </template>
 
@@ -31,6 +31,7 @@
   &--sm {
     flex-direction: column-reverse;
   }
+
   &--fit-screen {
     height: var(--page-height);
   }
@@ -46,15 +47,19 @@ import AppMenu from "./AppMenu/AppMenu.vue";
 import PageContentBuilder from "./PageContent/PageContentBuilder.vue";
 
 export default {
-  components: { AppMenu, PageContentBuilder },
+  name: "Page",
   props: ["data"],
+  components: { AppMenu, PageContentBuilder },
 
   computed: {
-    isMobileVersion() {
-      return this.$services.settings.useMobileVersion();
+    useMobileVersion() {
+      return this.$services.settings.getUseMobileVersion();
     },
     viewportHeight() {
-      return this.$services.settings.viewportHeight();
+      return this.$services.settings.getViewportHeight();
+    },
+    menu() {
+      return this.$services.menu.getByRoute(this.$route.path);
     },
     cssVars() {
       return {

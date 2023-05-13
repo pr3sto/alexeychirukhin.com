@@ -14,12 +14,8 @@
           component.style.fillAvaliableSpace,
       }"
     >
-      <card-stack-lg
-        v-if="component.content.type === 'CardStack' && !isMobileVersion"
-        :content="component.content"
-      />
-      <card-stack-sm
-        v-else-if="component.content.type === 'CardStack' && isMobileVersion"
+      <card-stack
+        v-if="component.content.type === 'CardStack'"
         :content="component.content"
       />
       <photo
@@ -73,8 +69,7 @@
 </style>
 
 <script>
-import CardStackLg from "./CardStack/CardStackLg.vue";
-import CardStackSm from "./CardStack/CardStackSm.vue";
+import CardStack from "./CardStack/CardStack.vue";
 import Photo from "./Photo/Photo.vue";
 import PhotoGrid from "./Photo/PhotoGrid.vue";
 import TextBlocks from "./TextBlocks/TextBlocks.vue";
@@ -82,11 +77,6 @@ import TextBlocks from "./TextBlocks/TextBlocks.vue";
 export default {
   name: "PageContentBuilder",
   props: ["components"],
-  components: { CardStackLg, CardStackSm, Photo, PhotoGrid, TextBlocks },
-  computed: {
-    isMobileVersion() {
-      return this.$services.settings.getUseMobileVersion();
-    },
-  },
+  components: { CardStack, Photo, PhotoGrid, TextBlocks },
 };
 </script>

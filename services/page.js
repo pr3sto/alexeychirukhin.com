@@ -17,7 +17,7 @@ export default (api, menuService, stylesService) => ({
     }
 
     // apply page styles
-    stylesService.applyPageStyles(pagesCache[menuPage.id].settings);
+    stylesService.applyPageStyles(pagesCache[menuPage.id].style);
 
     return pagesCache[menuPage.id];
   },
@@ -28,7 +28,7 @@ const pageSchema = {
   type: "object",
   properties: {
     id: { type: "number", minimum: 0 },
-    settings: {
+    style: {
       type: "object",
       properties: {
         backgroundColor: { type: "string" },
@@ -73,7 +73,7 @@ const pageSchema = {
       },
     },
   },
-  required: ["id", "settings", "components"],
+  required: ["id", "style", "components"],
 };
 
 const cardstackComponentSchema = {
