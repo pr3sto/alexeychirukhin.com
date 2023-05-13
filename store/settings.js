@@ -24,7 +24,7 @@ export const mutations = {
   setPhotoFullscreenBgTransparency(state, value) {
     state.photoGrid.fullscreenBgTransparent = value;
   },
-  fixState(state) {
+  validate(state) {
     if (
       state.photoGrid.fullscreenBgColor !== scssVars.whiteColor &&
       state.photoGrid.fullscreenBgColor !== scssVars.blackColor

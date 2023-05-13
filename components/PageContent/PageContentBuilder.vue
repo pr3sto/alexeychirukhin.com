@@ -85,7 +85,7 @@ export default {
   components: { CardStackLg, CardStackSm, Photo, PhotoGrid, TextBlocks },
   computed: {
     isMobileVersion() {
-      return this.$services.settings.useMobileVersion();
+      return this.$services.settings.getUseMobileVersion();
     },
   },
 };

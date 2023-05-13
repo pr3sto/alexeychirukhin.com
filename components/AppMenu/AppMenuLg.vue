@@ -38,7 +38,6 @@
   flex-direction: column;
   justify-content: flex-end;
   height: 100vh;
-  font-family: vars.$primary-font-family;
   border-left: 2px solid;
   border-image: linear-gradient(
       to top,
@@ -47,7 +46,6 @@
       transparent 90%
     )
     1;
-  pointer-events: none;
 }
 
 .app-menu-header {
@@ -60,7 +58,6 @@
   white-space: nowrap;
   text-shadow: var(--styles-font-shadow);
   transform: scale(1, 1.2) rotate3d(0, 1, 1, -2deg);
-  pointer-events: all;
 }
 
 .app-menu-section {
@@ -76,19 +73,13 @@
 
 .app-menu-section-header {
   font-size: vars.$appmenu-section-header-font-size;
-  pointer-events: all;
+  opacity: 0.8;
 }
 
 .app-menu-section-link {
   color: var(--styles-font-color);
   text-decoration: none;
-  pointer-events: all;
   cursor: pointer;
-  opacity: 0.8;
-
-  &:hover {
-    opacity: 1;
-  }
 }
 </style>
 

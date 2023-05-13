@@ -47,7 +47,6 @@
 @use "~/assets/scss/variables" as vars;
 
 .app-menu {
-  font-family: vars.$primary-font-family;
   z-index: 0; /* creates stacking context */
 }
 

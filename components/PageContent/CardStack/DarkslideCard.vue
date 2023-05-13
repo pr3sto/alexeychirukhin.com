@@ -2,7 +2,7 @@
   <figure class="darkslidecard" :style="cssVars">
     <div class="darkslidecard-content">
       <div class="darkslidecard-content-header">
-        <img src="/images/arrow.png" />
+        <img src="/images/cardstack/arrow.png" />
         <p>Insert film this side up.&#10;Do not remove this darkslide.</p>
       </div>
       <div class="darkslidecard-content-area" v-html="card.html" />
@@ -65,7 +65,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url("/images/paper.png");
+    background-image: url("/images/cardstack/paper.png");
     background-size: cover;
     opacity: 0.4;
     pointer-events: none;

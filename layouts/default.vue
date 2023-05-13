@@ -14,7 +14,7 @@
   left: 0;
   right: 0;
   background: url(~/assets/noise.svg);
-  filter: brightness(150%) opacity(20%);
+  filter: brightness(110%) opacity(20%);
   mix-blend-mode: plus-lighter;
   pointer-events: none;
 }

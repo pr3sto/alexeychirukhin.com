@@ -56,7 +56,7 @@ export default {
 
   computed: {
     isMobileVersion() {
-      return this.$services.settings.useMobileVersion();
+      return this.$services.settings.getUseMobileVersion();
     },
   },
 };

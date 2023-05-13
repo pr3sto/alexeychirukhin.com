@@ -201,7 +201,7 @@
     border: 1px solid vars.$white-color;
   }
   &--transparent {
-    background: url("/images/opacity.png");
+    background: url("/images/photo/opacity.png");
     background-size: 8px;
   }
 }
@@ -283,7 +283,7 @@ export default {
       return this.$services.settings.photoGrid.get();
     },
     isMobileVersion() {
-      return this.$services.settings.useMobileVersion();
+      return this.$services.settings.getUseMobileVersion();
     },
   },
 

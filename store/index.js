@@ -6,6 +6,6 @@ export const actions = {
     // settings are stored in persisted storage
     // and some old values may become invalid
     // so should fix state if necessary
-    await $services.settings.fixState();
+    await $services.settings.validate();
   },
 };

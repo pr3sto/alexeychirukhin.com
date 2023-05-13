@@ -60,7 +60,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url("/images/gloss.png");
+    background-image: url("/images/cardstack/gloss.png");
     background-size: cover;
     pointer-events: none;
   }

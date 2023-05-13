@@ -1,13 +1,13 @@
 import * as scssVars from "~/assets/scss/_variables.scss";
 
 export default (store) => ({
-  fixState() {
-    store.commit("settings/fixState");
+  validate() {
+    store.commit("settings/validate");
   },
-  useMobileVersion() {
+  getUseMobileVersion() {
     return store.state.settings.useMobileVersion;
   },
-  viewportHeight() {
+  getViewportHeight() {
     return store.state.settings.viewportHeight;
   },
   setUseMobileVersion(useMobileVersion) {

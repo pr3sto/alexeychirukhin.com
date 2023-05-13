@@ -26,10 +26,10 @@ function detectScreenSize(settingsService) {
   ).matches;
   const viewportHeight = document.documentElement.clientHeight;
 
-  if (settingsService.useMobileVersion() !== useMobileVersion) {
+  if (settingsService.getUseMobileVersion() !== useMobileVersion) {
     settingsService.setUseMobileVersion(useMobileVersion);
   }
-  if (settingsService.viewportHeight() !== viewportHeight) {
+  if (settingsService.getViewportHeight() !== viewportHeight) {
     settingsService.setViewportHeight(viewportHeight);
   }
 }
