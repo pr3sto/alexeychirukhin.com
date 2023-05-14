@@ -13,7 +13,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: url(~/assets/noise.svg);
+  background: url(~/assets/textures/noise.svg);
   filter: brightness(110%) opacity(20%);
   mix-blend-mode: plus-lighter;
   pointer-events: none;

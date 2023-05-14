@@ -201,7 +201,7 @@
     border: 1px solid vars.$white-color;
   }
   &--transparent {
-    background: url("/images/photo/opacity.png");
+    background: url("~/assets/textures/opacity.png");
     background-size: 8px;
   }
 }

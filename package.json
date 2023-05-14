@@ -1,6 +1,6 @@
 {
   "name": "alexeychirukhin.com",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Alexey Chirukhin personal website",
   "author": "Alexey Chirukhin",
   "private": true,
@@ -18,7 +18,6 @@
     "jsonschema": "^1.4.1",
     "lodash": "^4.17.21",
     "nuxt": "^2.15.8",
-    "nuxt-client-init-module": "^0.3.0",
     "vue-inline-svg": "^2.1.3",
     "vue-lodash": "^2.1.2",
     "vue-masonry-css": "^1.0.3",
@@ -28,6 +27,7 @@
     "@nuxt/image": "^0.6.2",
     "eslint": "^8.30.0",
     "eslint-plugin-nuxt": "^4.0.0",
+    "nuxt-client-init-module": "^0.3.0",
     "sass": "^1.53.0",
     "sass-loader": "^10.3.1"
   },
