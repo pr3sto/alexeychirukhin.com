@@ -1,9 +1,13 @@
 import * as scssVars from "~/assets/scss/_variables.scss";
-import { throttle } from "lodash";
+import lodash from "lodash";
+import Vue from "vue";
+import VueLodash from "vue-lodash";
+
+Vue.use(VueLodash, { name: "$_", lodash });
 
 export default function ({ $services }, inject) {
   detectScreenSize($services.settings);
-  window.onresize = throttle(() => {
+  window.onresize = lodash.throttle(() => {
     detectScreenSize($services.settings);
   }, 50);
 

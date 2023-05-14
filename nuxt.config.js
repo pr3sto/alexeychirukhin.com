@@ -44,13 +44,11 @@ export default {
   loadingIndicator: "~/loading.html",
   buildModules: ["@nuxt/image", "nuxt-client-init-module"],
   plugins: [
-    { src: "~/plugins/persistedState.client.js", mode: "client" },
-    { src: "~/plugins/api.client.js", mode: "client" },
-    { src: "~/plugins/services.client.js", mode: "client" },
-    { src: "~/plugins/pageUtility.client.js", mode: "client" },
-    { src: "~/plugins/vueMasonry.client.js", mode: "client" },
-    { src: "~/plugins/inlineSvg.client.js", mode: "client" },
-    { src: "~/plugins/lodash.client.js", mode: "client" },
+    { src: "~/plugins/persistedState.client.js" },
+    { src: "~/plugins/api.client.js" },
+    { src: "~/plugins/services.client.js" },
+    { src: "~/plugins/utilities.client.js" },
+    { src: "~/plugins/components.client.js" },
   ],
   router: {
     middleware: ["routeValidator"],
