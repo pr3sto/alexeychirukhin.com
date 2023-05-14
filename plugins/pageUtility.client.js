@@ -1,12 +1,19 @@
 import * as scssVars from "~/assets/scss/_variables.scss";
+import { throttle } from "lodash";
 
 export default ({ $services }, inject) => {
   detectScreenSize($services.settings);
-  window.onresize = () => {
+  window.onresize = throttle(() => {
     detectScreenSize($services.settings);
-  };
+  }, 50);
 
   const utilities = {
+    getPageScrollTopOffset: () => {
+      return document.documentElement.scrollTop || document.body.scrollTop;
+    },
+    scrollToTop: () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
     disablePageScroll: () => {
       document.body.classList.add("non-scrollable");
       document.documentElement.classList.add("non-scrollable");

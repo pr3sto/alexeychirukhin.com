@@ -8,6 +8,7 @@
     }"
     :style="cssVars"
   >
+    <tool-panel />
     <page-content-builder
       class="page-content"
       :components="data && data.components"
@@ -45,11 +46,12 @@
 <script>
 import AppMenu from "./AppMenu/AppMenu.vue";
 import PageContentBuilder from "./PageContent/PageContentBuilder.vue";
+import ToolPanel from "./ToolPanel.vue";
 
 export default {
   name: "Page",
   props: ["data"],
-  components: { AppMenu, PageContentBuilder },
+  components: { AppMenu, PageContentBuilder, ToolPanel },
 
   computed: {
     useMobileVersion() {

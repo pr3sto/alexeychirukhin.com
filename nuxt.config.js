@@ -49,6 +49,8 @@ export default {
     { src: "~/plugins/services.client.js", mode: "client" },
     { src: "~/plugins/pageUtility.client.js", mode: "client" },
     { src: "~/plugins/vueMasonry.client.js", mode: "client" },
+    { src: "~/plugins/inlineSvg.client.js", mode: "client" },
+    { src: "~/plugins/lodash.client.js", mode: "client" },
   ],
   router: {
     middleware: ["routeValidator"],
