@@ -141,7 +141,7 @@ export default {
     });
 
     this.elementResizeObserver = new ResizeObserver(
-      this.recalculateCardDimensions
+      this.lodash.throttle(this.recalculateCardDimensions, 50)
     );
     this.elementResizeObserver.observe(this.$el);
   },

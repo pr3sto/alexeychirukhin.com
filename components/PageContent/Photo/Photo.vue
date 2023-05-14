@@ -309,7 +309,7 @@ export default {
 
   methods: {
     beforeFullscreenLgOpened() {
-      window.addEventListener("resize", this.closeFullscreen);
+      window.addEventListener("resize", this.closeFullscreen, { once: true });
       window.addEventListener("wheel", this.handleScroll, { passive: false });
     },
     afterFullscreenLgClosed() {

@@ -177,7 +177,7 @@ export default {
 
       // set zoom in or out in progress
       this.isZoomInProgress = true;
-      setTimeout(() => {
+      this.lodash.delay(() => {
         this.isZoomInProgress = false;
       }, 250);
     },
@@ -195,7 +195,7 @@ export default {
 
       // set zoom in or out in progress
       this.isZoomInProgress = true;
-      setTimeout(() => {
+      this.lodash.delay(() => {
         this.isZoomInProgress = false;
       }, 250);
     },
