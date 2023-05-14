@@ -1,6 +1,6 @@
 <template>
   <menu class="app-menu">
-    <p class="app-menu-header" v-on:click="handleAppMenuHeaderClicked">
+    <p class="app-menu-header" v-on:click="handleAppMenuHeaderClick">
       {{ menu.currentHeader }}
     </p>
     <transition
@@ -11,7 +11,7 @@
       <div
         class="app-menu-full"
         v-show="showFullscreenAppMenu"
-        v-on:click="handleFullscreenAppMenuClicked"
+        v-on:click="handleFullscreenAppMenuClick"
       >
         <section class="app-menu-full-section" v-if="menu.index">
           <nuxt-link
@@ -114,10 +114,10 @@ export default {
   },
 
   methods: {
-    handleAppMenuHeaderClicked() {
+    handleAppMenuHeaderClick() {
       this.showFullscreenAppMenu = true;
     },
-    handleFullscreenAppMenuClicked() {
+    handleFullscreenAppMenuClick() {
       this.showFullscreenAppMenu = false;
     },
     afterFullscreenAppMenuOpened() {

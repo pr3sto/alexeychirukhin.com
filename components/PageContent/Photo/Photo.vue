@@ -9,7 +9,7 @@
         loading="lazy"
         sizes="md:800px lg:1500px"
         :src="content.url"
-        v-on:click="handlePhotoImgClicked()"
+        v-on:click="handlePhotoImgClick"
       />
       <div
         class="photo-container-caption"
@@ -34,7 +34,7 @@
         <div
           class="fullscreen-lg"
           v-show="showFullScreen"
-          v-on:click="handleFullscreenLgClicked"
+          v-on:click="handleFullscreenLgClick"
         >
           <transition name="zoomimg-transform-transition">
             <zoom-img
@@ -49,7 +49,7 @@
             <p
               class="fullscreen-lg-close"
               v-if="showFullScreen"
-              v-on:click="handleCloseButtonClicked"
+              v-on:click="handleCloseButtonClick"
             >
               close
             </p>
@@ -58,15 +58,15 @@
             <div class="fullscreen-lg-colorpicker" v-if="showFullScreen">
               <figure
                 class="fullscreen-lg-colorpicker-block fullscreen-lg-colorpicker-block--white"
-                v-on:click="handleWhiteBgClicked"
+                v-on:click="handleWhiteBgClick"
               />
               <figure
                 class="fullscreen-lg-colorpicker-block fullscreen-lg-colorpicker-block--black"
-                v-on:click="handleBlackBgClicked"
+                v-on:click="handleBlackBgClick"
               />
               <figure
                 class="fullscreen-lg-colorpicker-block fullscreen-lg-colorpicker-block--transparent"
-                v-on:click="handleTransparentBgClicked"
+                v-on:click="handleTransparentBgClick"
               />
             </div>
           </transition>
@@ -92,7 +92,7 @@
           <p
             class="fullscreen-sm-close"
             v-if="showFullScreen"
-            v-on:click="handleCloseButtonClicked"
+            v-on:click="handleCloseButtonClick"
           >
             close
           </p>
@@ -174,6 +174,7 @@
   left: 0;
   padding: vars.$general__padding--default;
   font-size: vars.$photo__close__font-size;
+  line-height: vars.$photo__close__font-size;
   writing-mode: vertical-rl;
   cursor: pointer;
 }
@@ -334,32 +335,32 @@ export default {
       // restore scroll position
       window.scrollTo(this.windowScrollPosition.x, this.windowScrollPosition.y);
     },
-    handlePhotoImgClicked() {
+    handlePhotoImgClick() {
       if (this.useMobileVersion) {
         this.openFullscreenSm();
       } else {
         this.openFullscreenLg();
       }
     },
-    handleFullscreenLgClicked(e) {
+    handleFullscreenLgClick(e) {
       if (e.srcElement.classList.contains("fullscreen-lg")) {
         this.closeFullscreen();
       }
     },
-    handleCloseButtonClicked() {
+    handleCloseButtonClick() {
       this.closeFullscreen();
     },
     handleScroll(e) {
       e.preventDefault();
       this.closeFullscreen();
     },
-    handleWhiteBgClicked() {
+    handleWhiteBgClick() {
       this.$services.settings.photoGrid.setWhiteFullscreenBgColor();
     },
-    handleBlackBgClicked() {
+    handleBlackBgClick() {
       this.$services.settings.photoGrid.setBlackFullscreenBgColor();
     },
-    handleTransparentBgClicked() {
+    handleTransparentBgClick() {
       this.$services.settings.photoGrid.switchFullscreenBgTransparency();
     },
     openFullscreenSm() {

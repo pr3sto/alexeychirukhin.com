@@ -7,7 +7,7 @@
         v-for="(photo, index) of content.photos"
         :key="index"
         :content="photo"
-      ></photo>
+      />
     </masonry>
   </div>
 </template>

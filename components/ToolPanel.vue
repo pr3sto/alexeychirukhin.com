@@ -10,7 +10,7 @@
       <div
         class="tool-panel-scroll-top"
         v-if="showScrollToTop"
-        v-on:click="scrollToTop"
+        v-on:click="handleScrollToTopClick"
       >
         <div class="tool-panel-scroll-top-icon">
           <inline-svg :src="require('~/assets/icons/scrollup.svg')" />
@@ -150,7 +150,7 @@ export default {
     handleScroll() {
       this.showScrollToTop = this.$pageUtility.getPageScrollTopOffset() > 100;
     },
-    scrollToTop() {
+    handleScrollToTopClick() {
       this.$pageUtility.scrollToTop();
     },
     cleanupEventListeners() {
