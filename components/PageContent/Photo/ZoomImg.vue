@@ -32,7 +32,7 @@
     cursor: zoom-out;
   }
   &--zoom-in-progress {
-    transition: transform vars.$default-transition;
+    transition: transform vars.$general__transition--default;
   }
 }
 </style>

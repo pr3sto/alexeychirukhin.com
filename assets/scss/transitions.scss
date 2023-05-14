@@ -2,7 +2,7 @@
 
 .opacity-transition-enter-active,
 .opacity-transition-leave-active {
-  transition: opacity vars.$default-transition;
+  transition: opacity vars.$general__transition--default;
 }
 .opacity-transition-enter,
 .opacity-transition-leave-to {

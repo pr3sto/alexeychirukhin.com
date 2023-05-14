@@ -48,23 +48,23 @@
 }
 
 .tool-panel-scroll-top {
-  padding: vars.$default-padding;
+  padding: vars.$general__padding--default;
 }
 
 .tool-panel-scroll-top-icon {
-  width: vars.$tool-panel-element-size;
-  height: vars.$tool-panel-element-size;
+  width: vars.$tool-panel__element__size;
+  height: vars.$tool-panel__element__size;
 }
 
 .tool-panel-links {
   display: flex;
-  padding: vars.$default-padding;
+  padding: vars.$general__padding--default;
 }
 
 .tool-panel-link {
   display: block;
-  width: vars.$tool-panel-element-size;
-  height: vars.$tool-panel-element-size;
+  width: vars.$tool-panel__element__size;
+  height: vars.$tool-panel__element__size;
 }
 
 /* styles for lg screen */
@@ -84,7 +84,7 @@
     1;
 
   .tool-panel-scroll-top {
-    padding-bottom: calc(vars.$default-padding * 2);
+    padding-bottom: calc(vars.$general__padding--default * 2);
     cursor: pointer;
   }
 
@@ -93,7 +93,7 @@
   }
 
   .tool-panel-link {
-    margin-bottom: vars.$default-padding;
+    margin-bottom: vars.$general__padding--default;
   }
 }
 
@@ -103,7 +103,7 @@
   justify-content: flex-end;
 
   .tool-panel-scroll-top {
-    padding-left: vars.$default-padding;
+    padding-left: vars.$general__padding--default;
     margin-left: auto;
   }
 
@@ -112,7 +112,7 @@
   }
 
   .tool-panel-link {
-    margin-right: vars.$default-padding;
+    margin-right: vars.$general__padding--default;
   }
 }
 </style>

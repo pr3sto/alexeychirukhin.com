@@ -1,36 +1,35 @@
 // max width for mobile version of the site
-$media-mobile-max-width: 700px;
+$media__mobile__max-width: 700px;
 
 // fonts
-$primary-font-family: "Violet Sans";
-$menu-header-font-family: "Chango";
-
-$handwriting1-font-family: "Schoolbell";
-$handwriting2-font-family: "Just Me Again Down Here";
+$general__font-family: "Violet Sans";
+$appmenu__header__font-family: "Chango";
+$general__font-family--handwriting1: "Schoolbell";
+$general__font-family--handwriting2: "Just Me Again Down Here";
 
 // font sizes
-$appmenu-font-size: 2rem;
-$appmenu-section-header-font-size: 1.5rem;
-$appmenu-active-header-font-size: 2.3rem;
+$appmenu__font-size: 2rem;
+$appmenu__section-header__font-size: 1.5rem;
+$appmenu__active-header__font-size: 2.3rem;
 
-$photo-close-font-size: 1.5rem;
-$photo-caption-font-size: 1.5rem;
+$photo__close__font-size: 1.5rem;
+$photo__caption__font-size: 1.5rem;
 
-$tool-panel-element-size: 1.5rem;
+$tool-panel__element__size: 1.5rem;
 
 // padding
-$default-padding: 1rem;
+$general__padding--default: 1rem;
 
 // transitions
-$default-transition-func: cubic-bezier(0.8, 0.2, 0.1, 0.8);
-$default-transition: 0.2s $default-transition-func;
+$general__transition-func--default: cubic-bezier(0.8, 0.2, 0.1, 0.8);
+$general__transition--default: 0.2s $general__transition-func--default;
 
 // colors
-$white-color: #fefefe;
-$black-color: #1f1f1f;
+$general__color--white: #fefefe;
+$general__color--black: #1f1f1f;
 
 :export {
-  mediaMobileMaxWidth: $media-mobile-max-width;
-  whiteColor: $white-color;
-  blackColor: $black-color;
+  mediaMobileMaxWidth: $media__mobile__max-width;
+  whiteColor: $general__color--white;
+  blackColor: $general__color--black;
 }

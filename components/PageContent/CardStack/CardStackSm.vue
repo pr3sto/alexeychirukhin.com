@@ -34,7 +34,7 @@
   z-index: 2;
   transform-origin: 0 0;
   transform: translateX(5%) rotate(4deg) scale(1);
-  transition: transform 0.4s vars.$default-transition-func 0.1s;
+  transition: transform 0.4s vars.$general__transition-func--default 0.1s;
 
   &--current {
     z-index: 5;
@@ -52,7 +52,7 @@
 
   &--out {
     z-index: 1;
-    animation: cardstack-card-out 0.5s vars.$default-transition-func;
+    animation: cardstack-card-out 0.5s vars.$general__transition-func--default;
     transform: translateX(13%) translateY(-8%) rotate(8deg) scale(0.95);
     transition: none !important;
   }

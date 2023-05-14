@@ -1,7 +1,7 @@
 @use "~/assets/scss/variables" as vars;
 
 html {
-  font-family: vars.$primary-font-family, serif;
+  font-family: vars.$general__font-family, serif;
   font-size: 16px;
   text-size-adjust: 100%;
   box-sizing: border-box;
@@ -45,7 +45,7 @@ img {
 }
 
 /* mobile version */
-@media only screen and (max-width: vars.$media-mobile-max-width) {
+@media only screen and (max-width: vars.$media__mobile__max-width) {
   html {
     font-size: 14px;
   }

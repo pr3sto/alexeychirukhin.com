@@ -132,14 +132,14 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: vars.$default-padding;
+  padding: vars.$general__padding--default;
 
   &--lg {
-    font-size: vars.$photo-caption-font-size;
+    font-size: vars.$photo__caption__font-size;
   }
 
   &--sm {
-    font-size: vars.$photo-caption-font-size;
+    font-size: vars.$photo__caption__font-size;
   }
 
   & > span {
@@ -155,7 +155,7 @@
   right: 0;
   z-index: 1;
   background: var(--fs-bg-color);
-  transition: background vars.$default-transition;
+  transition: background vars.$general__transition--default;
   touch-action: none;
 }
 
@@ -172,8 +172,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: vars.$default-padding;
-  font-size: vars.$photo-close-font-size;
+  padding: vars.$general__padding--default;
+  font-size: vars.$photo__close__font-size;
   writing-mode: vertical-rl;
   cursor: pointer;
 }
@@ -182,23 +182,23 @@
   position: fixed;
   top: 0;
   right: 0;
-  padding: vars.$default-padding;
+  padding: vars.$general__padding--default;
   display: flex;
   flex-direction: column;
 }
 
 .fullscreen-lg-colorpicker-block {
-  width: vars.$default-padding;
-  height: vars.$default-padding;
+  width: vars.$general__padding--default;
+  height: vars.$general__padding--default;
   cursor: pointer;
 
   &--white {
-    background: vars.$white-color;
-    border: 1px solid vars.$black-color;
+    background: vars.$general__color--white;
+    border: 1px solid vars.$general__color--black;
   }
   &--black {
-    background: vars.$black-color;
-    border: 1px solid vars.$white-color;
+    background: vars.$general__color--black;
+    border: 1px solid vars.$general__color--white;
   }
   &--transparent {
     background: url("~/assets/textures/opacity.png");
@@ -225,22 +225,22 @@
   max-width: 100%;
   max-height: 100%;
   margin: auto;
-  padding: vars.$default-padding;
+  padding: vars.$general__padding--default;
 }
 
 .fullscreen-sm-close {
   position: fixed;
   top: 0;
   left: 0;
-  padding: vars.$default-padding;
-  font-size: vars.$photo-close-font-size;
+  padding: vars.$general__padding--default;
+  font-size: vars.$photo__close__font-size;
   cursor: pointer;
 }
 
 /* background color transition */
 .background-transition-enter-active,
 .background-transition-leave-active {
-  transition: background vars.$default-transition;
+  transition: background vars.$general__transition--default;
 }
 .background-transition-enter,
 .background-transition-leave-to {
@@ -250,7 +250,7 @@
 /* zoomimg transform transition */
 .zoomimg-transform-transition-enter-active,
 .zoomimg-transform-transition-leave-active {
-  transition: transform vars.$default-transition;
+  transition: transform vars.$general__transition--default;
 }
 .zoomimg-transform-transition-enter,
 .zoomimg-transform-transition-leave-to {

@@ -50,10 +50,10 @@
 
 .app-menu-header {
   position: absolute;
-  top: calc(vars.$default-padding * 2);
-  right: calc(vars.$default-padding * 2);
-  font-family: vars.$menu-header-font-family;
-  font-size: vars.$appmenu-active-header-font-size;
+  top: calc(vars.$general__padding--default * 2);
+  right: calc(vars.$general__padding--default * 2);
+  font-family: vars.$appmenu__header__font-family;
+  font-size: vars.$appmenu__active-header__font-size;
   font-weight: bolder;
   white-space: nowrap;
   text-shadow: var(--styles-font-shadow);
@@ -63,16 +63,16 @@
 .app-menu-section {
   display: flex;
   flex-direction: column;
-  padding-left: calc(vars.$default-padding * 2);
-  padding-right: calc(vars.$default-padding * 2);
-  padding-bottom: calc(vars.$default-padding * 2);
-  font-size: vars.$appmenu-font-size;
-  line-height: calc(vars.$appmenu-font-size * 1.1);
+  padding-left: calc(vars.$general__padding--default * 2);
+  padding-right: calc(vars.$general__padding--default * 2);
+  padding-bottom: calc(vars.$general__padding--default * 2);
+  font-size: vars.$appmenu__font-size;
+  line-height: calc(vars.$appmenu__font-size * 1.1);
   border-top: 2px solid var(--styles-font-color);
 }
 
 .app-menu-section-header {
-  font-size: vars.$appmenu-section-header-font-size;
+  font-size: vars.$appmenu__section-header__font-size;
   opacity: 0.8;
 }
 

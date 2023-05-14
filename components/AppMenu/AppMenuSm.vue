@@ -52,12 +52,12 @@
 
 .app-menu-header {
   display: inline-block;
-  padding-left: vars.$default-padding;
-  padding-right: vars.$default-padding;
-  padding-top: vars.$default-padding;
-  padding-bottom: calc(vars.$default-padding * 2);
-  font-family: vars.$menu-header-font-family;
-  font-size: vars.$appmenu-active-header-font-size;
+  padding-left: vars.$general__padding--default;
+  padding-right: vars.$general__padding--default;
+  padding-top: vars.$general__padding--default;
+  padding-bottom: calc(vars.$general__padding--default * 2);
+  font-family: vars.$appmenu__header__font-family;
+  font-size: vars.$appmenu__active-header__font-size;
   font-weight: bolder;
   text-shadow: var(--styles-font-shadow);
   transform: scale(1, 1.2) rotate3d(0, 1, 1, -1deg);
@@ -73,22 +73,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: vars.$default-padding;
+  padding: vars.$general__padding--default;
   background: var(--styles-background-color);
 }
 
 .app-menu-full-section {
   display: flex;
   flex-direction: column;
-  padding-left: vars.$default-padding;
-  padding-right: vars.$default-padding;
-  padding-bottom: vars.$default-padding;
-  font-size: vars.$appmenu-font-size;
+  padding-left: vars.$general__padding--default;
+  padding-right: vars.$general__padding--default;
+  padding-bottom: vars.$general__padding--default;
+  font-size: vars.$appmenu__font-size;
 }
 
 .app-menu-full-section-header {
-  padding-bottom: calc(vars.$default-padding / 2);
-  font-size: vars.$appmenu-section-header-font-size;
+  padding-bottom: calc(vars.$general__padding--default / 2);
+  font-size: vars.$appmenu__section-header__font-size;
   opacity: 0.8;
 }
 

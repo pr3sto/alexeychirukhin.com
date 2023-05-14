@@ -17,15 +17,15 @@
 
 .photogrid {
   &--padding {
-    margin: -(vars.$default-padding);
-    padding: calc(vars.$default-padding / 2);
+    margin: -(vars.$general__padding--default);
+    padding: calc(vars.$general__padding--default / 2);
 
     .photogrid-photo {
-      padding: calc(vars.$default-padding / 2);
+      padding: calc(vars.$general__padding--default / 2);
     }
 
     .photogrid-photo-caption {
-      padding: calc(vars.$default-padding + vars.$default-padding / 2);
+      padding: calc(vars.$general__padding--default + vars.$general__padding--default / 2);
     }
   }
 }

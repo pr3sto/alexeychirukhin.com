@@ -87,9 +87,9 @@
   padding: 8% 0;
   font-size: 3em;
   opacity: 0.9;
-  font-family: vars.$handwriting1-font-family;
+  font-family: vars.$general__font-family--handwriting1;
   font-weight: bolder;
-  color: vars.$black-color;
+  color: vars.$general__color--black;
 }
 </style>
 

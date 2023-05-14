@@ -46,16 +46,16 @@
   display: flex;
 
   &--padding-top {
-    padding-top: vars.$default-padding;
+    padding-top: vars.$general__padding--default;
   }
   &--padding-bottom {
-    padding-bottom: vars.$default-padding;
+    padding-bottom: vars.$general__padding--default;
   }
   &--padding-left {
-    padding-left: vars.$default-padding;
+    padding-left: vars.$general__padding--default;
   }
   &--padding-right {
-    padding-right: vars.$default-padding;
+    padding-right: vars.$general__padding--default;
   }
   &--fill-avaliable-space {
     overflow: hidden;
