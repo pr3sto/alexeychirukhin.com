@@ -25,7 +25,9 @@
     }
 
     .photogrid-photo-caption {
-      padding: calc(vars.$general__padding--default + vars.$general__padding--default / 2);
+      padding: calc(
+        vars.$general__padding--default + vars.$general__padding--default / 2
+      );
     }
   }
 }

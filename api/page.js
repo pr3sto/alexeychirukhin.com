@@ -1,9 +1,9 @@
 import utility from "~/api/utility.js";
-import app from "~/constants/app.js";
+import api from "~/constants/api.js";
 
 export default {
   async getAsync(id) {
-    return await utility.getAsync(format(app.PAGE_API_URL, [id]));
+    return await utility.getAsync(format(api.PAGE_API_URL, [id]));
   },
 };
 

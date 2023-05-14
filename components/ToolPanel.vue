@@ -18,22 +18,13 @@
       </div>
     </transition>
     <div class="tool-panel-links">
-      <a
-        class="tool-panel-link"
-        href="https://instagram.com/alexeychirukhin"
-        target="_blank"
+      <a class="tool-panel-link" target="_blank" :href="links.INSTAGRAM_URL"
         ><inline-svg :src="require('~/assets/logos/instagram.svg')"
       /></a>
-      <a
-        class="tool-panel-link"
-        href="https://github.com/pr3sto"
-        target="_blank"
+      <a class="tool-panel-link" target="_blank" :href="links.GITHUB_URL"
         ><inline-svg :src="require('~/assets/logos/github.svg')"
       /></a>
-      <a
-        class="tool-panel-link"
-        href="https://alexeychirukhin.com"
-        target="_blank"
+      <a class="tool-panel-link" :href="links.ORIGIN_URL"
         ><inline-svg :src="require('~/assets/logos/pr3sto.svg')"
       /></a>
     </div>
@@ -127,6 +118,8 @@
 </style>
 
 <script>
+import links from "~/constants/links.js";
+
 export default {
   name: "ToolPanel",
   computed: {
@@ -138,6 +131,7 @@ export default {
   data() {
     return {
       showScrollToTop: false,
+      links: links,
     };
   },
 
