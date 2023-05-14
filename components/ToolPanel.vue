@@ -12,19 +12,30 @@
         v-if="showScrollToTop"
         v-on:click="handleScrollToTopClick"
       >
-        <div class="tool-panel-scroll-top-icon">
+        <div class="tool-panel-scroll-top-icon" title="Scroll to top">
           <inline-svg :src="require('~/assets/icons/scrollup.svg')" />
         </div>
       </div>
     </transition>
     <div class="tool-panel-links">
-      <a class="tool-panel-link" target="_blank" :href="links.INSTAGRAM_URL"
+      <a
+        class="tool-panel-link"
+        target="_blank"
+        :href="links.INSTAGRAM_URL"
+        title="Instagram"
         ><inline-svg :src="require('~/assets/logos/instagram.svg')"
       /></a>
-      <a class="tool-panel-link" target="_blank" :href="links.GITHUB_URL"
+      <a
+        class="tool-panel-link"
+        target="_blank"
+        :href="links.GITHUB_URL"
+        title="Github"
         ><inline-svg :src="require('~/assets/logos/github.svg')"
       /></a>
-      <a class="tool-panel-link" :href="links.ORIGIN_URL"
+      <a
+        class="tool-panel-link"
+        :href="links.ORIGIN_URL"
+        title="Alexey Chirukhin"
         ><inline-svg :src="require('~/assets/logos/pr3sto.svg')"
       /></a>
     </div>

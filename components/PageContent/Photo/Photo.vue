@@ -59,14 +59,17 @@
               <figure
                 class="fullscreen-lg-colorpicker-block fullscreen-lg-colorpicker-block--white"
                 v-on:click="handleWhiteBgClick"
+                title="Light background"
               />
               <figure
                 class="fullscreen-lg-colorpicker-block fullscreen-lg-colorpicker-block--black"
                 v-on:click="handleBlackBgClick"
+                title="Dark background"
               />
               <figure
                 class="fullscreen-lg-colorpicker-block fullscreen-lg-colorpicker-block--transparent"
                 v-on:click="handleTransparentBgClick"
+                title="Toggle background transparency"
               />
             </div>
           </transition>
