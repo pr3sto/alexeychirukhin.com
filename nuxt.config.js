@@ -8,7 +8,7 @@ export default {
   },
   head: {
     title: "Alexey Chirukhin",
-    titleTemplate: (titleChunk) => {
+    titleTemplate(titleChunk) {
       return titleChunk && titleChunk !== "Alexey Chirukhin"
         ? `${titleChunk} — Alexey Chirukhin`
         : "Alexey Chirukhin";

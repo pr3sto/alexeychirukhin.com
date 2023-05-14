@@ -1,31 +1,31 @@
 import * as scssVars from "~/assets/scss/_variables.scss";
 import { throttle } from "lodash";
 
-export default ({ $services }, inject) => {
+export default function ({ $services }, inject) {
   detectScreenSize($services.settings);
   window.onresize = throttle(() => {
     detectScreenSize($services.settings);
   }, 50);
 
   const utilities = {
-    getPageScrollTopOffset: () => {
+    getPageScrollTopOffset() {
       return document.documentElement.scrollTop || document.body.scrollTop;
     },
-    scrollToTop: () => {
+    scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
-    disablePageScroll: () => {
+    disablePageScroll() {
       document.body.classList.add("non-scrollable");
       document.documentElement.classList.add("non-scrollable");
     },
-    enablePageScroll: () => {
+    enablePageScroll() {
       document.body.classList.remove("non-scrollable");
       document.documentElement.classList.remove("non-scrollable");
     },
   };
 
   inject("pageUtility", utilities);
-};
+}
 
 function detectScreenSize(settingsService) {
   const useMobileVersion = window.matchMedia(

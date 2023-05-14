@@ -3,7 +3,7 @@ import Page from "~/services/page.js";
 import Settings from "~/services/settings.js";
 import Styles from "~/services/styles.js";
 
-export default ({ $api, store }, inject) => {
+export default function ({ $api, store }, inject) {
   const menuService = Menu($api, store);
   const settingsService = Settings(store);
   const stylesService = Styles();
@@ -17,4 +17,4 @@ export default ({ $api, store }, inject) => {
   };
 
   inject("services", services);
-};
+}
