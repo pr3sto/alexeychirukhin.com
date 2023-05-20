@@ -155,13 +155,10 @@ export default {
     recalculateCardDimensions() {
       const containerRect = this.$el.getBoundingClientRect();
 
-      // multiply by 0.95 to fit angled cards
-      const cardScale = this.content.cardScale * 0.95;
-
-      const cardWidth = containerRect.width * cardScale;
+      const cardWidth = containerRect.width * this.content.cardScale;
       const cardHeight = cardWidth / cardstack.CARD_ASPECT_RATIO;
 
-      this.cardstackHeight = cardHeight / cardScale;
+      this.cardstackHeight = cardHeight / this.content.cardScale;
       this.cardstackCardWidth = cardWidth;
       this.cardstackCardHeight = cardHeight;
       this.fontSize = cardWidth / cardstack.FONT_SIZE_FACTOR2;

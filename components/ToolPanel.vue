@@ -7,12 +7,12 @@
     }"
   >
     <transition name="opacity-transition">
-      <div
-        class="tool-panel-scroll-top"
-        v-if="showScrollToTop"
-        v-on:click="handleScrollToTopClick"
-      >
-        <div class="tool-panel-scroll-top-icon" title="Scroll to top">
+      <div class="tool-panel-scroll-top" v-if="showScrollToTop">
+        <div
+          class="tool-panel-scroll-top-icon"
+          title="Scroll to top"
+          v-on:click="handleScrollToTopClick"
+        >
           <inline-svg :src="require('~/assets/icons/scrollup.svg')" />
         </div>
       </div>
@@ -53,11 +53,6 @@
   padding: vars.$general__padding--default;
 }
 
-.tool-panel-scroll-top-icon {
-  width: vars.$tool-panel__element__size;
-  height: vars.$tool-panel__element__size;
-}
-
 .tool-panel-links {
   display: flex;
   padding: vars.$general__padding--default;
@@ -65,8 +60,6 @@
 
 .tool-panel-link {
   display: block;
-  width: vars.$tool-panel__element__size;
-  height: vars.$tool-panel__element__size;
 }
 
 /* styles for lg screen */
@@ -76,17 +69,15 @@
   flex-direction: column;
   justify-content: flex-end;
   height: 100vh;
-  border-right: 2px solid;
-  border-image: linear-gradient(
-      to top,
-      var(--styles-font-color) 50%,
-      85%,
-      transparent 100%
-    )
-    1;
+  border-right: 2px solid var(--styles-font-color);
 
   .tool-panel-scroll-top {
     padding-bottom: calc(vars.$general__padding--default * 2);
+  }
+
+  .tool-panel-scroll-top-icon {
+    width: vars.$tool-panel__element__size--lg;
+    height: vars.$tool-panel__element__size--lg;
     cursor: pointer;
   }
 
@@ -95,6 +86,8 @@
   }
 
   .tool-panel-link {
+    width: vars.$tool-panel__element__size--lg;
+    height: vars.$tool-panel__element__size--lg;
     margin-bottom: vars.$general__padding--default;
   }
 }
@@ -109,11 +102,19 @@
     margin-left: auto;
   }
 
+  .tool-panel-scroll-top-icon {
+    width: vars.$tool-panel__element__size--sm;
+    height: vars.$tool-panel__element__size--sm;
+    cursor: pointer;
+  }
+
   .tool-panel-links {
     flex-direction: row-reverse;
   }
 
   .tool-panel-link {
+    width: vars.$tool-panel__element__size--sm;
+    height: vars.$tool-panel__element__size--sm;
     margin-right: vars.$general__padding--default;
   }
 }

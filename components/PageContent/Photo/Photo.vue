@@ -12,14 +12,11 @@
         v-on:click="handlePhotoImgClick"
       />
       <div
+        v-if="content.caption"
         class="photo-container-caption"
-        :class="
-          useMobileVersion
-            ? 'photo-container-caption--sm'
-            : 'photo-container-caption--lg'
-        "
+        :style="content.caption.linesStyle"
       >
-        <span v-for="(line, index) in content.caption" :key="index">{{
+        <span v-for="(line, index) in content.caption.lines" :key="index">{{
           line
         }}</span>
       </div>
@@ -65,11 +62,6 @@
                 class="fullscreen-lg-colorpicker-block fullscreen-lg-colorpicker-block--black"
                 v-on:click="handleBlackBgClick"
                 title="Dark background"
-              />
-              <figure
-                class="fullscreen-lg-colorpicker-block fullscreen-lg-colorpicker-block--transparent"
-                v-on:click="handleTransparentBgClick"
-                title="Toggle background transparency"
               />
             </div>
           </transition>
@@ -136,18 +128,6 @@
   flex-direction: column;
   align-items: flex-start;
   padding: vars.$general__padding--default;
-
-  &--lg {
-    font-size: vars.$photo__caption__font-size;
-  }
-
-  &--sm {
-    font-size: vars.$photo__caption__font-size;
-  }
-
-  & > span {
-    line-height: 0.9em;
-  }
 }
 
 .fullscreen-lg {
@@ -173,20 +153,18 @@
 
 .fullscreen-lg-close {
   position: fixed;
-  top: 0;
-  left: 0;
-  padding: vars.$general__padding--default;
-  font-size: vars.$photo__close__font-size;
-  line-height: vars.$photo__close__font-size;
+  top: var(--fs-zoomimg-top);
+  left: vars.$general__padding--default;
+  font-size: vars.$photo__close__font-size--lg;
+  line-height: vars.$photo__close__font-size--lg;
   writing-mode: vertical-rl;
   cursor: pointer;
 }
 
 .fullscreen-lg-colorpicker {
   position: fixed;
-  top: 0;
-  right: 0;
-  padding: vars.$general__padding--default;
+  top: var(--fs-zoomimg-top);
+  right: vars.$general__padding--default;
   display: flex;
   flex-direction: column;
 }
@@ -203,10 +181,6 @@
   &--black {
     background: vars.$general__color--black;
     border: 1px solid vars.$general__color--white;
-  }
-  &--transparent {
-    background: url("~/assets/textures/opacity.png");
-    background-size: 8px;
   }
 }
 
@@ -237,7 +211,7 @@
   top: 0;
   left: 0;
   padding: vars.$general__padding--default;
-  font-size: vars.$photo__close__font-size;
+  font-size: vars.$photo__close__font-size--sm;
   cursor: pointer;
 }
 
@@ -273,9 +247,7 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--fs-bg-color": `${this.settings.fullscreenBgColor}${
-          this.settings.fullscreenBgTransparent ? "c8" : "ff"
-        }`,
+        "--fs-bg-color": `${this.settings.fullscreenBgColor}`,
         "--fs-zoomimg-left": `${this.zoomigProps.left}px`,
         "--fs-zoomimg-top": `${this.zoomigProps.top}px`,
         "--fs-zoomimg-width": `${this.zoomigProps.width}px`,
@@ -363,9 +335,6 @@ export default {
     handleBlackBgClick() {
       this.$services.settings.photoGrid.setBlackFullscreenBgColor();
     },
-    handleTransparentBgClick() {
-      this.$services.settings.photoGrid.switchFullscreenBgTransparency();
-    },
     openFullscreenSm() {
       this.showFullScreen = true;
     },
@@ -431,7 +400,7 @@ function calcFsImgScaleFactor(
   padding
 ) {
   return Math.min(
-    (fullscreenWidth - padding * 2) / initImgRect.width,
+    (fullscreenWidth - padding * 6) / initImgRect.width,
     (fullscreenHeight - padding * 2) / initImgRect.height
   );
 }

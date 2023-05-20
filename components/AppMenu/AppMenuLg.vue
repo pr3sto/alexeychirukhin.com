@@ -38,7 +38,7 @@
   flex-direction: column;
   justify-content: flex-end;
   height: 100vh;
-  border-left: 2px solid;
+  border-left: 2px solid var(--styles-font-color);
   border-image: linear-gradient(
       to top,
       var(--styles-font-color) 50%,
@@ -53,11 +53,11 @@
   top: calc(vars.$general__padding--default * 2);
   right: calc(vars.$general__padding--default * 2);
   font-family: vars.$appmenu__header__font-family;
-  font-size: vars.$appmenu__active-header__font-size;
+  font-size: vars.$appmenu__active-header__font-size--lg;
   font-weight: bolder;
   white-space: nowrap;
   text-shadow: var(--styles-font-shadow);
-  transform: scale(1, 1.2) rotate3d(0, 1, 1, -2deg);
+  transform: scale(1, 1.2) rotate3d(0, 1, 1, -1deg);
 }
 
 .app-menu-section {
@@ -65,14 +65,15 @@
   flex-direction: column;
   padding-left: calc(vars.$general__padding--default * 2);
   padding-right: calc(vars.$general__padding--default * 2);
+  padding-top: calc(vars.$general__padding--default / 2);
   padding-bottom: calc(vars.$general__padding--default * 2);
-  font-size: vars.$appmenu__font-size;
-  line-height: calc(vars.$appmenu__font-size * 1.1);
+  font-size: vars.$appmenu__font-size--lg;
+  line-height: calc(vars.$appmenu__font-size--lg * 1.1);
   border-top: 2px solid var(--styles-font-color);
 }
 
 .app-menu-section-header {
-  font-size: vars.$appmenu__section-header__font-size;
+  font-size: vars.$appmenu__section-header__font-size--lg;
   opacity: 0.8;
 }
 

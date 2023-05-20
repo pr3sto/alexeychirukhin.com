@@ -6,6 +6,7 @@
       sizes="md:800px lg:1500px"
       class="zoomimg-img"
       :class="{
+        'zoomimg-img--zoom-enabled': zoomEnabled(),
         'zoomimg-img--zoomed': isZoomed,
         'zoomimg-img--zoom-in-progress': isZoomInProgress,
       }"
@@ -26,8 +27,10 @@
   transform-origin: left top;
   transform: translate(var(--img-offset-x), var(--img-offset-y))
     scale(var(--img-scale));
-  cursor: zoom-in;
 
+  &--zoom-enabled {
+    cursor: zoom-in;
+  }
   &--zoomed {
     cursor: zoom-out;
   }
@@ -81,6 +84,10 @@ export default {
       this.$el.removeEventListener("touchend", this.handleTouchEnd);
     },
     handleClick(e) {
+      if (!this.zoomEnabled()) {
+        return;
+      }
+
       if (this.isZoomed) {
         this.zoomOut();
       } else {
@@ -166,6 +173,9 @@ export default {
 
       this.imgOffsetX = x;
       this.imgOffsetY = y;
+    },
+    zoomEnabled() {
+      return this.zoomScale >= 1;
     },
     zoomIn(clientX, clientY) {
       this.addEventListenersForZoomedImg();

@@ -26,11 +26,5 @@ export default (store) => ({
     setBlackFullscreenBgColor() {
       store.commit("settings/setPhotoFullscreenBgColor", scssVars.blackColor);
     },
-    switchFullscreenBgTransparency() {
-      store.commit(
-        "settings/setPhotoFullscreenBgTransparency",
-        !store.state.settings.photoGrid.fullscreenBgTransparent
-      );
-    },
   },
 });

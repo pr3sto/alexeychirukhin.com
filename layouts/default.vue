@@ -21,10 +21,10 @@
 
 /* Nuxt pages transition */
 .page-enter-active {
-  transition: opacity 0.25s;
+  transition: opacity 0.5s;
 }
 .page-enter {
-  opacity: 0.5;
+  opacity: 0;
 }
 </style>
 

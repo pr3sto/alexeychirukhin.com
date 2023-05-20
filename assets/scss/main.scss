@@ -1,7 +1,7 @@
 @use "~/assets/scss/variables" as vars;
 
 html {
-  font-family: vars.$general__font-family, serif;
+  font-family: vars.$general__font-family, sans-serif;
   font-size: 16px;
   text-size-adjust: 100%;
   box-sizing: border-box;
@@ -10,6 +10,7 @@ html {
 
 body {
   margin: 0;
+  background: var(--styles-background-color);
 }
 
 *,

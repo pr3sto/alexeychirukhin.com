@@ -8,14 +8,17 @@ $general__font-family--handwriting1: "Schoolbell";
 $general__font-family--handwriting2: "Just Me Again Down Here";
 
 // font sizes
-$appmenu__font-size: 2rem;
-$appmenu__section-header__font-size: 1.5rem;
-$appmenu__active-header__font-size: 2.3rem;
+$appmenu__font-size--lg: 1.8rem;
+$appmenu__section-header__font-size--lg: 1.5rem;
+$appmenu__active-header__font-size--lg: 2.2rem;
+$photo__close__font-size--lg: 1.5rem;
+$tool-panel__element__size--lg: 1.3rem;
 
-$photo__close__font-size: 1.5rem;
-$photo__caption__font-size: 1.5rem;
-
-$tool-panel__element__size: 1.5rem;
+$appmenu__font-size--sm: 2.2rem;
+$appmenu__section-header__font-size--sm: 1.8rem;
+$appmenu__active-header__font-size--sm: 2rem;
+$photo__close__font-size--sm: 1.8rem;
+$tool-panel__element__size--sm: 1.8rem;
 
 // padding
 $general__padding--default: 1rem;

@@ -5,7 +5,6 @@ const defaultState = {
   viewportHeight: 0,
   photoGrid: {
     fullscreenBgColor: scssVars.whiteColor,
-    fullscreenBgTransparent: true,
   },
 };
 
@@ -21,9 +20,6 @@ export const mutations = {
   setPhotoFullscreenBgColor(state, value) {
     state.photoGrid.fullscreenBgColor = value;
   },
-  setPhotoFullscreenBgTransparency(state, value) {
-    state.photoGrid.fullscreenBgTransparent = value;
-  },
   validate(state) {
     if (
       state.photoGrid.fullscreenBgColor !== scssVars.whiteColor &&
@@ -31,13 +27,6 @@ export const mutations = {
     ) {
       state.photoGrid.fullscreenBgColor =
         defaultState.photoGrid.fullscreenBgColor;
-    }
-    if (
-      state.photoGrid.fullscreenBgTransparent !== true &&
-      state.photoGrid.fullscreenBgTransparent !== false
-    ) {
-      state.photoGrid.fullscreenBgTransparent =
-        defaultState.photoGrid.fullscreenBgTransparent;
     }
   },
 };

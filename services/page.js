@@ -1,3 +1,5 @@
+import * as scssVars from "~/assets/scss/_variables.scss";
+
 let pagesCache = {};
 
 export default (api, menuService, stylesService) => ({
@@ -12,6 +14,18 @@ export default (api, menuService, stylesService) => ({
         console.log("PAGE DATA INVALID");
         return null;
       }
+
+      // transform PhotoGrid cols to masonry component structure
+      pageData.components.forEach((component) => {
+        if (component.content.type === "PhotoGrid" && component.content.cols) {
+          const cols = component.content.cols;
+          const smMaxWidth = scssVars.mediaMobileMaxWidth.slice(0, -2);
+          component.content.cols = {
+            default: cols.lg,
+            [smMaxWidth]: cols.sm,
+          };
+        }
+      });
 
       pagesCache[menuPage.id] = pageData;
     }
@@ -118,7 +132,17 @@ const photoComponentSchema = {
   properties: {
     type: { type: "string", enum: ["Photo"] },
     url: { type: "string" },
-    caption: { type: "array", items: { type: "string" } },
+    caption: {
+      type: "object",
+      properties: {
+        linesStyle: { type: "string" },
+        lines: {
+          type: "array",
+          items: { type: "string" },
+        },
+      },
+      required: ["linesStyle", "lines"],
+    },
   },
   required: ["type", "url"],
 };
@@ -131,9 +155,10 @@ const photogridComponentSchema = {
     cols: {
       type: "object",
       properties: {
-        default: { type: "number", minimum: 1 },
+        lg: { type: "number", minimum: 1 },
+        sm: { type: "number", minimum: 1 },
       },
-      required: ["default"],
+      required: ["lg", "sm"],
     },
     photos: {
       type: "array",
@@ -141,7 +166,17 @@ const photogridComponentSchema = {
         type: "object",
         properties: {
           url: { type: "string" },
-          caption: { type: "array", items: { type: "string" } },
+          caption: {
+            type: "object",
+            properties: {
+              linesStyle: { type: "string" },
+              lines: {
+                type: "array",
+                items: { type: "string" },
+              },
+            },
+            required: ["linesStyle", "lines"],
+          },
         },
         required: ["url"],
       },

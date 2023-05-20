@@ -57,10 +57,10 @@
   padding-top: vars.$general__padding--default;
   padding-bottom: calc(vars.$general__padding--default * 2);
   font-family: vars.$appmenu__header__font-family;
-  font-size: vars.$appmenu__active-header__font-size;
+  font-size: vars.$appmenu__active-header__font-size--sm;
   font-weight: bolder;
   text-shadow: var(--styles-font-shadow);
-  transform: scale(1, 1.2) rotate3d(0, 1, 1, -1deg);
+  transform: scale(1, 1.2);
 }
 
 .app-menu-full {
@@ -73,7 +73,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: vars.$general__padding--default;
   background: var(--styles-background-color);
 }
 
@@ -82,13 +81,13 @@
   flex-direction: column;
   padding-left: vars.$general__padding--default;
   padding-right: vars.$general__padding--default;
-  padding-bottom: vars.$general__padding--default;
-  font-size: vars.$appmenu__font-size;
+  padding-bottom: calc(vars.$general__padding--default * 2);
+  font-size: vars.$appmenu__font-size--sm;
 }
 
 .app-menu-full-section-header {
   padding-bottom: calc(vars.$general__padding--default / 2);
-  font-size: vars.$appmenu__section-header__font-size;
+  font-size: vars.$appmenu__section-header__font-size--sm;
   opacity: 0.8;
 }
 
@@ -117,8 +116,10 @@ export default {
     handleAppMenuHeaderClick() {
       this.showFullscreenAppMenu = true;
     },
-    handleFullscreenAppMenuClick() {
-      this.showFullscreenAppMenu = false;
+    handleFullscreenAppMenuClick(e) {
+      if (e.srcElement.classList.contains("app-menu-full")) {
+        this.showFullscreenAppMenu = false;
+      }
     },
     afterFullscreenAppMenuOpened() {
       this.$pageUtility.disablePageScroll();
