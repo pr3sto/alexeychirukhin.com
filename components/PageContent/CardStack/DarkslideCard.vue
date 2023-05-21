@@ -11,8 +11,11 @@
           <div class="darkslidecard-content-footer-left-dot" />
         </div>
         <div class="darkslidecard-content-footer-right">
-          <p>{{ currentDate }}</p>
-          <p><b>Alexey Chirukhin</b>&#10;alexeychirukhin.com</p>
+          <p>{{ footerDate }}</p>
+          <p>
+            <b>{{ footerText }}</b
+            >&#10;{{ footerAddress }}
+          </p>
         </div>
       </div>
     </div>
@@ -156,12 +159,19 @@ export default {
   props: ["card", "fontSize"],
 
   computed: {
-    currentDate() {
+    footerDate() {
       return (
         ("0" + (new Date().getMonth() + 1)).slice(-2) + // month
         "/" +
         new Date().getFullYear().toString().slice(-2) // year
       );
+    },
+    footerAddress() {
+      return window.location.host;
+    },
+    footerText({ $route, $services }) {
+      const { displayName } = $services.menu.getMenuPageByRoute($route.path);
+      return displayName;
     },
     cssVars() {
       return {

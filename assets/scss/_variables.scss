@@ -9,16 +9,16 @@ $general__font-family--handwriting2: "Just Me Again Down Here";
 
 // font sizes
 $appmenu__font-size--lg: 1.8rem;
-$appmenu__section-header__font-size--lg: 1.5rem;
+$appmenu__section-header__font-size--lg: 1.3rem;
 $appmenu__active-header__font-size--lg: 2.2rem;
-$photo__close__font-size--lg: 1.5rem;
+$photo__close__font-size--lg: 1.3rem;
 $tool-panel__element__size--lg: 1.3rem;
 
-$appmenu__font-size--sm: 2.2rem;
-$appmenu__section-header__font-size--sm: 1.8rem;
+$appmenu__font-size--sm: 2rem;
+$appmenu__section-header__font-size--sm: 1.5rem;
 $appmenu__active-header__font-size--sm: 2rem;
-$photo__close__font-size--sm: 1.8rem;
-$tool-panel__element__size--sm: 1.8rem;
+$photo__close__font-size--sm: 1.5rem;
+$tool-panel__element__size--sm: 1.5rem;
 
 // padding
 $general__padding--default: 1rem;
@@ -29,8 +29,8 @@ $general__transition--02s: 0.2s $general__transition-func--default;
 $general__transition--03s: 0.3s $general__transition-func--default;
 
 // colors
-$general__color--white: #fefefe;
-$general__color--black: #1f1f1f;
+$general__color--white: #f8f8f8;
+$general__color--black: #1a1a1a;
 
 :export {
   mediaMobileMaxWidth: $media__mobile__max-width;
