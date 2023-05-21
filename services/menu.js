@@ -5,8 +5,7 @@ export default (api, store) => ({
     const data = await api.menu.getAsync();
 
     if (!data || !isValid(data)) {
-      console.log("MENU DATA INVALID");
-      return;
+      throw Error("MENU DATA INVALID");
     }
 
     // construct page routes
@@ -19,7 +18,7 @@ export default (api, store) => ({
 
     store.commit("menu/setData", data);
   },
-  getByRoute(route) {
+  getMenuByRoute(route) {
     // create deep copy
     let menu = JSON.parse(JSON.stringify(store.state.menu));
 
@@ -42,7 +41,13 @@ export default (api, store) => ({
 
     return menu;
   },
-  getAllMenuPages() {
+  getMenuPageByRoute(route) {
+    return this._getAllMenuPages().find((page) => page.route === route);
+  },
+  hasRoute(route) {
+    return this._getAllMenuPages().some((page) => page.route === route);
+  },
+  _getAllMenuPages() {
     const indexPage = store.state.menu.index.page;
     return store.state.menu.sections.reduce(
       (acc, section) => {
@@ -50,12 +55,6 @@ export default (api, store) => ({
       },
       [indexPage]
     );
-  },
-  getMenuPageByRoute(route) {
-    return this.getAllMenuPages().find((page) => page.route === route);
-  },
-  hasRoute(route) {
-    return this.getAllMenuPages().some((page) => page.route === route);
   },
 });
 

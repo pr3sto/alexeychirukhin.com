@@ -6,7 +6,7 @@
       'tool-panel--lg': !useMobileVersion,
     }"
   >
-    <transition name="opacity-transition">
+    <transition name="opacity-transition-02s">
       <div class="tool-panel-scroll-top" v-if="showScrollToTop">
         <div
           class="tool-panel-scroll-top-icon"

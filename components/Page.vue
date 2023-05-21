@@ -61,7 +61,7 @@ export default {
       return this.$services.settings.getViewportHeight();
     },
     menu() {
-      return this.$services.menu.getByRoute(this.$route.path);
+      return this.$services.menu.getMenuByRoute(this.$route.path);
     },
     cssVars() {
       return {

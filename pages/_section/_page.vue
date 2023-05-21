@@ -9,9 +9,9 @@ export default {
   components: { Page },
 
   head({ $route, $services }) {
-    const menuPage = $services.menu.getMenuPageByRoute($route.path);
+    const { displayName } = $services.menu.getMenuPageByRoute($route.path);
     return {
-      title: menuPage && menuPage.displayName,
+      title: displayName,
     };
   },
 

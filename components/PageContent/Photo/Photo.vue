@@ -42,7 +42,7 @@
               :zoomScale="zoomigProps.zoomScale"
             />
           </transition>
-          <transition name="opacity-transition">
+          <transition name="opacity-transition-02s">
             <p
               class="fullscreen-lg-close"
               v-if="showFullScreen"
@@ -51,7 +51,7 @@
               close
             </p>
           </transition>
-          <transition name="opacity-transition">
+          <transition name="opacity-transition-02s">
             <div class="fullscreen-lg-colorpicker" v-if="showFullScreen">
               <figure
                 class="fullscreen-lg-colorpicker-block fullscreen-lg-colorpicker-block--white"
@@ -71,7 +71,7 @@
 
     <template v-if="useMobileVersion">
       <transition
-        name="opacity-transition"
+        name="opacity-transition-03s"
         v-on:after-enter="afterFullscreenSmOpened"
         v-on:before-leave="beforeFullscreenSmClosed"
       >
@@ -138,7 +138,7 @@
   right: 0;
   z-index: 1;
   background: var(--fs-bg-color);
-  transition: background vars.$general__transition--default;
+  transition: background vars.$general__transition--02s;
   touch-action: none;
 }
 
@@ -218,7 +218,7 @@
 /* background color transition */
 .background-transition-enter-active,
 .background-transition-leave-active {
-  transition: background vars.$general__transition--default;
+  transition: background vars.$general__transition--02s;
 }
 .background-transition-enter,
 .background-transition-leave-to {
@@ -228,7 +228,7 @@
 /* zoomimg transform transition */
 .zoomimg-transform-transition-enter-active,
 .zoomimg-transform-transition-leave-active {
-  transition: transform vars.$general__transition--default;
+  transition: transform vars.$general__transition--02s;
 }
 .zoomimg-transform-transition-enter,
 .zoomimg-transform-transition-leave-to {

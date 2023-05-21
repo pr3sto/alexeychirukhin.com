@@ -25,7 +25,8 @@ $general__padding--default: 1rem;
 
 // transitions
 $general__transition-func--default: cubic-bezier(0.8, 0.2, 0.1, 0.8);
-$general__transition--default: 0.2s $general__transition-func--default;
+$general__transition--02s: 0.2s $general__transition-func--default;
+$general__transition--03s: 0.3s $general__transition-func--default;
 
 // colors
 $general__color--white: #fefefe;

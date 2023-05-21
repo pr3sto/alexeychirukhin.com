@@ -4,15 +4,14 @@ let pagesCache = {};
 
 export default (api, menuService, stylesService) => ({
   async loadAsync(route) {
-    const menuPage = menuService.getMenuPageByRoute(route);
+    const { id } = menuService.getMenuPageByRoute(route);
 
     // load page from api
-    if (!pagesCache[menuPage.id]) {
-      const pageData = await api.page.getAsync(menuPage.id);
+    if (!pagesCache[id]) {
+      const pageData = await api.page.getAsync(id);
 
       if (!pageData || !isDataValid(pageData)) {
-        console.log("PAGE DATA INVALID");
-        return null;
+        throw Error("PAGE DATA INVALID");
       }
 
       // transform PhotoGrid cols to masonry component structure
@@ -27,13 +26,13 @@ export default (api, menuService, stylesService) => ({
         }
       });
 
-      pagesCache[menuPage.id] = pageData;
+      pagesCache[id] = pageData;
     }
 
     // apply page styles
-    stylesService.applyPageStyles(pagesCache[menuPage.id].style);
+    stylesService.applyPageStyles(pagesCache[id].style);
 
-    return pagesCache[menuPage.id];
+    return pagesCache[id];
   },
 });
 

@@ -4,7 +4,7 @@
       {{ menu.currentHeader }}
     </p>
     <transition
-      name="opacity-transition"
+      name="opacity-transition-03s"
       v-on:after-enter="afterFullscreenAppMenuOpened"
       v-on:before-leave="beforeFullscreenAppMenuClosed"
     >
@@ -83,6 +83,7 @@
   padding-right: vars.$general__padding--default;
   padding-bottom: calc(vars.$general__padding--default * 2);
   font-size: vars.$appmenu__font-size--sm;
+  line-height: calc(vars.$appmenu__font-size--sm * 1.1);
 }
 
 .app-menu-full-section-header {

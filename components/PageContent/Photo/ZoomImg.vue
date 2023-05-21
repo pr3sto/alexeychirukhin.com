@@ -35,7 +35,7 @@
     cursor: zoom-out;
   }
   &--zoom-in-progress {
-    transition: transform vars.$general__transition--default;
+    transition: transform vars.$general__transition--02s;
   }
 }
 </style>

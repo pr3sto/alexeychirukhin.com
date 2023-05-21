@@ -6,6 +6,8 @@
 </template>
 
 <style lang="scss">
+@use "~/assets/scss/variables" as vars;
+
 .grain {
   content: "";
   position: fixed;
@@ -14,14 +16,13 @@
   left: 0;
   right: 0;
   background: url(~/assets/textures/noise.svg);
-  filter: brightness(110%) opacity(20%);
-  mix-blend-mode: plus-lighter;
+  filter: brightness(150%) opacity(15%);
   pointer-events: none;
 }
 
 /* Nuxt pages transition */
 .page-enter-active {
-  transition: opacity 0.5s;
+  transition: opacity vars.$general__transition--03s;
 }
 .page-enter {
   opacity: 0;
