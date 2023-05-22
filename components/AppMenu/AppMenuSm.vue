@@ -4,7 +4,7 @@
       {{ menu.currentHeader }}
     </p>
     <transition
-      name="opacity-transition-03s"
+      name="opacity-transition-02s"
       v-on:after-enter="afterFullscreenAppMenuOpened"
       v-on:before-leave="beforeFullscreenAppMenuClosed"
     >
@@ -61,6 +61,7 @@
   font-weight: bolder;
   text-shadow: var(--styles-font-shadow);
   transform: scale(1, 1.2);
+  cursor: pointer;
 }
 
 .app-menu-full {
@@ -95,6 +96,7 @@
 .app-menu-full-section-link {
   color: var(--styles-font-color);
   text-decoration: none;
+  cursor: pointer;
 }
 </style>
 

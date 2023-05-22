@@ -71,7 +71,7 @@
 
     <template v-if="useMobileVersion">
       <transition
-        name="opacity-transition-03s"
+        name="opacity-transition-02s"
         v-on:after-enter="afterFullscreenSmOpened"
         v-on:before-leave="beforeFullscreenSmClosed"
       >

@@ -2,11 +2,11 @@
 
 .opacity-transition-02s-enter-active,
 .opacity-transition-02s-leave-active {
-  transition: opacity vars.$general__transition--02s;
+  transition: opacity vars.$general__transition--02s !important;
 }
 .opacity-transition-03s-enter-active,
 .opacity-transition-03s-leave-active {
-  transition: opacity vars.$general__transition--03s;
+  transition: opacity vars.$general__transition--03s !important;
 }
 .opacity-transition-02s-enter,
 .opacity-transition-02s-leave-to,
