@@ -76,21 +76,27 @@
         v-on:before-leave="beforeFullscreenSmClosed"
       >
         <div class="fullscreen-sm" v-show="showFullScreen">
-          <nuxt-img
-            class="fullscreen-sm-img"
-            v-if="showFullScreen"
-            provider="imagekit"
-            preset="progressivejpg"
-            sizes="md:800px lg:1500px"
-            :src="content.url"
-          />
-          <p
-            class="fullscreen-sm-close"
-            v-if="showFullScreen"
-            v-on:click="handleCloseButtonClick"
-          >
-            close
-          </p>
+          <div class="fullscreen-sm-photo">
+            <nuxt-img
+              provider="imagekit"
+              preset="progressivejpg"
+              sizes="md:800px lg:1500px"
+              :src="content.url"
+            />
+          </div>
+          <div class="fullscreen-sm-controls">
+            <div class="fullscreen-sm-colorpicker">
+              <figure
+                class="fullscreen-sm-colorpicker-block fullscreen-sm-colorpicker-block--white"
+                v-on:click="handleWhiteBgClick"
+              />
+              <figure
+                class="fullscreen-sm-colorpicker-block fullscreen-sm-colorpicker-block--black"
+                v-on:click="handleBlackBgClick"
+              />
+            </div>
+            <p v-on:click="handleCloseButtonClick">close</p>
+          </div>
         </div>
       </transition>
     </template>
@@ -191,28 +197,62 @@
   left: 0;
   right: 0;
   z-index: 1;
-  background: var(--styles-background-color);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr auto 1fr;
+  background: var(--fs-bg-color);
+  transition: background vars.$general__transition--02s;
 }
 
-.fullscreen-sm-img {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-width: 100%;
-  max-height: 100%;
-  margin: auto;
-  padding: vars.$general__padding--default;
+.fullscreen-sm-photo {
+  grid-row: 1/1;
+  grid-column: 2/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  & > img {
+    max-width: 100%;
+    max-height: 100%;
+    padding: vars.$general__padding--default;
+  }
 }
 
-.fullscreen-sm-close {
-  position: fixed;
-  top: 0;
-  left: 0;
+.fullscreen-sm-controls {
+  grid-column: 2/2;
+  grid-row: 2/2;
+  display: flex;
+  flex-direction: row;
   padding: vars.$general__padding--default;
   font-size: vars.$photo__close__font-size--sm;
+
+  & > p {
+    margin-left: auto;
+    cursor: pointer;
+  }
+}
+
+.fullscreen-sm-colorpicker {
+  display: flex;
+  flex-direction: row;
+}
+
+.fullscreen-sm-colorpicker-block {
+  width: vars.$photo__close__font-size--sm;
+  height: vars.$photo__close__font-size--sm;
+  margin-right: calc(vars.$general__padding--default / 2);
+  align-self: center;
   cursor: pointer;
+
+  &--white {
+    background: vars.$general__color--white;
+    border: 1px solid vars.$general__color--black;
+  }
+  &--black {
+    background: vars.$general__color--black;
+    border: 1px solid vars.$general__color--white;
+  }
 }
 
 /* background color transition */
