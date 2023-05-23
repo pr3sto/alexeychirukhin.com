@@ -14,12 +14,14 @@
         v-on:click="handleFullscreenAppMenuClick"
       >
         <section class="app-menu-full-section" v-if="menu.index">
-          <nuxt-link
-            class="app-menu-full-section-link"
-            :to="menu.index.page.route"
-          >
-            {{ menu.index.page.displayName }}
-          </nuxt-link>
+          <div>
+            <nuxt-link
+              class="app-menu-full-section-link"
+              :to="menu.index.page.route"
+            >
+              {{ menu.index.page.displayName }}
+            </nuxt-link>
+          </div>
         </section>
         <section
           class="app-menu-full-section"
@@ -29,14 +31,11 @@
           <p class="app-menu-full-section-header">
             {{ section.displayName }}
           </p>
-          <nuxt-link
-            class="app-menu-full-section-link"
-            v-for="(page, index1) of section.pages"
-            :key="index1"
-            :to="page.route"
-          >
-            {{ page.displayName }}
-          </nuxt-link>
+          <div v-for="(page, index1) of section.pages" :key="index1">
+            <nuxt-link class="app-menu-full-section-link" :to="page.route">
+              {{ page.displayName }}
+            </nuxt-link>
+          </div>
         </section>
       </div>
     </transition>
@@ -119,10 +118,8 @@ export default {
     handleAppMenuHeaderClick() {
       this.showFullscreenAppMenu = true;
     },
-    handleFullscreenAppMenuClick(e) {
-      if (e.srcElement.classList.contains("app-menu-full")) {
-        this.showFullscreenAppMenu = false;
-      }
+    handleFullscreenAppMenuClick() {
+      this.showFullscreenAppMenu = false;
     },
     afterFullscreenAppMenuOpened() {
       this.$pageUtility.disablePageScroll();
