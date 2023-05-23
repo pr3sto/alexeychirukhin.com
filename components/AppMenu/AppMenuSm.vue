@@ -10,7 +10,7 @@
     >
       <div
         class="app-menu-full"
-        v-show="showFullscreenAppMenu"
+        v-if="showFullscreenAppMenu"
         v-on:click="handleFullscreenAppMenuClick"
       >
         <section class="app-menu-full-section" v-if="menu.index">

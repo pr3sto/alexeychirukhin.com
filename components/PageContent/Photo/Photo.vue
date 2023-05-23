@@ -4,6 +4,7 @@
       <nuxt-img
         ref="nuxtimg"
         class="photo-container-img"
+        :class="{ 'photo-container-img--hidden': !showOriginalPhoto }"
         provider="imagekit"
         preset="progressivejpg"
         loading="lazy"
@@ -11,15 +12,17 @@
         :src="content.url"
         v-on:click="handlePhotoImgClick"
       />
-      <div
-        v-if="content.caption"
-        class="photo-container-caption"
-        :style="content.caption.linesStyle"
-      >
-        <span v-for="(line, index) in content.caption.lines" :key="index">{{
-          line
-        }}</span>
-      </div>
+      <transition name="opacity-enter-transition-02s">
+        <div
+          v-if="content.caption && showOriginalPhoto"
+          class="photo-container-caption"
+          :style="content.caption.linesStyle"
+        >
+          <span v-for="(line, index) in content.caption.lines" :key="index">{{
+            line
+          }}</span>
+        </div>
+      </transition>
     </div>
 
     <template v-if="!useMobileVersion">
@@ -75,7 +78,7 @@
         v-on:after-enter="afterFullscreenSmOpened"
         v-on:before-leave="beforeFullscreenSmClosed"
       >
-        <div class="fullscreen-sm" v-show="showFullScreen">
+        <div class="fullscreen-sm" v-if="showFullScreen">
           <div class="fullscreen-sm-photo">
             <nuxt-img
               provider="imagekit"
@@ -124,6 +127,10 @@
   max-height: 100%;
   object-fit: contain;
   cursor: pointer;
+
+  &--hidden {
+    visibility: hidden;
+  }
 }
 
 .photo-container-caption {
@@ -306,6 +313,7 @@ export default {
   data() {
     return {
       showFullScreen: false,
+      showOriginalPhoto: true,
       windowScrollPosition: {},
       zoomigProps: {
         zoomScale: 1,
@@ -329,9 +337,7 @@ export default {
       window.addEventListener("wheel", this.handleScroll, { passive: false });
     },
     afterFullscreenLgClosed() {
-      // show image on grid
-      this.$refs["nuxtimg"].$el.parentNode.style.visibility = "visible";
-
+      this.showOriginalPhoto = true;
       window.removeEventListener("resize", this.closeFullscreen);
       window.removeEventListener("wheel", this.handleScroll);
     },
@@ -415,7 +421,7 @@ export default {
       this.zoomigProps.transform = fsImgTransfrom;
 
       // hide original image on grid
-      this.$refs["nuxtimg"].$el.parentNode.style.visibility = "hidden";
+      this.showOriginalPhoto = false;
 
       // show fullscreen
       this.showFullScreen = true;

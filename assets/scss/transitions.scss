@@ -1,5 +1,8 @@
 @use "~/assets/scss/variables" as vars;
 
+.opacity-enter-transition-02s-enter-active {
+  transition: opacity vars.$general__transition--02s !important;
+}
 .opacity-transition-02s-enter-active,
 .opacity-transition-02s-leave-active {
   transition: opacity vars.$general__transition--02s !important;
@@ -8,6 +11,7 @@
 .opacity-transition-03s-leave-active {
   transition: opacity vars.$general__transition--03s !important;
 }
+.opacity-enter-transition-02s-enter,
 .opacity-transition-02s-enter,
 .opacity-transition-02s-leave-to,
 .opacity-transition-03s-enter,
