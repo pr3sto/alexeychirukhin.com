@@ -51,7 +51,7 @@ function convertHexToRGB(hexColor) {
 
 function colorToHex(color) {
   const hex = color.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
+  return hex.length === 1 ? "0" + hex : hex;
 }
 
 function convertRGBtoHex(r, g, b) {
