@@ -5,6 +5,6 @@ export default {
 
   desktop: {
     CARD_MAX_ROTATE_ANGLE_DEG: 7,
-    CARD_CONTAINER_PADDING_PERCENT: 0.2,
+    CARD_CONTAINER_PADDING_PERCENT: 0.1,
   },
 };

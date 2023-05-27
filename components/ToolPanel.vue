@@ -72,7 +72,8 @@
   border-right: 2px solid var(--styles-font-color);
 
   .tool-panel-scroll-top {
-    padding-bottom: calc(vars.$general__padding--default * 2);
+    margin-top: vars.$general__padding--default;
+    margin-bottom: auto;
   }
 
   .tool-panel-scroll-top-icon {

@@ -36,6 +36,7 @@
   line-height: var(--line-height);
   filter: drop-shadow(1px 1px 1px #000);
   z-index: 0; /* creates stacking context */
+  user-select: none;
 
   /* shape of darkslide */
   &-content,

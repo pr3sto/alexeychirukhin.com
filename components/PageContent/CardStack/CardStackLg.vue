@@ -302,7 +302,7 @@ export default {
 
 function getRandomPointsOnPlane(width, height, numberOfPoints) {
   // use poisson disk sampling algorithm
-  const radius = Math.sqrt((width * height) / numberOfPoints / Math.PI);
+  const radius = Math.sqrt((width * height) / (numberOfPoints * 2));
   const pds = new FastPoissonDiskSampling({
     shape: [width, height],
     radius: radius,
@@ -318,7 +318,8 @@ function getRandomNumber(min, max) {
 }
 
 function sliceRandom(array, numberOfItems) {
-  const shuffled = array.sort(() => 0.5 - Math.random());
+  const _ = require("lodash");
+  const shuffled = _.shuffle(array);
   return shuffled.slice(0, numberOfItems);
 }
 
