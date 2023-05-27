@@ -4,12 +4,8 @@
       class="page-content-component"
       v-for="(component, index) of components"
       :key="index"
+      :style="component.style.css"
       :class="{
-        'page-content-component--padding-top': component.style.padding.top,
-        'page-content-component--padding-bottom':
-          component.style.padding.bottom,
-        'page-content-component--padding-left': component.style.padding.left,
-        'page-content-component--padding-right': component.style.padding.right,
         'page-content-component--fill-avaliable-space':
           component.style.fillAvaliableSpace,
       }"
@@ -45,18 +41,6 @@
 .page-content-component {
   display: flex;
 
-  &--padding-top {
-    padding-top: vars.$general__padding--default;
-  }
-  &--padding-bottom {
-    padding-bottom: vars.$general__padding--default;
-  }
-  &--padding-left {
-    padding-left: vars.$general__padding--default;
-  }
-  &--padding-right {
-    padding-right: vars.$general__padding--default;
-  }
   &--fill-avaliable-space {
     overflow: hidden;
     flex: 1;

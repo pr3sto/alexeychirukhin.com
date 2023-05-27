@@ -14,8 +14,8 @@ export default (api, menuService, stylesService) => ({
         throw Error("PAGE DATA INVALID");
       }
 
-      // transform PhotoGrid cols to masonry component structure
       pageData.components.forEach((component) => {
+        // transform PhotoGrid cols to masonry component structure
         if (component.content.type === "PhotoGrid" && component.content.cols) {
           const cols = component.content.cols;
           const smMaxWidth = scssVars.mediaMobileMaxWidth.slice(0, -2);
@@ -24,6 +24,8 @@ export default (api, menuService, stylesService) => ({
             [smMaxWidth]: cols.sm,
           };
         }
+        // compose component style css
+        component.style.css = `padding:${component.style.padding.top} ${component.style.padding.right} ${component.style.padding.bottom} ${component.style.padding.left};`;
       });
 
       pagesCache[id] = pageData;
@@ -35,6 +37,8 @@ export default (api, menuService, stylesService) => ({
     return pagesCache[id];
   },
 });
+
+const cssSizeRegex = "(([0-9]*[.])?[0-9]+)(px|em|rem|vh)?$";
 
 const pageSchema = {
   id: "/page",
@@ -71,10 +75,10 @@ const pageSchema = {
               padding: {
                 type: "object",
                 properties: {
-                  top: { type: "boolean" },
-                  bottom: { type: "boolean" },
-                  left: { type: "boolean" },
-                  right: { type: "boolean" },
+                  top: { type: "string", pattern: cssSizeRegex },
+                  bottom: { type: "string", pattern: cssSizeRegex },
+                  left: { type: "string", pattern: cssSizeRegex },
+                  right: { type: "string", pattern: cssSizeRegex },
                 },
                 required: ["top", "bottom", "left", "right"],
               },
