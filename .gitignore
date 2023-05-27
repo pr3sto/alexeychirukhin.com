@@ -90,8 +90,7 @@ sw.*
 *.swp
 
 # only for local dev
-static/data.development.json
-static/data.beta.json
+static/*/*.local.json
 
 # todo files
 *.todo
