@@ -32,7 +32,7 @@ export default (api, menuService, stylesService) => ({
     }
 
     // apply page styles
-    stylesService.applyPageStyles(pagesCache[id].style);
+    stylesService.applyPageStyles(pagesCache[id].styles);
 
     return pagesCache[id];
   },
@@ -45,7 +45,7 @@ const pageSchema = {
   type: "object",
   properties: {
     id: { type: "number", minimum: 0 },
-    style: {
+    styles: {
       type: "object",
       properties: {
         backgroundColor: { type: "string" },
@@ -90,7 +90,7 @@ const pageSchema = {
       },
     },
   },
-  required: ["id", "style", "components"],
+  required: ["id", "styles", "components"],
 };
 
 const cardstackComponentSchema = {

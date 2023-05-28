@@ -4,7 +4,7 @@
     :class="{
       'page--sm': useMobileVersion,
       'page--lg': !useMobileVersion,
-      'page--fit-screen': data && data.style.fitScreen,
+      'page--fit-screen': data && data.styles.fitScreen,
     }"
     :style="cssVars"
   >
