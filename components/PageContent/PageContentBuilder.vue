@@ -1,29 +1,19 @@
 <template>
   <main class="page-content">
     <section
-      class="page-content-component"
+      class="page-content-section"
       v-for="(component, index) of components"
       :key="index"
-      :style="component.style.css"
+      :style="composeCSS(component)"
       :class="{
-        'page-content-component--fill-avaliable-space':
-          component.style.fillAvaliableSpace,
+        'page-content-section--fill-avaliable-space':
+          component.styles.fillAvaliableSpace,
       }"
     >
-      <card-stack
-        v-if="component.content.type === 'CardStack'"
-        :content="component.content"
-      />
-      <photo
-        v-else-if="component.content.type === 'Photo'"
-        :content="component.content"
-      />
-      <photo-grid
-        v-else-if="component.content.type === 'PhotoGrid'"
-        :content="component.content"
-      />
-      <text-blocks
-        v-else-if="component.content.type === 'TextBlocks'"
+      <component
+        class="page-content-component"
+        :class="{ 'fade-in': component.styles.enableFadeInTransition }"
+        :is="component.content.type"
         :content="component.content"
       />
     </section>
@@ -38,7 +28,7 @@
   flex-direction: column;
 }
 
-.page-content-component {
+.page-content-section {
   display: flex;
 
   &--fill-avaliable-space {
@@ -49,6 +39,15 @@
   & > * {
     flex: 1;
   }
+}
+
+.page-content-component {
+  transition: transform 0.8s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+.out-of-view {
+  opacity: 0;
+  transform: translateY(50px);
 }
 </style>
 
@@ -62,5 +61,51 @@ export default {
   name: "PageContentBuilder",
   props: ["components"],
   components: { CardStack, Photo, PhotoGrid, TextBlocks },
+
+  data() {
+    return {
+      observer: null,
+    };
+  },
+
+  mounted() {
+    const options = {
+      root: null,
+      rootMargin: "0% 0% -15% 0%",
+      threshold: 0.1,
+    };
+
+    const intersectionCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("out-of-view");
+        } else {
+          if (entry.boundingClientRect.top > 0) {
+            console.log("BELOW");
+            entry.target.classList.add("out-of-view");
+          }
+        }
+      });
+    };
+
+    this.observer = new IntersectionObserver(intersectionCallback, options);
+
+    document.querySelectorAll(".fade-in").forEach((element) => {
+      this.observer.observe(element);
+    });
+  },
+
+  beforeDestroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
+  },
+
+  methods: {
+    composeCSS(component) {
+      return `padding: ${component.styles.offset.top} ${component.styles.offset.right} ${component.styles.offset.bottom} ${component.styles.offset.left};`;
+    },
+  },
 };
 </script>

@@ -14,19 +14,20 @@ export default (api, menuService, stylesService) => ({
         throw Error("PAGE DATA INVALID");
       }
 
-      pageData.components.forEach((component) => {
-        // transform PhotoGrid cols to masonry component structure
-        if (component.content.type === "PhotoGrid" && component.content.cols) {
+      pageData.components
+        .filter(
+          (component) =>
+            component.content.type === "PhotoGrid" && component.content.cols
+        )
+        .forEach((component) => {
+          // transform PhotoGrid cols to masonry component structure
           const cols = component.content.cols;
           const smMaxWidth = scssVars.mediaMobileMaxWidth.slice(0, -2);
           component.content.cols = {
             default: cols.lg,
             [smMaxWidth]: cols.sm,
           };
-        }
-        // compose component style css
-        component.style.css = `padding:${component.style.padding.top} ${component.style.padding.right} ${component.style.padding.bottom} ${component.style.padding.left};`;
-      });
+        });
 
       pagesCache[id] = pageData;
     }
@@ -68,11 +69,12 @@ const pageSchema = {
               { $ref: "/definitions/data/page/component/textblocks" },
             ],
           },
-          style: {
+          styles: {
             type: "object",
             properties: {
               fillAvaliableSpace: { type: "boolean" },
-              padding: {
+              enableFadeInTransition: { type: "boolean" },
+              offset: {
                 type: "object",
                 properties: {
                   top: { type: "string", pattern: cssSizeRegex },
@@ -83,10 +85,10 @@ const pageSchema = {
                 required: ["top", "bottom", "left", "right"],
               },
             },
-            required: ["padding"],
+            required: ["offset"],
           },
         },
-        required: ["content", "style"],
+        required: ["content", "styles"],
       },
     },
   },
@@ -118,7 +120,7 @@ const cardstackComponentSchema = {
               type: { type: "string", enum: ["DarkslideCard"] },
               html: { type: "string" },
             },
-            required: ["type"],
+            required: ["type", "html"],
           },
         ],
       },
