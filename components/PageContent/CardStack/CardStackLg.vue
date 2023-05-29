@@ -12,6 +12,7 @@
         class="cardstack-card"
         v-for="(card, index) of content.cards.slice().reverse()"
         :key="index"
+        :data-index="index"
         ref="cards"
         v-on:mousedown="handleCardMouseDown"
         v-on:touchstart="handleCardTouchStart"
@@ -147,7 +148,7 @@ export default {
     },
     distributeCards() {
       const containerRect = this.$el.getBoundingClientRect();
-      const cardsNumber = this.$refs["cards"].length;
+      const cardsNumber = this.content.cards.length;
 
       // max offset for card
       const maxOffsetX = containerRect.width - this.cardstackCardWidth;
@@ -171,7 +172,9 @@ export default {
       );
 
       // transform each card
-      this.$refs["cards"].forEach((element, index) => {
+      this.$refs["cards"].forEach((element) => {
+        const index = parseInt(element.dataset.index);
+
         const x = randomPoints[index][0] + paddingX;
         const y = randomPoints[index][1] + paddingY;
 
