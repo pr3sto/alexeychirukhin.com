@@ -148,7 +148,6 @@ export default {
     },
     distributeCards() {
       const containerRect = this.$el.getBoundingClientRect();
-      const cardsNumber = this.content.cards.length;
 
       // max offset for card
       const maxOffsetX = containerRect.width - this.cardstackCardWidth;
@@ -168,7 +167,7 @@ export default {
       const randomPoints = getRandomPointsOnPlane(
         planeWidth,
         planeHeight,
-        cardsNumber
+        this.content.cards.length
       );
 
       // transform each card
@@ -198,7 +197,7 @@ export default {
         .forEach((element) => {
           element.style.zIndex--;
         });
-      cardElement.style.zIndex = this.$refs["cards"].length;
+      cardElement.style.zIndex = this.content.cards.length;
     },
     moveCardTo(clientX, clientY) {
       const containerRect = this.$el.getBoundingClientRect();
