@@ -343,10 +343,7 @@ export default {
     },
     afterFullscreenSmOpened() {
       // save scroll position
-      this.windowScrollPosition = {
-        x: window.pageXOffset,
-        y: window.pageYOffset,
-      };
+      this.windowScrollPosition = this.$pageUtility.getScrollPosition();
 
       this.$pageUtility.disablePageScroll();
     },
@@ -354,7 +351,7 @@ export default {
       this.$pageUtility.enablePageScroll();
 
       // restore scroll position
-      window.scrollTo(this.windowScrollPosition.x, this.windowScrollPosition.y);
+      this.$pageUtility.scrollTo(this.windowScrollPosition);
     },
     handlePhotoImgClick() {
       if (this.useMobileVersion) {
@@ -392,7 +389,7 @@ export default {
       const fsImgScaleFactor = calcFsImgScaleFactor(
         initImgRect,
         document.documentElement.clientWidth,
-        window.innerHeight,
+        document.documentElement.clientHeight,
         parseFloat(getComputedStyle(this.$el).fontSize)
       );
 
@@ -400,7 +397,7 @@ export default {
       const fsImgRect = calcFsImgRect(
         initImgRect,
         document.documentElement.clientWidth,
-        window.innerHeight,
+        document.documentElement.clientHeight,
         fsImgScaleFactor
       );
 

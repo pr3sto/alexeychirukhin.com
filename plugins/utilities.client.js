@@ -13,7 +13,29 @@ export default function ({ $services }, inject) {
 
   const utilities = {
     getPageScrollTopOffset() {
-      return document.documentElement.scrollTop || document.body.scrollTop;
+      return (
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0
+      );
+    },
+    getPageScrollLeftOffset() {
+      return (
+        window.scrollX ||
+        document.documentElement.scrollLeft ||
+        document.body.scrollLeft ||
+        0
+      );
+    },
+    getScrollPosition() {
+      return {
+        x: this.getPageScrollLeftOffset(),
+        y: this.getPageScrollTopOffset(),
+      };
+    },
+    scrollTo(scrollPosition) {
+      window.scrollTo(scrollPosition.x, scrollPosition.y);
     },
     scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
