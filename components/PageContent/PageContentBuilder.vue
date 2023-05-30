@@ -2,19 +2,23 @@
   <main class="page-content">
     <section
       class="page-content-section"
-      v-for="(component, index) of components"
-      :key="index"
-      :style="composeCSS(component)"
       :class="{
         'page-content-section--fill-avaliable-space':
           component.styles.fillAvaliableSpace,
       }"
+      :style="composeCSS(component)"
+      v-for="(component, index) of components"
+      :key="index"
     >
       <component
         class="page-content-component"
-        :class="{ 'fade-in': component.styles.enableFadeInTransition }"
+        :class="{ 'fade-in': component.styles.fadeInTransition }"
         :is="component.content.type"
         :content="component.content"
+        :ref="component.styles.fadeInTransition ? 'fadeInComponents' : ''"
+        :data-fade-in-offset="
+          component.styles.fadeInTransition?.triggerOffsetPercentage
+        "
       />
     </section>
   </main>
@@ -41,8 +45,8 @@
   }
 }
 
-.page-content-component {
-  transition: transform 0.8s ease-in-out, opacity 0.6s ease-in-out;
+.fade-in {
+  transition: opacity 0.6s ease-in-out, transform 0.8s ease-in-out;
 }
 
 .out-of-view {
@@ -64,47 +68,67 @@ export default {
 
   data() {
     return {
-      observer: null,
+      intersectionObservers: [],
     };
   },
 
   mounted() {
-    const options = {
-      root: null,
-      rootMargin: "0% 0% -15% 0%",
-      threshold: 0.1,
-    };
+    if (!this.$refs["fadeInComponents"]) {
+      return;
+    }
 
-    const intersectionCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove("out-of-view");
-        } else {
-          if (entry.boundingClientRect.top > 0) {
-            console.log("BELOW");
-            entry.target.classList.add("out-of-view");
-          }
-        }
-      });
-    };
+    const elementsByOffset = this.$refs["fadeInComponents"].reduce(
+      (dict, component) => {
+        const key = component.$el.dataset.fadeInOffset;
+        (dict[key] || (dict[key] = [])).push(component.$el);
+        return dict;
+      },
+      {}
+    );
 
-    this.observer = new IntersectionObserver(intersectionCallback, options);
-
-    document.querySelectorAll(".fade-in").forEach((element) => {
-      this.observer.observe(element);
+    Object.entries(elementsByOffset).forEach(([fadeInOffset, elements]) => {
+      this.observeElements(fadeInOffset, elements);
     });
   },
 
   beforeDestroy() {
-    if (this.observer) {
-      this.observer.disconnect();
-      this.observer = null;
-    }
+    this.deleteObservers();
   },
 
   methods: {
     composeCSS(component) {
       return `padding: ${component.styles.offset.top} ${component.styles.offset.right} ${component.styles.offset.bottom} ${component.styles.offset.left};`;
+    },
+    observeElements(bottomOffset, elements) {
+      const callback = (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // element appear on screen
+            entry.target.classList.remove("out-of-view");
+          } else if (entry.boundingClientRect.top > 0) {
+            // element disappear from screen (below viewport)
+            entry.target.classList.add("out-of-view");
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(callback, {
+        root: null,
+        rootMargin: `0% 0% -${bottomOffset}% 0%`,
+        threshold: 0,
+      });
+
+      elements.forEach((el) => {
+        observer.observe(el);
+      });
+
+      this.intersectionObservers.push(observer);
+    },
+    deleteObservers() {
+      this.intersectionObservers.forEach((observer) => {
+        observer.disconnect();
+        observer = null;
+      });
     },
   },
 };

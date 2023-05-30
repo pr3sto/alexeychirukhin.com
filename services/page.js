@@ -39,7 +39,7 @@ export default (api, menuService, stylesService) => ({
   },
 });
 
-const cssSizeRegex = "(([0-9]*[.])?[0-9]+)(px|em|rem|vh)?$";
+const cssSizeRegex = "^(([0-9]*[.])?[0-9]+)(px|em|rem|vh)?$";
 
 const pageSchema = {
   id: "/page",
@@ -73,7 +73,16 @@ const pageSchema = {
             type: "object",
             properties: {
               fillAvaliableSpace: { type: "boolean" },
-              enableFadeInTransition: { type: "boolean" },
+              fadeInTransition: {
+                type: "object",
+                properties: {
+                  triggerOffsetPercentage: {
+                    type: "number",
+                    minimum: 0,
+                  },
+                },
+                required: ["triggerOffsetPercentage"],
+              },
               offset: {
                 type: "object",
                 properties: {
