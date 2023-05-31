@@ -269,6 +269,12 @@ export default {
       }
     },
     handleCardTouchStart(e) {
+      // prevent multitouch
+      if (e.touches.length > 1) {
+        this.handleTouchEnd();
+        return;
+      }
+
       this.draggableCard.element = e.currentTarget;
       this.draggableCard.initialMouseX = e.changedTouches[0].clientX;
       this.draggableCard.initialMouseY = e.changedTouches[0].clientY;
