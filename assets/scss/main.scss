@@ -5,11 +5,10 @@ html {
   font-size: 16px;
   text-size-adjust: 100%;
   box-sizing: border-box;
-  overflow: auto;
 }
 
 body {
-  margin: 0;
+  width: 100%;
 }
 
 *,
@@ -18,6 +17,8 @@ body {
   box-sizing: inherit;
 }
 
+html,
+body,
 menu,
 figure,
 p {
@@ -37,11 +38,6 @@ strong {
 img {
   border-style: none;
   image-rendering: -webkit-optimize-contrast;
-}
-
-.non-scrollable {
-  height: 100%;
-  overflow: hidden;
 }
 
 /* mobile version */

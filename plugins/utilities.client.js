@@ -5,6 +5,9 @@ import VueLodash from "vue-lodash";
 
 Vue.use(VueLodash, { name: "$_", lodash });
 
+let savedScrollPosition = null;
+let pageScrollDisabled = false;
+
 export default function ({ $services }, inject) {
   detectScreenSize($services.settings);
   window.onresize = lodash.throttle(() => {
@@ -41,12 +44,23 @@ export default function ({ $services }, inject) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     disablePageScroll() {
-      document.body.classList.add("non-scrollable");
-      document.documentElement.classList.add("non-scrollable");
+      savedScrollPosition = this.getScrollPosition();
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${savedScrollPosition.y}px`;
+      pageScrollDisabled = true;
     },
     enablePageScroll() {
-      document.body.classList.remove("non-scrollable");
-      document.documentElement.classList.remove("non-scrollable");
+      if (pageScrollDisabled) {
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        if (savedScrollPosition) {
+          this.scrollTo(savedScrollPosition);
+          savedScrollPosition = null;
+        }
+        pageScrollDisabled = false;
+      }
     },
   };
 

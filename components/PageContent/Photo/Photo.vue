@@ -75,7 +75,7 @@
     <template v-if="useMobileVersion">
       <transition
         name="opacity-transition-02s"
-        v-on:after-enter="afterFullscreenSmOpened"
+        v-on:before-enter="beforeFullscreenSmOpened"
         v-on:before-leave="beforeFullscreenSmClosed"
       >
         <div class="fullscreen-sm" v-if="showFullScreen">
@@ -314,7 +314,6 @@ export default {
     return {
       showFullScreen: false,
       showOriginalPhoto: true,
-      windowScrollPosition: {},
       zoomigProps: {
         zoomScale: 1,
         left: 0,
@@ -333,6 +332,7 @@ export default {
 
   methods: {
     beforeFullscreenLgOpened() {
+      this.showOriginalPhoto = false;
       window.addEventListener("resize", this.closeFullscreen, { once: true });
       window.addEventListener("wheel", this.handleScroll, { passive: false });
     },
@@ -341,17 +341,11 @@ export default {
       window.removeEventListener("resize", this.closeFullscreen);
       window.removeEventListener("wheel", this.handleScroll);
     },
-    afterFullscreenSmOpened() {
-      // save scroll position
-      this.windowScrollPosition = this.$pageUtility.getScrollPosition();
-
+    beforeFullscreenSmOpened() {
       this.$pageUtility.disablePageScroll();
     },
     beforeFullscreenSmClosed() {
       this.$pageUtility.enablePageScroll();
-
-      // restore scroll position
-      this.$pageUtility.scrollTo(this.windowScrollPosition);
     },
     handlePhotoImgClick() {
       if (this.useMobileVersion) {
@@ -416,9 +410,6 @@ export default {
       this.zoomigProps.width = fsImgRect.width;
       this.zoomigProps.height = fsImgRect.height;
       this.zoomigProps.transform = fsImgTransfrom;
-
-      // hide original image on grid
-      this.showOriginalPhoto = false;
 
       // show fullscreen
       this.showFullScreen = true;

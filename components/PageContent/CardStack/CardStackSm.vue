@@ -29,12 +29,11 @@
   position: absolute;
   height: var(--cardstack-card-height);
   width: var(--cardstack-card-width);
-  cursor: pointer;
-
   z-index: 2;
   transform-origin: 0 0;
   transform: translateX(5%) rotate(4deg) scale(1);
   transition: transform 0.4s vars.$general__transition-func--default 0.1s;
+  cursor: pointer;
 
   &--current {
     z-index: 5;

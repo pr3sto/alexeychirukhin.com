@@ -5,7 +5,7 @@
     </p>
     <transition
       name="opacity-transition-02s"
-      v-on:after-enter="afterFullscreenAppMenuOpened"
+      v-on:before-enter="beforeFullscreenAppMenuOpened"
       v-on:before-leave="beforeFullscreenAppMenuClosed"
     >
       <div
@@ -121,7 +121,7 @@ export default {
     handleFullscreenAppMenuClick() {
       this.showFullscreenAppMenu = false;
     },
-    afterFullscreenAppMenuOpened() {
+    beforeFullscreenAppMenuOpened() {
       this.$pageUtility.disablePageScroll();
     },
     beforeFullscreenAppMenuClosed() {
