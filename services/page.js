@@ -14,16 +14,14 @@ export default (api, menuService, stylesService) => ({
         throw Error("PAGE DATA INVALID");
       }
 
+      // transform PhotoGrid cols to masonry component structure
       pageData.components
-        .filter(
-          (component) =>
-            component.content.type === "PhotoGrid" && component.content.cols
-        )
-        .forEach((component) => {
-          // transform PhotoGrid cols to masonry component structure
-          const cols = component.content.cols;
+        .filter((component) => component.content.type === "PhotoGrid")
+        .flatMap((component) => component.content.sections)
+        .forEach((section) => {
+          const cols = section.cols;
           const smMaxWidth = scssVars.mediaMobileMaxWidth.slice(0, -2);
-          component.content.cols = {
+          section.cols = {
             default: cols.lg,
             [smMaxWidth]: cols.sm,
           };
@@ -109,6 +107,8 @@ const cardstackComponentSchema = {
   type: "object",
   properties: {
     type: { type: "string", enum: ["CardStack"] },
+    cardScale: { type: "number", minimum: 0, maximum: 0.99 },
+    showBorder: { type: "boolean" },
     cards: {
       type: "array",
       items: {
@@ -134,10 +134,8 @@ const cardstackComponentSchema = {
         ],
       },
     },
-    cardScale: { type: "number", minimum: 0, maximum: 0.99 },
-    showBorder: { type: "boolean" },
   },
-  required: ["type", "cards", "cardScale"],
+  required: ["type", "cardScale", "cards"],
 };
 
 const photoComponentSchema = {
@@ -166,38 +164,47 @@ const photogridComponentSchema = {
   type: "object",
   properties: {
     type: { type: "string", enum: ["PhotoGrid"] },
-    cols: {
-      type: "object",
-      properties: {
-        lg: { type: "number", minimum: 1 },
-        sm: { type: "number", minimum: 1 },
-      },
-      required: ["lg", "sm"],
-    },
-    photos: {
+    padding: { type: "boolean" },
+    sections: {
       type: "array",
       items: {
         type: "object",
         properties: {
-          url: { type: "string" },
-          caption: {
+          cols: {
             type: "object",
             properties: {
-              linesStyle: { type: "string" },
-              lines: {
-                type: "array",
-                items: { type: "string" },
-              },
+              lg: { type: "number", minimum: 1 },
+              sm: { type: "number", minimum: 1 },
             },
-            required: ["linesStyle", "lines"],
+            required: ["lg", "sm"],
+          },
+          photos: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                url: { type: "string" },
+                caption: {
+                  type: "object",
+                  properties: {
+                    linesStyle: { type: "string" },
+                    lines: {
+                      type: "array",
+                      items: { type: "string" },
+                    },
+                  },
+                  required: ["linesStyle", "lines"],
+                },
+              },
+              required: ["url"],
+            },
           },
         },
-        required: ["url"],
+        required: ["cols", "photos"],
       },
     },
-    padding: { type: "boolean" },
   },
-  required: ["type", "photos"],
+  required: ["type", "padding", "sections"],
 };
 
 const textblocksComponentSchema = {

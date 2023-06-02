@@ -1,11 +1,15 @@
 <template>
   <div class="photogrid" :class="{ 'photogrid--padding': content.padding }">
-    <masonry :cols="content.cols">
+    <masonry
+      v-for="(section, index) of content.sections"
+      :key="index"
+      :cols="section.cols"
+    >
       <photo
         class="photogrid-photo"
-        :class="{ 'photogrid-photo--padding': content.padding }"
-        v-for="(photo, index) of content.photos"
-        :key="index"
+        :class="{ 'photogrid-photo--padding': section.padding }"
+        v-for="(photo, index1) of section.photos"
+        :key="index1"
         :content="photo"
       />
     </masonry>
