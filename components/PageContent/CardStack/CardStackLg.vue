@@ -18,7 +18,7 @@
         v-on:touchstart="handleCardTouchStart"
         v-on:click="handleCardClick"
       >
-        <component :is="card.type" :card="card" :fontSize="fontSize" />
+        <component :is="card.type" :card="card" />
       </div>
     </div>
   </div>
@@ -52,6 +52,8 @@
   right: 0;
   z-index: 0; /* creates stacking context for cards */
   overflow: hidden;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
 
   &--with-border {
     border-top: 2px solid var(--styles-background-color);
@@ -90,6 +92,8 @@ export default {
       return {
         "--cardstack-card-height": `${this.cardstackCardHeight}px`,
         "--cardstack-card-width": `${this.cardstackCardWidth}px`,
+        "--font-size": `${this.fontSize}px`,
+        "--line-height": `${this.fontSize}px`,
       };
     },
   },

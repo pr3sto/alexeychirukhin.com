@@ -1,5 +1,5 @@
 <template>
-  <figure class="darkslidecard" :style="cssVars">
+  <figure class="darkslidecard">
     <div class="darkslidecard-content">
       <div class="darkslidecard-content-header">
         <img :src="require('~/assets/icons/arrow.png')" />
@@ -32,8 +32,6 @@
   color: #ffffff;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-size: var(--font-size);
-  line-height: var(--line-height);
   filter: drop-shadow(1px 1px 1px #000);
   z-index: 0; /* creates stacking context */
   user-select: none;
@@ -157,7 +155,7 @@
 <script>
 export default {
   name: "DarkslideCard",
-  props: ["card", "fontSize"],
+  props: ["card"],
 
   computed: {
     footerDate() {
@@ -173,12 +171,6 @@ export default {
     footerText({ $route, $services }) {
       const { displayName } = $services.menu.getMenuPageByRoute($route.path);
       return displayName;
-    },
-    cssVars() {
-      return {
-        "--font-size": `${this.fontSize}px`,
-        "--line-height": `${this.fontSize}px`,
-      };
     },
   },
 };

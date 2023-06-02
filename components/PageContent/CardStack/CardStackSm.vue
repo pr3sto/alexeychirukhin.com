@@ -7,7 +7,6 @@
       :class="card.class"
       :is="card.type"
       :card="card"
-      :fontSize="fontSize"
       v-on:click.native="handleCardClick"
     />
   </div>
@@ -30,6 +29,8 @@
   height: var(--cardstack-card-height);
   width: var(--cardstack-card-width);
   z-index: 2;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   transform-origin: 0 0;
   transform: translateX(5%) rotate(4deg) scale(1);
   transition: transform 0.4s vars.$general__transition-func--default 0.1s;
@@ -119,6 +120,8 @@ export default {
         "--cardstack-height": `${this.cardstackHeight}px`,
         "--cardstack-card-height": `${this.cardstackCardHeight}px`,
         "--cardstack-card-width": `${this.cardstackCardWidth}px`,
+        "--font-size": `${this.fontSize}px`,
+        "--line-height": `${this.fontSize}px`,
       };
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <figure class="photocard" :style="cssVars">
+  <figure class="photocard">
     <div
       class="photocard-photo"
       :class="{ 'photocard-photo--round': card.round }"
@@ -29,8 +29,6 @@
   border-radius: 0px;
   box-shadow: 1px 1px 6px -4px #000;
   background-color: #f9f9f9;
-  font-size: var(--font-size);
-  line-height: var(--line-height);
   user-select: none;
 
   /* texture */
@@ -97,14 +95,6 @@
 <script>
 export default {
   name: "PhotoCard",
-  props: ["card", "fontSize"],
-  computed: {
-    cssVars() {
-      return {
-        "--font-size": `${this.fontSize}px`,
-        "--line-height": `${this.fontSize}px`,
-      };
-    },
-  },
+  props: ["card"],
 };
 </script>
