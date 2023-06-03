@@ -69,7 +69,7 @@
     left: 0;
     background-image: url("~/assets/textures/paper.png");
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.25;
     pointer-events: none;
   }
 }

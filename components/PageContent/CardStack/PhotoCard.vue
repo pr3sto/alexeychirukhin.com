@@ -51,21 +51,7 @@
   width: 100%;
   aspect-ratio: 1;
 
-  /* gloss effect */
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: url("~/assets/textures/gloss.png");
-    background-size: cover;
-    pointer-events: none;
-  }
-
   /* round photo */
-  &--round::after,
   &--round img {
     border-radius: 50%;
   }
