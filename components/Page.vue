@@ -14,6 +14,7 @@
       :components="data && data.components"
     />
     <app-menu :menu="menu" />
+    <photo-fullscreen />
   </div>
 </template>
 
@@ -46,12 +47,13 @@
 <script>
 import AppMenu from "./AppMenu/AppMenu.vue";
 import PageContentBuilder from "./PageContent/PageContentBuilder.vue";
+import PhotoFullscreen from "./PageContent/Photo/Fullscreen/PhotoFullscreen.vue";
 import ToolPanel from "./ToolPanel.vue";
 
 export default {
   name: "Page",
   props: ["data"],
-  components: { AppMenu, PageContentBuilder, ToolPanel },
+  components: { AppMenu, PageContentBuilder, PhotoFullscreen, ToolPanel },
 
   computed: {
     useMobileVersion() {

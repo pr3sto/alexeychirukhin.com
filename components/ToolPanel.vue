@@ -135,6 +135,7 @@ import links from "~/constants/links.js";
 
 export default {
   name: "ToolPanel",
+
   computed: {
     useMobileVersion() {
       return this.$services.settings.getUseMobileVersion();
