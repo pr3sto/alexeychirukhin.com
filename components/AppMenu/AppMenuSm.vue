@@ -45,10 +45,6 @@
 <style lang="scss" scoped>
 @use "~/assets/scss/variables" as vars;
 
-.app-menu {
-  z-index: 0; /* creates stacking context */
-}
-
 .app-menu-header {
   display: inline-block;
   padding-left: vars.$general__padding--default;
@@ -69,7 +65,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;

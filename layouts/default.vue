@@ -2,6 +2,7 @@
   <div>
     <Nuxt />
     <div class="grain" />
+    <overlay class="overlay" />
   </div>
 </template>
 
@@ -17,7 +18,13 @@
   right: 0;
   background: url(~/assets/textures/noise.svg);
   filter: brightness(150%) opacity(15%);
+  z-index: 1;
   pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 2;
 }
 
 /* Nuxt pages transition */
@@ -30,5 +37,9 @@
 </style>
 
 <script>
-export default {};
+import Overlay from "~/components/Overlay.vue";
+
+export default {
+  components: { Overlay },
+};
 </script>

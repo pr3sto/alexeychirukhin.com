@@ -50,7 +50,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
   background: var(--bg-color);
   transition: background vars.$general__transition--02s;
   touch-action: none;
@@ -232,10 +231,12 @@ export default {
       this.showFullScreen = true;
     },
     closeFullscreen() {
-      if (this.$refs["zoomimg"]) {
-        this.$refs["zoomimg"].zoomOut();
+      if (this.showFullScreen) {
+        if (this.$refs["zoomimg"]) {
+          this.$refs["zoomimg"].zoomOut();
+        }
+        this.showFullScreen = false;
       }
-      this.showFullScreen = false;
     },
     cleanupEventListeners() {
       window.removeEventListener("resize", this.closeFullscreen);

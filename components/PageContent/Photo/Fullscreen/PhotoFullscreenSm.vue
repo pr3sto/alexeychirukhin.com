@@ -40,7 +40,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
   display: grid;
   grid-template-rows: 1fr auto;
   grid-template-columns: 1fr auto 1fr;
