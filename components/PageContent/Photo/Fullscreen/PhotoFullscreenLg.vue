@@ -9,7 +9,7 @@
         <zoom-img
           ref="zoomimg"
           class="photo-fullscreen-zoomimg"
-          v-if="showFullScreen"
+          v-show="showFullScreen"
           :src="photoUrl"
           :zoomScale="zoomigProps.zoomScale"
         />
@@ -121,6 +121,7 @@
 
 <script>
 import events from "~/constants/events.js";
+import photoConstants from "~/constants/photo.js";
 import ZoomImg from "../ZoomImg.vue";
 
 export default {
@@ -146,7 +147,7 @@ export default {
   data() {
     return {
       showFullScreen: false,
-      photoUrl: null,
+      photoUrl: photoConstants.NO_IMAGE_URL,
       zoomigProps: {
         zoomScale: 1,
         left: 0,
