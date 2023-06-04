@@ -50,6 +50,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  color: var(--page-font-color);
   background: var(--photo-fs-bg-color);
   transition: background vars.$general__transition--02s;
   touch-action: none;
