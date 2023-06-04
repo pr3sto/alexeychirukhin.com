@@ -5,6 +5,7 @@
   },
   "extends": ["eslint:recommended", "plugin:nuxt/recommended"],
   "rules": {
-    "no-var": 1
+    "no-var": 1,
+    "sort-imports": "error"
   }
 }

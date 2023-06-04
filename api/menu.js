@@ -1,5 +1,5 @@
-import utility from "~/api/utility.js";
 import api from "~/constants/api.js";
+import utility from "~/api/utility.js";
 
 export default {
   async getAsync() {

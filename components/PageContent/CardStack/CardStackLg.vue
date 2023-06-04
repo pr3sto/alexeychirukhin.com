@@ -76,16 +76,16 @@
 </style>
 
 <script>
-import cardstack from "~/constants/cardstack.js";
-import PhotoCard from "./PhotoCard.vue";
 import DarkslideCard from "./DarkslideCard.vue";
-
 import FastPoissonDiskSampling from "fast-2d-poisson-disk-sampling";
+import PhotoCard from "./PhotoCard.vue";
+import cardstack from "~/constants/cardstack.js";
+
 
 export default {
   name: "CardStackLg",
   props: ["content"],
-  components: { PhotoCard, DarkslideCard },
+  components: { DarkslideCard, PhotoCard },
 
   computed: {
     cssVars() {

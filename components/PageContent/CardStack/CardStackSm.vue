@@ -108,14 +108,14 @@
 </style>
 
 <script>
-import cardstack from "~/constants/cardstack.js";
-import PhotoCard from "./PhotoCard.vue";
 import DarkslideCard from "./DarkslideCard.vue";
+import PhotoCard from "./PhotoCard.vue";
+import cardstack from "~/constants/cardstack.js";
 
 export default {
   name: "CardStackSm",
   props: ["content"],
-  components: { PhotoCard, DarkslideCard },
+  components: { DarkslideCard, PhotoCard },
 
   computed: {
     cssVars() {

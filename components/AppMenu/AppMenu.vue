@@ -4,13 +4,13 @@
 </template>
 
 <script>
-import AppMenuSm from "./AppMenuSm.vue";
 import AppMenuLg from "./AppMenuLg.vue";
+import AppMenuSm from "./AppMenuSm.vue";
 
 export default {
   name: "AppMenu",
   props: ["menu"],
-  components: { AppMenuSm, AppMenuLg },
+  components: { AppMenuLg, AppMenuSm },
 
   computed: {
     useMobileVersion() {

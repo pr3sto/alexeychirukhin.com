@@ -4,12 +4,12 @@
 </template>
 
 <script>
-import PhotoFullscreenSm from "./PhotoFullscreenSm.vue";
 import PhotoFullscreenLg from "./PhotoFullscreenLg.vue";
+import PhotoFullscreenSm from "./PhotoFullscreenSm.vue";
 
 export default {
   name: "PhotoFullscreen",
-  components: { PhotoFullscreenSm, PhotoFullscreenLg },
+  components: { PhotoFullscreenLg, PhotoFullscreenSm },
 
   computed: {
     useMobileVersion() {

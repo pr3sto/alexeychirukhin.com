@@ -120,9 +120,9 @@
 </style>
 
 <script>
+import ZoomImg from "../ZoomImg.vue";
 import events from "~/constants/events.js";
 import photoConstants from "~/constants/photo.js";
-import ZoomImg from "../ZoomImg.vue";
 
 export default {
   name: "PhotoFullscreenLg",

@@ -4,13 +4,13 @@
 </template>
 
 <script>
-import CardStackSm from "./CardStackSm.vue";
 import CardStackLg from "./CardStackLg.vue";
+import CardStackSm from "./CardStackSm.vue";
 
 export default {
   name: "CardStack",
   props: ["content"],
-  components: { CardStackSm, CardStackLg },
+  components: { CardStackLg, CardStackSm },
 
   computed: {
     useMobileVersion() {
