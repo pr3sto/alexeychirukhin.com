@@ -19,10 +19,6 @@
 <style lang="scss" scoped>
 @use "~/assets/scss/variables" as vars;
 
-.zoomimg {
-  overflow: hidden;
-}
-
 .zoomimg-img {
   transform-origin: left top;
   transform: translate(var(--img-offset-x), var(--img-offset-y))
