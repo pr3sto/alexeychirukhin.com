@@ -1,8 +1,9 @@
 import * as scssVars from "~/assets/scss/_variables.scss";
 
-export default (store) => ({
-  validate() {
+export default (store, stylesService) => ({
+  init() {
     store.commit("settings/validate");
+    updateCssVars(store, stylesService);
   },
   getUseMobileVersion() {
     return store.state.settings.useMobileVersion;
@@ -16,9 +17,18 @@ export default (store) => ({
     },
     setWhiteFullscreenBgColor() {
       store.commit("settings/setPhotoFullscreenBgColor", scssVars.whiteColor);
+      updateCssVars(store, stylesService);
     },
     setBlackFullscreenBgColor() {
       store.commit("settings/setPhotoFullscreenBgColor", scssVars.blackColor);
+      updateCssVars(store, stylesService);
     },
   },
 });
+
+function updateCssVars(store, stylesService) {
+  stylesService.setRootVariable(
+    "--photo-fs-bg-color",
+    store.state.settings.photoGrid.fullscreenBgColor
+  );
+}

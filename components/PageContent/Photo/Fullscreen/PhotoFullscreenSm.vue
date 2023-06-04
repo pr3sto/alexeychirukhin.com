@@ -5,7 +5,7 @@
     v-on:before-leave="beforeFullscreenClosed"
     v-on:after-leave="afterFullscreenClosed"
   >
-    <div class="photo-fullscreen" v-show="showFullScreen" :style="cssVars">
+    <div class="photo-fullscreen" v-show="showFullScreen">
       <div class="photo-fullscreen-img" v-if="showFullScreen">
         <nuxt-img
           provider="imagekit"
@@ -43,7 +43,7 @@
   display: grid;
   grid-template-rows: 1fr auto;
   grid-template-columns: 1fr auto 1fr;
-  background: var(--bg-color);
+  background: var(--photo-fs-bg-color);
   transition: background vars.$general__transition--02s;
 }
 
@@ -104,17 +104,6 @@ import events from "~/constants/events.js";
 
 export default {
   name: "PhotoFullscreenSm",
-
-  computed: {
-    cssVars() {
-      return {
-        "--bg-color": `${this.settings.fullscreenBgColor}`,
-      };
-    },
-    settings() {
-      return this.$services.settings.photoGrid.get();
-    },
-  },
 
   data() {
     return {

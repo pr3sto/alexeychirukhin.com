@@ -22,8 +22,8 @@
 .page {
   display: flex;
   min-height: var(--viewport-height);
-  background: var(--styles-background-color);
-  color: var(--styles-font-color);
+  background: var(--page-background-color);
+  color: var(--page-font-color);
 
   &--lg {
     flex-direction: row;

@@ -38,10 +38,10 @@
   flex-direction: column;
   justify-content: flex-end;
   height: 100vh;
-  border-left: 2px solid var(--styles-font-color);
+  border-left: 2px solid var(--page-font-color);
   border-image: linear-gradient(
       to top,
-      var(--styles-font-color) 50%,
+      var(--page-font-color) 50%,
       75%,
       transparent 90%
     )
@@ -56,7 +56,7 @@
   font-size: vars.$appmenu__active-header__font-size--lg;
   font-weight: bolder;
   white-space: nowrap;
-  text-shadow: var(--styles-font-shadow);
+  text-shadow: var(--page-header-shadow);
   transform: scale(1, 1.2) rotate3d(0, 1, 1, -1deg);
 }
 
@@ -69,7 +69,7 @@
   padding-bottom: calc(vars.$general__padding--default * 2);
   font-size: vars.$appmenu__font-size--lg;
   line-height: calc(vars.$appmenu__font-size--lg * 1.1);
-  border-top: 2px solid var(--styles-font-color);
+  border-top: 2px solid var(--page-font-color);
 }
 
 .app-menu-section-header {
@@ -78,7 +78,7 @@
 }
 
 .app-menu-section-link {
-  color: var(--styles-font-color);
+  color: var(--page-font-color);
   text-decoration: none;
   cursor: pointer;
 }

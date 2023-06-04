@@ -3,9 +3,7 @@ export const actions = {
     // load menu
     await $services.menu.loadToStoreAsync();
 
-    // settings are stored in persisted storage
-    // and some old values may become invalid
-    // so should fix state if necessary
-    await $services.settings.validate();
+    // initialize app settings
+    await $services.settings.init();
   },
 };

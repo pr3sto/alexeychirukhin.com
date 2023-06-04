@@ -38,8 +38,8 @@
     right: 0;
     bottom: 0;
     left: 0;
-    box-shadow: inset 0 30px 10px -20px var(--styles-background-color),
-      inset 0 -30px 10px -20px var(--styles-background-color);
+    box-shadow: inset 0 30px 10px -20px var(--page-background-color),
+      inset 0 -30px 10px -20px var(--page-background-color);
     pointer-events: none;
   }
 }
@@ -56,8 +56,8 @@
   line-height: var(--line-height);
 
   &--with-border {
-    border-top: 2px solid var(--styles-background-color);
-    border-bottom: 2px solid var(--styles-background-color);
+    border-top: 2px solid var(--page-background-color);
+    border-bottom: 2px solid var(--page-background-color);
   }
 }
 

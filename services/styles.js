@@ -3,12 +3,12 @@ export default function () {
   return {
     applyPageStyles(pageStyles) {
       this.setRootVariable(
-        "--styles-background-color",
+        "--page-background-color",
         pageStyles.backgroundColor
       );
-      this.setRootVariable("--styles-font-color", pageStyles.fontColor);
+      this.setRootVariable("--page-font-color", pageStyles.fontColor);
       this.setRootVariable(
-        "--styles-font-shadow",
+        "--page-header-shadow",
         createTextShadow(pageStyles.fontColor, 10)
       );
     },

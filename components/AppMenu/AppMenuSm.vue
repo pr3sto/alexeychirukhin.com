@@ -54,7 +54,7 @@
   font-family: vars.$appmenu__header__font-family;
   font-size: vars.$appmenu__active-header__font-size--sm;
   font-weight: bolder;
-  text-shadow: var(--styles-font-shadow);
+  text-shadow: var(--page-header-shadow);
   transform: scale(1, 1.2);
   cursor: pointer;
 }
@@ -68,7 +68,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--styles-background-color);
+  background: var(--page-background-color);
 }
 
 .app-menu-full-section {
@@ -88,7 +88,7 @@
 }
 
 .app-menu-full-section-link {
-  color: var(--styles-font-color);
+  color: var(--page-font-color);
   text-decoration: none;
   cursor: pointer;
 }

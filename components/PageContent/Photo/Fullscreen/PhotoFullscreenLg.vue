@@ -50,7 +50,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--bg-color);
+  background: var(--photo-fs-bg-color);
   transition: background vars.$general__transition--02s;
   touch-action: none;
 }
@@ -130,16 +130,12 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--bg-color": `${this.settings.fullscreenBgColor}`,
         "--img-left": `${this.zoomigProps.left}px`,
         "--img-top": `${this.zoomigProps.top}px`,
         "--img-width": `${this.zoomigProps.width}px`,
         "--img-height": `${this.zoomigProps.height}px`,
         "--img-transform": this.zoomigProps.transform,
       };
-    },
-    settings() {
-      return this.$services.settings.photoGrid.get();
     },
   },
 

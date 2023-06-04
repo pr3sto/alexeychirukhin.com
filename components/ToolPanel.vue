@@ -69,7 +69,7 @@
   flex-direction: column;
   justify-content: flex-end;
   height: 100vh;
-  border-right: 2px solid var(--styles-font-color);
+  border-right: 2px solid var(--page-font-color);
 
   .tool-panel-scroll-top {
     margin-top: vars.$general__padding--default;
@@ -123,10 +123,10 @@
 
 <style lang="scss">
 .tool-panel-link svg path {
-  fill: var(--styles-font-color);
+  fill: var(--page-font-color);
 }
 .tool-panel-scroll-top-icon svg * {
-  stroke: var(--styles-font-color);
+  stroke: var(--page-font-color);
 }
 </style>
 
