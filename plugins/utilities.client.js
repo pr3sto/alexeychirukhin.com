@@ -9,9 +9,9 @@ let savedScrollPosition = null;
 let pageScrollDisabled = false;
 
 export default function ({ $services }, inject) {
-  detectScreenSize($services.settings);
+  detectScreenSize($services.settings, $services.styles);
   window.onresize = lodash.throttle(() => {
-    detectScreenSize($services.settings);
+    detectScreenSize($services.settings, $services.styles);
   }, 50);
 
   const utilities = {
@@ -67,16 +67,15 @@ export default function ({ $services }, inject) {
   inject("pageUtility", utilities);
 }
 
-function detectScreenSize(settingsService) {
+function detectScreenSize(settingsService, stylesService) {
   const useMobileVersion = window.matchMedia(
     `(max-width: ${scssVars.mediaMobileMaxWidth})`
   ).matches;
-  const viewportHeight = document.documentElement.clientHeight;
 
   if (settingsService.getUseMobileVersion() !== useMobileVersion) {
     settingsService.setUseMobileVersion(useMobileVersion);
   }
-  if (settingsService.getViewportHeight() !== viewportHeight) {
-    settingsService.setViewportHeight(viewportHeight);
-  }
+
+  const viewportHeight = document.documentElement.clientHeight;
+  stylesService.setRootVariable("--viewport-height", `${viewportHeight}px`);
 }

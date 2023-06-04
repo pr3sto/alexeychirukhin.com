@@ -7,14 +7,8 @@ export default (store) => ({
   getUseMobileVersion() {
     return store.state.settings.useMobileVersion;
   },
-  getViewportHeight() {
-    return store.state.settings.viewportHeight;
-  },
   setUseMobileVersion(useMobileVersion) {
     return store.commit("settings/setUseMobileVersion", useMobileVersion);
-  },
-  setViewportHeight(viewportHeight) {
-    return store.commit("settings/setViewportHeight", viewportHeight);
   },
   photoGrid: {
     get() {

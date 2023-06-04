@@ -6,7 +6,6 @@
       'page--lg': !useMobileVersion,
       'page--fit-screen': data && data.styles.fitScreen,
     }"
-    :style="cssVars"
   >
     <tool-panel />
     <page-content-builder
@@ -22,7 +21,7 @@
 
 .page {
   display: flex;
-  min-height: var(--page-height);
+  min-height: var(--viewport-height);
   background: var(--styles-background-color);
   color: var(--styles-font-color);
 
@@ -34,7 +33,7 @@
   }
 
   &--fit-screen {
-    height: var(--page-height);
+    height: var(--viewport-height);
   }
 }
 
@@ -57,16 +56,8 @@ export default {
     useMobileVersion() {
       return this.$services.settings.getUseMobileVersion();
     },
-    viewportHeight() {
-      return this.$services.settings.getViewportHeight();
-    },
     menu() {
       return this.$services.menu.getMenuByRoute(this.$route.path);
-    },
-    cssVars() {
-      return {
-        "--page-height": `${this.viewportHeight}px`,
-      };
     },
   },
 };

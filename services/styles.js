@@ -1,21 +1,35 @@
-export default () => ({
-  applyPageStyles(pageStyles) {
-    const sheet = new CSSStyleSheet();
-    const styles = createCSS(pageStyles);
+export default function () {
+  document.adoptedStyleSheets = [getCSSStyleSheet()];
+  return {
+    applyPageStyles(pageStyles) {
+      this.setRootVariable(
+        "--styles-background-color",
+        pageStyles.backgroundColor
+      );
+      this.setRootVariable("--styles-font-color", pageStyles.fontColor);
+      this.setRootVariable(
+        "--styles-font-shadow",
+        createTextShadow(pageStyles.fontColor, 10)
+      );
+    },
+    setRootVariable(name, value) {
+      if (
+        document.adoptedStyleSheets[0] &&
+        document.adoptedStyleSheets[0].cssRules
+      ) {
+        document.adoptedStyleSheets[0].cssRules[0].style.setProperty(
+          name,
+          value
+        );
+      }
+    },
+  };
+}
 
-    sheet.replaceSync(styles);
-    document.adoptedStyleSheets = [sheet];
-  },
-});
-
-function createCSS(pageStyles) {
-  return `
-    :root {
-      --styles-background-color: ${pageStyles.backgroundColor};
-      --styles-font-color: ${pageStyles.fontColor};
-      --styles-font-shadow: ${createTextShadow(pageStyles.fontColor, 10)};
-    }
-  `;
+function getCSSStyleSheet() {
+  const styleSheet = new CSSStyleSheet();
+  styleSheet.replaceSync(`:root {}`);
+  return styleSheet;
 }
 
 function createTextShadow(hexColor, steps) {
