@@ -125,6 +125,12 @@ export default {
       this.imgOffsetY = y * -this.zoomedImgProps.ratios.y;
     },
     handleTouchStart(e) {
+      // prevent multitouch
+      if (e.touches.length > 1) {
+        this.handleTouchEnd();
+        return;
+      }
+
       this.isTouch = true;
 
       this.zoomedImgProps.initialTouch = {
