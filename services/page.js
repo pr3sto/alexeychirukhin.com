@@ -2,7 +2,7 @@ import * as scssVars from "~/assets/scss/_variables.scss";
 
 let pagesCache = {};
 
-export default (api, menuService, stylesService) => ({
+export default (api, menuService) => ({
   async loadAsync(route) {
     const { id } = menuService.getMenuPageByRoute(route);
 
@@ -29,9 +29,6 @@ export default (api, menuService, stylesService) => ({
 
       pagesCache[id] = pageData;
     }
-
-    // apply page styles
-    stylesService.applyPageStyles(pagesCache[id].styles);
 
     return pagesCache[id];
   },

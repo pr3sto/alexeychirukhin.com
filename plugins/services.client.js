@@ -7,7 +7,7 @@ export default function ({ $api, store }, inject) {
   const menuService = Menu($api, store);
   const stylesService = Styles();
   const settingsService = Settings(store, stylesService);
-  const pageService = Page($api, menuService, stylesService);
+  const pageService = Page($api, menuService);
 
   const services = {
     menu: menuService,
