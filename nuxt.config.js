@@ -71,6 +71,9 @@ export default {
     },
   },
   build: {
+    loaders: {
+      scss: { sourceMap: false },
+    },
     terser: {
       terserOptions: {
         compress: {
