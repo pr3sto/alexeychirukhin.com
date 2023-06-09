@@ -182,10 +182,10 @@ export default {
       this.closeFullscreen();
     },
     handleWhiteBgClick() {
-      this.$services.settings.photoGrid.setWhiteFullscreenBgColor();
+      this.$services.settings.photo.setWhiteFullscreenBgColor();
     },
     handleBlackBgClick() {
-      this.$services.settings.photoGrid.setBlackFullscreenBgColor();
+      this.$services.settings.photo.setBlackFullscreenBgColor();
     },
     openFullscreen(targetImg, photoUrl) {
       this.photoUrl = photoUrl;

@@ -2,7 +2,7 @@ import * as scssVars from "~/assets/scss/_variables.scss";
 
 const defaultState = {
   useMobileVersion: false,
-  photoGrid: {
+  photo: {
     fullscreenBgColor: scssVars.whiteColor,
   },
 };
@@ -14,15 +14,14 @@ export const mutations = {
     state.useMobileVersion = value;
   },
   setPhotoFullscreenBgColor(state, value) {
-    state.photoGrid.fullscreenBgColor = value;
+    state.photo.fullscreenBgColor = value;
   },
   validate(state) {
     if (
-      state.photoGrid.fullscreenBgColor !== scssVars.whiteColor &&
-      state.photoGrid.fullscreenBgColor !== scssVars.blackColor
+      state.photo.fullscreenBgColor !== scssVars.whiteColor &&
+      state.photo.fullscreenBgColor !== scssVars.blackColor
     ) {
-      state.photoGrid.fullscreenBgColor =
-        defaultState.photoGrid.fullscreenBgColor;
+      state.photo.fullscreenBgColor = defaultState.photo.fullscreenBgColor;
     }
   },
 };

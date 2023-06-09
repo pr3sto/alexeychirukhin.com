@@ -3,7 +3,7 @@ import * as scssVars from "~/assets/scss/_variables.scss";
 export default (store, stylesService) => ({
   init() {
     store.commit("settings/validate");
-    updateCssVars(store, stylesService);
+    updateCssRootVariables(store, stylesService);
   },
   getUseMobileVersion() {
     return store.state.settings.useMobileVersion;
@@ -11,24 +11,24 @@ export default (store, stylesService) => ({
   setUseMobileVersion(useMobileVersion) {
     return store.commit("settings/setUseMobileVersion", useMobileVersion);
   },
-  photoGrid: {
+  photo: {
     get() {
-      return store.state.settings.photoGrid;
+      return store.state.settings.photo;
     },
     setWhiteFullscreenBgColor() {
       store.commit("settings/setPhotoFullscreenBgColor", scssVars.whiteColor);
-      updateCssVars(store, stylesService);
+      updateCssRootVariables(store, stylesService);
     },
     setBlackFullscreenBgColor() {
       store.commit("settings/setPhotoFullscreenBgColor", scssVars.blackColor);
-      updateCssVars(store, stylesService);
+      updateCssRootVariables(store, stylesService);
     },
   },
 });
 
-function updateCssVars(store, stylesService) {
+function updateCssRootVariables(store, stylesService) {
   stylesService.setRootVariable(
     "--photo-fs-bg-color",
-    store.state.settings.photoGrid.fullscreenBgColor
+    store.state.settings.photo.fullscreenBgColor
   );
 }
