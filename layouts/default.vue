@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <Nuxt />
     <div class="grain" />
     <overlay class="overlay" />
@@ -8,6 +8,11 @@
 
 <style lang="scss">
 @use "~/assets/scss/variables" as vars;
+
+.layout {
+  color: var(--page-font-color);
+  background: var(--page-background-color);
+}
 
 .grain {
   content: "";
