@@ -26,14 +26,6 @@
   position: absolute;
   z-index: 2;
 }
-
-/* Nuxt pages transition */
-.page-enter-active {
-  transition: opacity vars.$general__transition--03s;
-}
-.page-enter {
-  opacity: 0;
-}
 </style>
 
 <script>
