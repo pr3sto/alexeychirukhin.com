@@ -60,7 +60,6 @@ export default {
   },
 
   mounted() {
-    // apply page styles
     this.$services.styles.applyPageStyles(this.data.styles);
   },
 };

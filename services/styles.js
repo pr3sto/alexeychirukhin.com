@@ -9,7 +9,7 @@ export default function () {
       this.setRootVariable("--page-font-color", pageStyles.fontColor);
       this.setRootVariable(
         "--page-header-shadow",
-        createTextShadow(pageStyles.fontColor, 10)
+        createTextShadow(pageStyles.fontColor, 7)
       );
     },
     setRootVariable(name, value) {

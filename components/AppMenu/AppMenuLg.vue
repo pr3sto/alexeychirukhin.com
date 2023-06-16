@@ -1,6 +1,16 @@
 <template>
   <menu class="app-menu">
-    <p class="app-menu-header">
+    <transition name="opacity-transition-03s">
+      <div class="app-menu-overlay" v-show="loading"></div>
+    </transition>
+    <p
+      class="app-menu-header"
+      :class="{
+        'app-menu-header--loading': loading,
+        'app-menu-header--phase1': loadingTransitionPhase1,
+        'app-menu-header--phase2': loadingTransitionPhase2,
+      }"
+    >
       {{ menu.currentHeader }}
     </p>
     <section class="app-menu-section" v-if="menu.index">
@@ -48,6 +58,16 @@
     1;
 }
 
+.app-menu-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--page-background-color);
+  z-index: 1;
+}
+
 .app-menu-header {
   position: absolute;
   top: calc(vars.$general__padding--default * 2);
@@ -57,7 +77,22 @@
   font-weight: bolder;
   white-space: nowrap;
   text-shadow: var(--page-header-shadow);
-  transform: scale(1, 1.2) rotate3d(0, 1, 1, -1deg);
+  transform: scale(1, 1.2);
+  transition: transform 0.3s ease-in-out;
+  z-index: 2;
+
+  &--loading {
+    transition: transform 0.7s linear, text-shadow 0.7s linear;
+  }
+  &--phase1 {
+    text-shadow: none;
+    transform: translateY(calc(50vh - vars.$general__padding--default * 2))
+      scale(1, 1);
+  }
+  &--phase2 {
+    transform: translateY(calc(50vh - vars.$general__padding--default * 2))
+      scale(1, 1.2);
+  }
 }
 
 .app-menu-section {
@@ -88,5 +123,24 @@
 export default {
   name: "AppMenuLg",
   props: ["menu"],
+
+  data() {
+    return {
+      loading: true,
+      loadingTransitionPhase1: true,
+      loadingTransitionPhase2: false,
+    };
+  },
+
+  mounted() {
+    this.lodash.delay(() => {
+      this.loadingTransitionPhase1 = false;
+      this.loadingTransitionPhase2 = true;
+      this.lodash.delay(() => {
+        this.loadingTransitionPhase2 = false;
+        this.loading = false;
+      }, 1000);
+    }, 200);
+  },
 };
 </script>
