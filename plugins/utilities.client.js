@@ -6,7 +6,7 @@ import lodash from "lodash";
 Vue.use(VueLodash, { name: "$_", lodash });
 
 let savedScrollPosition = null;
-let pageScrollDisabled = false;
+let pageScrollEnabled = true;
 
 export default function ({ $services }, inject) {
   detectScreenSize($services.settings, $services.styles);
@@ -48,10 +48,10 @@ export default function ({ $services }, inject) {
       document.body.style.overflow = "hidden";
       document.body.style.position = "fixed";
       document.body.style.top = `-${savedScrollPosition.y}px`;
-      pageScrollDisabled = true;
+      pageScrollEnabled = false;
     },
     enablePageScroll() {
-      if (pageScrollDisabled) {
+      if (!pageScrollEnabled) {
         document.body.style.overflow = "";
         document.body.style.position = "";
         document.body.style.top = "";
@@ -59,7 +59,7 @@ export default function ({ $services }, inject) {
           this.scrollTo(savedScrollPosition);
           savedScrollPosition = null;
         }
-        pageScrollDisabled = false;
+        pageScrollEnabled = true;
       }
     },
   };

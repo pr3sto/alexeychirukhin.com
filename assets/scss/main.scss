@@ -11,12 +11,6 @@ body {
   width: 100%;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
 html,
 body,
 menu,
@@ -24,6 +18,12 @@ figure,
 p {
   padding: 0;
   margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 a {

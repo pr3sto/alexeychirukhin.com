@@ -32,10 +32,7 @@
         title="Github"
         ><inline-svg :src="require('~/assets/logos/github.svg')"
       /></a>
-      <a
-        class="tool-panel-link"
-        :href="links.ORIGIN_URL"
-        title="Alexey Chirukhin"
+      <a class="tool-panel-link" :href="originUrl" title="Alexey Chirukhin"
         ><inline-svg :src="require('~/assets/logos/pr3sto.svg')"
       /></a>
     </div>
@@ -146,6 +143,7 @@ export default {
     return {
       showScrollToTop: false,
       links: links,
+      originUrl: window.location.origin,
     };
   },
 
