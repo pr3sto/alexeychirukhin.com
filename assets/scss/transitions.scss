@@ -7,14 +7,14 @@
 .opacity-transition-02s-leave-active {
   transition: opacity vars.$general__transition--02s !important;
 }
-.opacity-transition-03s-enter-active,
-.opacity-transition-03s-leave-active {
-  transition: opacity vars.$general__transition--03s !important;
+.opacity-transition-05s-enter-active,
+.opacity-transition-05s-leave-active {
+  transition: opacity 0.5s vars.$general__transition-func--default !important;
 }
 .opacity-enter-transition-02s-enter,
 .opacity-transition-02s-enter,
 .opacity-transition-02s-leave-to,
-.opacity-transition-03s-enter,
-.opacity-transition-03s-leave-to {
+.opacity-transition-05s-enter,
+.opacity-transition-05s-leave-to {
   opacity: 0;
 }

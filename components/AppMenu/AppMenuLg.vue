@@ -1,6 +1,6 @@
 <template>
   <menu class="app-menu">
-    <transition name="opacity-transition-03s">
+    <transition name="opacity-transition-05s">
       <div class="app-menu-overlay" v-show="loading"></div>
     </transition>
     <p
@@ -80,11 +80,11 @@
   white-space: nowrap;
   text-shadow: var(--page-header-shadow);
   transform: scale(1, 1.2);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.5s ease-in-out;
   z-index: 2;
 
   &--loading {
-    transition: transform 0.7s linear, text-shadow 0.7s linear;
+    transition: transform 0.5s linear, text-shadow 0.5s linear;
   }
   &--phase1 {
     text-shadow: none;
@@ -141,8 +141,8 @@ export default {
       this.lodash.delay(() => {
         this.loadingTransitionPhase2 = false;
         this.loading = false;
-      }, 1000);
-    }, 200);
+      }, 900);
+    }, 100);
   },
 };
 </script>
