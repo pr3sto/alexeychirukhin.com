@@ -50,7 +50,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--photo-fs-bg-color);
+  background: var(vars.$page-styles__fs-bg-color);
   transition: background vars.$general__transition--02s;
   touch-action: none;
 }

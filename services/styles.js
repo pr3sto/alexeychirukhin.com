@@ -1,14 +1,16 @@
+import * as scssVars from "~/assets/scss/_variables.scss";
+
 export default function () {
   document.adoptedStyleSheets = [getCSSStyleSheet()];
   return {
     applyPageStyles(pageStyles) {
       this.setRootVariable(
-        "--page-background-color",
+        scssVars.varPageBackgroundColor,
         pageStyles.backgroundColor
       );
-      this.setRootVariable("--page-font-color", pageStyles.fontColor);
+      this.setRootVariable(scssVars.varPageFontColor, pageStyles.fontColor);
       this.setRootVariable(
-        "--page-header-shadow",
+        scssVars.varPageHeaderShadow,
         createTextShadow(pageStyles.fontColor, 7)
       );
     },

@@ -43,7 +43,7 @@
   display: grid;
   grid-template-rows: 1fr auto;
   grid-template-columns: 1fr auto 1fr;
-  background: var(--photo-fs-bg-color);
+  background: var(vars.$page-styles__fs-bg-color);
   transition: background vars.$general__transition--02s;
 }
 

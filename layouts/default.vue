@@ -10,8 +10,8 @@
 @use "~/assets/scss/variables" as vars;
 
 .layout {
-  color: var(--page-font-color);
-  background: var(--page-background-color);
+  color: var(vars.$page-styles__font-color);
+  background: var(vars.$page-styles__background-color);
 }
 
 .grain {

@@ -48,10 +48,10 @@
   flex-direction: column;
   justify-content: flex-end;
   height: 100vh;
-  border-left: 2px solid var(--page-font-color);
+  border-left: 2px solid var(vars.$page-styles__font-color);
   border-image: linear-gradient(
       to top,
-      var(--page-font-color) 50%,
+      var(vars.$page-styles__font-color) 50%,
       75%,
       transparent 90%
     )
@@ -78,7 +78,7 @@
   font-size: vars.$appmenu__active-header__font-size--lg;
   font-weight: bolder;
   white-space: nowrap;
-  text-shadow: var(--page-header-shadow);
+  text-shadow: var(vars.$page-styles__header__shadow);
   transform: scale(1, 1.2);
   transition: transform 0.5s ease-in-out;
   z-index: 2;
@@ -106,7 +106,7 @@
   padding-bottom: calc(vars.$general__padding--default * 2);
   font-size: vars.$appmenu__font-size--lg;
   line-height: calc(vars.$appmenu__font-size--lg * 1.1);
-  border-top: 2px solid var(--page-font-color);
+  border-top: 2px solid var(vars.$page-styles__font-color);
 }
 
 .app-menu-section-header {
@@ -115,7 +115,7 @@
 }
 
 .app-menu-section-link {
-  color: var(--page-font-color);
+  color: var(vars.$page-styles__font-color);
   text-decoration: none;
   cursor: pointer;
 }

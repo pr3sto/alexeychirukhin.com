@@ -28,7 +28,7 @@ export default (store, stylesService) => ({
 
 function updateCssRootVariables(store, stylesService) {
   stylesService.setRootVariable(
-    "--photo-fs-bg-color",
+    scssVars.varPhotoFsBgColor,
     store.state.settings.photo.fullscreenBgColor
   );
 }
