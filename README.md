@@ -18,10 +18,6 @@ $ npm run dev:host
 # lint the code
 $ npm run lint
 
-# build for production and launch server
-$ npm run build
-$ npm run start
-
 # generate static project
 $ npm run generate
 ```
