@@ -24,6 +24,7 @@ export default {
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "preload", as: "image", href: "/face.jpg" },
       /* Fonts */
       { rel: "preconnect", href: "https://fonts.cdnfonts.com" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

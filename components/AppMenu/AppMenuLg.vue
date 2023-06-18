@@ -64,7 +64,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--page-background-color);
+  background: url(/face.jpg);
+  background-size: cover;
+  background-position: center;
   z-index: 1;
 }
 
@@ -87,7 +89,7 @@
   &--phase1 {
     text-shadow: none;
     transform: translateY(calc(50vh - vars.$general__padding--default * 2))
-      scale(1, 1);
+      scale(1, 1.2);
   }
   &--phase2 {
     transform: translateY(calc(50vh - vars.$general__padding--default * 2))
