@@ -1,15 +1,15 @@
 <template>
   <div class="zoomimg" v-on:click="handleClick">
     <nuxt-img
-      provider="imagekit"
-      preset="progressivejpg"
-      sizes="md:800px lg:1500px"
       class="zoomimg-img"
       :class="{
         'zoomimg-img--zoom-enabled': zoomEnabled(),
         'zoomimg-img--zoomed': isZoomed,
         'zoomimg-img--zoom-in-progress': isZoomInProgress,
       }"
+      :provider="$globalProperties.nuxtImgProvider"
+      preset="progressivejpg"
+      sizes="md:800px lg:1500px"
       :src="src"
       :style="cssVars"
     />

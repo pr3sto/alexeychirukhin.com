@@ -5,6 +5,7 @@ export default {
   env: {
     MENU_API_URL: process.env.MENU_API_URL,
     PAGE_API_URL: process.env.PAGE_API_URL,
+    NUXT_IMG_PROVIDER: process.env.NUXT_IMG_PROVIDER,
   },
   head: {
     title: "Alexey Chirukhin",
@@ -46,6 +47,7 @@ export default {
   loadingIndicator: "~/loading.html",
   buildModules: ["@nuxt/image", "nuxt-client-init-module"],
   plugins: [
+    { src: "~/plugins/globalProperties.client.js" },
     { src: "~/plugins/persistedState.client.js" },
     { src: "~/plugins/api.client.js" },
     { src: "~/plugins/services.client.js" },
@@ -56,6 +58,12 @@ export default {
     middleware: ["routeValidator"],
   },
   image: {
+    providers: {
+      local: {
+        name: "local",
+        provider: "~/providers/local",
+      },
+    },
     imagekit: {
       baseURL: "https://ik.imagekit.io/pr3sto",
     },

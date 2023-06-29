@@ -8,7 +8,7 @@
     <div class="photo-fullscreen" v-show="showFullScreen">
       <div class="photo-fullscreen-img" v-if="showFullScreen">
         <nuxt-img
-          provider="imagekit"
+          :provider="$globalProperties.nuxtImgProvider"
           preset="progressivejpg"
           sizes="md:800px lg:1500px"
           :src="photoUrl"

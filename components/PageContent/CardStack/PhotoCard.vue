@@ -6,7 +6,7 @@
     >
       <nuxt-img
         class="photocard-photo-img"
-        provider="imagekit"
+        :provider="$globalProperties.nuxtImgProvider"
         preset="progressivejpg"
         :src="card.photoUrl"
       />

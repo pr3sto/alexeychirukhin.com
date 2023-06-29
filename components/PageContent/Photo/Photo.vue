@@ -3,7 +3,7 @@
     <nuxt-img
       class="photo-img"
       :class="{ 'photo-img--hidden': !useMobileVersion && !photoVisible }"
-      provider="imagekit"
+      :provider="$globalProperties.nuxtImgProvider"
       preset="progressivejpg"
       loading="lazy"
       sizes="md:800px lg:1500px"
