@@ -2,10 +2,6 @@
   <main class="page-content">
     <section
       class="page-content-section"
-      :class="{
-        'page-content-section--fill-avaliable-space':
-          component.styles.fillAvaliableSpace,
-      }"
       :style="composeCSS(component)"
       v-for="(component, index) of components"
       :key="index"
@@ -34,11 +30,6 @@
 
 .page-content-section {
   display: flex;
-
-  &--fill-avaliable-space {
-    overflow: hidden;
-    flex: 1;
-  }
 
   & > * {
     flex: 1;
@@ -97,7 +88,16 @@ export default {
 
   methods: {
     composeCSS(component) {
-      return `padding: ${component.styles.offset.top} ${component.styles.offset.right} ${component.styles.offset.bottom} ${component.styles.offset.left};`;
+      let css = `padding: ${component.styles.offset.top} ${component.styles.offset.right} ${component.styles.offset.bottom} ${component.styles.offset.left};`;
+
+      if (component.styles.fillAvaliableSpace) {
+        css += "overflow: hidden; flex: 1;";
+      }
+      if (component.styles.maxHeight) {
+        css += `max-height: ${component.styles.maxHeight}`;
+      }
+
+      return css;
     },
     observeElements(bottomOffset, elements) {
       const callback = (entries) => {

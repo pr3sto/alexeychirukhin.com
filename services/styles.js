@@ -37,7 +37,7 @@ function getCSSStyleSheet() {
 function createTextShadow(hexColor, steps) {
   let css = "";
   for (let i = 0; i <= steps; i++) {
-    hexColor = offsetColor(hexColor, 8);
+    hexColor = offsetColor(hexColor, 9);
     css = css + `${i}px ${i}px 1px ${hexColor},`;
   }
 

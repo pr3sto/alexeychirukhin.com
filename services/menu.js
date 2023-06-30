@@ -63,7 +63,6 @@ const menuSchema = {
   type: "object",
   properties: {
     index: {
-      type: "object",
       $ref: "/definitions/menu/index",
     },
     sections: {

@@ -7,8 +7,6 @@
       class="app-menu-header"
       :class="{
         'app-menu-header--loading': loading,
-        'app-menu-header--phase1': loadingTransitionPhase1,
-        'app-menu-header--phase2': loadingTransitionPhase2,
       }"
     >
       {{ menu.currentHeader }}
@@ -64,7 +62,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: url(/face.jpg);
+  background: url(/menu-overlay.jpg);
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -80,20 +78,13 @@
   white-space: nowrap;
   text-shadow: var(vars.$page-styles__header__shadow);
   transform: scale(1, 1.2);
-  transition: transform 0.5s ease-in-out;
+  transition: all 0.5s vars.$general__transition-func--default;
   z-index: 2;
 
   &--loading {
-    transition: transform 0.5s linear, text-shadow 0.5s linear;
-  }
-  &--phase1 {
+    opacity: 0.85;
     text-shadow: none;
-    transform: translateY(calc(50vh - vars.$general__padding--default * 2))
-      scale(1, 1.2);
-  }
-  &--phase2 {
-    transform: translateY(calc(50vh - vars.$general__padding--default * 2))
-      scale(1, 1.2);
+    transform: translateX(-5vw) translateY(40vh) scale(1, 1.2);
   }
 }
 
@@ -129,20 +120,13 @@ export default {
   data() {
     return {
       loading: true,
-      loadingTransitionPhase1: true,
-      loadingTransitionPhase2: false,
     };
   },
 
   mounted() {
     this.lodash.delay(() => {
-      this.loadingTransitionPhase1 = false;
-      this.loadingTransitionPhase2 = true;
-      this.lodash.delay(() => {
-        this.loadingTransitionPhase2 = false;
-        this.loading = false;
-      }, 900);
-    }, 100);
+      this.loading = false;
+    }, 1200);
   },
 };
 </script>

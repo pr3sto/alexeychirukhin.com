@@ -53,50 +53,56 @@ const pageSchema = {
     components: {
       type: "array",
       items: {
-        type: "object",
-        properties: {
-          content: {
-            type: "object",
-            oneOf: [
-              { $ref: "/definitions/data/page/component/cardstack" },
-              { $ref: "/definitions/data/page/component/photo" },
-              { $ref: "/definitions/data/page/component/photogrid" },
-              { $ref: "/definitions/data/page/component/textblocks" },
-            ],
-          },
-          styles: {
-            type: "object",
-            properties: {
-              fillAvaliableSpace: { type: "boolean" },
-              fadeInTransition: {
-                type: "object",
-                properties: {
-                  triggerOffsetPercentage: {
-                    type: "number",
-                    minimum: 0,
-                  },
-                },
-                required: ["triggerOffsetPercentage"],
-              },
-              offset: {
-                type: "object",
-                properties: {
-                  top: { type: "string", pattern: cssSizeRegex },
-                  bottom: { type: "string", pattern: cssSizeRegex },
-                  left: { type: "string", pattern: cssSizeRegex },
-                  right: { type: "string", pattern: cssSizeRegex },
-                },
-                required: ["top", "bottom", "left", "right"],
-              },
-            },
-            required: ["offset"],
-          },
-        },
-        required: ["content", "styles"],
+        $ref: "/definitions/data/page/component",
       },
     },
   },
   required: ["id", "styles", "components"],
+};
+
+const componentSchema = {
+  id: "/definitions/data/page/component",
+  type: "object",
+  properties: {
+    content: {
+      type: "object",
+      oneOf: [
+        { $ref: "/definitions/data/page/component/cardstack" },
+        { $ref: "/definitions/data/page/component/photo" },
+        { $ref: "/definitions/data/page/component/photogrid" },
+        { $ref: "/definitions/data/page/component/textblocks" },
+      ],
+    },
+    styles: {
+      type: "object",
+      properties: {
+        fillAvaliableSpace: { type: "boolean" },
+        fadeInTransition: {
+          type: "object",
+          properties: {
+            triggerOffsetPercentage: {
+              type: "number",
+              minimum: 0,
+            },
+          },
+          required: ["triggerOffsetPercentage"],
+        },
+        maxHeight: { type: "string", pattern: cssSizeRegex },
+        offset: {
+          type: "object",
+          properties: {
+            top: { type: "string", pattern: cssSizeRegex },
+            bottom: { type: "string", pattern: cssSizeRegex },
+            left: { type: "string", pattern: cssSizeRegex },
+            right: { type: "string", pattern: cssSizeRegex },
+          },
+          required: ["top", "bottom", "left", "right"],
+        },
+      },
+      required: ["offset"],
+    },
+  },
+  required: ["content", "styles"],
 };
 
 const cardstackComponentSchema = {
@@ -232,6 +238,7 @@ function isDataValid(data) {
   const Validator = require("jsonschema").Validator;
   const validator = new Validator();
 
+  validator.addSchema(componentSchema, "/definitions/data/page/component");
   validator.addSchema(
     cardstackComponentSchema,
     "/definitions/data/page/component/cardstack"
