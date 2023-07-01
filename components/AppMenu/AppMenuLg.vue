@@ -1,7 +1,13 @@
 <template>
   <menu class="app-menu">
     <transition name="opacity-transition-05s">
-      <div class="app-menu-overlay" v-show="loading"></div>
+      <div
+        class="app-menu-overlay"
+        :class="{
+          'app-menu-overlay--grayscale': grayscaleLoader,
+        }"
+        v-show="loading"
+      ></div>
     </transition>
     <p
       class="app-menu-header"
@@ -9,7 +15,7 @@
         'app-menu-header--loading': loading,
       }"
     >
-      {{ menu.currentHeader }}
+      {{ menu.currentPage.displayName }}
     </p>
     <section class="app-menu-section" v-if="menu.index">
       <nuxt-link class="app-menu-section-link" :to="menu.index.page.route">
@@ -66,6 +72,10 @@
   background-size: cover;
   background-position: center;
   z-index: 1;
+
+  &--grayscale {
+    filter: grayscale(1);
+  }
 }
 
 .app-menu-header {
@@ -115,7 +125,7 @@
 <script>
 export default {
   name: "AppMenuLg",
-  props: ["menu"],
+  props: ["menu", "grayscaleLoader"],
 
   data() {
     return {

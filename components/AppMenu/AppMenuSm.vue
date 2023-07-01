@@ -1,7 +1,7 @@
 <template>
   <menu class="app-menu">
     <p class="app-menu-header" v-on:click="handleAppMenuHeaderClick">
-      {{ menu.currentHeader }}
+      {{ menu.currentPage.displayName }}
     </p>
     <transition
       name="opacity-transition-02s"

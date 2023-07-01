@@ -22,7 +22,7 @@ export default (api, store) => ({
     // create deep copy
     let menu = JSON.parse(JSON.stringify(store.state.menu));
 
-    menu.currentHeader = this.getMenuPageByRoute(route).displayName;
+    menu.currentPage = this.getMenuPageByRoute(route);
 
     if (menu.index.page.route === route) {
       // delete current index section

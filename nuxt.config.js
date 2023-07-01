@@ -20,7 +20,7 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: "Alexey Chirukhin Personal Website",
+        content: "Personal Website of Alexey Chirukhin",
       },
     ],
     link: [
