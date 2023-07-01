@@ -4,6 +4,6 @@ export const actions = {
     await $services.menu.loadToStoreAsync();
 
     // initialize app settings
-    await $services.settings.init();
+    await $services.settings.initialize();
   },
 };

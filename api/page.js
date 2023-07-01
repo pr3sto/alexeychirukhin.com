@@ -1,8 +1,8 @@
 import utility from "~/api/utility.js";
 
-export default (baseUrl) => ({
+export default (apiUrl) => ({
   async getAsync(id) {
-    return await utility.getAsync(format(baseUrl, [id]));
+    return await utility.getAsync(format(apiUrl, [id]));
   },
 });
 
