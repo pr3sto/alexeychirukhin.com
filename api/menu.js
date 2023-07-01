@@ -1,8 +1,7 @@
-import api from "~/constants/api.js";
 import utility from "~/api/utility.js";
 
-export default {
+export default (baseUrl) => ({
   async getAsync() {
-    return await utility.getAsync(api.MENU_API_URL);
+    return await utility.getAsync(baseUrl);
   },
-};
+});

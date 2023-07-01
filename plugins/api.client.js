@@ -1,10 +1,10 @@
 import Menu from "~/api/menu.js";
 import Page from "~/api/page.js";
 
-export default function (_, inject) {
+export default function ({ $globalProperties }, inject) {
   const api = {
-    menu: Menu,
-    page: Page,
+    menu: Menu($globalProperties.menuApiUrl),
+    page: Page($globalProperties.pageApiUrl),
   };
 
   inject("api", api);
