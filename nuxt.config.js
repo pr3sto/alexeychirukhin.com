@@ -25,8 +25,6 @@ export default {
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      { rel: "preload", as: "image", href: "/menu-overlay.jpg" },
-      { rel: "preload", as: "image", href: "/menu-overlay-sm.jpg" },
       /* Fonts */
       { rel: "preconnect", href: "https://fonts.cdnfonts.com" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

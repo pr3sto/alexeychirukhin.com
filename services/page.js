@@ -47,7 +47,6 @@ const pageSchema = {
         backgroundColor: { type: "string" },
         fontColor: { type: "string" },
         fitScreen: { type: "boolean" },
-        grayscaleLoader: { type: "boolean" },
       },
       required: ["backgroundColor", "fontColor"],
     },

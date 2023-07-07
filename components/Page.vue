@@ -12,10 +12,7 @@
       class="page-content"
       :components="data && data.components"
     />
-    <app-menu
-      :menu="menu"
-      :grayscaleLoader="data && data.styles.grayscaleLoader"
-    />
+    <app-menu :menu="menu" />
   </div>
 </template>
 

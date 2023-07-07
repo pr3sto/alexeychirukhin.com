@@ -1,20 +1,6 @@
 <template>
   <menu class="app-menu">
-    <transition name="opacity-transition-05s">
-      <div
-        class="app-menu-overlay"
-        :class="{
-          'app-menu-overlay--grayscale': grayscaleLoader,
-        }"
-        v-show="loading"
-      ></div>
-    </transition>
-    <p
-      class="app-menu-header"
-      :class="{
-        'app-menu-header--loading': loading,
-      }"
-    >
+    <p class="app-menu-header">
       {{ menu.currentPage.displayName }}
     </p>
     <section class="app-menu-section" v-if="menu.index">
@@ -62,22 +48,6 @@
     1;
 }
 
-.app-menu-overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: url(/menu-overlay.jpg);
-  background-size: cover;
-  background-position: center;
-  z-index: 1;
-
-  &--grayscale {
-    filter: grayscale(1);
-  }
-}
-
 .app-menu-header {
   position: absolute;
   top: calc(vars.$general__padding--default * 2);
@@ -88,14 +58,6 @@
   white-space: nowrap;
   text-shadow: var(vars.$page-styles__header__shadow);
   transform: scale(1, 1.2);
-  transition: all 0.5s vars.$general__transition-func--default;
-  z-index: 2;
-
-  &--loading {
-    opacity: 0.85;
-    text-shadow: none;
-    transform: translateX(-5vw) translateY(40vh) scale(1, 1.2);
-  }
 }
 
 .app-menu-section {
@@ -106,13 +68,13 @@
   padding-top: calc(vars.$general__padding--default / 2);
   padding-bottom: calc(vars.$general__padding--default * 2);
   font-size: vars.$appmenu__font-size--lg;
-  line-height: calc(vars.$appmenu__font-size--lg * 1.1);
+  line-height: calc(vars.$appmenu__font-size--lg * 1.2);
   border-top: 2px solid var(vars.$page-styles__font-color);
 }
 
 .app-menu-section-header {
   font-size: vars.$appmenu__section-header__font-size--lg;
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 .app-menu-section-link {
@@ -125,18 +87,6 @@
 <script>
 export default {
   name: "AppMenuLg",
-  props: ["menu", "grayscaleLoader"],
-
-  data() {
-    return {
-      loading: true,
-    };
-  },
-
-  mounted() {
-    this.lodash.delay(() => {
-      this.loading = false;
-    }, 1200);
-  },
+  props: ["menu"],
 };
 </script>
