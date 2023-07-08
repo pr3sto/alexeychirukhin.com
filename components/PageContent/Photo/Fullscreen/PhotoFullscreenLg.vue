@@ -156,6 +156,7 @@ export default {
 
   mounted() {
     this.$root.$on(events.OPEN_FULLSCREEN, this.openFullscreen);
+    window.addEventListener("keyup", this.handleKeyup);
   },
 
   beforeDestroy() {
@@ -172,6 +173,11 @@ export default {
       window.removeEventListener("resize", this.closeFullscreen);
       window.removeEventListener("wheel", this.handleScroll);
       this.$root.$emit(events.FULLSCREEN_CLOSED);
+    },
+    handleKeyup(e) {
+      if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
+        this.closeFullscreen();
+      }
     },
     handleCloseButtonClick() {
       this.closeFullscreen();
@@ -237,6 +243,7 @@ export default {
     cleanupEventListeners() {
       window.removeEventListener("resize", this.closeFullscreen);
       window.removeEventListener("wheel", this.handleScroll);
+      window.removeEventListener("keyup", this.handleKeyup);
     },
   },
 };
