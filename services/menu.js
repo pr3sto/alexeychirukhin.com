@@ -48,12 +48,11 @@ export default (api, store) => ({
     return this._getAllMenuPages().some((page) => page.route === route);
   },
   _getAllMenuPages() {
-    const indexPage = store.state.menu.index.page;
     return store.state.menu.sections.reduce(
       (acc, section) => {
         return acc.concat(section.pages);
       },
-      [indexPage]
+      [store.state.menu.index.page]
     );
   },
 });
