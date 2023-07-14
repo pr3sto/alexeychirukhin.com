@@ -146,14 +146,12 @@ export default {
       showScrollToTop: false,
       links: links,
       originUrl: window.location.origin,
+      throttledScrollHandler: this.lodash.throttle(this.handleScroll, 250),
     };
   },
 
   mounted() {
-    window.addEventListener(
-      "scroll",
-      this.lodash.throttle(this.handleScroll, 250)
-    );
+    window.addEventListener("scroll", this.throttledScrollHandler);
   },
 
   beforeDestroy() {
@@ -168,7 +166,7 @@ export default {
       this.$pageUtility.scrollToTop();
     },
     cleanupEventListeners() {
-      window.removeEventListener("scroll", this.handleScroll);
+      window.removeEventListener("scroll", this.throttledScrollHandler);
     },
   },
 };

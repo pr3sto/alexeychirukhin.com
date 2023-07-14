@@ -30,7 +30,7 @@ export default function () {
 
 function getCSSStyleSheet() {
   const styleSheet = new CSSStyleSheet();
-  styleSheet.replaceSync(`:root {}`);
+  styleSheet.replaceSync(":root {}");
   return styleSheet;
 }
 
