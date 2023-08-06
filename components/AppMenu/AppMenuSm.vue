@@ -47,16 +47,12 @@
 
 .app-menu-header {
   display: inline-block;
-  padding-left: vars.$general__padding--default;
-  padding-right: vars.$general__padding--default;
-  padding-top: vars.$general__padding--default;
-  padding-bottom: calc(vars.$general__padding--default * 2);
+  padding: vars.$general__padding--default;
   font-family: vars.$appmenu__header__font-family;
   font-size: vars.$appmenu__active-header__font-size--sm;
   font-weight: bolder;
-  text-shadow: var(--page-header-shadow);
+  text-shadow: var(vars.$page-styles__header__shadow);
   transform: scale(1, 1.2);
-  cursor: pointer;
 }
 
 .app-menu-full {
@@ -68,7 +64,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--page-background-color);
+  background: var(vars.$page-styles__background-color);
 }
 
 .app-menu-full-section {
@@ -78,19 +74,18 @@
   padding-right: vars.$general__padding--default;
   padding-bottom: calc(vars.$general__padding--default * 2);
   font-size: vars.$appmenu__font-size--sm;
-  line-height: calc(vars.$appmenu__font-size--sm * 1.1);
+  line-height: calc(vars.$appmenu__font-size--sm * 1.2);
 }
 
 .app-menu-full-section-header {
   padding-bottom: calc(vars.$general__padding--default / 2);
   font-size: vars.$appmenu__section-header__font-size--sm;
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 .app-menu-full-section-link {
-  color: var(--page-font-color);
+  color: var(vars.$page-styles__font-color);
   text-decoration: none;
-  cursor: pointer;
 }
 </style>
 
