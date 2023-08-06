@@ -8,15 +8,15 @@ import Page from "~/components/Page.vue";
 export default {
   components: { Page },
 
-  head({ $route, $services }) {
-    const { displayName } = $services.menu.getMenuPageByRoute($route.path);
+  head({ $services }) {
+    const { displayName } = $services.navigation.getCurrentMenuPage();
     return {
       title: displayName,
     };
   },
 
-  async asyncData({ route, $services }) {
-    const pageData = await $services.page.loadAsync(route.path);
+  async asyncData({ $services }) {
+    const pageData = await $services.navigation.getCurrentPageAsync();
     return { pageData };
   },
 };

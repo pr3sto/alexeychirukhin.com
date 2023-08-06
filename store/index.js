@@ -1,9 +1,9 @@
 export const actions = {
   async nuxtClientInit(_, { $services }) {
-    // load menu
-    await $services.menu.loadToStoreAsync();
+    // initialize navigation
+    await $services.navigation.initializeAsync();
 
     // initialize app settings
-    await $services.settings.initialize();
+    $services.settings.initialize();
   },
 };

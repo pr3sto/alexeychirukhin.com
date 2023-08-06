@@ -1,36 +1,59 @@
 import * as scssVars from "~/assets/scss/_variables.scss";
+import lodash from "lodash";
 
 let pagesCache = {};
+let pagePhotoUrlsCache = {};
 
-export default (api, menuService) => ({
-  async loadAsync(route) {
-    const { id } = menuService.getMenuPageByRoute(route);
-
-    // load page from api
-    if (!pagesCache[id]) {
-      const pageData = await api.page.getAsync(id);
-
-      if (!pageData || !isDataValid(pageData)) {
-        throw Error("PAGE DATA INVALID");
-      }
-
-      // transform PhotoGrid cols to masonry component structure
-      pageData.components
-        .filter((component) => component.content.type === "PhotoGrid")
-        .flatMap((component) => component.content.sections)
-        .forEach((section) => {
-          const cols = section.cols;
-          const smMaxWidth = scssVars.mediaMobileMaxWidth.slice(0, -2);
-          section.cols = {
-            default: cols.lg,
-            [smMaxWidth]: cols.sm,
-          };
-        });
-
-      pagesCache[id] = pageData;
+export default (api) => ({
+  async getPageAsync(id) {
+    if (pagesCache[id]) {
+      return pagesCache[id];
     }
 
-    return pagesCache[id];
+    const pageData = await api.page.getAsync(id);
+
+    if (!pageData || !isDataValid(pageData)) {
+      throw Error("PAGE DATA INVALID");
+    }
+
+    // transform PhotoGrid cols to masonry component structure
+    pageData.components
+      .filter((component) => component.content.type === "PhotoGrid")
+      .flatMap((component) => component.content.sections)
+      .forEach((section) => {
+        const cols = section.cols;
+        const smMaxWidth = scssVars.mediaMobileMaxWidth.slice(0, -2);
+        section.cols = {
+          default: cols.lg,
+          [smMaxWidth]: cols.sm,
+        };
+      });
+
+    // store all photos from page data in a cache
+    pagePhotoUrlsCache[id] = this._getPagePhotoUrls(pageData);
+
+    pagesCache[id] = pageData;
+    return pageData;
+  },
+  getPagePhotoUrls(id) {
+    if (pagePhotoUrlsCache[id]) {
+      return pagePhotoUrlsCache[id];
+    }
+    return [];
+  },
+  _getPagePhotoUrls(pageData) {
+    let urls = [];
+    pageData.components.forEach((component) => {
+      if (component.content.type === "PhotoGrid") {
+        const photoGridUrls = component.content.sections
+          .flatMap((section) => section.photos)
+          .flatMap((photo) => photo.url);
+        urls = lodash.union(urls, photoGridUrls);
+      } else if (component.content.type === "Photo") {
+        urls.push(component.content.url);
+      }
+    });
+    return urls;
   },
 });
 

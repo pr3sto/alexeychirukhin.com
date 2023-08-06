@@ -54,7 +54,7 @@ export default {
     { src: "~/plugins/components.client.js" },
   ],
   router: {
-    middleware: ["routeValidator"],
+    middleware: ["navigationMiddleware"],
   },
   image: {
     providers: {

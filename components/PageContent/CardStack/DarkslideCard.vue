@@ -168,8 +168,8 @@ export default {
     footerAddress() {
       return window.location.host;
     },
-    footerText({ $route, $services }) {
-      const { displayName } = $services.menu.getMenuPageByRoute($route.path);
+    footerText({ $services }) {
+      const { displayName } = $services.navigation.getCurrentMenuPage();
       return displayName;
     },
   },
