@@ -2,7 +2,6 @@
   <div class="photo">
     <nuxt-img
       class="photo-img"
-      :class="{ 'photo-img--hidden': !useMobileVersion && !photoVisible }"
       :provider="$globalProperties.nuxtImgProvider"
       preset="progressivejpg"
       loading="lazy"
@@ -12,7 +11,7 @@
     />
     <transition name="opacity-enter-transition-02s">
       <div
-        v-if="content.caption && (useMobileVersion || photoVisible)"
+        v-if="content.caption"
         class="photo-caption"
         :style="content.caption.linesStyle"
       >
@@ -40,10 +39,6 @@
   max-height: 100%;
   object-fit: contain;
   cursor: pointer;
-
-  &--hidden {
-    visibility: hidden;
-  }
 }
 
 .photo-caption {
@@ -70,30 +65,9 @@ export default {
     },
   },
 
-  data() {
-    return {
-      photoVisible: true,
-    };
-  },
-
-  mounted() {
-    this.$root.$on(events.FULLSCREEN_CLOSED, this.showOriginalPhoto);
-  },
-
-  beforeDestroy() {
-    this.$root.$off(events.FULLSCREEN_CLOSED, this.showOriginalPhoto);
-  },
-
   methods: {
     handlePhotoImgClick(e, photoUrl) {
-      this.hideOriginalPhoto();
       this.$root.$emit(events.OPEN_FULLSCREEN, e.target, photoUrl);
-    },
-    showOriginalPhoto() {
-      this.photoVisible = true;
-    },
-    hideOriginalPhoto() {
-      this.photoVisible = false;
     },
   },
 };
