@@ -62,6 +62,17 @@ export default function ({ $services }, inject) {
         pageScrollEnabled = true;
       }
     },
+    isEscKey(event) {
+      return (
+        event.key === "Escape" || event.key === "Esc" || event.keyCode === 27
+      );
+    },
+    isArrowLeftKey(event) {
+      return event.key === "ArrowLeft" || event.keyCode === 37;
+    },
+    isArrowRightKey(event) {
+      return event.key === "ArrowRight" || event.keyCode === 39;
+    },
   };
 
   inject("pageUtility", utilities);
