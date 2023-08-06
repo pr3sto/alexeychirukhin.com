@@ -2,7 +2,6 @@ import * as scssVars from "~/assets/scss/_variables.scss";
 import lodash from "lodash";
 
 let pagesCache = {};
-let pagePhotoUrlsCache = {};
 
 export default (api) => ({
   async getPageAsync(id) {
@@ -29,21 +28,17 @@ export default (api) => ({
         };
       });
 
-    // store all photos from page data in a cache
-    pagePhotoUrlsCache[id] = this._getPagePhotoUrls(pageData);
-
     pagesCache[id] = pageData;
     return pageData;
   },
-  getPagePhotoUrls(id) {
-    if (pagePhotoUrlsCache[id]) {
-      return pagePhotoUrlsCache[id];
-    }
-    return [];
-  },
-  _getPagePhotoUrls(pageData) {
+  getPagePhotoUrls(pageId) {
     let urls = [];
-    pageData.components.forEach((component) => {
+
+    if (!pagesCache[pageId]) {
+      return urls;
+    }
+
+    pagesCache[pageId].components.forEach((component) => {
       if (component.content.type === "PhotoGrid") {
         const photoGridUrls = component.content.sections
           .flatMap((section) => section.photos)
