@@ -1,9 +1,10 @@
 <template>
   <div class="zoomimg" v-on:click="handleClick">
     <nuxt-img
+      ref="image"
       class="zoomimg-img"
       :class="{
-        'zoomimg-img--zoom-enabled': zoomEnabled(),
+        'zoomimg-img--zoom-enabled': zoomEnabled,
         'zoomimg-img--zoomed': isZoomed,
         'zoomimg-img--zoom-in-progress': isZoomInProgress,
       }"
@@ -49,6 +50,9 @@ export default {
         "--img-scale": this.isZoomed ? 1 : 1 / this.zoomScale,
       };
     },
+    zoomEnabled() {
+      return this.zoomScale >= 1;
+    },
   },
 
   data() {
@@ -60,6 +64,12 @@ export default {
       imgOffsetY: 0,
       zoomedImgProps: {},
     };
+  },
+
+  watch: {
+    src() {
+      this.zoomOut(false);
+    },
   },
 
   beforeDestroy() {
@@ -80,12 +90,12 @@ export default {
       this.$el.removeEventListener("touchend", this.handleTouchEnd);
     },
     handleClick(e) {
-      if (!this.zoomEnabled()) {
+      if (!this.zoomEnabled) {
         return;
       }
 
       if (this.isZoomed) {
-        this.zoomOut();
+        this.zoomOut(true);
       } else {
         // image bounds
         this.zoomedImgProps.bounds = this.$el.getBoundingClientRect();
@@ -106,7 +116,7 @@ export default {
       }
     },
     handleMouseLeave() {
-      this.zoomOut();
+      this.zoomOut(true);
     },
     handleMouseMove(e) {
       if (this.isTouch) {
@@ -176,9 +186,6 @@ export default {
       this.imgOffsetX = x;
       this.imgOffsetY = y;
     },
-    zoomEnabled() {
-      return this.zoomScale >= 1;
-    },
     zoomIn(clientX, clientY) {
       this.addEventListenersForZoomedImg();
 
@@ -193,7 +200,7 @@ export default {
         this.isZoomInProgress = false;
       }, 250);
     },
-    zoomOut() {
+    zoomOut(withTransition) {
       if (!this.isZoomed) {
         return;
       }
@@ -206,10 +213,15 @@ export default {
       this.imgOffsetY = 0;
 
       // set zoom in or out in progress
-      this.isZoomInProgress = true;
-      this.lodash.delay(() => {
-        this.isZoomInProgress = false;
-      }, 250);
+      if (withTransition) {
+        this.isZoomInProgress = true;
+        this.lodash.delay(() => {
+          this.isZoomInProgress = false;
+        }, 250);
+      }
+    },
+    getImageElement() {
+      return this.$refs["image"].$el;
     },
     cleanupEventListeners() {
       this.removeEventListenersForZoomedImg();

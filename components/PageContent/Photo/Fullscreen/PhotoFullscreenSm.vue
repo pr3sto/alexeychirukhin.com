@@ -101,6 +101,7 @@
 
 <script>
 import events from "~/constants/events.js";
+import photoConstants from "~/constants/photo.js";
 
 export default {
   name: "PhotoFullscreenSm",
@@ -108,7 +109,7 @@ export default {
   data() {
     return {
       showFullScreen: false,
-      photoUrl: "",
+      photoUrl: photoConstants.NO_IMAGE_URL,
     };
   },
 

@@ -11,30 +11,43 @@
           class="photo-fullscreen-zoomimg"
           v-show="showFullScreen"
           :src="photoUrl"
-          :zoomScale="zoomigProps.zoomScale"
+          :zoomScale="zoomimgProps.zoomScale"
         />
       </transition>
       <transition name="opacity-transition-02s">
-        <p
-          class="photo-fullscreen-close"
+        <div
+          class="photo-fullscreen-left-panel"
+          :class="{ 'photo-fullscreen-left-panel--clickable': canGoBack }"
           v-if="showFullScreen"
-          v-on:click="handleCloseButtonClick"
+          v-on:click="goToPrevPhoto"
         >
-          close
-        </p>
+          <p
+            class="photo-fullscreen-close"
+            v-on:click.stop="handleCloseButtonClick"
+          >
+            close
+          </p>
+        </div>
       </transition>
       <transition name="opacity-transition-02s">
-        <div class="photo-fullscreen-colorpicker" v-if="showFullScreen">
-          <figure
-            class="photo-fullscreen-colorpicker-block photo-fullscreen-colorpicker-block--white"
-            v-on:click="handleWhiteBgClick"
-            title="Light background"
-          />
-          <figure
-            class="photo-fullscreen-colorpicker-block photo-fullscreen-colorpicker-block--black"
-            v-on:click="handleBlackBgClick"
-            title="Dark background"
-          />
+        <div
+          class="photo-fullscreen-right-panel"
+          :class="{ 'photo-fullscreen-right-panel--clickable': canGoForward }"
+          v-if="showFullScreen"
+          v-on:click="goToNextPhoto"
+        >
+          <div class="photo-fullscreen-colorpicker">
+            <figure
+              class="photo-fullscreen-colorpicker-block photo-fullscreen-colorpicker-block--white"
+              v-on:click.stop="handleWhiteBgClick"
+              title="Light background"
+            />
+            <figure
+              class="photo-fullscreen-colorpicker-block photo-fullscreen-colorpicker-block--black"
+              v-on:click.stop="handleBlackBgClick"
+              title="Dark background"
+            />
+          </div>
         </div>
       </transition>
     </div>
@@ -64,20 +77,45 @@
   transform: translate(0px, 0px) scale(1);
 }
 
-.photo-fullscreen-close {
+.photo-fullscreen-left-panel {
   position: fixed;
   top: var(--img-top);
-  left: vars.$general__padding--default;
+  left: 0;
+  width: var(--img-left);
+  height: var(--img-height);
+  transition: top vars.$general__transition--02s;
+
+  &--clickable {
+    cursor: w-resize;
+  }
+}
+
+.photo-fullscreen-right-panel {
+  position: fixed;
+  top: var(--img-top);
+  right: 0;
+  width: var(--img-left);
+  height: var(--img-height);
+  transition: top vars.$general__transition--02s;
+
+  &--clickable {
+    cursor: e-resize;
+  }
+}
+
+.photo-fullscreen-close {
+  float: left;
+  padding-left: vars.$general__padding--default;
   font-size: vars.$photo__close__font-size--lg;
   line-height: vars.$photo__close__font-size--lg;
   writing-mode: vertical-rl;
+  user-select: none;
   cursor: pointer;
 }
 
 .photo-fullscreen-colorpicker {
-  position: fixed;
-  top: var(--img-top);
-  right: vars.$general__padding--default;
+  float: right;
+  padding-right: vars.$general__padding--default;
   display: flex;
   flex-direction: column;
 }
@@ -110,15 +148,18 @@
 /* zoomimg transform transition */
 .zoomimg-transform-transition-enter-active,
 .zoomimg-transform-transition-leave-active {
-  transition: transform vars.$general__transition--02s;
+  transition: transform vars.$general__transition--02s,
+    opacity vars.$general__transition--02s;
 }
 .zoomimg-transform-transition-enter,
 .zoomimg-transform-transition-leave-to {
   transform: var(--img-transform);
+  opacity: 0;
 }
 </style>
 
 <script>
+import PhotoCarousel from "./helpers/photoCarousel.js";
 import ZoomImg from "../ZoomImg.vue";
 import events from "~/constants/events.js";
 import photoConstants from "~/constants/photo.js";
@@ -130,11 +171,11 @@ export default {
   computed: {
     cssVars() {
       return {
-        "--img-left": `${this.zoomigProps.left}px`,
-        "--img-top": `${this.zoomigProps.top}px`,
-        "--img-width": `${this.zoomigProps.width}px`,
-        "--img-height": `${this.zoomigProps.height}px`,
-        "--img-transform": this.zoomigProps.transform,
+        "--img-left": `${this.zoomimgProps.left}px`,
+        "--img-top": `${this.zoomimgProps.top}px`,
+        "--img-width": `${this.zoomimgProps.width}px`,
+        "--img-height": `${this.zoomimgProps.height}px`,
+        "--img-transform": this.zoomimgProps.transform,
       };
     },
   },
@@ -143,7 +184,12 @@ export default {
     return {
       showFullScreen: false,
       photoUrl: photoConstants.NO_IMAGE_URL,
-      zoomigProps: {
+      photoTransform: "none",
+      imageLoadingTimer: null,
+      canGoBack: false,
+      canGoForward: false,
+      photoCarousel: PhotoCarousel(),
+      zoomimgProps: {
         zoomScale: 1,
         left: 0,
         top: 0,
@@ -156,7 +202,6 @@ export default {
 
   mounted() {
     this.$root.$on(events.OPEN_FULLSCREEN, this.openFullscreen);
-    window.addEventListener("keyup", this.handleKeyup);
   },
 
   beforeDestroy() {
@@ -168,19 +213,20 @@ export default {
     beforeFullscreenOpened() {
       window.addEventListener("resize", this.closeFullscreen, { once: true });
       window.addEventListener("wheel", this.handleScroll, { passive: false });
+      window.addEventListener("keyup", this.handleKeyup);
     },
     afterFullscreenClosed() {
-      window.removeEventListener("resize", this.closeFullscreen);
-      window.removeEventListener("wheel", this.handleScroll);
+      this.cleanupEventListeners();
       this.$root.$emit(events.FULLSCREEN_CLOSED);
     },
     handleKeyup(e) {
-      if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
+      if (this.$pageUtility.isEscKey(e)) {
         this.closeFullscreen();
+      } else if (this.$pageUtility.isArrowLeftKey(e)) {
+        this.goToPrevPhoto();
+      } else if (this.$pageUtility.isArrowRightKey(e)) {
+        this.goToNextPhoto();
       }
-    },
-    handleCloseButtonClick() {
-      this.closeFullscreen();
     },
     handleScroll(e) {
       e.preventDefault();
@@ -192,53 +238,93 @@ export default {
     handleBlackBgClick() {
       this.$services.settings.photo.setBlackFullscreenBgColor();
     },
-    openFullscreen(targetImg, photoUrl) {
-      this.photoUrl = photoUrl;
+    handleCloseButtonClick() {
+      this.closeFullscreen();
+    },
+    openFullscreen(imgElement, photoUrl) {
+      const { id } = this.$services.navigation.getCurrentMenuPage();
+      const pagePhotoUrls = this.$services.page.getPagePhotoUrls(id);
 
-      const initImgRect = targetImg.getBoundingClientRect();
-      const imgWidth = targetImg.naturalWidth;
+      this.photoCarousel.setup(pagePhotoUrls, photoUrl);
 
-      // calculate scale factor (from initial to fullscreen)
-      const fsImgScaleFactor = calcFsImgScaleFactor(
-        initImgRect,
-        document.documentElement.clientWidth,
-        document.documentElement.clientHeight,
-        parseFloat(getComputedStyle(document.body).fontSize)
-      );
-
-      // calculate fullscreen image position
-      const fsImgRect = calcFsImgRect(
-        initImgRect,
-        document.documentElement.clientWidth,
-        document.documentElement.clientHeight,
-        fsImgScaleFactor
-      );
-
-      // calculate transform (from fullscreen to initial)
-      const fsImgTransfrom = calcFsImgTransform(
-        initImgRect,
-        fsImgRect,
-        fsImgScaleFactor
-      );
-
-      // set fullscreen zoom-img css vars
-      this.zoomigProps.zoomScale = imgWidth / fsImgRect.width;
-      this.zoomigProps.left = fsImgRect.x;
-      this.zoomigProps.top = fsImgRect.y;
-      this.zoomigProps.width = fsImgRect.width;
-      this.zoomigProps.height = fsImgRect.height;
-      this.zoomigProps.transform = fsImgTransfrom;
-
-      // show fullscreen
+      this.changePhoto();
+      this.applyZoomImgProperties(imgElement, true);
       this.showFullScreen = true;
     },
     closeFullscreen() {
       if (this.showFullScreen) {
         if (this.$refs["zoomimg"]) {
-          this.$refs["zoomimg"].zoomOut();
+          this.$refs["zoomimg"].zoomOut(true);
         }
         this.showFullScreen = false;
       }
+    },
+    goToNextPhoto() {
+      if (this.photoCarousel.canGoForward()) {
+        this.photoCarousel.goToNextPhoto();
+        this.changePhoto();
+        this.fitPhoto();
+      }
+    },
+    goToPrevPhoto() {
+      if (this.photoCarousel.canGoBack()) {
+        this.photoCarousel.goToPrevPhoto();
+        this.changePhoto();
+        this.fitPhoto();
+      }
+    },
+    changePhoto() {
+      this.photoUrl = this.photoCarousel.getCurrentPhoto();
+      this.canGoBack = this.photoCarousel.canGoBack();
+      this.canGoForward = this.photoCarousel.canGoForward();
+    },
+    fitPhoto() {
+      // wait for nuxt to change photo
+      this.$nextTick(() => {
+        if (this.imageLoadingTimer) {
+          clearInterval(this.imageLoadingTimer);
+          this.imageLoadingTimer = null;
+        }
+
+        const img = this.$refs["zoomimg"].getImageElement();
+
+        // if image width and height avaliable -> applyZoomImgProperties
+        if (img.naturalWidth && img.naturalHeight) {
+          this.applyZoomImgProperties(img);
+        } else {
+          // try poll image width and height
+          this.imageLoadingTimer = setInterval(() => {
+            if (img.naturalWidth && img.naturalHeight) {
+              clearInterval(this.imageLoadingTimer);
+              this.imageLoadingTimer = null;
+              this.applyZoomImgProperties(img);
+            }
+          }, 50);
+        }
+      });
+    },
+    applyZoomImgProperties(imgElement, initial) {
+      // fullscreen image rect
+      const fsImgRect = calcFsImgRect(
+        imgElement.naturalWidth,
+        imgElement.naturalHeight,
+        document.documentElement.clientWidth,
+        document.documentElement.clientHeight,
+        parseFloat(getComputedStyle(document.body).fontSize)
+      );
+
+      // initial photo transform (for transition)
+      if (initial) {
+        const initImgRect = imgElement.getBoundingClientRect();
+        this.photoTransform = calcInitialImgTransform(initImgRect, fsImgRect);
+      }
+
+      this.zoomimgProps.zoomScale = imgElement.naturalWidth / fsImgRect.width;
+      this.zoomimgProps.left = fsImgRect.x;
+      this.zoomimgProps.top = fsImgRect.y;
+      this.zoomimgProps.width = fsImgRect.width;
+      this.zoomimgProps.height = fsImgRect.height;
+      this.zoomimgProps.transform = this.photoTransform;
     },
     cleanupEventListeners() {
       window.removeEventListener("resize", this.closeFullscreen);
@@ -248,35 +334,32 @@ export default {
   },
 };
 
-function calcFsImgScaleFactor(
-  initImgRect,
+function calcFsImgRect(
+  imageWidth,
+  imageHeight,
   fullscreenWidth,
   fullscreenHeight,
   padding
 ) {
-  return Math.min(
-    (fullscreenWidth - padding * 6) / initImgRect.width,
-    (fullscreenHeight - padding * 2) / initImgRect.height
+  const scale = Math.min(
+    (fullscreenWidth - padding * 6) / imageWidth,
+    (fullscreenHeight - padding * 2) / imageHeight
   );
-}
+  const fullscreenImageWidth = imageWidth * scale;
+  const fullscreenImageHeight = imageHeight * scale;
 
-function calcFsImgRect(
-  initImgRect,
-  fullscreenWidth,
-  fullscreenHeight,
-  fsImgScaleFactor
-) {
   return {
-    x: (fullscreenWidth - fsImgScaleFactor * initImgRect.width) / 2,
-    y: (fullscreenHeight - fsImgScaleFactor * initImgRect.height) / 2,
-    width: initImgRect.width * fsImgScaleFactor,
-    height: initImgRect.height * fsImgScaleFactor,
+    x: (fullscreenWidth - fullscreenImageWidth) / 2,
+    y: (fullscreenHeight - fullscreenImageHeight) / 2,
+    width: fullscreenImageWidth,
+    height: fullscreenImageHeight,
   };
 }
 
-function calcFsImgTransform(initImgRect, fsImgRect, fsImgScaleFactor) {
+function calcInitialImgTransform(initImgRect, fsImgRect) {
   let x, y;
-  const scale = 1 / fsImgScaleFactor;
+
+  const scale = initImgRect.width / fsImgRect.width;
 
   if (scale > 1) {
     x =
