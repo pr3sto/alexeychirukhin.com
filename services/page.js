@@ -5,8 +5,8 @@ let pagesCache = {};
 
 export default (api) => ({
   async getPageAsync(id) {
-    if (pagesCache[id]) {
-      return pagesCache[id];
+    if (pagesCache[id] && pagesCache[id].data) {
+      return pagesCache[id].data;
     }
 
     const pageData = await api.page.getAsync(id);
@@ -28,17 +28,21 @@ export default (api) => ({
         };
       });
 
-    pagesCache[id] = pageData;
+    // parse data to retrieve all photos on a page
+    const pagePhotoUrls = this._getPagePhotoUrls(pageData);
+
+    pagesCache[id] = { data: pageData, photoUrls: pagePhotoUrls };
     return pageData;
   },
-  getPagePhotoUrls(pageId) {
-    let urls = [];
-
-    if (!pagesCache[pageId]) {
-      return urls;
+  getPagePhotoUrls(id) {
+    if (pagesCache[id] && pagesCache[id].photoUrls) {
+      return pagesCache[id].photoUrls;
     }
-
-    pagesCache[pageId].components.forEach((component) => {
+    return [];
+  },
+  _getPagePhotoUrls(pageData) {
+    let urls = [];
+    pageData.components.forEach((component) => {
       if (component.content.type === "PhotoGrid") {
         const photoGridUrls = component.content.sections
           .flatMap((section) => section.photos)

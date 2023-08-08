@@ -22,4 +22,7 @@ export default (menuService, pageService) => ({
   async getCurrentPageAsync() {
     return await pageService.getPageAsync(currentMenuPage.id);
   },
+  getCurrentPagePhotoUrls() {
+    return pageService.getPagePhotoUrls(currentMenuPage.id);
+  },
 });
