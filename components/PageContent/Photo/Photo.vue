@@ -9,17 +9,15 @@
       :src="content.url"
       v-on:click="(e) => handlePhotoImgClick(e, content.url)"
     />
-    <transition name="opacity-enter-transition-02s">
-      <div
-        v-if="content.caption"
-        class="photo-caption"
-        :style="content.caption.linesStyle"
-      >
-        <span v-for="(line, index) in content.caption.lines" :key="index">{{
-          line
-        }}</span>
-      </div>
-    </transition>
+    <div
+      v-if="content.caption"
+      class="photo-caption"
+      :style="content.caption.linesStyle"
+    >
+      <span v-for="(line, index) in content.caption.lines" :key="index">{{
+        line
+      }}</span>
+    </div>
   </div>
 </template>
 

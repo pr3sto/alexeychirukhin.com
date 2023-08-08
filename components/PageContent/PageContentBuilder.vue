@@ -37,7 +37,7 @@
 }
 
 .fade-in {
-  transition: opacity 0.6s ease-in-out, transform 0.8s ease-in-out;
+  transition: vars.$page-content-fade-in__transition;
 }
 
 .out-of-view {

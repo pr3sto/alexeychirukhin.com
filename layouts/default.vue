@@ -12,7 +12,7 @@
 .layout {
   color: var(vars.$page-styles__font-color);
   background: var(vars.$page-styles__background-color);
-  transition: background linear 0.8s;
+  transition: vars.$page-switch__background-transition;
 }
 
 .grain {
