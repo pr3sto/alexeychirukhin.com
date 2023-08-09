@@ -4,6 +4,6 @@ export const actions = {
     await $services.navigation.initializeAsync();
 
     // initialize app settings
-    $services.settings.initialize();
+    $services.settings.validate();
   },
 };

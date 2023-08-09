@@ -1,7 +1,7 @@
 import * as scssVars from "~/assets/scss/_variables.scss";
 
 export default (store, stylesService) => ({
-  initialize() {
+  validate() {
     store.commit("settings/validate");
     updateCssRootVariables(store, stylesService);
   },
