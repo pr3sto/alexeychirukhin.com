@@ -60,7 +60,7 @@ export default {
     providers: {
       local: {
         name: "local",
-        provider: "~/providers/local",
+        provider: "~/providers/nuxtImgLocal",
       },
     },
     imagekit: {
