@@ -2,10 +2,12 @@
   <div class="photo">
     <nuxt-img
       class="photo-img"
+      :width="width"
+      :height="height"
       :provider="$globalProperties.nuxtImgProvider"
       preset="progressivejpg"
-      loading="lazy"
       sizes="md:800px lg:1500px"
+      loading="lazy"
       :src="content.url"
       v-on:click="(e) => handlePhotoImgClick(e, content.url)"
     />
@@ -63,7 +65,37 @@ export default {
     },
   },
 
+  data() {
+    return {
+      width: "auto",
+      height: "auto",
+      aspectRatio: this.content.width / this.content.height,
+      elementPadding: 0,
+      elementResizeObserver: null,
+    };
+  },
+
+  mounted() {
+    this.elementPadding = parseFloat(getComputedStyle(this.$el).padding);
+
+    this.elementResizeObserver = new ResizeObserver(
+      this.lodash.throttle(this.recalculatePhotoDimensions, 50)
+    );
+    this.elementResizeObserver.observe(this.$el);
+  },
+
+  beforeDestroy() {
+    this.elementResizeObserver.disconnect();
+    this.elementResizeObserver = null;
+  },
+
   methods: {
+    recalculatePhotoDimensions() {
+      if (this.$el.offsetWidth) {
+        this.width = this.$el.offsetWidth - this.elementPadding * 2;
+        this.height = this.width / this.aspectRatio;
+      }
+    },
     handlePhotoImgClick(e, photoUrl) {
       this.$root.$emit(events.OPEN_FULLSCREEN, e.target, photoUrl);
     },

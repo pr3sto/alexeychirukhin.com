@@ -11,6 +11,7 @@
       :provider="$globalProperties.nuxtImgProvider"
       preset="progressivejpg"
       sizes="md:800px lg:1500px"
+      loading="eager"
       :src="src"
       :style="cssVars"
     />

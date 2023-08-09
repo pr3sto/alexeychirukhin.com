@@ -169,6 +169,8 @@ const photoComponentSchema = {
   properties: {
     type: { type: "string", enum: ["Photo"] },
     url: { type: "string" },
+    width: { type: "number", minimum: 1 },
+    height: { type: "number", minimum: 1 },
     caption: {
       type: "object",
       properties: {
@@ -181,7 +183,7 @@ const photoComponentSchema = {
       required: ["linesStyle", "lines"],
     },
   },
-  required: ["type", "url"],
+  required: ["type", "url", "width", "height"],
 };
 
 const photogridComponentSchema = {
@@ -209,6 +211,8 @@ const photogridComponentSchema = {
               type: "object",
               properties: {
                 url: { type: "string" },
+                width: { type: "number", minimum: 1 },
+                height: { type: "number", minimum: 1 },
                 caption: {
                   type: "object",
                   properties: {
@@ -221,7 +225,7 @@ const photogridComponentSchema = {
                   required: ["linesStyle", "lines"],
                 },
               },
-              required: ["url"],
+              required: ["url", "width", "height"],
             },
           },
         },

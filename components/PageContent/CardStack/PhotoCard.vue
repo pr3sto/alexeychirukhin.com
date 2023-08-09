@@ -8,6 +8,7 @@
         class="photocard-photo-img"
         :provider="$globalProperties.nuxtImgProvider"
         preset="progressivejpg"
+        loading="eager"
         :src="card.photoUrl"
       />
     </div>
