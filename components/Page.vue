@@ -55,7 +55,7 @@ export default {
       return this.$services.settings.getUseMobileVersion();
     },
     menu() {
-      return this.$services.navigation.getCurrentMenu();
+      return this.$services.appState.getCurrentMenu();
     },
   },
 

@@ -242,7 +242,7 @@ export default {
       this.closeFullscreen();
     },
     openFullscreen(imgElement, photoUrl) {
-      const pagePhotoUrls = this.$services.navigation.getCurrentPagePhotoUrls();
+      const pagePhotoUrls = this.$services.appState.getCurrentPagePhotoUrls();
       this.photoCarousel.setup(pagePhotoUrls, photoUrl);
 
       this.changePhoto();

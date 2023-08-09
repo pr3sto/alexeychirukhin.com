@@ -9,14 +9,13 @@ export default {
   components: { Page },
 
   head({ $services }) {
-    const { displayName } = $services.navigation.getCurrentMenuPage();
     return {
-      title: displayName,
+      title: $services.appState.getCurrentPageDisplayName(),
     };
   },
 
   async asyncData({ $services }) {
-    const pageData = await $services.navigation.getCurrentPageAsync();
+    const pageData = await $services.appState.getCurrentPageAsync();
     return { pageData };
   },
 };

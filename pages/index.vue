@@ -9,7 +9,7 @@ export default {
   components: { Page },
 
   async asyncData({ $services }) {
-    const pageData = await $services.navigation.getCurrentPageAsync();
+    const pageData = await $services.appState.getCurrentPageAsync();
     return { pageData };
   },
 };

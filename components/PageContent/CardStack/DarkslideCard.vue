@@ -169,8 +169,7 @@ export default {
       return window.location.host;
     },
     footerText({ $services }) {
-      const { displayName } = $services.navigation.getCurrentMenuPage();
-      return displayName;
+      return $services.appState.getCurrentPageDisplayName();
     },
   },
 };
