@@ -24,10 +24,10 @@ export default (menuService, pageService) => ({
   async getCurrentPageAsync() {
     return await pageService.getPageAsync(menu.currentPage.id);
   },
-  getCurrentPagePhotoUrls() {
-    return pageService.getPagePhotoUrls(menu.currentPage.id);
+  getCurrentPagePhotos() {
+    return pageService.getPagePhotos(menu.currentPage.id);
   },
   getCurrentPageDisplayName() {
     return menu.currentPage.displayName;
-  }
+  },
 });

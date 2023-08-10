@@ -142,8 +142,8 @@ export default {
     handleCloseButtonClick() {
       this.showFullScreen = false;
     },
-    openFullscreen(_, photoUrl) {
-      this.photoUrl = photoUrl;
+    openFullscreen(_, photo) {
+      this.photoUrl = photo.url;
       this.showFullScreen = true;
     },
   },

@@ -9,7 +9,7 @@
       sizes="md:800px lg:1500px"
       loading="lazy"
       :src="content.url"
-      v-on:click="(e) => handlePhotoImgClick(e, content.url)"
+      v-on:click="(e) => handlePhotoImgClick(e, content)"
     />
     <div
       v-if="content.caption"
@@ -96,8 +96,8 @@ export default {
         this.height = this.width / this.aspectRatio;
       }
     },
-    handlePhotoImgClick(e, photoUrl) {
-      this.$root.$emit(events.OPEN_FULLSCREEN, e.target, photoUrl);
+    handlePhotoImgClick(e, photo) {
+      this.$root.$emit(events.OPEN_FULLSCREEN, e.target, photo);
     },
   },
 };

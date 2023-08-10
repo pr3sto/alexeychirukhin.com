@@ -29,30 +29,30 @@ export default (api) => ({
       });
 
     // parse data to retrieve all photos on a page
-    const pagePhotoUrls = this._getPagePhotoUrls(pageData);
+    const pagePhotos = this._getPagePhotos(pageData);
 
-    pagesCache[id] = { data: pageData, photoUrls: pagePhotoUrls };
+    pagesCache[id] = { data: pageData, photos: pagePhotos };
     return pageData;
   },
-  getPagePhotoUrls(id) {
-    if (pagesCache[id] && pagesCache[id].photoUrls) {
-      return pagesCache[id].photoUrls;
+  getPagePhotos(id) {
+    if (pagesCache[id] && pagesCache[id].photos) {
+      return pagesCache[id].photos;
     }
     return [];
   },
-  _getPagePhotoUrls(pageData) {
-    let urls = [];
+  _getPagePhotos(pageData) {
+    let photos = [];
     pageData.components.forEach((component) => {
       if (component.content.type === "PhotoGrid") {
-        const photoGridUrls = component.content.sections
-          .flatMap((section) => section.photos)
-          .flatMap((photo) => photo.url);
-        urls = lodash.union(urls, photoGridUrls);
+        const photoGridPhotos = component.content.sections.flatMap(
+          (section) => section.photos
+        );
+        photos = lodash.union(photos, photoGridPhotos);
       } else if (component.content.type === "Photo") {
-        urls.push(component.content.url);
+        photos.push(component.content);
       }
     });
-    return urls;
+    return photos;
   },
 });
 
