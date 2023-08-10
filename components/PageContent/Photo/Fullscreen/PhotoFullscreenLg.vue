@@ -10,8 +10,9 @@
           ref="zoomimg"
           class="photo-fullscreen-zoomimg"
           v-show="showFullScreen"
-          :src="photoUrl"
-          :zoomScale="zoomimgProps.zoomScale"
+          :src="zoomimgProps.photoUrl"
+          :width="zoomimgProps.width"
+          :height="zoomimgProps.height"
         />
       </transition>
       <transition name="opacity-transition-02s">
@@ -183,14 +184,11 @@ export default {
   data() {
     return {
       showFullScreen: false,
-      photoUrl: photoConstants.NO_IMAGE_URL,
-      photoTransform: "none",
-      imageLoadingTimer: null,
       canGoBack: false,
       canGoForward: false,
       photoCarousel: PhotoCarousel(),
       zoomimgProps: {
-        zoomScale: 1,
+        photoUrl: photoConstants.NO_IMAGE_URL,
         left: 0,
         top: 0,
         width: 0,
@@ -241,12 +239,14 @@ export default {
     handleCloseButtonClick() {
       this.closeFullscreen();
     },
-    openFullscreen(imgElement, photoUrl) {
-      const pagePhotoUrls = this.$services.appState.getCurrentPagePhotoUrls();
-      this.photoCarousel.setup(pagePhotoUrls, photoUrl);
+    openFullscreen(initialImgElement, photo) {
+      const pagePhotos = this.$services.appState.getCurrentPagePhotos();
+      this.photoCarousel.setup(pagePhotos, photo);
+
+      // transform from page photo to fullscreen photo
+      this.applyInitialImgTransform(initialImgElement, photo);
 
       this.changePhoto();
-      this.applyZoomImgProperties(imgElement, true);
       this.showFullScreen = true;
     },
     closeFullscreen() {
@@ -261,68 +261,48 @@ export default {
       if (this.photoCarousel.canGoForward()) {
         this.photoCarousel.goToNextPhoto();
         this.changePhoto();
-        this.fitPhoto();
       }
     },
     goToPrevPhoto() {
       if (this.photoCarousel.canGoBack()) {
         this.photoCarousel.goToPrevPhoto();
         this.changePhoto();
-        this.fitPhoto();
       }
     },
     changePhoto() {
-      this.photoUrl = this.photoCarousel.getCurrentPhoto();
+      const currentPhoto = this.photoCarousel.getCurrentPhoto();
       this.canGoBack = this.photoCarousel.canGoBack();
       this.canGoForward = this.photoCarousel.canGoForward();
-    },
-    fitPhoto() {
-      // wait for nuxt to change photo
-      this.$nextTick(() => {
-        if (this.imageLoadingTimer) {
-          clearInterval(this.imageLoadingTimer);
-          this.imageLoadingTimer = null;
-        }
 
-        const img = this.$refs["zoomimg"].getImageElement();
-
-        // if image width and height avaliable -> applyZoomImgProperties
-        if (img.naturalWidth && img.naturalHeight) {
-          this.applyZoomImgProperties(img);
-        } else {
-          // try poll image width and height
-          this.imageLoadingTimer = setInterval(() => {
-            if (img.naturalWidth && img.naturalHeight) {
-              clearInterval(this.imageLoadingTimer);
-              this.imageLoadingTimer = null;
-              this.applyZoomImgProperties(img);
-            }
-          }, 50);
-        }
-      });
-    },
-    applyZoomImgProperties(imgElement, initial) {
       // fullscreen image rect
       const fsImgRect = calcFsImgRect(
-        imgElement.naturalWidth,
-        imgElement.naturalHeight,
+        currentPhoto.width,
+        currentPhoto.height,
         document.documentElement.clientWidth,
         document.documentElement.clientHeight,
         parseFloat(getComputedStyle(document.body).fontSize)
       );
 
-      // initial photo transform (for transition)
-      if (initial) {
-        const initImgRect = imgElement.getBoundingClientRect();
-        this.photoTransform = calcInitialImgTransform(initImgRect, fsImgRect);
-      }
-
-      this.zoomimgProps.zoomScale = imgElement.naturalWidth / fsImgRect.width;
       this.zoomimgProps.left = fsImgRect.x;
       this.zoomimgProps.top = fsImgRect.y;
       this.zoomimgProps.width = fsImgRect.width;
       this.zoomimgProps.height = fsImgRect.height;
-      this.zoomimgProps.transform = this.photoTransform;
+      this.zoomimgProps.photoUrl = currentPhoto.url;
+    },
+    applyInitialImgTransform(initialImgElement, photo) {
+      const fsImgRect = calcFsImgRect(
+        photo.width,
+        photo.height,
+        document.documentElement.clientWidth,
+        document.documentElement.clientHeight,
+        parseFloat(getComputedStyle(document.body).fontSize)
+      );
+
+      const initImgRect = initialImgElement.getBoundingClientRect();
+      this.zoomimgProps.transform = calcInitialImgTransform(
+        initImgRect,
+        fsImgRect
+      );
     },
     cleanupEventListeners() {
       window.removeEventListener("resize", this.closeFullscreen);

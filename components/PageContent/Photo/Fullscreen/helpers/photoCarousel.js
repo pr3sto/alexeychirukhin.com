@@ -1,19 +1,19 @@
-let allPhotoUrls = [];
+let allPhotos = [];
 let currentPhotoIndex = 0;
 
 export default () => ({
-  setup(photoUrls, photoUrl) {
-    allPhotoUrls = photoUrls;
-    currentPhotoIndex = photoUrls.indexOf(photoUrl);
+  setup(photos, photo) {
+    allPhotos = photos;
+    currentPhotoIndex = allPhotos.map((x) => x.url).indexOf(photo.url);
   },
   getCurrentPhoto() {
-    return allPhotoUrls[currentPhotoIndex];
+    return allPhotos[currentPhotoIndex];
   },
   canGoBack() {
     return currentPhotoIndex > 0;
   },
   canGoForward() {
-    return currentPhotoIndex < allPhotoUrls.length - 1;
+    return currentPhotoIndex < allPhotos.length - 1;
   },
   goToPrevPhoto() {
     if (!this.canGoBack()) {

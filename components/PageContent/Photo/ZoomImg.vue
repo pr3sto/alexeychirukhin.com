@@ -8,10 +8,11 @@
         'zoomimg-img--zoomed': isZoomed,
         'zoomimg-img--zoom-in-progress': isZoomInProgress,
       }"
+      :width="width"
+      :height="height"
       :provider="$globalProperties.nuxtImgProvider"
       preset="progressivejpg"
       sizes="md:800px lg:1500px"
-      loading="eager"
       :src="src"
       :style="cssVars"
     />
@@ -41,18 +42,18 @@
 <script>
 export default {
   name: "ZoomImg",
-  props: ["src", "zoomScale"],
+  props: ["src", "width", "height"],
 
   computed: {
     cssVars() {
       return {
         "--img-offset-x": `${this.imgOffsetX}px`,
         "--img-offset-y": `${this.imgOffsetY}px`,
-        "--img-scale": this.isZoomed ? 1 : 1 / this.zoomScale,
+        "--img-scale": this.zoomScale,
       };
     },
     zoomEnabled() {
-      return this.zoomScale >= 1;
+      return true;
     },
   },
 
@@ -61,6 +62,7 @@ export default {
       isTouch: false,
       isZoomed: false,
       isZoomInProgress: false,
+      zoomScale: 1,
       imgOffsetX: 0,
       imgOffsetY: 0,
       zoomedImgProps: {},
@@ -98,21 +100,6 @@ export default {
       if (this.isZoomed) {
         this.zoomOut(true);
       } else {
-        // image bounds
-        this.zoomedImgProps.bounds = this.$el.getBoundingClientRect();
-
-        // get dimensions of zoomed image
-        this.zoomedImgProps.scaledDimensions = getScaledDimensions(
-          this.zoomedImgProps.bounds,
-          this.zoomScale
-        );
-
-        // calculate ratios for zoomed image
-        this.zoomedImgProps.ratios = getRatios(
-          this.zoomedImgProps.scaledDimensions,
-          this.zoomedImgProps.bounds
-        );
-
         this.zoomIn(e.clientX, e.clientY);
       }
     },
@@ -190,7 +177,23 @@ export default {
     zoomIn(clientX, clientY) {
       this.addEventListenersForZoomedImg();
 
+      this.zoomScale = this.getMaxZoomScale();
       this.isZoomed = true;
+
+      // image bounds
+      this.zoomedImgProps.bounds = this.$el.getBoundingClientRect();
+
+      // get dimensions of zoomed image
+      this.zoomedImgProps.scaledDimensions = getScaledDimensions(
+        this.zoomedImgProps.bounds,
+        this.zoomScale
+      );
+
+      // calculate ratios for zoomed image
+      this.zoomedImgProps.ratios = getRatios(
+        this.zoomedImgProps.scaledDimensions,
+        this.zoomedImgProps.bounds
+      );
 
       // move image under cursor (or touch)
       this.handleMouseMove({ clientX, clientY });
@@ -208,6 +211,7 @@ export default {
 
       this.removeEventListenersForZoomedImg();
 
+      this.zoomScale = 1;
       this.isZoomed = false;
       this.isTouch = false;
       this.imgOffsetX = 0;
@@ -220,6 +224,9 @@ export default {
           this.isZoomInProgress = false;
         }, 250);
       }
+    },
+    getMaxZoomScale() {
+      return 2.3;
     },
     getImageElement() {
       return this.$refs["image"].$el;
