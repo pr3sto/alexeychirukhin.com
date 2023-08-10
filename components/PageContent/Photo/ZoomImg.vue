@@ -52,9 +52,6 @@ export default {
         "--img-scale": this.zoomScale,
       };
     },
-    zoomEnabled() {
-      return true;
-    },
   },
 
   data() {
@@ -62,21 +59,27 @@ export default {
       isTouch: false,
       isZoomed: false,
       isZoomInProgress: false,
+      zoomEnabled: false,
       zoomScale: 1,
       imgOffsetX: 0,
       imgOffsetY: 0,
       zoomedImgProps: {},
+      imageLoadingTimer: null,
     };
   },
 
   watch: {
     src() {
-      this.zoomOut(false);
+      this.onSrcChanged();
     },
   },
 
   beforeDestroy() {
     this.cleanupEventListeners();
+
+    if (this.imageLoadingTimer) {
+      clearInterval(this.imageLoadingTimer);
+    }
   },
 
   methods: {
@@ -91,6 +94,29 @@ export default {
       this.$el.removeEventListener("mousemove", this.handleMouseMove);
       this.$el.removeEventListener("touchstart", this.handleTouchStart);
       this.$el.removeEventListener("touchend", this.handleTouchEnd);
+    },
+    onSrcChanged() {
+      this.zoomOut(false);
+      this.zoomEnabled = false;
+
+      if (this.imageLoadingTimer) {
+        clearInterval(this.imageLoadingTimer);
+      }
+
+      // wait untill image dimensions avaliable
+      const img = this.getImageElement();
+      let attemptCounter = 0;
+      this.imageLoadingTimer = setInterval(() => {
+        if (attemptCounter++ > 40) {
+          clearInterval(this.imageLoadingTimer);
+          this.imageLoadingTimer = null;
+        }
+        if (img.naturalWidth && img.naturalWidth > 0) {
+          clearInterval(this.imageLoadingTimer);
+          this.imageLoadingTimer = null;
+          this.zoomEnabled = this.getImageElement().naturalWidth > this.width;
+        }
+      }, 50);
     },
     handleClick(e) {
       if (!this.zoomEnabled) {
@@ -211,11 +237,12 @@ export default {
 
       this.removeEventListenersForZoomedImg();
 
-      this.zoomScale = 1;
-      this.isZoomed = false;
       this.isTouch = false;
+      this.isZoomed = false;
+      this.zoomScale = 1;
       this.imgOffsetX = 0;
       this.imgOffsetY = 0;
+      this.zoomedImgProps = {};
 
       // set zoom in or out in progress
       if (withTransition) {
@@ -226,7 +253,7 @@ export default {
       }
     },
     getMaxZoomScale() {
-      return 2.3;
+      return Math.max(this.getImageElement().naturalWidth / this.width, 1);
     },
     getImageElement() {
       return this.$refs["image"].$el;
