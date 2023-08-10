@@ -1,4 +1,5 @@
 let menu;
+let pages = {};
 
 export default (menuService, pageService) => ({
   async initializeAsync() {
@@ -22,10 +23,23 @@ export default (menuService, pageService) => ({
     return menu.currentPage;
   },
   async getCurrentPageAsync() {
-    return await pageService.getPageAsync(menu.currentPage.id);
+    const pageId = menu.currentPage.id;
+
+    if (pages[pageId] && pages[pageId].data) {
+      return pages[pageId].data;
+    }
+
+    pages[pageId] = await pageService.getPageAsync(pageId);
+    return pages[pageId].data;
   },
   getCurrentPagePhotos() {
-    return pageService.getPagePhotos(menu.currentPage.id);
+    const pageId = menu.currentPage.id;
+
+    if (pages[pageId] && pages[pageId].photos) {
+      return pages[pageId].photos;
+    }
+
+    return [];
   },
   getCurrentPageDisplayName() {
     return menu.currentPage.displayName;

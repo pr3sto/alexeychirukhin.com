@@ -1,14 +1,8 @@
 import * as scssVars from "~/assets/scss/_variables.scss";
 import lodash from "lodash";
 
-let pagesCache = {};
-
 export default (api) => ({
   async getPageAsync(id) {
-    if (pagesCache[id] && pagesCache[id].data) {
-      return pagesCache[id].data;
-    }
-
     const pageData = await api.page.getAsync(id);
 
     if (!pageData || !isDataValid(pageData)) {
@@ -31,14 +25,7 @@ export default (api) => ({
     // parse data to retrieve all photos on a page
     const pagePhotos = this._getPagePhotos(pageData);
 
-    pagesCache[id] = { data: pageData, photos: pagePhotos };
-    return pageData;
-  },
-  getPagePhotos(id) {
-    if (pagesCache[id] && pagesCache[id].photos) {
-      return pagesCache[id].photos;
-    }
-    return [];
+    return { data: pageData, photos: pagePhotos };
   },
   _getPagePhotos(pageData) {
     let photos = [];
