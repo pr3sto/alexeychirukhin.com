@@ -75,7 +75,6 @@
   top: var(--img-top);
   width: var(--img-width);
   height: var(--img-height);
-  transform: translate(0px, 0px) scale(1);
 }
 
 .photo-fullscreen-left-panel {
@@ -116,9 +115,9 @@
 
 .photo-fullscreen-colorpicker {
   float: right;
-  padding-right: vars.$general__padding--default;
   display: flex;
   flex-direction: column;
+  padding-right: vars.$general__padding--default;
 }
 
 .photo-fullscreen-colorpicker-block {
@@ -246,7 +245,7 @@ export default {
       // transform from page photo to fullscreen photo
       this.applyInitialImgTransform(initialImgElement, photo);
 
-      this.changePhoto();
+      this.changePhoto(photo);
       this.showFullScreen = true;
     },
     closeFullscreen() {
@@ -259,25 +258,24 @@ export default {
     },
     goToNextPhoto() {
       if (this.photoCarousel.canGoForward()) {
-        this.photoCarousel.goToNextPhoto();
-        this.changePhoto();
+        const photo = this.photoCarousel.getNextPhoto();
+        this.changePhoto(photo);
       }
     },
     goToPrevPhoto() {
       if (this.photoCarousel.canGoBack()) {
-        this.photoCarousel.goToPrevPhoto();
-        this.changePhoto();
+        const photo = this.photoCarousel.getPrevPhoto();
+        this.changePhoto(photo);
       }
     },
-    changePhoto() {
-      const currentPhoto = this.photoCarousel.getCurrentPhoto();
+    changePhoto(photo) {
       this.canGoBack = this.photoCarousel.canGoBack();
       this.canGoForward = this.photoCarousel.canGoForward();
 
       // fullscreen image rect
       const fsImgRect = calcFsImgRect(
-        currentPhoto.width,
-        currentPhoto.height,
+        photo.width,
+        photo.height,
         document.documentElement.clientWidth,
         document.documentElement.clientHeight,
         parseFloat(getComputedStyle(document.body).fontSize)
@@ -287,7 +285,7 @@ export default {
       this.zoomimgProps.top = fsImgRect.y;
       this.zoomimgProps.width = fsImgRect.width;
       this.zoomimgProps.height = fsImgRect.height;
-      this.zoomimgProps.photoUrl = currentPhoto.url;
+      this.zoomimgProps.photoUrl = photo.url;
     },
     applyInitialImgTransform(initialImgElement, photo) {
       const fsImgRect = calcFsImgRect(

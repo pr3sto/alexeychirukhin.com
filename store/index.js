@@ -3,7 +3,7 @@ export const actions = {
     // initialize app state
     await $services.appState.initializeAsync();
 
-    // initialize app settings
+    // validate settings saved in local storage
     $services.settings.validate();
   },
 };

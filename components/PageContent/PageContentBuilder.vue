@@ -94,7 +94,7 @@ export default {
         css += "overflow: hidden; flex: 1;";
       }
       if (component.styles.maxHeight) {
-        css += `max-height: ${component.styles.maxHeight}`;
+        css += `max-height: ${component.styles.maxHeight};`;
       }
 
       return css;

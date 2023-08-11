@@ -1,4 +1,4 @@
-let menu;
+let currentMenu;
 let pages = {};
 
 export default (menuService, pageService) => ({
@@ -10,20 +10,20 @@ export default (menuService, pageService) => ({
       throw Error("INVALID ROUTE");
     }
 
-    menu = menuService.getMenuByRoute(route);
+    currentMenu = menuService.getMenuByRoute(route);
 
-    if (!menu || !menu.currentPage) {
+    if (!currentMenu || !currentMenu.currentPage) {
       throw Error("INVALID MENU");
     }
   },
   getCurrentMenu() {
-    return menu;
+    return currentMenu;
   },
   getCurrentMenuPage() {
-    return menu.currentPage;
+    return currentMenu.currentPage;
   },
   async getCurrentPageAsync() {
-    const pageId = menu.currentPage.id;
+    const pageId = currentMenu.currentPage.id;
 
     if (pages[pageId] && pages[pageId].data) {
       return pages[pageId].data;
@@ -33,7 +33,7 @@ export default (menuService, pageService) => ({
     return pages[pageId].data;
   },
   getCurrentPagePhotos() {
-    const pageId = menu.currentPage.id;
+    const pageId = currentMenu.currentPage.id;
 
     if (pages[pageId] && pages[pageId].photos) {
       return pages[pageId].photos;
@@ -42,6 +42,6 @@ export default (menuService, pageService) => ({
     return [];
   },
   getCurrentPageDisplayName() {
-    return menu.currentPage.displayName;
+    return currentMenu.currentPage.displayName;
   },
 });
