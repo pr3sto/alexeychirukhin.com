@@ -64,7 +64,6 @@ export default {
       imgOffsetX: 0,
       imgOffsetY: 0,
       zoomedImgProps: {},
-      imageLoadingTimer: null,
     };
   },
 
@@ -76,10 +75,6 @@ export default {
 
   beforeDestroy() {
     this.cleanupEventListeners();
-
-    if (this.imageLoadingTimer) {
-      clearInterval(this.imageLoadingTimer);
-    }
   },
 
   methods: {
@@ -99,24 +94,16 @@ export default {
       this.zoomOut(false);
       this.zoomEnabled = false;
 
-      if (this.imageLoadingTimer) {
-        clearInterval(this.imageLoadingTimer);
-      }
+      this.$nextTick(() => {
+        const img = this.getImageElement();
+        const imgDimensionsAvailable = () =>
+          img.naturalWidth && img.naturalWidth > 0;
 
-      // wait untill image dimensions avaliable
-      const img = this.getImageElement();
-      let attemptCounter = 0;
-      this.imageLoadingTimer = setInterval(() => {
-        if (attemptCounter++ > 40) {
-          clearInterval(this.imageLoadingTimer);
-          this.imageLoadingTimer = null;
-        }
-        if (img.naturalWidth && img.naturalWidth > 0) {
-          clearInterval(this.imageLoadingTimer);
-          this.imageLoadingTimer = null;
-          this.zoomEnabled = this.getImageElement().naturalWidth > this.width;
-        }
-      }, 50);
+        // try to get image dimensions (abort after 3s)
+        this.$pageUtility.singletonPoll(imgDimensionsAvailable, 100, 50, () => {
+          this.zoomEnabled = img.naturalWidth > this.width;
+        });
+      });
     },
     handleClick(e) {
       if (!this.zoomEnabled) {
@@ -203,7 +190,10 @@ export default {
     zoomIn(clientX, clientY) {
       this.addEventListenersForZoomedImg();
 
-      this.zoomScale = this.getMaxZoomScale();
+      this.zoomScale = Math.max(
+        this.getImageElement().naturalWidth / this.width,
+        1
+      );
       this.isZoomed = true;
 
       // image bounds
@@ -251,9 +241,6 @@ export default {
           this.isZoomInProgress = false;
         }, 250);
       }
-    },
-    getMaxZoomScale() {
-      return Math.max(this.getImageElement().naturalWidth / this.width, 1);
     },
     getImageElement() {
       return this.$refs["image"].$el;

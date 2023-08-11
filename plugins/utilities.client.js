@@ -8,6 +8,8 @@ Vue.use(VueLodash, { name: "$_", lodash });
 let savedScrollPosition = null;
 let pageScrollEnabled = true;
 
+let singletonTimer = null;
+
 export default function ({ $services }, inject) {
   detectScreenSize($services.settings, $services.styles);
   window.onresize = lodash.throttle(() => {
@@ -61,6 +63,36 @@ export default function ({ $services }, inject) {
         }
         pageScrollEnabled = true;
       }
+    },
+    singletonPoll(
+      condition,
+      delay,
+      maxAttempts,
+      successCallback,
+      failCallback
+    ) {
+      if (singletonTimer) {
+        clearInterval(singletonTimer);
+        singletonTimer = null;
+      }
+
+      if (condition()) {
+        successCallback && successCallback();
+        return;
+      }
+
+      let attemptCounter = 1;
+      singletonTimer = setInterval(() => {
+        if (attemptCounter++ > maxAttempts) {
+          clearInterval(singletonTimer);
+          singletonTimer = null;
+          failCallback && failCallback();
+        } else if (condition()) {
+          clearInterval(singletonTimer);
+          singletonTimer = null;
+          successCallback && successCallback();
+        }
+      }, delay);
     },
     isEscKey(event) {
       return (
