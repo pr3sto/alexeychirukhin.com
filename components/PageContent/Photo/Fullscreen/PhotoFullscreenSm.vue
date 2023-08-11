@@ -115,11 +115,13 @@ export default {
 
   mounted() {
     this.$root.$on(events.OPEN_FULLSCREEN, this.openFullscreen);
+    this.$root.$on(events.CLOSE_FULLSCREEN, this.closeFullscreen);
   },
 
   beforeDestroy() {
     this.$pageUtility.enablePageScroll();
     this.$root.$off(events.OPEN_FULLSCREEN, this.openFullscreen);
+    this.$root.$off(events.CLOSE_FULLSCREEN, this.closeFullscreen);
   },
 
   methods: {
@@ -139,11 +141,14 @@ export default {
       this.$services.settings.photo.setBlackFullscreenBgColor();
     },
     handleCloseButtonClick() {
-      this.showFullScreen = false;
+      this.closeFullscreen();
     },
     openFullscreen(_, photo) {
       this.photoUrl = photo.url;
       this.showFullScreen = true;
+    },
+    closeFullscreen() {
+      this.showFullScreen = false;
     },
   },
 };

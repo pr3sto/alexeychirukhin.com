@@ -51,8 +51,15 @@
 
 <script>
 import Overlay from "~/components/Overlay.vue";
+import events from "~/constants/events.js";
 
 export default {
   components: { Overlay },
+
+  watch: {
+    $route() {
+      this.$root.$emit(events.CLOSE_FULLSCREEN);
+    },
+  },
 };
 </script>

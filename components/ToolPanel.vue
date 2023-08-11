@@ -160,7 +160,7 @@ export default {
 
   methods: {
     handleScroll() {
-      this.showScrollToTop = this.$pageUtility.getPageScrollTopOffset() > 100;
+      this.showScrollToTop = this.$pageUtility.getPageScrollTopOffset() > 200;
     },
     handleScrollToTopClick() {
       this.$pageUtility.scrollToTop();

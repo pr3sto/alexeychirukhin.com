@@ -199,10 +199,12 @@ export default {
 
   mounted() {
     this.$root.$on(events.OPEN_FULLSCREEN, this.openFullscreen);
+    this.$root.$on(events.CLOSE_FULLSCREEN, this.closeFullscreen);
   },
 
   beforeDestroy() {
     this.$root.$off(events.OPEN_FULLSCREEN, this.openFullscreen);
+    this.$root.$off(events.CLOSE_FULLSCREEN, this.closeFullscreen);
     this.cleanupEventListeners();
   },
 
