@@ -96,16 +96,18 @@ export default {
 
       this.$nextTick(() => {
         const img = this.getImageElement();
-        const imgDimensionsAvailable = () =>
-          img.naturalWidth && img.naturalWidth > 0;
+        const imgDimensionsAvailable = () => img.naturalWidth > 0;
 
         // try to get image dimensions (abort after 3s)
-        this.$pageUtility.singletonPoll(imgDimensionsAvailable, 100, 50, () => {
+        this.$pageUtility.singletonPoll(imgDimensionsAvailable, 100, 30, () => {
           this.zoomEnabled = img.naturalWidth > this.width;
         });
       });
     },
     handleClick(e) {
+      // additional check if zoom enabled
+      this.zoomEnabled = this.getImageElement().naturalWidth > this.width;
+
       if (!this.zoomEnabled) {
         return;
       }
