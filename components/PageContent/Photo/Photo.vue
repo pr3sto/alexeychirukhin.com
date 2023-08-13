@@ -52,6 +52,7 @@
 }
 
 .photo-container-img {
+  position: relative;
   display: block;
   max-width: 100%;
   max-height: 100%;
