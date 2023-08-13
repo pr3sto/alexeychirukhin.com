@@ -1,4 +1,5 @@
 // modified version of https://github.com/paulcollett/vue-masonry-css
+// LICENSE: https://github.com/paulcollett/vue-masonry-css/blob/master/LICENSE
 
 const props = {
   tag: {
