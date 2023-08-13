@@ -3,7 +3,7 @@
     <masonry
       v-for="(section, index) of content.sections"
       :key="index"
-      :cols="section.cols"
+      :cols="useMobileVersion ? section.cols.sm : section.cols.lg"
     >
       <photo
         class="photogrid-photo"
@@ -44,5 +44,11 @@ export default {
   name: "PhotoGrid",
   props: ["content"],
   components: { Photo },
+
+  computed: {
+    useMobileVersion() {
+      return this.$services.settings.getUseMobileVersion();
+    },
+  },
 };
 </script>

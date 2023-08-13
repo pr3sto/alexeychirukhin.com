@@ -1,4 +1,3 @@
-import * as scssVars from "~/assets/scss/_variables.scss";
 import lodash from "lodash";
 
 export default (api) => ({
@@ -8,19 +7,6 @@ export default (api) => ({
     if (!pageData || !isDataValid(pageData)) {
       throw Error("PAGE DATA INVALID");
     }
-
-    // transform PhotoGrid cols to masonry component structure
-    pageData.components
-      .filter((component) => component.content.type === "PhotoGrid")
-      .flatMap((component) => component.content.sections)
-      .forEach((section) => {
-        const cols = section.cols;
-        const smMaxWidth = scssVars.mediaMobileMaxWidth.slice(0, -2);
-        section.cols = {
-          default: cols.lg,
-          [smMaxWidth]: cols.sm,
-        };
-      });
 
     // parse data to retrieve all photos on a page
     const pagePhotos = this._getPagePhotos(pageData);
