@@ -121,8 +121,8 @@
 }
 
 .photo-fullscreen-colorpicker-block {
-  width: vars.$general__padding--default;
-  height: vars.$general__padding--default;
+  width: vars.$photo__close__font-size--lg;
+  height: vars.$photo__close__font-size--lg;
   cursor: pointer;
 
   &--white {

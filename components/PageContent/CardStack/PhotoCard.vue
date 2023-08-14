@@ -52,8 +52,26 @@
   width: 100%;
   aspect-ratio: 1;
 
+  & img {
+    position: relative;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: var(vars.$page-styles__font-color);
+    opacity: 0.05;
+  }
+
   /* round photo */
   &--round img {
+    border-radius: 50%;
+  }
+  &--round::before {
     border-radius: 50%;
   }
 }

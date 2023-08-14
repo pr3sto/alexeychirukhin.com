@@ -29,12 +29,6 @@
 <style lang="scss" scoped>
 @use "~/assets/scss/variables" as vars;
 
-.photo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .photo-container {
   position: relative;
 
