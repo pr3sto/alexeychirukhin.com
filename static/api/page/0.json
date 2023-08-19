@@ -1,10 +1,8 @@
 {
   "id": 0,
-  "header": "Alexey Chirukhin",
-  "settings": {
-    "backgroundColor": "#dcd9c6",
-    "fontColor": "#ec5938",
-    "fitScreen": true
+  "styles": {
+    "backgroundColor": "#2b2435",
+    "fontColor": "#d8b5b5"
   },
   "components": [
     {
@@ -14,21 +12,26 @@
           {
             "type": "PhotoCard",
             "round": true,
-            "photoUrl": "alexeychirukhin_com/v1/pages/index/vDXwb_ibYHTPk2A.jpg"
+            "photoUrl": "alexeychirukhin_com/v1/pages/index/vDXPk2A.jpg"
+          },
+          {
+            "type": "PhotoCard",
+            "photoUrl": "alexeychirukhin_com/v1/pages/index/M3hi9ly.jpg"
           },
           {
             "type": "DarkslideCard",
-            "html": "<div style=\"display:flex;flex-direction:column;font-size:2em;line-height:1.1em;\"><div>Links:</div><a href=\"https://www.instagram.com/alexeychirukhin\" target=\"_blank\" style=\"color: #fff\">instagram.com/alexeychirukhin</a><a href=\"https://github.com/pr3sto\" target=\"_blank\" style=\"color: #fff\">github.com/pr3sto</a></div>"
+            "html": "<div style=\"display:flex;flex-direction:column;font-size:2.5em;line-height:1.1em;\"><div>The Volume Turned Down</div></div>"
           }
-        ]
+        ],
+        "cardScale": 0.8
       },
-      "style": {
-        "growToFitScreen": true,
-        "padding": {
-          "top": true,
-          "bottom": true,
-          "left": true,
-          "right": true
+      "styles": {
+        "fillAvaliableSpace": true,
+        "offset": {
+          "top": "0",
+          "bottom": "0",
+          "left": "0",
+          "right": "0"
         }
       }
     }

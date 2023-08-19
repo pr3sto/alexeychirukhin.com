@@ -1,30 +1,23 @@
 {
   "id": 1,
-  "header": "The memory",
-  "settings": {
-    "backgroundColor": "#3d4949",
-    "fontColor": "#e6b998"
+  "styles": {
+    "backgroundColor": "#ececec",
+    "fontColor": "#504e51"
   },
   "components": [
     {
       "content": {
-        "type": "PhotoGrid",
-        "cols": {
-          "default": 1
-        },
-        "padding": false,
-        "photos": [
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/vYbxd4R.jpg"
-          }
-        ]
+        "type": "Photo",
+        "url": "alexeychirukhin_com/v1/pages/memories/3ZsXkSU.jpg",
+        "width": 1964,
+        "height": 2963
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": true,
-          "left": true,
-          "right": true
+      "styles": {
+        "offset": {
+          "top": "1rem",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -34,7 +27,7 @@
         "blocks": [
           {
             "align": "right",
-            "linesStyle": "font-size:1.3em;line-height:1em;",
+            "linesStyle": "font-size:1.2em;line-height:1em;",
             "lines": [
               "That life is gone, and many good people with it.",
               "I carry the memory.",
@@ -44,16 +37,16 @@
           {
             "align": "right",
             "linesStyle": "font-size:1.2em;line-height:1em;font-weight:bolder;",
-            "lines": ["- Aveline Vallen"]
+            "lines": ["Aveline Vallen"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": true,
-          "left": true,
-          "right": true
+      "styles": {
+        "offset": {
+          "top": "1rem",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -62,18 +55,21 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
-            "linesStyle": "font-size:1.3em;line-height:1em;font-weight:bolder;",
-            "lines": ["Chapter 1"]
+            "align": "center",
+            "linesStyle": "font-size:2.2em;line-height:1em;font-weight:bolder;",
+            "lines": ["Ⅰ"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 15
+        },
+        "offset": {
+          "top": "70vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -82,78 +78,92 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
+            "align": "center",
             "linesStyle": "font-size:1.2em;line-height:1em;",
             "lines": ["Nonchalance"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": false,
-          "bottom": false,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 25
+        },
+        "offset": {
+          "top": "0.5rem",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
     {
       "content": {
         "type": "PhotoGrid",
-        "cols": {
-          "default": 2
-        },
         "padding": true,
-        "photos": [
+        "sections": [
           {
-            "url": "alexeychirukhin_com/v1/pages/memories/87YM5tP.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/Ta1CU0F.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/LgWdDWL.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/8c81ljp.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/mwGKhYl.jpg"
-          },
+            "cols": {
+              "lg": 2,
+              "sm": 1
+            },
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/87YM5tP.jpg",
+                "width": 3101,
+                "height": 2056
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/Ta1CU0F.jpg",
+                "width": 2075,
+                "height": 3130
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/LgWdDWL.jpg",
+                "width": 3042,
+                "height": 2017
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/8c81ljp.jpg",
+                "width": 3033,
+                "height": 2011
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/mwGKhYl.jpg",
+                "width": 1890,
+                "height": 2851
+              },
 
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/olsXKqC.jpg",
+                "width": 2947,
+                "height": 1954
+              }
+            ]
+          },
           {
-            "url": "alexeychirukhin_com/v1/pages/memories/olsXKqC.jpg"
+            "cols": {
+              "lg": 1,
+              "sm": 1
+            },
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/2cUWoRz.jpg",
+                "width": 1966,
+                "height": 2966
+              }
+            ]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
-        }
-      }
-    },
-    {
-      "content": {
-        "type": "PhotoGrid",
-        "cols": {
-          "default": 1
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 35
         },
-        "padding": true,
-        "photos": [
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/2cUWoRz.jpg"
-          }
-        ]
-      },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": true,
-          "left": true,
-          "right": true
+        "offset": {
+          "top": "10vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -162,18 +172,21 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
-            "linesStyle": "font-size:1.3em;line-height:1em;font-weight:bolder;",
-            "lines": ["Chapter 2"]
+            "align": "center",
+            "linesStyle": "font-size:2.2em;line-height:1em;font-weight:bolder;",
+            "lines": ["Ⅱ"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 15
+        },
+        "offset": {
+          "top": "70vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -182,71 +195,81 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
+            "align": "center",
             "linesStyle": "font-size:1.2em;line-height:1em;",
             "lines": ["Vagueness"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": false,
-          "bottom": false,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 25
+        },
+        "offset": {
+          "top": "0.5rem",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
     {
       "content": {
         "type": "PhotoGrid",
-        "cols": {
-          "default": 2
-        },
         "padding": true,
-        "photos": [
+        "sections": [
           {
-            "url": "alexeychirukhin_com/v1/pages/memories/QgHhEi6.jpg"
+            "cols": {
+              "lg": 2,
+              "sm": 1
+            },
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/QgHhEi6.jpg",
+                "width": 2980,
+                "height": 1976
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/bKlB74h.jpg",
+                "width": 3035,
+                "height": 2012
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/G7zDTrJ.jpg",
+                "width": 2858,
+                "height": 1895
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/kE8MMrL.jpg",
+                "width": 3059,
+                "height": 2028
+              }
+            ]
           },
           {
-            "url": "alexeychirukhin_com/v1/pages/memories/bKlB74h.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/G7zDTrJ.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/kE8MMrL.jpg"
+            "cols": {
+              "lg": 1,
+              "sm": 1
+            },
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/q7yzJnY.jpg",
+                "width": 3075,
+                "height": 2039
+              }
+            ]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
-        }
-      }
-    },
-    {
-      "content": {
-        "type": "PhotoGrid",
-        "cols": {
-          "default": 1
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 35
         },
-        "padding": true,
-        "photos": [
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/q7yzJnY.jpg"
-          }
-        ]
-      },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": true,
-          "left": true,
-          "right": true
+        "offset": {
+          "top": "10vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -255,18 +278,21 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
-            "linesStyle": "font-size:1.3em;line-height:1em;font-weight:bolder;",
-            "lines": ["Chapter 3"]
+            "align": "center",
+            "linesStyle": "font-size:2.2em;line-height:1em;font-weight:bolder;",
+            "lines": ["Ⅲ"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 15
+        },
+        "offset": {
+          "top": "70vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -275,111 +301,114 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
+            "align": "center",
             "linesStyle": "font-size:1.2em;line-height:1em;",
             "lines": ["Comprehension"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": false,
-          "bottom": false,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 25
+        },
+        "offset": {
+          "top": "0.5rem",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
     {
       "content": {
         "type": "PhotoGrid",
-        "cols": {
-          "default": 1
-        },
         "padding": true,
-        "photos": [
+        "sections": [
           {
-            "url": "alexeychirukhin_com/v1/pages/memories/EGmmziM.jpg"
+            "cols": {
+              "lg": 1,
+              "sm": 1
+            },
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/EGmmziM.jpg",
+                "width": 2923,
+                "height": 1938
+              }
+            ]
+          },
+          {
+            "cols": {
+              "lg": 2,
+              "sm": 1
+            },
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/fPoo642.jpg",
+                "width": 2874,
+                "height": 1905
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/Bms4ogH.jpg",
+                "width": 3066,
+                "height": 2033
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/BMSEcqb.jpg",
+                "width": 2075,
+                "height": 3130
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/23Y6uxw.jpg",
+                "width": 2996,
+                "height": 1986
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/3EHaQ1k.jpg",
+                "width": 2003,
+                "height": 3021
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/Kac8FNh.jpg",
+                "width": 2041,
+                "height": 3078
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/QibjoAo.jpg",
+                "width": 2931,
+                "height": 1943
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/LyV5VtI.jpg",
+                "width": 1944,
+                "height": 2932
+              }
+            ]
+          },
+          {
+            "cols": {
+              "lg": 1,
+              "sm": 1
+            },
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/53HyFRw.jpg",
+                "width": 2971,
+                "height": 1970
+              }
+            ]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
-        }
-      }
-    },
-    {
-      "content": {
-        "type": "PhotoGrid",
-        "cols": {
-          "default": 2
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 35
         },
-        "padding": true,
-        "photos": [
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/fPoo642.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/Bms4ogH.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/radYZK3.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/3EHaQ1k.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/BMSEcqb.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/23Y6uxw.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/QibjoAo.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/LyV5VtI.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/Kac8FNh.jpg"
-          },
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/9nn2sNI.jpg"
-          }
-        ]
-      },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
-        }
-      }
-    },
-    {
-      "content": {
-        "type": "PhotoGrid",
-        "cols": {
-          "default": 1
-        },
-        "padding": true,
-        "photos": [
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/53HyFRw.jpg"
-          }
-        ]
-      },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": true,
-          "left": true,
-          "right": true
+        "offset": {
+          "top": "10vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -388,18 +417,21 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
-            "linesStyle": "font-size:1.3em;line-height:1em;font-weight:bolder;",
-            "lines": ["Chapter 4"]
+            "align": "center",
+            "linesStyle": "font-size:2.2em;line-height:1em;font-weight:bolder;",
+            "lines": ["Ⅳ"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 15
+        },
+        "offset": {
+          "top": "70vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -408,40 +440,40 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
+            "align": "center",
             "linesStyle": "font-size:1.2em;line-height:1em;",
             "lines": ["Disharmony"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": false,
-          "bottom": false,
-          "left": true,
-          "right": true
-        }
-      }
-    },
-    {
-      "content": {
-        "type": "PhotoGrid",
-        "cols": {
-          "default": 1
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 25
         },
-        "padding": true,
-        "photos": [
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/xp88BRL.jpg"
-          }
-        ]
+        "offset": {
+          "top": "0.5rem",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
+        }
+      }
+    },
+    {
+      "content": {
+        "type": "Photo",
+        "url": "alexeychirukhin_com/v1/pages/memories/xp88BRL.jpg",
+        "width": 2920,
+        "height": 1936
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": true,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 35
+        },
+        "offset": {
+          "top": "10vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -450,18 +482,21 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
-            "linesStyle": "font-size:1.3em;line-height:1em;font-weight:bolder;",
-            "lines": ["Chapter 5"]
+            "align": "center",
+            "linesStyle": "font-size:2.2em;line-height:1em;font-weight:bolder;",
+            "lines": ["Ⅴ"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 15
+        },
+        "offset": {
+          "top": "70vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -470,87 +505,71 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
+            "align": "center",
             "linesStyle": "font-size:1.2em;line-height:1em;",
             "lines": ["Indifference"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": false,
-          "bottom": false,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 25
+        },
+        "offset": {
+          "top": "0.5rem",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
     {
       "content": {
         "type": "PhotoGrid",
-        "cols": {
-          "default": 2
-        },
         "padding": true,
-        "photos": [
+        "sections": [
           {
-            "url": "alexeychirukhin_com/v1/pages/memories/XM1qmoe.jpg"
+            "cols": {
+              "lg": 2,
+              "sm": 1
+            },
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/XM1qmoe.jpg",
+                "width": 2819,
+                "height": 1869
+              },
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/75mJNWM.jpg",
+                "width": 2612,
+                "height": 1732
+              }
+            ]
           },
           {
-            "url": "alexeychirukhin_com/v1/pages/memories/75mJNWM.jpg"
+            "cols": {
+              "lg": 1,
+              "sm": 1
+            },
+            "photos": [
+              {
+                "url": "alexeychirukhin_com/v1/pages/memories/hQivyxJ.jpg",
+                "width": 2991,
+                "height": 1983
+              }
+            ]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
-        }
-      }
-    },
-    {
-      "content": {
-        "type": "PhotoGrid",
-        "cols": {
-          "default": 1
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 35
         },
-        "padding": true,
-        "photos": [
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/hQivyxJ.jpg"
-          }
-        ]
-      },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": false,
-          "left": true,
-          "right": true
-        }
-      }
-    },
-    {
-      "content": {
-        "type": "PhotoGrid",
-        "cols": {
-          "default": 1
-        },
-        "padding": true,
-        "photos": [
-          {
-            "url": "alexeychirukhin_com/v1/pages/memories/3ZsXkSU.jpg"
-          }
-        ]
-      },
-      "style": {
-        "padding": {
-          "top": true,
-          "bottom": true,
-          "left": true,
-          "right": true
+        "offset": {
+          "top": "10vh",
+          "bottom": "0",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     },
@@ -559,29 +578,29 @@
         "type": "TextBlocks",
         "blocks": [
           {
-            "align": "left",
-            "linesStyle": "font-size:0.9em; line-height:0.9em;",
+            "align": "center",
+            "linesStyle": "font-size:1.2em;line-height:1em;",
             "lines": [
               "camera: Canon T70",
               "lens: Canon FD 50mm, FD 35mm",
               "film: ILFORD FP4 PLUS (ISO 125)",
               "development: foqusstore.com",
-              ""
+              "",
+              "Rzhev",
+              "March 2021"
             ]
-          },
-          {
-            "align": "right",
-            "linesStyle": "font-size:0.8em; line-height:0.9em;",
-            "lines": ["Rzhev", "15 - 25 Mar 2021"]
           }
         ]
       },
-      "style": {
-        "padding": {
-          "top": false,
-          "bottom": true,
-          "left": true,
-          "right": true
+      "styles": {
+        "fadeInTransition": {
+          "triggerOffsetPercentage": 25
+        },
+        "offset": {
+          "top": "50vh",
+          "bottom": "40vh",
+          "left": "1rem",
+          "right": "1rem"
         }
       }
     }

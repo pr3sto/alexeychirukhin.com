@@ -16,6 +16,22 @@
           "displayName": "The memory"
         }
       ]
+    },
+    {
+      "path": "photos",
+      "displayName": "photos",
+      "pages": [
+        {
+          "id": 2,
+          "path": "untitled1",
+          "displayName": "untitled #1"
+        },
+        {
+          "id": 3,
+          "path": "untitled2",
+          "displayName": "untitled #2"
+        }
+      ]
     }
   ]
 }

@@ -119,6 +119,6 @@ function detectScreenSize(settingsService, stylesService) {
     settingsService.setUseMobileVersion(useMobileVersion);
   }
 
-  const viewportHeight = document.documentElement.clientHeight;
+  const viewportHeight = document.documentElement.clientHeight - 5;
   stylesService.setRootVariable("--viewport-height", `${viewportHeight}px`);
 }
