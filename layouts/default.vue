@@ -23,7 +23,7 @@
   left: 0;
   right: 0;
   background: url(~/assets/textures/noise.svg);
-  filter: brightness(110%) opacity(20%);
+  filter: brightness(110%) opacity(10%);
   z-index: 1;
   pointer-events: none;
 }
