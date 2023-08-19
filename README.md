@@ -11,10 +11,6 @@ $ npm install
 # serve with hot reload at localhost:3000
 $ npm run dev
 
-# serve with hot reload at [local_ip_address]:3000
-# useful to test project on a mobile device
-$ npm run dev:host
-
 # lint the code
 $ npm run lint
 
