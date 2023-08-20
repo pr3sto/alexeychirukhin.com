@@ -1,6 +1,13 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
+  runtimeConfig: {
+    public: {
+      MENU_API_URL: process.env.MENU_API_URL,
+      PAGE_API_URL: process.env.PAGE_API_URL,
+      NUXT_IMG_PROVIDER: process.env.NUXT_IMG_PROVIDER,
+    },
+  },
   app: {
     head: {
       title: "Alexey Chirukhin",

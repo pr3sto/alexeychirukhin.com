@@ -15,6 +15,11 @@
   ],
   "rules": {
     "no-var": 1,
-    "sort-imports": "error"
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true
+      }
+    ]
   }
 }
