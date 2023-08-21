@@ -28,3 +28,7 @@ logs
 
 # todo files
 *.todo
+
+# local files
+public/**/*.local.json
+public/local/*
