@@ -1,7 +1,7 @@
 import { Menu } from "../types/menu";
 import { MenuResponse } from "../types/responses/menuResponse";
 import MenuConverter from "../types/converters/menuConverter";
-import MenuSchemaValidator from "./validators/menuSchemaValidator";
+import MenuSchemaValidator from "./validators/MenuSchemaValidator";
 import Utility from "./utility";
 
 export default class MenuApi {

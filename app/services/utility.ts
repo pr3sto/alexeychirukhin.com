@@ -1,4 +1,4 @@
-import IValidator from "./validators/validator";
+import IValidator from "./validators/IValidator";
 
 export default class Utility {
   static async getAsync<TResponse>(
