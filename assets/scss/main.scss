@@ -1,0 +1,51 @@
+html {
+  font-family: $general__font-family, sans-serif;
+  font-size: 16px;
+  text-size-adjust: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+}
+
+html,
+body,
+menu,
+figure,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  background-color: transparent;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+img {
+  border-style: none;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* mobile version */
+@media only screen and (max-width: $media__mobile__max-width) {
+  html {
+    font-size: 14px;
+  }
+
+  /* looks better on mobile */
+  img {
+    image-rendering: auto;
+  }
+}
