@@ -2,7 +2,7 @@ import { Menu } from "../types/menu";
 import { MenuResponse } from "../types/responses/menuResponse";
 import MenuConverter from "../types/converters/menuConverter";
 import MenuSchemaValidator from "./validators/MenuSchemaValidator";
-import Utility from "./utility";
+import Utility from "./Utility";
 
 export default class MenuApi {
   static async getAsync(url: string): Promise<Menu> {
