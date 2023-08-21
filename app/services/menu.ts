@@ -1,6 +1,6 @@
 import { Menu } from "../types/menu";
 import { MenuResponse } from "../types/responses/menuResponse";
-import MenuConverter from "../types/converters/menuConverter";
+import MenuConverter from "../types/converters/MenuConverter";
 import MenuSchemaValidator from "./validators/MenuSchemaValidator";
 import Utility from "./Utility";
 
