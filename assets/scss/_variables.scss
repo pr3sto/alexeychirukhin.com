@@ -5,20 +5,6 @@ $media__mobile__max-width: 700px;
 $general__font-family: "Violet Sans";
 $general__font-family--handwriting1: "Schoolbell";
 $general__font-family--handwriting2: "Just Me Again Down Here";
-$appmenu__header__font-family: "Chango";
-
-// font sizes
-$appmenu__font-size--lg: 1.8rem;
-$appmenu__section-header__font-size--lg: 1.5rem;
-$appmenu__active-header__font-size--lg: 2.4rem;
-$photo__close__font-size--lg: 1.5rem;
-$tool-panel__element__size--lg: 1.5rem;
-
-$appmenu__font-size--sm: 2rem;
-$appmenu__section-header__font-size--sm: 1.5rem;
-$appmenu__active-header__font-size--sm: 2rem;
-$photo__close__font-size--sm: 1.5rem;
-$tool-panel__element__size--sm: 1.5rem;
 
 // padding
 $general__padding--default: 1rem;
@@ -26,16 +12,6 @@ $general__padding--default: 1rem;
 // transitions
 $general__transition-func--default: cubic-bezier(0.8, 0.2, 0.1, 0.8);
 $general__transition--02s: 0.2s $general__transition-func--default;
-
-$page-switch__background-transition: background linear 0.8s;
-$page-content-fade-in__transition: opacity 0.5s ease-in-out,
-  transform 0.7s ease-in-out;
-
-// style vars
-$page-styles__header__shadow: --page-header-shadow;
-$page-styles__background-color: --page-background-color;
-$page-styles__font-color: --page-font-color;
-$page-styles__fs-bg-color: --photo-fs-bg-color;
 
 // colors
 $general__color--white: #f8f8f8;
@@ -45,8 +21,4 @@ $general__color--black: #1a1a1a;
   mediaMobileMaxWidth: $media__mobile__max-width;
   whiteColor: $general__color--white;
   blackColor: $general__color--black;
-  varPageHeaderShadow: $page-styles__header__shadow;
-  varPageBackgroundColor: $page-styles__background-color;
-  varPageFontColor: $page-styles__font-color;
-  varPhotoFsBgColor: $page-styles__fs-bg-color;
 }
