@@ -5,19 +5,19 @@ type MenuPage = {
   route: string;
 };
 
-type IndexSection = {
+type MenuIndexSection = {
   page: MenuPage;
 };
 
-type Section = {
+type MenuSection = {
   path: string;
   displayName: string;
   pages: MenuPage[];
 };
 
 type Menu = {
-  index: IndexSection;
-  sections: Section[];
+  index: MenuIndexSection;
+  sections: MenuSection[];
 };
 
-export { MenuPage, IndexSection, Section, Menu };
+export { MenuPage, MenuIndexSection, MenuSection, Menu };

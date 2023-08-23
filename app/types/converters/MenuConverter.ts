@@ -1,10 +1,15 @@
-import { IndexSection, Menu, MenuPage, Section } from "../menu";
 import {
-  IndexSectionResponse,
+  Menu,
+  MenuIndexSection,
+  MenuPage,
+  MenuSection,
+} from "~/app/types/menu";
+import {
+  MenuIndexSectionResponse,
   MenuPageResponse,
   MenuResponse,
-  SectionResponse,
-} from "./../responses/menuResponse";
+  MenuSectionResponse,
+} from "~/app/types/responses/menuResponse";
 
 export default class MenuConverter {
   static covertResponseToMenuPage(
@@ -22,17 +27,17 @@ export default class MenuConverter {
   }
 
   static convertResponseToIndexSection(
-    response: IndexSectionResponse,
-  ): IndexSection {
-    const index: IndexSection = {
+    response: MenuIndexSectionResponse,
+  ): MenuIndexSection {
+    const index: MenuIndexSection = {
       page: this.covertResponseToMenuPage(response.page, "/"),
     };
 
     return index;
   }
 
-  static convertResponseToSection(response: SectionResponse): Section {
-    const section: Section = {
+  static convertResponseToSection(response: MenuSectionResponse): MenuSection {
+    const section: MenuSection = {
       path: response.path,
       displayName: response.displayName,
       pages: response.pages.map((page) =>

@@ -1,8 +1,8 @@
-import { Menu } from "../types/menu";
-import { MenuResponse } from "../types/responses/menuResponse";
-import MenuConverter from "../types/converters/MenuConverter";
-import MenuSchemaValidator from "./validators/MenuSchemaValidator";
-import Utility from "./Utility";
+import { Menu } from "~/app/types/menu";
+import { MenuResponse } from "~/app/types/responses/menuResponse";
+import MenuConverter from "~/app/types/converters/MenuConverter";
+import MenuSchemaValidator from "~/app/services/validators/MenuSchemaValidator";
+import Utility from "~/app/services/Utility";
 
 export default class MenuService {
   static async getAsync(url: string): Promise<Menu> {

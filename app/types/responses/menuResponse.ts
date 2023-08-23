@@ -4,24 +4,24 @@ type MenuPageResponse = {
   displayName: string;
 };
 
-type IndexSectionResponse = {
+type MenuIndexSectionResponse = {
   page: MenuPageResponse;
 };
 
-type SectionResponse = {
+type MenuSectionResponse = {
   path: string;
   displayName: string;
   pages: MenuPageResponse[];
 };
 
 type MenuResponse = {
-  index: IndexSectionResponse;
-  sections: SectionResponse[];
+  index: MenuIndexSectionResponse;
+  sections: MenuSectionResponse[];
 };
 
 export {
   MenuPageResponse,
-  IndexSectionResponse,
-  SectionResponse,
+  MenuIndexSectionResponse,
+  MenuSectionResponse,
   MenuResponse,
 };
