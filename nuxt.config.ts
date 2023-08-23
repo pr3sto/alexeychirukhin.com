@@ -8,6 +8,7 @@ export default defineNuxtConfig({
       NUXT_IMG_PROVIDER: process.env.NUXT_IMG_PROVIDER,
     },
   },
+  modules: ["nuxt-lodash"],
   app: {
     head: {
       title: "Alexey Chirukhin",
@@ -59,5 +60,4 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: ["nuxt-lodash"],
 });
