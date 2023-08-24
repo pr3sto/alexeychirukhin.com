@@ -44,6 +44,10 @@ export default defineNuxtConfig({
           rel: "stylesheet",
           href: "https://fonts.cdnfonts.com/css/violet-sans",
         },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.cdnfonts.com/css/druk-wide-bold",
+        },
       ],
       htmlAttrs: {
         lang: "en",

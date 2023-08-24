@@ -5,6 +5,7 @@ $media__mobile__max-width: 700px;
 $general__font-family: "Violet Sans";
 $general__font-family--handwriting1: "Schoolbell";
 $general__font-family--handwriting2: "Just Me Again Down Here";
+$appmenu__font-family: "Druk Wide Bold";
 
 // padding
 $general__padding--default: 1rem;
@@ -16,6 +17,9 @@ $general__transition--02s: 0.2s $general__transition-func--default;
 // colors
 $general__color--white: #f8f8f8;
 $general__color--black: #1a1a1a;
+
+// app menu
+$appmenu__width--minimized: 4rem;
 
 :export {
   mediaMobileMaxWidth: $media__mobile__max-width;
