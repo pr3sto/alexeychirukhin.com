@@ -1,7 +1,7 @@
 import Ajv, { Schema } from "ajv";
-import IValidator from "./IValidator";
+import ISchemaValidator from "./ISchemaValidator";
 
-export default abstract class CommonSchemaValidator implements IValidator {
+export default abstract class CommonSchemaValidator implements ISchemaValidator {
   schema: Schema;
 
   constructor(schema: Schema) {

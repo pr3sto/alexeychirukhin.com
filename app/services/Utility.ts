@@ -1,9 +1,9 @@
-import IValidator from "~/app/services/validators/IValidator";
+import ISchemaValidator from "~/app/services/validators/ISchemaValidator";
 
 export default class Utility {
   static async getAsync<TResponse>(
     url: string,
-    validator?: IValidator,
+    validator?: ISchemaValidator,
   ): Promise<TResponse> {
     const response = await fetch(new URL(url, window.location.origin), {
       method: "GET",
