@@ -8,15 +8,9 @@ export default defineNuxtConfig({
       NUXT_IMG_PROVIDER: process.env.NUXT_IMG_PROVIDER,
     },
   },
-  modules: ["nuxt-lodash"],
+  modules: ["nuxt-lodash", "@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
   app: {
     head: {
-      title: "Alexey Chirukhin",
-      titleTemplate(title) {
-        return title && title !== "Alexey Chirukhin"
-          ? `${title} — Alexey Chirukhin`
-          : "Alexey Chirukhin";
-      },
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
       meta: [
