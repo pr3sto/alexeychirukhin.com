@@ -47,11 +47,7 @@ const onLeftPanelToggleClick = () => {
         </div>
         <div v-if="!rightPanelMinimized" class="app-menu-sections">
           <section v-if="menu.index" class="app-menu-section">
-            <nuxt-link
-              v-fit-text
-              class="app-menu-section-link"
-              :to="menu.index.page.route"
-            >
+            <nuxt-link v-fit-text class="app-menu-section-link" to="/">
               {{ menu.index.page.displayName }}
             </nuxt-link>
           </section>
@@ -70,7 +66,7 @@ const onLeftPanelToggleClick = () => {
               :key="index1"
               v-fit-text
               class="app-menu-section-link"
-              :to="page.route"
+              :to="`/${section.path}/${page.path}`"
             >
               {{ page.displayName }}
             </nuxt-link>

@@ -2,7 +2,6 @@ type MenuPage = {
   id: number;
   path: string;
   displayName: string;
-  route: string;
 };
 
 type MenuIndexSection = {

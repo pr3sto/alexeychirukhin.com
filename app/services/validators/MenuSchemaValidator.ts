@@ -1,13 +1,13 @@
 import { JSONSchemaType } from "ajv";
 import CommonSchemaValidator from "./CommonSchemaValidator";
 import {
-  MenuIndexSectionResponse,
-  MenuPageResponse,
-  MenuResponse,
-  MenuSectionResponse,
-} from "~/app/types/responses/menuResponse";
+  Menu,
+  MenuIndexSection,
+  MenuPage,
+  MenuSection,
+} from "~/app/types/menu";
 
-const menuPageSchema: JSONSchemaType<MenuPageResponse> = {
+const menuPageSchema: JSONSchemaType<MenuPage> = {
   type: "object",
   properties: {
     id: { type: "number", minimum: 0 },
@@ -18,7 +18,7 @@ const menuPageSchema: JSONSchemaType<MenuPageResponse> = {
   additionalProperties: false,
 };
 
-const indexSchema: JSONSchemaType<MenuIndexSectionResponse> = {
+const indexSchema: JSONSchemaType<MenuIndexSection> = {
   type: "object",
   properties: {
     page: menuPageSchema,
@@ -27,7 +27,7 @@ const indexSchema: JSONSchemaType<MenuIndexSectionResponse> = {
   additionalProperties: false,
 };
 
-const sectionSchema: JSONSchemaType<MenuSectionResponse> = {
+const sectionSchema: JSONSchemaType<MenuSection> = {
   type: "object",
   properties: {
     path: { type: "string" },
@@ -41,7 +41,7 @@ const sectionSchema: JSONSchemaType<MenuSectionResponse> = {
   additionalProperties: false,
 };
 
-const menuSchema: JSONSchemaType<MenuResponse> = {
+const menuSchema: JSONSchemaType<Menu> = {
   type: "object",
   properties: {
     index: indexSchema,
