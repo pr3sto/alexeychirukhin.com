@@ -111,14 +111,14 @@ const onLeftPanelToggleClick = () => {
 }
 
 .app-menu-left-panel-content {
-  background-image: url("/images/menu-bkg-left.jpg");
+  background-image: url("~/assets/images/menu-bkg-left.jpg");
   background-position: right;
   border-right: 2px solid $general__color--black;
   float: left;
 }
 
 .app-menu-right-panel-content {
-  background-image: url("/images/menu-bkg-right.jpg");
+  background-image: url("~/assets/images/menu-bkg-right.jpg");
   background-position: left;
   border-left: 2px solid $general__color--black;
   float: right;
