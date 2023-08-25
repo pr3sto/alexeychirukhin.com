@@ -23,9 +23,7 @@ const { pending, data } = await useLazyAsyncData("menu", async () => {
 
 <template>
   <div>
-    <div v-if="pending">
-      <h1>LOADING</h1>
-    </div>
+    <LoadingOverlay v-if="pending" />
     <div v-if="data">
       <AppMenu :menu="data" class="menu" />
       <NuxtPage class="page" />

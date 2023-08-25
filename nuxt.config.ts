@@ -32,7 +32,7 @@ export default defineNuxtConfig({
         },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Chango&family=Schoolbell&family=Just+Me+Again+Down+Here&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Schoolbell&family=Just+Me+Again+Down+Here&display=swap",
         },
         {
           rel: "stylesheet",
