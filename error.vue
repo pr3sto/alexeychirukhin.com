@@ -1,21 +1,40 @@
 <script setup>
-const error = useError();
+defineProps({
+  error: {
+    type: Error,
+    required: true,
+  },
+});
+
+// state
+const config = useRuntimeConfig();
+const errorCounter = useState("errorCounter", () => 0);
+
+useHead({
+  title: config.public.HEAD_TITLE,
+});
+
+errorCounter.value = errorCounter.value + 1;
+
+// event handlers
 const handleError = () => clearError({ redirect: "/" });
 </script>
 
 <template>
   <div class="error-page">
-    <div v-if="error && error.statusCode === 404" class="error-page-content">
-      <span class="message">are you lost?</span>
-      <span class="button" @click="handleError">go back to reality</span>
+    <div v-if="error.statusCode === 404" class="error-page-content">
+      <span class="code">{{ error.statusCode }}</span>
+      <span class="message">Either I have lost it or haven't made it yet.</span>
+      <span class="link" @click="handleError">whatever</span>
     </div>
-    <div
-      v-else-if="error && error.statusCode === 500"
-      class="error-page-content"
-    >
-      <span class="message">something not working</span>
-      <span class="button" @click="handleError"
-        >click and see if that helped</span
+    <div v-else-if="error.statusCode === 500" class="error-page-content">
+      <span class="code">{{ error.statusCode }}</span>
+      <span class="message"
+        >Something is broken
+        <span v-if="errorCounter > 5"><b>completely</b></span></span
+      >
+      <span v-if="errorCounter <= 5" class="link" @click="handleError"
+        >try to fix</span
       >
     </div>
   </div>
@@ -31,17 +50,23 @@ const handleError = () => clearError({ redirect: "/" });
   display: flex;
   align-items: center;
   justify-content: center;
-  background: center / contain no-repeat url(~/assets/images/error.jpg);
+  background:
+    center / contain no-repeat url(~/assets/images/error-bkg.jpg),
+    $general__color--white;
 }
 
 .error-page-content {
   display: flex;
   flex-direction: column;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   color: $general__color--white;
 
-  & .button {
+  & .code {
+    font-size: 3rem;
+  }
+
+  & .link {
     cursor: pointer;
     text-decoration: underline;
   }
