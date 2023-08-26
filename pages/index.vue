@@ -5,12 +5,12 @@ const menuStore = useMenuStore();
 const menuPage = menuStore.indexMenuPage;
 
 if (!menuPage) {
-  throw showError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({ statusCode: 404, fatal: true });
 }
 </script>
 
 <template>
-  <div>
+  <div v-if="menuPage">
     <ContentBuilder :page-id="menuPage.id" />
   </div>
 </template>

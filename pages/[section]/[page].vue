@@ -10,16 +10,16 @@ const menuPage = menuStore.getSectionMenuPage(
 );
 
 if (!menuPage) {
-  throw showError({ statusCode: 404, statusMessage: "Page Not Found" });
+  throw createError({ statusCode: 404, fatal: true });
 }
 
 useHead({
-  title: menuPage.displayName,
+  title: menuPage?.displayName,
 });
 </script>
 
 <template>
-  <div>
+  <div v-if="menuPage">
     <ContentBuilder :page-id="menuPage.id" />
   </div>
 </template>

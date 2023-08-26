@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   ssr: false,
   runtimeConfig: {
     public: {
+      HEAD_TITLE: "Alexey Chirukhin",
       MENU_API_URL: process.env.MENU_API_URL,
       PAGE_API_URL: process.env.PAGE_API_URL,
       NUXT_IMG_PROVIDER: process.env.NUXT_IMG_PROVIDER,

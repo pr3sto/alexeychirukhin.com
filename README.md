@@ -16,4 +16,5 @@ $ npm run lint
 
 # generate static project
 $ npm run generate
+$ npm run preview
 ```
