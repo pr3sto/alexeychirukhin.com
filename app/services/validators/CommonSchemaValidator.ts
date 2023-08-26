@@ -17,7 +17,7 @@ export default abstract class CommonSchemaValidator
     const isValid = validate(json);
 
     if (!isValid) {
-      throw new Error(JSON.stringify(validate.errors));
+      throw createError(JSON.stringify(validate.errors));
     }
   }
 }
