@@ -22,20 +22,24 @@ const handleError = () => clearError({ redirect: "/" });
 
 <template>
   <div class="error-page">
-    <div v-if="error.statusCode === 404" class="error-page-content">
-      <span class="code">{{ error.statusCode }}</span>
-      <span class="message">Either I have lost it or haven't made it yet.</span>
-      <span class="link" @click="handleError">whatever</span>
-    </div>
-    <div v-else-if="error.statusCode === 500" class="error-page-content">
-      <span class="code">{{ error.statusCode }}</span>
-      <span class="message"
-        >Something is broken
-        <span v-if="errorCounter > 5"><b>completely</b></span></span
-      >
-      <span v-if="errorCounter <= 5" class="link" @click="handleError"
-        >try to fix</span
-      >
+    <div class="error-page-container">
+      <div v-if="error.statusCode === 404" class="error-page-content">
+        <span class="code">{{ error.statusCode }}</span>
+        <span class="message"
+          >Either I have lost it or haven't made it yet.</span
+        >
+        <span class="link" @click="handleError">whatever</span>
+      </div>
+      <div v-else-if="error.statusCode === 500" class="error-page-content">
+        <span class="code">{{ error.statusCode }}</span>
+        <template v-if="errorCounter <= 5">
+          <span class="message">Something is broken</span>
+          <span class="link" @click="handleError">try to fix</span>
+        </template>
+        <template v-else>
+          <span class="message">Something is broken <b>completely</b></span>
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -48,11 +52,16 @@ const handleError = () => clearError({ redirect: "/" });
   left: 0;
   right: 0;
   display: flex;
+  background: $general__color--white;
+}
+
+.error-page-container {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    center / contain no-repeat url(~/assets/images/error-bkg.jpg),
-    $general__color--white;
+  margin: $general__padding--default;
+  background: center / contain no-repeat url(~/assets/images/error-bkg.jpg);
 }
 
 .error-page-content {
