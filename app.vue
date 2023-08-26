@@ -26,7 +26,7 @@ const { pending, data } = await useLazyAsyncData("menu", async () => {
     <LoadingOverlay v-if="pending" />
     <div v-if="data">
       <AppMenu :menu="data" class="menu" />
-      <NuxtPage class="page" />
+      <NuxtPage class="main-page" />
     </div>
   </div>
 </template>
@@ -36,7 +36,7 @@ const { pending, data } = await useLazyAsyncData("menu", async () => {
   z-index: 1;
 }
 
-.page {
+.main-page {
   padding: 0 $appmenu__width--minimized;
 }
 </style>
