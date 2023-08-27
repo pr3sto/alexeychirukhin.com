@@ -21,8 +21,14 @@ $general__color--black: #1a1a1a;
 // app menu
 $appmenu__width--minimized: 4rem;
 
+// page style vars
+$page-styles__background-color: --page-background-color;
+$page-styles__font-color: --page-font-color;
+
 :export {
   mediaMobileMaxWidth: $media__mobile__max-width;
   whiteColor: $general__color--white;
   blackColor: $general__color--black;
+  pageBackgroundColorVar: $page-styles__background-color;
+  pageFontColorVar: $page-styles__font-color;
 }
