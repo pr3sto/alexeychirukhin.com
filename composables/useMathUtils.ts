@@ -32,8 +32,8 @@ export const useMathUtils = () => {
     return Math.random() * (max - min) + min;
   };
 
-  const isOdd = (num: number) => {
-    return num % 2;
+  const isOdd = (num: number): boolean => {
+    return num % 2 === 1;
   };
 
   const percentToPx = (
