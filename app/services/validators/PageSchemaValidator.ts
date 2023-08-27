@@ -26,7 +26,7 @@ const darkslideCardSchema: JSONSchemaType<PageTypes.DarkslideCard> = {
   additionalProperties: false,
 };
 
-const cardstackSchema: JSONSchemaType<PageTypes.Cardstack> = {
+const cardStackSchema: JSONSchemaType<PageTypes.CardStack> = {
   type: "object",
   properties: {
     type: { type: "string", enum: ["CardStack"] },
@@ -153,7 +153,7 @@ const pageComponentSchema: JSONSchemaType<PageTypes.PageComponent> = {
   type: "object",
   properties: {
     content: {
-      oneOf: [cardstackSchema, photoSchema, photoGridSchema, textBlocksSchema],
+      oneOf: [cardStackSchema, photoSchema, photoGridSchema, textBlocksSchema],
     },
     styles: pageComponentStylesSchema,
   },

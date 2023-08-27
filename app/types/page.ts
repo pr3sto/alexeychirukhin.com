@@ -10,7 +10,7 @@ type DarkslideCard = {
   html: string;
 };
 
-type Cardstack = {
+type CardStack = {
   type: string;
   cardScale: number;
   showBorder: boolean;
@@ -69,7 +69,7 @@ type PageComponentStyles = {
 };
 
 type PageComponent = {
-  content: Cardstack | Photo | PhotoGrid | TextBlocks;
+  content: CardStack | Photo | PhotoGrid | TextBlocks;
   styles: PageComponentStyles;
 };
 
@@ -87,7 +87,7 @@ type Page = {
 export {
   PhotoCard,
   DarkslideCard,
-  Cardstack,
+  CardStack,
   Photo,
   PhotoGridSectionCols,
   PhotoGridSection,
