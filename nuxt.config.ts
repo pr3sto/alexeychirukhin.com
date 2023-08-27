@@ -9,7 +9,12 @@ export default defineNuxtConfig({
       NUXT_IMG_PROVIDER: process.env.NUXT_IMG_PROVIDER,
     },
   },
-  modules: ["nuxt-lodash", "@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
+  modules: [
+    "@nuxt/image",
+    "nuxt-lodash",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+  ],
   app: {
     head: {
       charset: "utf-8",
@@ -55,6 +60,22 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           additionalData: '@use "@/assets/scss/_variables.scss" as *;',
+        },
+      },
+    },
+  },
+  image: {
+    imagekit: {
+      baseURL: "https://ik.imagekit.io/pr3sto",
+    },
+    screens: {
+      md: 700,
+    },
+    presets: {
+      progressivejpg: {
+        modifiers: {
+          f: "jpg",
+          progressive: true,
         },
       },
     },
