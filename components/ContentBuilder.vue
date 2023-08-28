@@ -46,10 +46,13 @@ const composeCSS = (component: PageComponent): string => {
 
 // dynamic components
 const CardStack = resolveComponent("CardStack");
+const TextBlocks = resolveComponent("TextBlocks");
 const resolveComponentByType = (typeName: string): Object | string => {
   switch (typeName) {
     case "CardStack":
       return CardStack;
+    case "TextBlocks":
+      return TextBlocks;
     default:
       return "div";
   }
@@ -72,3 +75,10 @@ const resolveComponentByType = (typeName: string): Object | string => {
     </section>
   </main>
 </template>
+
+<style lang="scss" scoped>
+.page-content {
+  background: var($page-styles__background-color);
+  color: var($page-styles__font-color);
+}
+</style>

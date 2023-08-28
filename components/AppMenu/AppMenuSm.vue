@@ -10,5 +10,5 @@ defineProps({
 </script>
 
 <template>
-  <span>WIP</span>
+  <span>{{ menu }}</span>
 </template>
