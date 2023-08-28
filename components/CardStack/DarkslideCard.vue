@@ -21,7 +21,7 @@ const footerDate = computed(() => {
   <figure class="darkslidecard">
     <div class="darkslidecard-content">
       <div class="darkslidecard-content-header">
-        <img src="~/assets/icons/arrow.png" />
+        <img src="~/assets/icons/darkslidecard-arrow.png" />
         <p>Insert film this side up.<br />Do not remove this darkslide.</p>
       </div>
       <!-- eslint-disable-next-line vue/no-v-html -->
