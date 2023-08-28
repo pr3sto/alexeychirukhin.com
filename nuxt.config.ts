@@ -65,6 +65,12 @@ export default defineNuxtConfig({
     },
   },
   image: {
+    providers: {
+      local: {
+        name: "local",
+        provider: "~/providers/nuxtImgLocal",
+      },
+    },
     imagekit: {
       baseURL: "https://ik.imagekit.io/pr3sto",
     },
