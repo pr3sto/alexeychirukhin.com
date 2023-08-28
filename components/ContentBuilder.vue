@@ -48,6 +48,7 @@ const composeCSS = (component: PageComponent): string => {
 const CardStack = resolveComponent("CardStack");
 const TextBlocks = resolveComponent("TextBlocks");
 const PhotoBlock = resolveComponent("PhotoBlock");
+const PhotoBlockGrid = resolveComponent("PhotoBlockGrid");
 const resolveComponentByType = (typeName: string): Object | string => {
   switch (typeName) {
     case "CardStack":
@@ -56,6 +57,8 @@ const resolveComponentByType = (typeName: string): Object | string => {
       return TextBlocks;
     case "Photo":
       return PhotoBlock;
+    case "PhotoGrid":
+      return PhotoBlockGrid;
     default:
       return "div";
   }
