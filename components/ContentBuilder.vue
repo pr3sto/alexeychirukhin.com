@@ -47,12 +47,15 @@ const composeCSS = (component: PageComponent): string => {
 // dynamic components
 const CardStack = resolveComponent("CardStack");
 const TextBlocks = resolveComponent("TextBlocks");
+const PhotoBlock = resolveComponent("PhotoBlock");
 const resolveComponentByType = (typeName: string): Object | string => {
   switch (typeName) {
     case "CardStack":
       return CardStack;
     case "TextBlocks":
       return TextBlocks;
+    case "Photo":
+      return PhotoBlock;
     default:
       return "div";
   }
