@@ -24,7 +24,7 @@
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
-    "@nuxt/image": "^0.6.2",
+    "@nuxt/image": "^1.0.0",
     "eslint": "^8.30.0",
     "eslint-plugin-nuxt": "^4.0.0",
     "nuxt-client-init-module": "^0.3.0",
